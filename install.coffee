@@ -31,18 +31,18 @@ sh.run "mv ~/.bin #{trash_dir}/.bin"
 sh.run 'mkdir ~/.bin'
 
 
-# Setup "N"
-sh.run "mv ~/.n #{trash_dir}/.n"
-sh.run 'mkdir -p ~/.n/versions'
-sh.run 'rm -rf /tmp/n'
-sh.run 'git clone https://github.com/visionmedia/n.git /tmp/n'
-sh.run 'cp /tmp/n/bin/n ~/.n/n'
-sh.run 'ln -s ~/.n/n ~/.bin/n'
-
-
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
 sh.run "ln -s #{cwd}/configs/fish/config.fish ~/.config/fish/config.fish"
+
+
+# Setup "N"
+sh.run "mv ~/.n #{trash_dir}/.n"
+sh.run 'mkdir -p ~/.n/bin' # Bin ensures Fish can Path It
+sh.run 'rm -rf /tmp/n'
+sh.run 'git clone https://github.com/visionmedia/n.git /tmp/n'
+sh.run 'cp /tmp/n/bin/n ~/.n/_n'
+sh.run 'ln -s ~/.n/_n ~/.bin/n'
 
 
 # Setup Bash (to execute fish)
