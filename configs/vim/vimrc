@@ -39,7 +39,9 @@ set shiftwidth=2			              " Something involving tab width.
 set expandtab				                " Spaces instead of tabs
 
 " CtrlP Settings
-let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
+
+" Disabled due to .git being searched and causing lag
+"let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
 
 " Chrome Specific Remaps
 "
