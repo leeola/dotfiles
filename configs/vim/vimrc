@@ -1,4 +1,4 @@
-" put this line first in ~/.vimrc
+" VAM Auto Setup.
 set nocompatible | filetype indent plugin on | syn on
 
 fun SetupVAM()
@@ -15,19 +15,40 @@ fun SetupVAM()
   " Also See "plugins-per-line" below
 endfun
 call SetupVAM()
-
-
-
-set laststatus=2 " Show the Airline Line
-let g:ctrlp_show_hidden = 1 " ctrlp will grep hidden files
-
+call vam#ActivateAddons([])
 
 
 " Load plugins using VAM.
-" https://raw.github.com/MarcWeber/vim-addon-manager-known-repositories/master/db/vimorgsources.json
-call vam#ActivateAddons([])
-" ActivateAddons powerline
 ActivateAddons vim-airline
 ActivateAddons ctrlp
 ActivateAddons Command-T
 ActivateAddons fugitive
+ActivateAddons vim-coffee-script
+
+
+" My Vim Settings
+set laststatus=2                    " Show the Airline Line
+
+"set number                          " Show line numbers
+set ruler                           " Show cursor position
+
+set directory=$HOME/.vim/tmp//,.	  " Keep swap files in one location.. black magic.
+
+set tabstop=2       				        " Global tab width
+set shiftwidth=2			              " Something involving tab width.
+set expandtab				                " Spaces instead of tabs
+
+" CtrlP Settings
+let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
+
+" Chrome Specific Remaps
+"
+" These are mappings that have to do with the fact that Chrome sucks.
+" .. to elaborate, Chrome consumes a pile of keys and gives you know way
+" to actually use them in a webapp. In this case Ctrl-W, Ctrl-T, Ctrl-N,
+" and others. Below are remaps that are directly related to that.
+
+nnoremap <C-Q> <C-W>
+
+
+" General Purpose Remaps
