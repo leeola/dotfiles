@@ -27,14 +27,21 @@ ActivateAddons vim-coffee-script
 ActivateAddons jade
 
 
-
 " My Vim Settings
 set laststatus=2                    " Show the Airline Line
 
-"set number                          " Show line numbers
+"set number                         " Show line numbers
 set ruler                           " Show cursor position
 
-set directory=$HOME/.vim/tmp//,.	  " Keep swap files in one location.. black magic.
+set backupdir-=.                    " Remove current dir from the list
+set backupdir+=.                    " Append it to the list (so it's checked last)
+set backupdir-=~                    " Remove home, if it's in there.. not sure it is?
+set backupdir^=~/.vim/tmp/bkp//     " Prepend the bkp dir. Not sure if // syntax
+                                    " works with backups.
+set backup                          " Turn backup on
+
+set directory=~/.vim/tmp/swp//   	  " Keep swap files in one location.
+set directory+=.                    " Add the current directory as a fallback
 
 set tabstop=2       				        " Global tab width
 set shiftwidth=2			              " Something involving tab width.
