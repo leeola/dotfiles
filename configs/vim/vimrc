@@ -27,7 +27,7 @@ ActivateAddons vim-coffee-script
 ActivateAddons jade
 
 
-" My Vim Settings
+" Vim Settings
 set laststatus=2                    " Show the Airline Line
 
 "set number                         " Show line numbers
@@ -49,8 +49,11 @@ set expandtab				                " Spaces instead of tabs
 
 " CtrlP Settings
 
-" Disabled due to .git being searched and causing lag
-"let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
+let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
+let g:ctrlp_custom_ignore = {
+  \ 'dir': '\.git$\|node_modules$\|bower_components$',
+  \ 'file': '\.exe$\.so$'
+  \ }                               " Ignore groups of files.
 
 " Chrome Specific Remaps
 "
