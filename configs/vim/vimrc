@@ -21,7 +21,6 @@ call vam#ActivateAddons([])
 " Load plugins using VAM.
 ActivateAddons vim-airline
 ActivateAddons ctrlp
-ActivateAddons Command-T
 ActivateAddons fugitive
 ActivateAddons vim-coffee-script
 ActivateAddons jade
@@ -54,6 +53,13 @@ let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|node_modules$\|bower_components$',
   \ 'file': '\.exe$\.so$'
   \ }                               " Ignore groups of files.
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtHistory(-1)': ['<c-up>'],
+  \ 'PrtHistory(1)':  ['<c-down>'],
+  \ 'ToggleType(1)':  ['<c-p>']
+  \ }
+
+
 
 " Chrome Specific Remaps
 "
