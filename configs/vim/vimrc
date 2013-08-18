@@ -52,6 +52,7 @@ set foldlevelstart=50               " A large foldlevel, so everything isn't fol
 
 " CtrlP Settings
 
+let g:ctrlp_extensions = ['line']
 let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|node_modules$\|bower_components$',
@@ -60,7 +61,9 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(-1)': ['<c-up>'],
   \ 'PrtHistory(1)':  ['<c-down>'],
-  \ 'ToggleType(1)':  ['<c-p>']
+  \ 'ToggleType(1)':  ['<c-p>'],
+  \ 'ToggleType(-1)': ['<c-l>'],
+  \ 'PrtCurRight()':  ['<right>']
   \ }
 
 
