@@ -24,7 +24,7 @@ ActivateAddons ctrlp
 ActivateAddons fugitive
 ActivateAddons vim-coffee-script
 ActivateAddons jade
-ActivateAddons Markdown_syntax
+"ActivateAddons Markdown_syntax
 
 
 " Vim Settings
@@ -47,8 +47,13 @@ set tabstop=2       				        " Global tab width
 set shiftwidth=2			              " Something involving tab width.
 set expandtab				                " Spaces instead of tabs
 
-set foldlevelstart=50               " A large foldlevel, so everything isn't folded
-                                    " at the start.
+set foldmethod=indent               " Magic
+set foldlevel=20                    " Magic
+set foldlevelstart=20               " Magic
+
+autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
+
+
 
 " CtrlP Settings
 
