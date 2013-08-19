@@ -10,18 +10,27 @@ Bundle 'gmarik/vundle'
 Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'guns/xterm-color-table.vim'
+
+" Syntax Highlighting Bundles
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 
 filetype plugin indent on           " Vundle Related Magic!
 
 
+" Vim Theme Settings
+syntax enable
+colorscheme twilight
+
+let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
+highlight ColorColumn ctermbg=234         " Color the column
+
 
 " Vim Settings
-set syntax=on
 set laststatus=2                    " Show the Airline Line
 
-"set number                         " Show line numbers
+set number                          " Show line numbers
 set ruler                           " Show cursor position
 
 set backupdir-=.                    " Remove current dir from the list
