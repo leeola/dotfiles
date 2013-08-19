@@ -84,3 +84,7 @@ nnoremap <C-Q> <C-W>
 
 
 " General Purpose Remaps
+
+
+" Maps
+nmap <silent> <leader>s :set spell!<CR>
