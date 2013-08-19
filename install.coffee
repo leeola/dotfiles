@@ -57,8 +57,13 @@ sh.run "ln -s #{cwd}/configs/bash/bash_profile ~/.bash_profile"
 # Setup Vim.
 sh.run "mv ~/.vim #{trash_dir}/.vim"
 sh.run "mv ~/.vimrc #{trash_dir}/.vimrc"
-sh.run "ln -s #{cwd}/configs/vim ~/.vim"
+sh.run "mkdir -p ~/.vim/bundle"
+sh.run "mkdir -p ~/.vim/tmp/bkp"
+sh.run "mkdir -p ~/.vim/tmp/swp"
+sh.run "ln -s #{cwd}/configs/vim/colors ~/.vim/colors"
 sh.run "ln -s #{cwd}/configs/vim/vimrc ~/.vimrc"
+sh.run "git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle"
+sh.run "vim +BundleInstall +qall"
 
 
 # Vim Plugins

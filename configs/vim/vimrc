@@ -1,32 +1,24 @@
-" VAM Auto Setup.
-set nocompatible | filetype indent plugin on | syn on
+set nocompatible                    " be iMproved
+filetype off                        " required!
 
-fun SetupVAM()
-  let c = get(g:, 'vim_addon_manager', {})
-  let g:vim_addon_manager = c
-  let c.plugin_root_dir = expand('$HOME', 1) . '/.vim/vim-addons'
-  let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-  " let g:vim_addon_manager = { your config here see "commented version" example and help
-  if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-    execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
-                \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
-  endif
-  " call vam#ActivateAddons([the plugin names], {'auto_install' : 0})
-  " Also See "plugins-per-line" below
-endfun
-call SetupVAM()
-call vam#ActivateAddons([])
+" Vundle Setup
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
 
+" My Bundles
+Bundle 'bling/vim-airline'
+Bundle 'kien/ctrlp.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'digitaltoad/vim-jade'
 
-" Load plugins using VAM.
-ActivateAddons vim-airline
-ActivateAddons ctrlp
-ActivateAddons fugitive
-ActivateAddons vim-coffee-script
-ActivateAddons jade
+filetype plugin indent on           " Vundle Related Magic!
+
 
 
 " Vim Settings
+set syntax=on
 set laststatus=2                    " Show the Airline Line
 
 "set number                         " Show line numbers
