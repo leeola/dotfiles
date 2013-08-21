@@ -12,13 +12,4 @@ set -x N_PREFIX ~/.n
 # stty -ixon; screen -e \^Ss
 
 # Fish Greeting
-set fish_greeting "
-  _  __         _ _             
- | |/ /        | (_)            
- | ' / ___   __| |_ _ __   __ _ 
- |  < / _ \ / _` | | '_ \ / _` |
- | . \ (_) | (_| | | | | | (_| |
- |_|\_\___/ \__,_|_|_| |_|\__, |
-                           __/ |
-      Make something!     |___/ 
-"
+function fish_greeting; cat ~/.config/fish/ascii_greeting; end

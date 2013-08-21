@@ -34,6 +34,7 @@ sh.run 'mkdir ~/.bin'
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
 sh.run "ln -s #{cwd}/configs/fish/config.fish ~/.config/fish/config.fish"
+sh.run "ln -s #{cwd}/configs/fish/ascii_greeting ~/.config/fish/ascii_greeting"
 
 
 # Setup "N"
