@@ -74,13 +74,6 @@ let g:ctrlp_prompt_mappings = {
 
 
 " Chrome Specific Remaps
-"
-" These are mappings that have to do with the fact that Chrome sucks.
-" .. to elaborate, Chrome consumes a pile of keys and gives you know way
-" to actually use them in a webapp. In this case Ctrl-W, Ctrl-T, Ctrl-N,
-" and others. Below are remaps that are directly related to that.
-
-nnoremap <C-Q> <C-W>
 
 
 " General Purpose Remaps
