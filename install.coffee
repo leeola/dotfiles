@@ -50,7 +50,9 @@ sh.run 'ln -s ~/.n/_n ~/.bin/n'
 # 
 # Note that we use this method, as it is currently the best method for Koding
 sh.run "mv ~/.bashrc #{trash_dir}/.bashrc"
+sh.run "mv ~/.bash_profile #{trash_dir}/.bash_profile"
 sh.run "ln -s #{cwd}/configs/bash/bashrc ~/.bashrc"
+sh.run "ln -s #{cwd}/configs/bash/bash_profile ~/.bash_profile"
 
 
 
