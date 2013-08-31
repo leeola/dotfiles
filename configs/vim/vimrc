@@ -21,6 +21,7 @@ filetype plugin indent on           " Vundle Related Magic!
 
 " Vim Theme Settings
 syntax enable
+set t_Co=256                        " Force 256 Colors
 colorscheme twilight
 
 let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
@@ -28,6 +29,8 @@ highlight ColorColumn ctermbg=234         " Color the column
 
 
 " Vim Settings
+set shell=sh                        " Set the default shell to sh, this
+                                    " fixes my bash->fish in Vim.
 set laststatus=2                    " Show the Airline Line
 
 set number                          " Show line numbers
