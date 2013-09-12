@@ -83,4 +83,7 @@ let g:ctrlp_prompt_mappings = {
 
 
 " Maps
+nmap <silent> <leader>1 :!!<CR>
 nmap <silent> <leader>s :set spell!<CR>
+
+
