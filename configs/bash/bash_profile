@@ -1,2 +1,0 @@
-alias fish="source ~/.bashrc"
-alias aptbug="sudo apt-get -f install && sudo apt-get install vim"
