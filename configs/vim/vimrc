@@ -16,6 +16,10 @@ Bundle 'guns/xterm-color-table.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 
+" Colorscheme Plugins
+Bundle 'vim-scripts/ScrollColors'
+Bundle 'flazz/vim-colorschemes'
+
 filetype plugin indent on           " Vundle Related Magic!
 
 
