@@ -32,12 +32,13 @@ sh.run 'mkdir ~/.bin'
 
 
 # Setup Tmux
-sh.run "my ~/.tmux.conf #{trash_dir}/.tmux.conf"
-sh.run "ln -s #{cwd}/config/tmux/.tmux.conf ~/.tmux.conf"
+sh.run "mv ~/.tmux.conf #{trash_dir}/.tmux.conf"
+sh.run "ln -s #{cwd}/config/tmux/tmux.conf ~/.tmux.conf"
 
 
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
+sh.run "mv ~/.config/fish/ascii_greeting  #{trash_dir}/ascii_greeting"
 sh.run "ln -s #{cwd}/config/fish/config.fish ~/.config/fish/config.fish"
 sh.run "ln -s #{cwd}/config/fish/ascii_greeting ~/.config/fish/ascii_greeting"
 
