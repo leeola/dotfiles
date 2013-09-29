@@ -1,2 +1,2 @@
 stty -ixon
-exec fish
+tmux attach
