@@ -1,3 +1,4 @@
 stty -ixon
-alias t="tmux attach"
-tmux attach
+
+alias t="tmux attach -t koding"
+t
