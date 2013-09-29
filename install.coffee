@@ -23,7 +23,8 @@ sh.run "mkdir -p #{trash_dir}"
 
 # Install some sudo programs. Note that we do this first, that way
 # sudo is the first thing, if any, to fail.
-#sh.run 'sudo apt-get install fish'
+sh.run 'apt-get install fish python-pip tmux'
+sh.run 'pip install powerline'
 
 
 # Setup our Bin directory
