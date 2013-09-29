@@ -31,6 +31,11 @@ sh.run "mv ~/.bin #{trash_dir}/.bin"
 sh.run 'mkdir ~/.bin'
 
 
+# Setup Tmux
+sh.run "my ~/.tmux.conf #{trash_dir}/.tmux.conf"
+sh.run "ln -s #{cwd}/config/tmux/.tmux.conf ~/.tmux.conf"
+
+
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
 sh.run "ln -s #{cwd}/configs/fish/config.fish ~/.config/fish/config.fish"
