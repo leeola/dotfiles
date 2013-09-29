@@ -26,10 +26,24 @@ filetype plugin indent on           " Vundle Related Magic!
 " Vim Theme Settings
 syntax enable
 set t_Co=256                        " Force 256 Colors
-colorscheme twilight
+set term=screen-256color
+colorscheme twilight256
+
+" I hate vim themes. I want a solid background with a visible cursor, but 
+" this is causing me hell. Commenting it out for now so that i can move on
+" with my life. In the future i need to figure out two things:
+" 1.) How to make a solid dark gray background.
+" 2.) How to make the cursor visisble during the background assignment.
+"     Currently if i enter `hi Normal ctermbg=black` my cursor disappears,
+"     even though *at the moment* my cursor is a bright grey cursor. Makes
+"     no sense to me.
+"set background=dark
+"highlight Normal ctermbg=234
 
 let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
 highlight ColorColumn ctermbg=234         " Color the column
+
+
 
 
 " Vim Settings
