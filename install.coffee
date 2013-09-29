@@ -38,8 +38,8 @@ sh.run "ln -s #{cwd}/config/tmux/.tmux.conf ~/.tmux.conf"
 
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
-sh.run "ln -s #{cwd}/configs/fish/config.fish ~/.config/fish/config.fish"
-sh.run "ln -s #{cwd}/configs/fish/ascii_greeting ~/.config/fish/ascii_greeting"
+sh.run "ln -s #{cwd}/config/fish/config.fish ~/.config/fish/config.fish"
+sh.run "ln -s #{cwd}/config/fish/ascii_greeting ~/.config/fish/ascii_greeting"
 
 
 # Setup "N"
@@ -56,8 +56,8 @@ sh.run 'ln -s ~/.n/_n ~/.bin/n'
 # Note that we use this method, as it is currently the best method for Koding
 sh.run "mv ~/.bashrc #{trash_dir}/.bashrc"
 sh.run "mv ~/.bash_profile #{trash_dir}/.bash_profile"
-sh.run "ln -s #{cwd}/configs/bash/bashrc ~/.bashrc"
-sh.run "ln -s #{cwd}/configs/bash/bash_profile ~/.bash_profile"
+sh.run "ln -s #{cwd}/config/bash/bashrc ~/.bashrc"
+sh.run "ln -s #{cwd}/config/bash/bash_profile ~/.bash_profile"
 
 
 
@@ -68,8 +68,8 @@ sh.run "mv ~/.vimrc #{trash_dir}/.vimrc"
 sh.run "mkdir -p ~/.vim/bundle"
 sh.run "mkdir -p ~/.vim/tmp/bkp"
 sh.run "mkdir -p ~/.vim/tmp/swp"
-sh.run "ln -s #{cwd}/configs/vim/colors ~/.vim/colors"
-sh.run "ln -s #{cwd}/configs/vim/vimrc ~/.vimrc"
+sh.run "ln -s #{cwd}/config/vim/colors ~/.vim/colors"
+sh.run "ln -s #{cwd}/config/vim/vimrc ~/.vimrc"
 sh.run "git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle"
 sh.run "vim +BundleInstall +qall"
 
