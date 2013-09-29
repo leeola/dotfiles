@@ -27,6 +27,11 @@ sh.run "mkdir -p #{trash_dir}"
 sh.run 'sudo apt-get install fish python-pip tmux'
 sh.run 'sudo pip install powerline'
 
+# Configure the time, because it annoys me with Powerline if the time is
+# wrong.
+sh.run 'echo "US/Pacific-New" | sudo tee /etc/timezone'
+sh.run 'sudo dpkg-reconfigure -f noninteractive tzdata'
+
 
 # Setup our Bin directory
 sh.run "mv ~/.bin #{trash_dir}/.bin"
