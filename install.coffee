@@ -21,10 +21,11 @@ trash_dir = path.join '/tmp', 'dotfilestrash', +(new Date())+''
 sh.run "mkdir -p #{trash_dir}"
 
 
-# Install some sudo programs. Note that we do this first, that way
-# sudo is the first thing, if any, to fail.
-sh.run 'apt-get install fish python-pip tmux'
-sh.run 'pip install powerline'
+# Install some sudo programs.
+# Note that we use sudo here, instead of on the whole command, so that created
+# files and directories are owned by user, not root.
+sh.run 'sudo apt-get install fish python-pip tmux'
+sh.run 'sudo pip install powerline'
 
 
 # Setup our Bin directory
@@ -40,6 +41,7 @@ sh.run "ln -s #{cwd}/config/tmux/tmux.conf ~/.tmux.conf"
 # Setup Fish
 sh.run "mv ~/.config/fish/config.fish #{trash_dir}/config.fish"
 sh.run "mv ~/.config/fish/ascii_greeting  #{trash_dir}/ascii_greeting"
+sh.run "mkdir -p ~/.config/fish"
 sh.run "ln -s #{cwd}/config/fish/config.fish ~/.config/fish/config.fish"
 sh.run "ln -s #{cwd}/config/fish/ascii_greeting ~/.config/fish/ascii_greeting"
 
