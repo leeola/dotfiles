@@ -2,3 +2,5 @@ PATH=:~/.bin:~/.n/bin:$PATH
 N_PREFIX=~/.n
 export PATH
 export N_PREFIX
+alias t="tmux attach -t koding"
+
