@@ -1,6 +1,18 @@
+# 
+# # Bash Profile.. KDFramework Friendly
+# 
+# A simple bash profile. It's worth noting that our bash_profile is sourced
+# every time the KDF makes a call to our VM. With that said, we want to make
+# sure this profile doesn't do any thing crazy like launching other processes,
+# but at the same time we need to expose any variables/etc that the KDF (or
+# a KDApp) might want.. such as my Node version.
+# 
+
+# Export our proper Node Versio Junk
 PATH=:~/.bin:~/.n/bin:$PATH
 N_PREFIX=~/.n
 export PATH
 export N_PREFIX
-alias t="tmux attach -t koding"
 
+# Alias tmux in here as well, so if i SSH in i can gtfo of bash right away.
+alias t="tmux attach -t koding"
