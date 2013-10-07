@@ -1,4 +1,17 @@
-stty -ixon
+# 
+# # Bashrc
+# 
+# My bashrc is a minimal attempt at getting the hell out of bash as fast
+# as possible.
+# 
 
+# Good god i hate this fucking ixon bullshit. These two lines kill it dead
+# before we call tmux.
+stty -ixon
+stty stop undef
+
+# Alias tmux so i can easily gtfo of bash if i accidentally leave tmux
 alias t="tmux attach -t koding"
+
+# Call our tmux alias, so i can gtfo right away.
 t
