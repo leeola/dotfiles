@@ -15,6 +15,7 @@ Bundle 'guns/xterm-color-table.vim'
 " Syntax Highlighting Bundles
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'groenewege/vim-less'
 
 " Colorscheme Plugins
 Bundle 'vim-scripts/ScrollColors'
