@@ -14,3 +14,6 @@ set -Ux N_PREFIX ~/.n
 
 # Fish Greeting
 function fish_greeting; cat ~/.config/fish/ascii_greeting; end
+
+# Change `cd foo` to always check the current dir, and not current *and* home.
+set -Ux CDPATH .
