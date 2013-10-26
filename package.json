@@ -15,7 +15,6 @@
     "url": "http://github.com/leeolayvar/dotfiles/issues"
   },
   "scripts": {
-    "postinstall": "./node_modules/coffee-script/bin/coffee install.coffee"
   },
   "devDependencies": {
     "execSync": "~1.0.1-pre",
