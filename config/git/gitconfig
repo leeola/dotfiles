@@ -1,0 +1,7 @@
+[user]
+        name = Lee Olayvar
+        email = leeolayvar@gmail.com
+[core]
+        editor = vim
+[push]
+        default = simple

@@ -73,9 +73,6 @@ sh.run "git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle"
 sh.run "vim +BundleInstall +qall"
 
 
-# Vim Plugins
-# 
-# Download our vim plugin manager, and then initiate it to do the
-# rest of the magic.
-
-
+# Setup Git
+sh.run "mv ~/.gitconfig #{trash_dir}/.vim"
+sh.run "ln -s #{cwd}/config/git/gitconfig ~/.gitconfig"
