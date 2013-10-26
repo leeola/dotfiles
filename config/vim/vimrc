@@ -7,7 +7,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My Bundles
-Bundle 'bling/vim-airline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'guns/xterm-color-table.vim'
@@ -22,6 +21,9 @@ Bundle 'vim-scripts/ScrollColors'
 Bundle 'flazz/vim-colorschemes'
 
 filetype plugin indent on           " Vundle Related Magic!
+
+" Powerline setup
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 
 
 " Vim Theme Settings
@@ -43,7 +45,6 @@ colorscheme twilight256
 
 let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
 highlight ColorColumn ctermbg=234         " Color the column
-
 
 
 
