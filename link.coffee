@@ -53,7 +53,6 @@ do ->
     when 'mac'
       powerlineLoc = 'site'
 
-  console.log 'system?', system, powerlineLoc
   sh.run "ln -s /usr/local/lib/python2.7/#{powerlineLoc}-packages/powerline "+
     '~/.lees_hacks/bridges/powerline'
 
