@@ -1,5 +1,14 @@
 #! ./node_modules/coffee-script/bin/coffee
 
+console.log '''
+Temporarily disabled!
+
+I am converting my installer into two files, an installer and a linker.
+For now you'll have to install everything manually, and then run
+`./link.coffee`
+'''
+return process.exit 1
+
 # 
 # # Install Dotfiles
 # 

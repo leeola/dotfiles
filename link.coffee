@@ -20,7 +20,7 @@ else if os.platform() is 'linux' and os.hostname()[-5...] is 'kd.io'
   system  = 'koding'
 else
   console.log 'Unrecognized system'
-  process.exit()
+  process.exit 1
 
 
 
