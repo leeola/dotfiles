@@ -23,7 +23,7 @@ Bundle 'flazz/vim-colorschemes'
 filetype plugin indent on           " Vundle Related Magic!
 
 " Powerline setup
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+set rtp+=~/.lees_hacks/bridges/powerline/bindings/vim
 
 
 " Vim Theme Settings

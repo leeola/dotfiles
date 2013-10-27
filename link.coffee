@@ -1,7 +1,7 @@
 #!/usr/bin/env ./node_modules/coffee-script/bin/coffee
 
 # 
-# # Install Dotfiles
+# # Link Dotfiles
 # 
 # This is a simple installer which executes a bunch of shell commands in a
 # row. There is no error catching or recovery, so it is expected to
@@ -9,8 +9,19 @@
 # 
 # For further information, see the README.
 # 
-path = require 'path'
-sh = require 'execSync'
+os    = require 'os'
+path  = require 'path'
+sh    = require 'execSync'
+
+
+if os.platform() is 'darwin'
+  system  = 'mac'
+else if os.platform() is 'linux' and os.hostname()[-5...] is 'kd.io'
+  system  = 'koding'
+else
+  console.log 'Unrecognized system'
+  process.exit()
+
 
 
 # The directory we will move all files to. This script is "desctructive"
@@ -19,6 +30,33 @@ sh = require 'execSync'
 cwd = process.cwd()
 trash_dir = path.join '~', '.tmp', 'dotfilestrash', +(new Date())+''
 sh.run "mkdir -p #{trash_dir}"
+
+
+# Lees Hacks
+#
+# Create a directory to store random hacks, usually related to system
+# abstraction.
+sh.run "mv ~/.lees_hacks #{trash_dir}/.lees_hacks"
+sh.run 'mkdir -p ~/.lees_hacks'
+
+
+# Location Bridges
+#
+# The bridges are system specific links to allow for config files to
+# link to a specific location and be pointed to the proper destination.
+sh.run 'mkdir ~/.lees_hacks/bridges'
+# using a do for a simple scope closure
+do ->
+  switch system
+    when 'koding'
+      powerlineLoc = 'dist'
+    when 'mac'
+      powerlineLoc = 'site'
+
+  console.log 'system?', system, powerlineLoc
+  sh.run "ln -s /usr/local/lib/python2.7/#{powerlineLoc}-packages/powerline "+
+    '~/.lees_hacks/bridges/powerline'
+
 
 
 # Setup our Bin directory
