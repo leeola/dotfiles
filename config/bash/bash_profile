@@ -21,4 +21,8 @@ alias t="tmux attach -t koding"
 # to be mean to the Koding Framework calls
 if [ "$(uname)" == "Darwin" ]; then
   t
+# Here we check if the ssh client var exists, and autolaunch. If it doesn't,
+# we don't launch to ensure that it doesn't autorun for KDF
+elif [ "$SSH_CLIENT" != "" ]; then
+  t
 fi
