@@ -1,0 +1,3 @@
+Host vm-*
+  User leeolayvar
+  ProxyCommand ssh %r@ssh.koding.com nc %h.%r.koding.kd.io %p
