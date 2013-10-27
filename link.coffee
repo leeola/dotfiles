@@ -76,3 +76,5 @@ sh.run "vim +BundleInstall +qall"
 # Setup Git
 sh.run "mv ~/.gitconfig #{trash_dir}/.vim"
 sh.run "ln -s #{cwd}/config/git/gitconfig ~/.gitconfig"
+
+
