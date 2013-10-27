@@ -12,3 +12,7 @@ stty stop undef
 
 # Alias tmux so i can easily gtfo of bash if i accidentally leave tmux
 alias t="tmux attach -t koding"
+
+if [ "$(uname)" == "Linux" ]; then
+  t
+fi

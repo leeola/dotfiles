@@ -16,3 +16,9 @@ export N_PREFIX
 
 # Alias tmux in here as well, so if i SSH in i can gtfo of bash right away.
 alias t="tmux attach -t koding"
+
+# Make sure to only auto-run on Mac, since we want Koding's bash_profile not
+# to be mean to the Koding Framework calls
+if [ "$(uname)" == "Darwin" ]; then
+  t
+fi
