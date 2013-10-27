@@ -12,6 +12,3 @@ stty stop undef
 
 # Alias tmux so i can easily gtfo of bash if i accidentally leave tmux
 alias t="tmux attach -t koding"
-
-# Call our tmux alias, so i can gtfo right away.
-t
