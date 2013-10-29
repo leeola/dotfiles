@@ -53,7 +53,10 @@ set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
 set laststatus=2                    " Show the Airline Line
 
+" The following two options enable 'hybrid mode'
 set number                          " Show line numbers
+set relativenumber                  " Show Relative numbers
+
 set ruler                           " Show cursor position
 
 set backupdir-=.                    " Remove current dir from the list
