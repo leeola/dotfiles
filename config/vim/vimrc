@@ -12,12 +12,14 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'guns/xterm-color-table.vim'
 
 " Syntax Highlighting Bundles
+Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'groenewege/vim-less'
+Bundle 'jnwhiteh/vim-golang'
 
 " Colorscheme Plugins
-Bundle 'vim-scripts/ScrollColors'
+"Bundle 'vim-scripts/ScrollColors'
 Bundle 'flazz/vim-colorschemes'
 
 filetype plugin indent on           " Vundle Related Magic!
@@ -78,7 +80,7 @@ set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
 autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
-
+autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 
 
 " CtrlP Settings
@@ -106,7 +108,10 @@ let g:ctrlp_prompt_mappings = {
 
 
 " Maps
+
+" Run last command
 nmap <silent> <leader>1 :!!<CR>
+" Check spelling
 nmap <silent> <leader>s :set spell!<CR>
-
-
+" Run Syntastic
+nmap <leader>c :SyntasticCheck<CR>
