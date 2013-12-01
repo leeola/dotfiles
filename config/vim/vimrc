@@ -89,7 +89,7 @@ let g:ctrlp_extensions = ['line']
 let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
 let g:ctrlp_custom_ignore = {
   \ 'dir': '\.git$\|node_modules$\|bower_components$\|build$',
-  \ 'file': '\.exe$\.so$'
+  \ 'file': '\.exe$\|\.so$\|\.test$'
   \ }                               " Ignore groups of files.
 let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(-1)': ['<c-up>'],
