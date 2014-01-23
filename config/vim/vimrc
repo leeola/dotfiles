@@ -49,6 +49,11 @@ let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
 highlight ColorColumn ctermbg=234         " Color the column
 
 
+" Whitespace Matching
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+
 
 " Vim Settings
 set shell=sh                        " Set the default shell to sh, this
@@ -75,13 +80,16 @@ set tabstop=2       				        " Global tab width
 set shiftwidth=2			              " Something involving tab width.
 set expandtab				                " Spaces instead of tabs
 
+set backspace=2                     " From Wiki: Make backspace work like most
+                                    " other apps. In practice, it lets me
+                                    " backspace through newlines on osx.
+
 set foldmethod=indent               " Magic
 set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
 autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80
-
 
 " CtrlP Settings
 
