@@ -80,6 +80,9 @@ set shell=sh                        " Set the default shell to sh, this
 " menu.
 set wildmenu
 
+" Vim Searching will search as you type.
+set incsearch
+
 set laststatus=2                    " Show the Airline Line
 
 " The following two options enable 'hybrid mode'
