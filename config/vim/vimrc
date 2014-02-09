@@ -125,12 +125,8 @@ autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 "
 
 " ### CtrlP Settings
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_extensions = ['line']
-let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|node_modules$\|bower_components$\|build$',
-  \ 'file': '\.exe$\|\.so$\|\.test$'
-  \ }                               " Ignore groups of files.
 let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(-1)': ['<c-up>'],
   \ 'PrtHistory(1)':  ['<c-down>'],
@@ -139,22 +135,19 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtCurRight()':  ['<right>']
   \ }
 
-" ### Silver Searcher Ag.vim
-nnoremap <leader>a :Ag
-
 
 
 "
 " ## Maps
 "
 
-" Chrome Specific Remaps
-
-
-" General Purpose Remaps
+" ### General Purpose Remaps
 
 " Remap Leader to ,
 let mapleader=","
+
+" Set Ag to ,a
+nnoremap <leader>a :Ag
 
 " Reload Vimrc Config
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
@@ -165,4 +158,7 @@ nmap <silent> <leader>1 :!!<CR>
 nmap <silent> <leader>s :set spell!<CR>
 " Run Syntastic
 nmap <leader>c :SyntasticCheck<CR>
+
+
+" ### Chrome Specific Remaps
 
