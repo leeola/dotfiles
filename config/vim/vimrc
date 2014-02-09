@@ -1,3 +1,15 @@
+"
+" # Lee's Vimrc
+"
+" My humble vimrc setup.
+"
+" ## Noteworthy Credits
+"
+" - Doug Black via http://dougblack.io/words/a-good-vimrc.html
+"   Great vimrc writeup.
+"
+
+
 set nocompatible                    " be iMproved
 filetype off                        " required!
 
