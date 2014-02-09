@@ -48,30 +48,26 @@ set background=dark
 " Set the theme to Solarized
 colorscheme solarized
 
-" I hate vim themes. I want a solid background with a visible cursor, but 
-" this is causing me hell. Commenting it out for now so that i can move on
-" with my life. In the future i need to figure out two things:
-" 1.) How to make a solid dark gray background.
-" 2.) How to make the cursor visisble during the background assignment.
-"     Currently if i enter `hi Normal ctermbg=black` my cursor disappears,
-"     even though *at the moment* my cursor is a bright grey cursor. Makes
-"     no sense to me.
-"set background=light
-"highlight Normal ctermbg=234
-
-"let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
-"highlight ColorColumn ctermbg=234         " Color the column
 
 
-" Whitespace Matching
+"
+" ## Whitespace Matching
+"
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 
-" Vim Settings
+"
+" ## Vim Settings
+"
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
+
+" Enables the autocomplete menu when you have some menus up like the `:e foo`
+" menu.
+set wildmenu
+
 set laststatus=2                    " Show the Airline Line
 
 " The following two options enable 'hybrid mode'
