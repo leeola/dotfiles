@@ -19,8 +19,9 @@ Bundle 'groenewege/vim-less'
 Bundle 'jnwhiteh/vim-golang'
 
 " Colorscheme Plugins
-"Bundle 'vim-scripts/ScrollColors'
-Bundle 'flazz/vim-colorschemes'
+"Bundle 'vim-scripts/ScrollColors'  " Deprecated
+"Bundle 'flazz/vim-colorschemes'    " Deprecated
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on           " Vundle Related Magic!
 
@@ -28,11 +29,24 @@ filetype plugin indent on           " Vundle Related Magic!
 set rtp+=~/.lees_hacks/bridges/powerline/bindings/vim
 
 
-" Vim Theme Settings
+"
+" ## Vim Theme Settings
+"
+
 syntax enable
-set t_Co=256                        " Force 256 Colors
-set term=screen-256color
-colorscheme twilight256
+"set t_Co=256                       " Deprecated Magic
+"set term=screen-256color           " Deprecated Magic
+
+" Because we're using Solarized, i am using iTerm2's Solarized Color palette.
+" If we were not, we want to force 256 color mode for solarized. Currently
+" though, we're ignoring it.
+"let g:solarized_termcolors=256
+
+" Tell Solarized to use the dark themes
+set background=dark
+
+" Set the theme to Solarized
+colorscheme solarized
 
 " I hate vim themes. I want a solid background with a visible cursor, but 
 " this is causing me hell. Commenting it out for now so that i can move on
@@ -42,11 +56,11 @@ colorscheme twilight256
 "     Currently if i enter `hi Normal ctermbg=black` my cursor disappears,
 "     even though *at the moment* my cursor is a bright grey cursor. Makes
 "     no sense to me.
-"set background=dark
+"set background=light
 "highlight Normal ctermbg=234
 
-let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
-highlight ColorColumn ctermbg=234         " Color the column
+"let &colorcolumn=join(range(81,999),",")  " Create a column at 81,82,83,etc
+"highlight ColorColumn ctermbg=234         " Color the column
 
 
 " Whitespace Matching
