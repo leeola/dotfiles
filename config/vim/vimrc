@@ -13,24 +13,28 @@
 set nocompatible                    " be iMproved
 filetype off                        " required!
 
-" Vundle Setup
+"
+" ## Vundle Setup
+"
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-" My Bundles
+" ### My Bundles
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'guns/xterm-color-table.vim'
+Bundle 'rking/ag.vim'
 
-" Syntax Highlighting Bundles
+" ### Syntax Highlighting Bundles
 Bundle 'scrooloose/syntastic'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'groenewege/vim-less'
 Bundle 'jnwhiteh/vim-golang'
 
-" Colorscheme Plugins
+" ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
 "Bundle 'flazz/vim-colorschemes'    " Deprecated
 Bundle 'altercation/vim-colors-solarized'
@@ -116,8 +120,11 @@ set foldlevelstart=20               " Magic
 autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 
-" CtrlP Settings
+"
+" ## Plugin Settings
+"
 
+" ### CtrlP Settings
 let g:ctrlp_extensions = ['line']
 let g:ctrlp_show_hidden = 1         " ctrlp will grep hidden files
 let g:ctrlp_custom_ignore = {
@@ -132,19 +139,25 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtCurRight()':  ['<right>']
   \ }
 
+" ### Silver Searcher Ag.vim
+nnoremap <leader>a :Ag
 
+
+
+"
+" ## Maps
+"
 
 " Chrome Specific Remaps
 
 
 " General Purpose Remaps
 
-"
-" ## Maps
-"
-
 " Remap Leader to ,
 let mapleader=","
+
+" Reload Vimrc Config
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
 
 " Run last command
 nmap <silent> <leader>1 :!!<CR>
