@@ -139,8 +139,12 @@ let g:ctrlp_prompt_mappings = {
 
 " General Purpose Remaps
 
+"
+" ## Maps
+"
 
-" Maps
+" Remap Leader to ,
+let mapleader=","
 
 " Run last command
 nmap <silent> <leader>1 :!!<CR>
@@ -148,3 +152,4 @@ nmap <silent> <leader>1 :!!<CR>
 nmap <silent> <leader>s :set spell!<CR>
 " Run Syntastic
 nmap <leader>c :SyntasticCheck<CR>
+
