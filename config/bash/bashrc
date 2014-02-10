@@ -1,9 +1,18 @@
-# 
+#
 # # Bashrc
-# 
+#
 # My bashrc is a minimal attempt at getting the hell out of bash as fast
 # as possible.
-# 
+#
+PATH=:~/.bin:~/.n/bin:$PATH
+N_PREFIX=~/.n
+export N_PREFIX
+
+# And go
+GOPATH=~/projects/.gocode
+PATH=$GOPATH/bin:$PATH
+export GOPATH
+export PATH
 
 # Good god i hate this fucking ixon bullshit. These two lines kill it dead
 # before we call tmux.
