@@ -26,6 +26,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'rking/ag.vim'
+Bundle 'godlygeek/tabular'
 
 " ### Syntax Highlighting Bundles
 Bundle 'scrooloose/syntastic'
