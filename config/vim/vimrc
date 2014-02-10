@@ -27,6 +27,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'guns/xterm-color-table.vim'
 Bundle 'rking/ag.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'Lokaltog/vim-easymotion'
 
 " ### Syntax Highlighting Bundles
 Bundle 'scrooloose/syntastic'
