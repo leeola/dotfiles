@@ -75,6 +75,13 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 match ExtraWhitespace /\s\+$\| \+\ze\t/
 
+"
+" ## Highlight Past 80
+" Everything after the 80char limit
+"
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 
 "
 " ## Vim Settings
@@ -121,6 +128,7 @@ set foldlevelstart=20               " Magic
 
 autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
 autocmd BufNewFile,BufRead *.md setlocal textwidth=80
+
 
 "
 " ## Plugin Settings
