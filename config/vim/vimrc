@@ -28,6 +28,10 @@ Bundle 'guns/xterm-color-table.vim'
 Bundle 'rking/ag.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'Lokaltog/vim-easymotion'
+" Automatic closing tags
+Bundle 'Raimondi/delimitMate'
+" Cool starting screen!
+Bundle 'mhinz/vim-startify'
 
 " ### Syntax Highlighting Bundles
 Bundle 'scrooloose/syntastic'
@@ -145,6 +149,9 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtCurRight()':  ['<right>']
   \ }
 
+" ### Startify
+let g:startify_custom_header = 
+      \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
 
 "
