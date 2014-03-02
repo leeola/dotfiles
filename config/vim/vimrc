@@ -32,6 +32,11 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Raimondi/delimitMate'
 " Cool starting screen!
 Bundle 'mhinz/vim-startify'
+" snipMate and it's requirements
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
 
 " ### Syntax Highlighting Bundles
 Bundle 'scrooloose/syntastic'
@@ -139,7 +144,7 @@ autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 "
 
 " ### CtrlP Settings
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_extensions = ['line']
 let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(-1)': ['<c-up>'],
