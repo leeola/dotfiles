@@ -31,7 +31,8 @@ Bundle 'Lokaltog/vim-easymotion'
 " Automatic closing tags
 Bundle 'Raimondi/delimitMate'
 " Cool starting screen!
-Bundle 'mhinz/vim-startify'
+" Disabled because it's damn annoying at the moment.
+"Bundle 'mhinz/vim-startify'
 " snipMate and it's requirements
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
