@@ -1,3 +1,7 @@
 Host vm-*
   User leeolayvar
   ProxyCommand ssh %r@ssh.koding.com nc %h.%r.koding.kd.io %p
+
+Host karmlet
+  User root
+  HostName 107.170.105.215
