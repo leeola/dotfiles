@@ -1,9 +1,9 @@
 [user]
-        name = Lee Olayvar
-        email = leeolayvar@gmail.com
+  name = Lee Olayvar
+  email = leeolayvar@gmail.com
 [alias]
   co = checkout
 [core]
-        editor = vim
+  editor = vim
 [push]
-        default = simple
+  default = simple
