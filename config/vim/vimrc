@@ -164,6 +164,7 @@ let g:startify_custom_header =
 " ## Maps
 "
 
+
 " ### General Purpose Remaps
 
 " Remap Leader to ,
@@ -181,6 +182,8 @@ nmap <silent> <leader>1 :!!<CR>
 nmap <silent> <leader>s :set spell!<CR>
 " Run Syntastic
 nmap <leader>c :SyntasticCheck<CR>
+
+nnoremap <silent> <leader>p :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
 
 " ### Chrome Specific Remaps
