@@ -45,6 +45,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'groenewege/vim-less'
 Bundle 'jnwhiteh/vim-golang'
+Bundle 'tpope/vim-markdown'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
@@ -136,8 +137,6 @@ set foldmethod=indent               " Magic
 set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
-autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
-autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 
 
 "
@@ -154,6 +153,23 @@ let g:ctrlp_prompt_mappings = {
   \ 'ToggleType(-1)': ['<c-l>'],
   \ 'PrtCurRight()':  ['<right>']
   \ }
+
+
+
+"
+" ### Markdown Plugin
+"
+let g:markdown_fenced_languages = [
+      \ 'coffee', 'css', 'erb=eruby', 'javascript',
+      \ 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'
+      \ ]
+
+" DEPRECATED:
+" These are commented out because i added the Markdown plugin, which should
+" take care of this.
+"autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
+"autocmd BufNewFile,BufRead *.md setlocal textwidth=80
+
 
 " ### Startify
 let g:startify_custom_header = 
