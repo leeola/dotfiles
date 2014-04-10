@@ -138,6 +138,11 @@ set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
 
+" ## Autocmd
+
+" Set the auto-wrap at 80 characters for markdown.
+autocmd BufNewFile,BufRead *.md setlocal textwidth=79
+
 
 "
 " ## Plugin Settings
@@ -166,7 +171,6 @@ let g:markdown_fenced_languages = [
 " These are commented out because i added the Markdown plugin, which should
 " take care of this.
 "autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
-"autocmd BufNewFile,BufRead *.md setlocal textwidth=80
 
 
 " ### Startify
