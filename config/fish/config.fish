@@ -17,3 +17,21 @@ function fish_greeting; cat ~/.config/fish/ascii_greeting; end
 
 # Change `cd foo` to always check the current dir, and not current *and* home.
 set -Ux CDPATH .
+
+set -x DOCKER_HOST tcp://localhost:4243
+
+
+# ## Alias: Docker Clean Containers
+#
+# Iterate through the docker containers and remove them.
+function docker-clean-containers
+  docker rm (docker ps -a -q)
+end
+
+# ## Alias: Clean noname images
+#
+# Iternate through all of the docker images, and any without a tag *(<none>)*
+# are removed.
+function docker-clean-images
+  docker rmi (docker images | grep "^<none>" | awk '{print $3}')
+end
