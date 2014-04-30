@@ -46,6 +46,7 @@ Bundle 'digitaltoad/vim-jade'
 Bundle 'groenewege/vim-less'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'tpope/vim-markdown'
+Bundle 'lchi/vim-toffee'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
