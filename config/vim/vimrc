@@ -138,10 +138,18 @@ set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
 
-" ## Autocmd
+"
+" ## Autocmds
+"
 
-" Set the auto-wrap at 80 characters for markdown.
-autocmd BufNewFile,BufRead *.md setlocal textwidth=79
+augroup markdown
+  autocmd!
+  " Set the auto-wrap at 80 characters for markdown.
+  autocmd BufNewFile,BufRead *.md setlocal textwidth=79
+  " Black magic from
+  " http://vim.wikia.com/wiki/Automatic_formatting_of_paragraphs
+  autocmd BufNewFile,BufRead *.md setlocal fo=aw2tq 
+augroup END
 
 
 "
