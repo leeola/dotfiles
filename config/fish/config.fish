@@ -21,22 +21,31 @@ set -Ux CDPATH .
 set -x DOCKER_HOST tcp://localhost:4243
 
 
-# ## Alias: Remove all Containers
 #
+# ## Aliases
+#
+alias s stash
+
+#
+# ## Alias Functions
+#
+
+# ### Remove all Containers
 # Iterate through the docker containers and remove them.
 function docker-rm-all
   docker rm (docker ps -a -q)
 end
 
-# ## Alias: Remove noname images
-#
+# ### Remove noname images
 # Iternate through all of the docker images, and any without a tag *(<none>)*
 # are removed.
 function docker-rmi-untagged
   docker rmi (docker images | grep "^<none>" | awk '{print $3}')
 end
 
-# ## Alias: Remove all images
+# ### Remove all images
 function docker-rmi-all
   docker rmi (docker images | awk '{print $3}')
 end
+
+
