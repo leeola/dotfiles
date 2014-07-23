@@ -13,6 +13,7 @@ GOPATH=~/projects/.gocode
 GOBIN=$GOPATH/bin
 PATH=$GOBIN:$PATH
 export GOPATH
+export GOBIN
 export PATH
 
 # Good god i hate this fucking ixon bullshit. These two lines kill it dead

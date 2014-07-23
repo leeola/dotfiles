@@ -15,8 +15,10 @@ export N_PREFIX
 
 # And go
 GOPATH=~/projects/.gocode
-PATH=$GOPATH/bin:$PATH
+GOBIN=$GOPATH/bin
+PATH=$GOBIN:$PATH
 export GOPATH
+export GOBIN
 export PATH
 
 # Alias tmux in here as well, so if i SSH in i can gtfo of bash right away.
