@@ -10,7 +10,8 @@ export N_PREFIX
 
 # And go
 GOPATH=~/projects/.gocode
-PATH=$GOPATH/bin:$PATH
+GOBIN=$GOPATH/bin
+PATH=$GOBIN:$PATH
 export GOPATH
 export PATH
 
