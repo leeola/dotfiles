@@ -17,42 +17,45 @@ filetype off                        " required!
 " ## Vundle Setup
 "
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Bundle 'gmarik/Vundle.vim'
 
 " ### My Bundles
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'guns/xterm-color-table.vim'
-Bundle 'rking/ag.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'rking/ag.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'Lokaltog/vim-easymotion'
 " Automatic closing tags
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 " Cool starting screen!
 " Disabled because it's damn annoying at the moment.
 "Bundle 'mhinz/vim-startify'
 " snipMate and it's requirements
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
 " ### Syntax Highlighting Bundles
-Bundle 'scrooloose/syntastic'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'groenewege/vim-less'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'tpope/vim-markdown'
-Bundle 'lchi/vim-toffee'
+Plugin 'scrooloose/syntastic'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'groenewege/vim-less'
+"Removed to try Fatih's vim-go
+"Bundle 'jnwhiteh/vim-golang'
+Plugin 'tpope/vim-markdown'
+Plugin 'lchi/vim-toffee'
+"Plugin 'fatih/vim-go'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
 "Bundle 'flazz/vim-colorschemes'    " Deprecated
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
+call vundle#end()
 filetype plugin indent on           " Vundle Related Magic!
 
 " Powerline setup
