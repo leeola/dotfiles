@@ -48,7 +48,7 @@ Plugin 'groenewege/vim-less'
 "Bundle 'jnwhiteh/vim-golang'
 Plugin 'tpope/vim-markdown'
 Plugin 'lchi/vim-toffee'
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
