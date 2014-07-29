@@ -74,6 +74,7 @@ sh.run "mv ~/.config/fish/ascii_greeting  #{trash_dir}/ascii_greeting"
 sh.run "mkdir -p ~/.config/fish"
 sh.run "ln -s #{cwd}/config/fish/config.fish ~/.config/fish/config.fish"
 sh.run "ln -s #{cwd}/config/fish/ascii_greeting ~/.config/fish/ascii_greeting"
+sh.run "ln -s #{cwd}/config/fish/functions ~/.config/fish/functions"
 
 
 # Setup "N"
