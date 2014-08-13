@@ -107,6 +107,7 @@ sh.run "mkdir -p ~/.vim/tmp/bkp"
 sh.run "mkdir -p ~/.vim/tmp/swp"
 sh.run "ln -s #{cwd}/config/vim/colors ~/.vim/colors"
 sh.run "ln -s #{cwd}/config/vim/vimrc ~/.vimrc"
+sh.run "ln -s #{cwd}/config/vim/snippets ~/vim/snippets"
 sh.run "git clone https://github.com/gmarik/vundle ~/.vim/bundle/Vundle.vim"
 sh.run "vim +PluginInstall +qall"
 

@@ -34,8 +34,8 @@ Plugin 'Raimondi/delimitMate'
 " Disabled because it's damn annoying at the moment.
 "Bundle 'mhinz/vim-startify'
 " snipMate and it's requirements
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
+Plugin 'tomtom/tlib_vim'              " Dep for snipmate
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 
