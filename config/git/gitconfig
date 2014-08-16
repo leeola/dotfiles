@@ -8,9 +8,10 @@
   ci = commit
   co = checkout
   br = branch
-  diff = diff --word-diff
-  df = diff --word-diff
-  dc = diff --word-diff --cached
+  df = diff
+  dc = diff --cached
+  dfw = diff --word-diff
+  dcw = diff --word-diff --cached
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
 [core]
   editor = vim
