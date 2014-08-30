@@ -53,7 +53,9 @@ Plugin 'fatih/vim-go'
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
 "Bundle 'flazz/vim-colorschemes'    " Deprecated
-Plugin 'altercation/vim-colors-solarized'
+" We're installing this plugin manually in Docker, so that
+" the dependency is met right away.
+"Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on           " Vundle Related Magic!
