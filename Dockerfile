@@ -77,3 +77,6 @@ RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
 ADD config/tmux /root/.dotfiles/config/tmux
 RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
 
+
+# ### Run process
+CMD ["/usr/bin/tmux"]
