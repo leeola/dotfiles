@@ -20,8 +20,9 @@ ENV TERM screen-256color
 
 
 # ## Setup the shared folders and links
-RUN mkdir -p /docker-shared/projects &&\
-  ln -s /docker-shared/projects /root/projects
+RUN mkdir -p /docker-shared/projects ~/.ssh &&\
+  ln -s /docker-shared/projects ~/projects
+  ln -s /docker-shared/.ssh     ~/.ssh
 
 
 # ## Install the dependencies
