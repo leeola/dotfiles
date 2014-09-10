@@ -29,6 +29,7 @@ RUN apt-get update &&\
     mercurial \
     curl \
     golang \
+    ruby rake \
     silversearcher-ag \
     python-pip &&\
 
@@ -40,6 +41,12 @@ RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
   -o /usr/bin/n && \
   chmod +x /usr/bin/n && \
   n stable
+
+
+# ## Github's Hub
+RUN git clone https://github.com/github/hub.git &&\
+  cd hub &&\
+  rake install prefix=/usr/local
 
 
 # ## Add and link configs
