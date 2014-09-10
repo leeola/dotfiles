@@ -19,6 +19,11 @@ ENV PATH $PATH:$GOBIN
 ENV TERM screen-256color
 
 
+# ## Setup the shared folders and links
+RUN mkdir -p /docker-shared/projects &&\
+  ln -s /docker-shared/projects /root/projects
+
+
 # ## Install the dependencies
 RUN apt-get update &&\
   apt-get install -y\
