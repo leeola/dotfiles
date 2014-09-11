@@ -25,7 +25,7 @@ RUN mkdir -p /docker-shared/projects ~/.ssh &&\
   ln -s /docker-shared/.ssh     ~/.ssh
 
 
-# ## Install the dependencies
+# ## Install simple dependencies
 RUN apt-get update &&\
   apt-get install -y\
     vim \
@@ -37,9 +37,7 @@ RUN apt-get update &&\
     golang \
     ruby rake \
     silversearcher-ag \
-    python-pip &&\
-
-  pip install --user git+git://github.com/Lokaltog/powerline
+    python-pip
 
 
 # ## Install N, and Node
@@ -53,6 +51,10 @@ RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
 RUN git clone https://github.com/github/hub.git &&\
   cd hub &&\
   rake install prefix=/usr/local
+
+
+# ## Powerline
+RUN pip install git+git://github.com/Lokaltog/powerline
 
 
 # ## Add and link configs
@@ -73,8 +75,7 @@ RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
 
 # ### ssh
 ADD config/ssh /root/.dotfiles/config/ssh
-RUN mkdir ~/.ssh &&\
-  ln -s ~/.dotfiles/config/ssh/config ~/.ssh/config
+RUN ln -s ~/.dotfiles/config/ssh/config ~/.ssh/config
 
 # ### fish
 ADD config/fish /root/.dotfiles/config/fish

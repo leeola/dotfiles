@@ -61,7 +61,7 @@ call vundle#end()
 filetype plugin indent on           " Vundle Related Magic!
 
 " Powerline setup
-set rtp+=~/.lees_hacks/bridges/powerline/bindings/vim
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
 
 
 "
