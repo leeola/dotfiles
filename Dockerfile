@@ -29,7 +29,6 @@ RUN mkdir -p /docker-shared/projects ~/.ssh &&\
 RUN apt-get update &&\
   apt-get install -y\
     vim \
-    fish \
     tmux \
     git \
     mercurial \
@@ -38,6 +37,13 @@ RUN apt-get update &&\
     ruby rake \
     silversearcher-ag \
     python-pip
+
+
+# ## Install Fish
+RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb > fish.deb &&\
+  apt-get install -y bc libjs-jquery gettext-base man-db &&\
+  dpkg -i fish.deb &&\
+  rm fish.deb
 
 
 # ## Install N, and Node
