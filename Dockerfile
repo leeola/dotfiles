@@ -28,6 +28,7 @@ RUN mkdir -p /docker-shared/projects ~/.ssh &&\
 # ## Install simple dependencies
 RUN apt-get update &&\
   apt-get install -y\
+    mosh \
     vim \
     tmux \
     git \
