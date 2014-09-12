@@ -99,11 +99,5 @@ ADD config/tmux /root/.dotfiles/config/tmux
 RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
 
 
-
-# ## Fix locales
-RUN locale-gen en_US en_US.UTF-8 &&\
-  dpkg-reconfigure locales
-
-
 # ## Run process
 CMD ["/usr/bin/tmux"]
