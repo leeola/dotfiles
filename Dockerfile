@@ -108,7 +108,8 @@ RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
 ADD config/fish /root/.dotfiles/config/fish
 RUN mkdir -p .config/fish &&\
   ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
-  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting
+  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
+  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
 
 # ### git
 ADD config/git /root/.dotfiles/config/git
