@@ -36,7 +36,6 @@ RUN apt-get update &&\
   apt-get install -y\
     mosh \
     vim \
-    tmux \
     git \
     mercurial \
     curl \
@@ -44,6 +43,14 @@ RUN apt-get update &&\
     ruby rake \
     silversearcher-ag \
     python-pip
+
+
+# ## Install tmux
+RUN apt-get install -y software-properties-common \
+    python-software-properties &&\
+  add-apt-repository ppa:pi-rho/dev &&\
+  apt-get update &&\
+  apt-get install -y tmux
 
 
 # ## Install Fish
