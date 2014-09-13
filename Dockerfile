@@ -36,7 +36,8 @@ RUN mkdir -p /docker-shared/projects /docker-shared/.ssh &&\
 # This is close, and "might" be fixed.. we'll see. Both Tmux and Vim
 # show the proper characters with this env setting and the language
 # install.
-RUN apt-get install -y language-pack-en-base &&\
+RUN apt-get update &&\
+  apt-get install -y language-pack-en-base &&\
   update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 # By using env manually, tmux picks up on the locale settings
 # (as the sole process)
@@ -47,17 +48,16 @@ ENV LC_ALL en_US.UTF-8
 
 
 # ## Install simple dependencies
-RUN apt-get update &&\
-  apt-get install -y\
-    mosh \
-    vim \
-    git \
-    mercurial \
-    curl \
-    golang \
-    ruby rake \
-    silversearcher-ag \
-    python-pip
+RUN apt-get install -y\
+  mosh \
+  vim \
+  git \
+  mercurial \
+  curl \
+  golang \
+  ruby rake \
+  silversearcher-ag \
+  python-pip
 
 
 # ## Install tmux
