@@ -103,5 +103,20 @@ ADD powerline /root/.dotfiles/powerline
 RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
 
 
+# ## Fix locale nightmare
+#
+# This is close, and "might" be fixed.. we'll see. Both Tmux and Vim
+# show the proper characters with this env setting and the language
+# install.
+RUN apt-get install -y language-pack-en-base &&\
+  update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+# By using env manually, tmux picks up on the locale settings
+# (as the sole process)
+#RUN echo 'LANG="en_US.UTF-8"' >> /etc/environment &&\
+#  echo 'LC_ALL="en_US.UTF-8"' >> /etc/environment
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+
 # ## Run process
 CMD ["/usr/bin/tmux"]
