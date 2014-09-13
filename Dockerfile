@@ -20,8 +20,14 @@ ENV TERM screen-256color
 
 
 # ## Setup the shared folders and links
-RUN mkdir -p /docker-shared/projects ~/.ssh &&\
-  ln -s /docker-shared/projects ~/projects
+#
+# We're creating the folders with `-p` so that if they don't
+# exist, our link still works.
+#
+# In the future we should probably throw a warning to the user
+# if the docker-shared dir doesn't exist.
+RUN mkdir -p /docker-shared/projects /docker-shared/.ssh &&\
+  ln -s /docker-shared/projects ~/projects &&\
   ln -s /docker-shared/.ssh     ~/.ssh
 
 
@@ -81,8 +87,15 @@ RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
   vim +PluginInstall +qall >/dev/null 2>&1
 
 # ### ssh
-ADD config/ssh /root/.dotfiles/config/ssh
-RUN ln -s ~/.dotfiles/config/ssh/config ~/.ssh/config
+#
+# Access to /docker-shared/.ssh is not possible (i believe) during
+# the Dockerfile build, due to the lack of a real shared volume.
+# At best, it will write the file(s) and then overwrite them once
+# the volume is shared.
+#
+# So, if something needs to be placed into ~/.ssh, it needs to be
+# done manually by the user, or post run.
+#ADD config/ssh/config /root/.ssh/config
 
 # ### fish
 ADD config/fish /root/.dotfiles/config/fish
