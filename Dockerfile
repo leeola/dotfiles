@@ -79,7 +79,10 @@ RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd6
 RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
   -o /usr/bin/n && \
   chmod +x /usr/bin/n && \
-  n stable
+  n stable &&\
+  npm install -g \
+    gulp \
+    coffee-script
 
 
 # ## Github's Hub
