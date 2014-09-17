@@ -87,13 +87,19 @@ RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
 
 # ## Install Go Stuff
 # (Note, not currently installing Go here, yet)
-RUN go get github.com/smartystreets/goconvey
-# gpm has manual install, so i'm separating it.
 RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
-  git checkout v1.2.3 &&\
-  ./configure &&\
-  make install &&\
-  cd .. && rm -rf gpm
+    git checkout v1.2.3 &&\
+    ./configure &&\
+    make install &&\
+    cd .. && rm -rf gpm &&\
+  git clone https://github.com/pote/gvp.git && cd gvp &&\
+    git checkout v0.1.0 &&\
+    ./configure &&\
+    make install &&\
+    cd .. && rm -rf gpm &&\
+  git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
+    cp bin/gvp-fish /usr/local/bin &&\
+    cd .. && rm -rf gvp-fish
 
 
 # ## Github's Hub
