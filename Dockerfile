@@ -85,6 +85,11 @@ RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
     coffee-script
 
 
+# ## Install Go Stuff
+# (Note, not currently installing Go here, yet)
+RUN go get github.com/smartystreets/goconvey
+
+
 # ## Github's Hub
 RUN git clone https://github.com/github/hub.git &&\
   cd hub &&\
