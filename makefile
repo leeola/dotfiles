@@ -35,3 +35,9 @@ interact:
 		--publish=8888:8888 \
 		--rm \
 		docker-dev tmux
+
+
+interact-noports:
+	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
+		--rm \
+		docker-dev tmux
