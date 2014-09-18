@@ -110,6 +110,10 @@ autocmd BufWinLeave * call clearmatches()
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
 
+" Modeline Support
+set modeline
+set modelines=5
+
 " Enables the autocomplete menu when you have some menus up like the `:e foo`
 " menu.
 set wildmenu
