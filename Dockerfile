@@ -129,39 +129,34 @@ RUN cd /tmp &&\
   make &&\
   make install
 
-#RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb > fish.deb &&\
-#  apt-get install -y bc libjs-jquery gettext-base man-db &&\
-#  dpkg -i fish.deb &&\
-#  rm fish.deb
-#
-#
-## ## Install N, and Node
-#RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
-#  -o /usr/bin/n && \
-#  chmod +x /usr/bin/n && \
-#  n stable &&\
-#  npm install -g \
-#    gulp \
-#    coffee-script
-#
-#
-## ## Install Go Stuff
-## (Note, not currently installing Go here, yet)
-#RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
-#    git checkout v1.2.3 &&\
-#    ./configure &&\
-#    make install &&\
-#    cd .. && rm -rf gpm &&\
-#  git clone https://github.com/pote/gvp.git && cd gvp &&\
-#    git checkout v0.1.0 &&\
-#    ./configure &&\
-#    make install &&\
-#    cd .. && rm -rf gpm &&\
-#  git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
-#    cp bin/gvp-fish /usr/local/bin &&\
-#    cd .. && rm -rf gvp-fish
-#
-#
+
+# ## Install N, and Node
+RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
+  -o /usr/bin/n && \
+  chmod +x /usr/bin/n && \
+  n stable &&\
+  npm install -g \
+    gulp \
+    coffee-script
+
+
+# ## Install Go Tools
+# (Note, not currently installing Go here, yet)
+RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
+    git checkout v1.2.3 &&\
+    ./configure &&\
+    make install &&\
+    cd .. && rm -rf gpm &&\
+  git clone https://github.com/pote/gvp.git && cd gvp &&\
+    git checkout v0.1.0 &&\
+    ./configure &&\
+    make install &&\
+    cd .. && rm -rf gpm &&\
+  git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
+    cp bin/gvp-fish /usr/local/bin &&\
+    cd .. && rm -rf gvp-fish
+
+
 ## ## Github's Hub
 #RUN git clone https://github.com/github/hub.git &&\
 #  cd hub &&\
