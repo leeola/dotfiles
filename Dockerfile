@@ -26,7 +26,10 @@ ENV TERM screen-256color
 #
 # In the future we should probably throw a warning to the user
 # if the docker-shared dir doesn't exist.
-RUN mkdir -p /docker-shared/projects /docker-shared/.ssh &&\
+RUN mkdir -p /docker-shared/projects \
+    /docker-shared/.ssh \
+    ~/.config/fish &&\
+  ln -s /docker-shared/._/fish/fish_history ~/.config/fish/fish_history &&\
   ln -s /docker-shared/projects ~/projects &&\
   ln -s /docker-shared/.ssh     ~/.ssh
 
