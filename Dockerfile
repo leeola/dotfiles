@@ -7,7 +7,7 @@
 # A humble dockerfile which install and configure my entire development
 # environment.
 #
-FROM ubuntu:14.04
+FROM centos
 WORKDIR /root
 
 
@@ -34,33 +34,35 @@ RUN mkdir -p /docker-shared/projects \
   ln -s /docker-shared/.ssh     ~/.ssh
 
 
-# ## Fix locale nightmare
-#
-# This is close, and "might" be fixed.. we'll see. Both Tmux and Vim
-# show the proper characters with this env setting and the language
-# install.
-RUN apt-get update &&\
-  apt-get install -y language-pack-en-base &&\
-  update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-# By using env manually, tmux picks up on the locale settings
-# (as the sole process)
-#RUN echo 'LANG="en_US.UTF-8"' >> /etc/environment &&\
-#  echo 'LC_ALL="en_US.UTF-8"' >> /etc/environment
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
+## ## Fix locale nightmare
+##
+## This is close, and "might" be fixed.. we'll see. Both Tmux and Vim
+## show the proper characters with this env setting and the language
+## install.
+#RUN apt-get update &&\
+#  apt-get install -y language-pack-en-base &&\
+#  update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+## By using env manually, tmux picks up on the locale settings
+## (as the sole process)
+##RUN echo 'LANG="en_US.UTF-8"' >> /etc/environment &&\
+##  echo 'LC_ALL="en_US.UTF-8"' >> /etc/environment
+#ENV LANG en_US.UTF-8
+#ENV LC_ALL en_US.UTF-8
 
 
 # ## Install simple dependencies
-RUN apt-get install -y\
-  mosh \
-  vim \
-  git \
-  mercurial \
-  curl \
-  golang \
-  ruby rake \
-  silversearcher-ag \
-  python-pip
+RUN yum install -y\
+  mosh
+#RUN apt-get install -y\
+#  mosh \
+#  vim \
+#  git \
+#  mercurial \
+#  curl \
+#  golang \
+#  ruby rake \
+#  silversearcher-ag \
+#  python-pip
 
 
 # ## Install tmux
