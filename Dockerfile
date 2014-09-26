@@ -56,6 +56,7 @@ RUN mkdir -p /docker-shared/projects \
 RUN yum install -y\
   make \
   tar \
+  hostname \
   vim \
   git \
   mercurial \
@@ -69,7 +70,7 @@ RUN yum install -y\
 #
 # Ie, dependencies we need for the build, but can remove
 # after it's all done.
-RUN yum install -y gcc automake pcre-devel xz-devel
+RUN yum install -y gcc gcc-c++ automake pcre-devel xz-devel ncurses-devel
 
 
 # ## Install silversearcher
@@ -100,15 +101,36 @@ RUN cd /tmp &&\
   mv go/bin/gofmt /usr/local/bin/gofmt
 
 
-## ## Install tmux
-#RUN apt-get install -y software-properties-common \
-#    python-software-properties &&\
-#  add-apt-repository ppa:pi-rho/dev &&\
-#  apt-get update &&\
-#  apt-get install -y tmux
+# ## Install tmux
 #
-#
-## ## Install Fish
+# First install libevent, a dep of tmux, then tmux.
+RUN cd /tmp &&\
+  curl -LO https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz &&\
+  tar -xvf libevent-2.0.21-stable.tar.gz &&\
+  ls -la &&\
+  cd libevent-2.0.21-stable &&\
+  ./configure --prefix=/usr --disable-static &&\
+  make install &&\
+  ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5 &&\
+  cd .. &&\
+  git clone git://git.code.sf.net/p/tmux/tmux-code tmux &&\
+  cd tmux
+RUN cd /tmp/tmux &&\
+  sh autogen.sh &&\
+  ./configure &&\
+  make && make install
+
+
+# ## Install Fish
+RUN cd /tmp &&\
+  git clone https://github.com/fish-shell/fish-shell &&\
+  cd fish-shell &&\
+  git checkout 2.1.1 &&\
+  autoconf &&\
+  ./configure &&\
+  make &&\
+  make install
+
 #RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb > fish.deb &&\
 #  apt-get install -y bc libjs-jquery gettext-base man-db &&\
 #  dpkg -i fish.deb &&\
