@@ -157,62 +157,62 @@ RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
     cd .. && rm -rf gvp-fish
 
 
-## ## Github's Hub
-#RUN git clone https://github.com/github/hub.git &&\
-#  cd hub &&\
-#  rake install prefix=/usr/local
+# ## Github's Hub
+RUN git clone https://github.com/github/hub.git &&\
+  cd hub &&\
+  rake install prefix=/usr/local
+
+
+# ## Powerline
+RUN pip install git+git://github.com/Lokaltog/powerline
+
+
+# ## Add and link configs
+# ### vim
+ADD config/vim /root/.dotfiles/config/vim
+RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
+  ln -s ~/.dotfiles/config/vim/colors .vim/colors &&\
+  ln -s ~/.dotfiles/config/vim/vimrc .vimrc &&\
+  ln -s ~/.dotfiles/config/vim/snippets .vim/snippets &&\
+
+  git clone https://github.com/altercation/vim-colors-solarized &&\
+  mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors &&\
+  rm -rf vim-colors-solarized &&\
+
+  git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim &&\
+  echo "Installing Vim Plugins. This will take a couple minutes.." &&\
+  vim +PluginInstall +qall >/dev/null 2>&1
+
+# ### ssh
 #
+# Access to /docker-shared/.ssh is not possible (i believe) during
+# the Dockerfile build, due to the lack of a real shared volume.
+# At best, it will write the file(s) and then overwrite them once
+# the volume is shared.
 #
-## ## Powerline
-#RUN pip install git+git://github.com/Lokaltog/powerline
-#
-#
-## ## Add and link configs
-## ### vim
-#ADD config/vim /root/.dotfiles/config/vim
-#RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
-#  ln -s ~/.dotfiles/config/vim/colors .vim/colors &&\
-#  ln -s ~/.dotfiles/config/vim/vimrc .vimrc &&\
-#  ln -s ~/.dotfiles/config/vim/snippets .vim/snippets &&\
-#
-#  git clone https://github.com/altercation/vim-colors-solarized &&\
-#  mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors &&\
-#  rm -rf vim-colors-solarized &&\
-#
-#  git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim &&\
-#  echo "Installing Vim Plugins. This will take a couple minutes.." &&\
-#  vim +PluginInstall +qall >/dev/null 2>&1
-#
-## ### ssh
-##
-## Access to /docker-shared/.ssh is not possible (i believe) during
-## the Dockerfile build, due to the lack of a real shared volume.
-## At best, it will write the file(s) and then overwrite them once
-## the volume is shared.
-##
-## So, if something needs to be placed into ~/.ssh, it needs to be
-## done manually by the user, or post run.
-##ADD config/ssh/config /root/.ssh/config
-#
-## ### fish
-#ADD config/fish /root/.dotfiles/config/fish
-#RUN mkdir -p .config/fish &&\
-#  ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
-#  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
-#  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
-#
-## ### git
-#ADD config/git /root/.dotfiles/config/git
-#RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
-#
-## ### tmux
-#ADD config/tmux /root/.dotfiles/config/tmux
-#RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
-#
-## ### powerline
-#ADD powerline /root/.dotfiles/powerline
-#RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
-#
-#
-## ## Run process
-#CMD ["/usr/bin/tmux"]
+# So, if something needs to be placed into ~/.ssh, it needs to be
+# done manually by the user, or post run.
+#ADD config/ssh/config /root/.ssh/config
+
+# ### fish
+ADD config/fish /root/.dotfiles/config/fish
+RUN mkdir -p .config/fish &&\
+  ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
+  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
+  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
+
+# ### git
+ADD config/git /root/.dotfiles/config/git
+RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
+
+# ### tmux
+ADD config/tmux /root/.dotfiles/config/tmux
+RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
+
+# ### powerline
+ADD powerline /root/.dotfiles/powerline
+RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
+
+
+# ## Run process
+CMD ["/usr/bin/tmux"]
