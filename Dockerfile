@@ -63,7 +63,6 @@ RUN yum install -y\
   curl \
   ruby rake
 #  mosh \
-#  golang \
 
 
 # ## Install build dependencies
@@ -114,8 +113,7 @@ RUN cd /tmp &&\
   ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5 &&\
   cd .. &&\
   git clone git://git.code.sf.net/p/tmux/tmux-code tmux &&\
-  cd tmux
-RUN cd /tmp/tmux &&\
+  cd tmux &&\
   sh autogen.sh &&\
   ./configure &&\
   make && make install
