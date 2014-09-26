@@ -50,119 +50,154 @@ RUN mkdir -p /docker-shared/projects \
 #ENV LC_ALL en_US.UTF-8
 
 
-# ## Install simple dependencies
+# ## Install simple user dependencies
+#
+# Some user deps that we aren't yet compiling by hand.
 RUN yum install -y\
-  mosh
-#RUN apt-get install -y\
+  make \
+  tar \
+  vim \
+  git \
+  mercurial \
+  curl \
+  ruby rake
 #  mosh \
-#  vim \
-#  git \
-#  mercurial \
-#  curl \
 #  golang \
-#  ruby rake \
-#  silversearcher-ag \
-#  python-pip
 
 
-# ## Install tmux
-RUN apt-get install -y software-properties-common \
-    python-software-properties &&\
-  add-apt-repository ppa:pi-rho/dev &&\
-  apt-get update &&\
-  apt-get install -y tmux
-
-
-# ## Install Fish
-RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb > fish.deb &&\
-  apt-get install -y bc libjs-jquery gettext-base man-db &&\
-  dpkg -i fish.deb &&\
-  rm fish.deb
-
-
-# ## Install N, and Node
-RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
-  -o /usr/bin/n && \
-  chmod +x /usr/bin/n && \
-  n stable &&\
-  npm install -g \
-    gulp \
-    coffee-script
-
-
-# ## Install Go Stuff
-# (Note, not currently installing Go here, yet)
-RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
-    git checkout v1.2.3 &&\
-    ./configure &&\
-    make install &&\
-    cd .. && rm -rf gpm &&\
-  git clone https://github.com/pote/gvp.git && cd gvp &&\
-    git checkout v0.1.0 &&\
-    ./configure &&\
-    make install &&\
-    cd .. && rm -rf gpm &&\
-  git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
-    cp bin/gvp-fish /usr/local/bin &&\
-    cd .. && rm -rf gvp-fish
-
-
-# ## Github's Hub
-RUN git clone https://github.com/github/hub.git &&\
-  cd hub &&\
-  rake install prefix=/usr/local
-
-
-# ## Powerline
-RUN pip install git+git://github.com/Lokaltog/powerline
-
-
-# ## Add and link configs
-# ### vim
-ADD config/vim /root/.dotfiles/config/vim
-RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
-  ln -s ~/.dotfiles/config/vim/colors .vim/colors &&\
-  ln -s ~/.dotfiles/config/vim/vimrc .vimrc &&\
-  ln -s ~/.dotfiles/config/vim/snippets .vim/snippets &&\
-
-  git clone https://github.com/altercation/vim-colors-solarized &&\
-  mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors &&\
-  rm -rf vim-colors-solarized &&\
-
-  git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim &&\
-  echo "Installing Vim Plugins. This will take a couple minutes.." &&\
-  vim +PluginInstall +qall >/dev/null 2>&1
-
-# ### ssh
+# ## Install build dependencies
 #
-# Access to /docker-shared/.ssh is not possible (i believe) during
-# the Dockerfile build, due to the lack of a real shared volume.
-# At best, it will write the file(s) and then overwrite them once
-# the volume is shared.
+# Ie, dependencies we need for the build, but can remove
+# after it's all done.
+RUN yum install -y gcc automake pcre-devel xz-devel
+
+
+# ## Install silversearcher
 #
-# So, if something needs to be placed into ~/.ssh, it needs to be
-# done manually by the user, or post run.
-#ADD config/ssh/config /root/.ssh/config
-
-# ### fish
-ADD config/fish /root/.dotfiles/config/fish
-RUN mkdir -p .config/fish &&\
-  ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
-  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
-  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
-
-# ### git
-ADD config/git /root/.dotfiles/config/git
-RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
-
-# ### tmux
-ADD config/tmux /root/.dotfiles/config/tmux
-RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
-
-# ### powerline
-ADD powerline /root/.dotfiles/powerline
-RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
+# General purpose
+RUN git clone https://github.com/ggreer/the_silver_searcher /tmp/ag &&\
+  cd /tmp/ag &&\
+  ./build.sh &&\
+  make install
 
 
-# ## Run process
-CMD ["/usr/bin/tmux"]
+# ## Install pip
+#
+# Used in: Powerline
+RUN cd /tmp &&\
+  curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.2.tar.gz &&\
+  tar -xvf setuptools-1.4.2.tar.gz &&\
+  cd setuptools-1.4.2 &&\
+  python2.7 setup.py install &&\
+  curl https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py | python2.7 -
+
+
+# ## Install Golang
+RUN cd /tmp &&\
+  curl -O https://storage.googleapis.com/golang/go1.3.2.linux-amd64.tar.gz &&\
+  tar -xzf go1.3.2.linux-amd64.tar.gz &&\
+  mv go/bin/go    /usr/local/bin/go &&\
+  mv go/bin/gofmt /usr/local/bin/gofmt
+
+
+## ## Install tmux
+#RUN apt-get install -y software-properties-common \
+#    python-software-properties &&\
+#  add-apt-repository ppa:pi-rho/dev &&\
+#  apt-get update &&\
+#  apt-get install -y tmux
+#
+#
+## ## Install Fish
+#RUN curl http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb > fish.deb &&\
+#  apt-get install -y bc libjs-jquery gettext-base man-db &&\
+#  dpkg -i fish.deb &&\
+#  rm fish.deb
+#
+#
+## ## Install N, and Node
+#RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
+#  -o /usr/bin/n && \
+#  chmod +x /usr/bin/n && \
+#  n stable &&\
+#  npm install -g \
+#    gulp \
+#    coffee-script
+#
+#
+## ## Install Go Stuff
+## (Note, not currently installing Go here, yet)
+#RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
+#    git checkout v1.2.3 &&\
+#    ./configure &&\
+#    make install &&\
+#    cd .. && rm -rf gpm &&\
+#  git clone https://github.com/pote/gvp.git && cd gvp &&\
+#    git checkout v0.1.0 &&\
+#    ./configure &&\
+#    make install &&\
+#    cd .. && rm -rf gpm &&\
+#  git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
+#    cp bin/gvp-fish /usr/local/bin &&\
+#    cd .. && rm -rf gvp-fish
+#
+#
+## ## Github's Hub
+#RUN git clone https://github.com/github/hub.git &&\
+#  cd hub &&\
+#  rake install prefix=/usr/local
+#
+#
+## ## Powerline
+#RUN pip install git+git://github.com/Lokaltog/powerline
+#
+#
+## ## Add and link configs
+## ### vim
+#ADD config/vim /root/.dotfiles/config/vim
+#RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
+#  ln -s ~/.dotfiles/config/vim/colors .vim/colors &&\
+#  ln -s ~/.dotfiles/config/vim/vimrc .vimrc &&\
+#  ln -s ~/.dotfiles/config/vim/snippets .vim/snippets &&\
+#
+#  git clone https://github.com/altercation/vim-colors-solarized &&\
+#  mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors &&\
+#  rm -rf vim-colors-solarized &&\
+#
+#  git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim &&\
+#  echo "Installing Vim Plugins. This will take a couple minutes.." &&\
+#  vim +PluginInstall +qall >/dev/null 2>&1
+#
+## ### ssh
+##
+## Access to /docker-shared/.ssh is not possible (i believe) during
+## the Dockerfile build, due to the lack of a real shared volume.
+## At best, it will write the file(s) and then overwrite them once
+## the volume is shared.
+##
+## So, if something needs to be placed into ~/.ssh, it needs to be
+## done manually by the user, or post run.
+##ADD config/ssh/config /root/.ssh/config
+#
+## ### fish
+#ADD config/fish /root/.dotfiles/config/fish
+#RUN mkdir -p .config/fish &&\
+#  ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
+#  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
+#  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
+#
+## ### git
+#ADD config/git /root/.dotfiles/config/git
+#RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
+#
+## ### tmux
+#ADD config/tmux /root/.dotfiles/config/tmux
+#RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
+#
+## ### powerline
+#ADD powerline /root/.dotfiles/powerline
+#RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
+#
+#
+## ## Run process
+#CMD ["/usr/bin/tmux"]
