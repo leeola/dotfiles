@@ -162,11 +162,11 @@ RUN pip install git+git://github.com/Lokaltog/powerline
 
 # ## Add and link configs
 # ### vim
-ADD config/vim /root/.dotfiles/config/vim
+ADD vim /root/.dotfiles/vim
 RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
-  ln -s ~/.dotfiles/config/vim/colors .vim/colors &&\
-  ln -s ~/.dotfiles/config/vim/vimrc .vimrc &&\
-  ln -s ~/.dotfiles/config/vim/snippets .vim/snippets &&\
+  ln -s ~/.dotfiles/vim/colors .vim/colors &&\
+  ln -s ~/.dotfiles/vim/vimrc .vimrc &&\
+  ln -s ~/.dotfiles/vim/snippets .vim/snippets &&\
 
   git clone https://github.com/altercation/vim-colors-solarized &&\
   mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors &&\
@@ -185,22 +185,22 @@ RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
 #
 # So, if something needs to be placed into ~/.ssh, it needs to be
 # done manually by the user, or post run.
-#ADD config/ssh/config /root/.ssh/config
+#ADD ssh/config /root/.ssh/config
 
 # ### fish
-ADD config/fish /root/.dotfiles/config/fish
+ADD fish /root/.dotfiles/fish
 RUN mkdir -p .config/fish &&\
-  ln -s ~/.dotfiles/config/fish/config.fish .config/fish/config.fish &&\
-  ln -s ~/.dotfiles/config/fish/ascii_greeting .config/fish/ascii_greeting &&\
-  ln -s ~/.dotfiles/config/fish/functions .config/fish/functions
+  ln -s ~/.dotfiles/fish/config.fish .config/fish/config.fish &&\
+  ln -s ~/.dotfiles/fish/ascii_greeting .config/fish/ascii_greeting &&\
+  ln -s ~/.dotfiles/fish/functions .config/fish/functions
 
 # ### git
-ADD config/git /root/.dotfiles/config/git
-RUN ln -s ~/.dotfiles/config/git/gitconfig ~/.gitconfig
+ADD git /root/.dotfiles/git
+RUN ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 
 # ### tmux
-ADD config/tmux /root/.dotfiles/config/tmux
-RUN ln -s .dotfiles/config/tmux/tmux.conf .tmux.conf
+ADD tmux /root/.dotfiles/tmux
+RUN ln -s .dotfiles/tmux/tmux.conf .tmux.conf
 
 # ### powerline
 ADD powerline /root/.dotfiles/powerline
