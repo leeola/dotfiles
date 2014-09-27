@@ -47,22 +47,21 @@ RUN mkdir -p /docker-shared/projects \
 #
 # Some user deps that we aren't yet compiling by hand.
 RUN yum install -y\
-  make \
-  tar \
-  hostname \
+  make tar hostname \
+  openssl \
   vim \
   git \
   mercurial \
   curl \
   ruby rake
-#  mosh \
 
 
 # ## Install build dependencies
 #
 # Ie, dependencies we need for the build, but can remove
 # after it's all done.
-RUN yum install -y gcc gcc-c++ automake pcre-devel xz-devel ncurses-devel
+RUN yum install -y \
+  gcc gcc-c++ automake pcre-devel xz-devel ncurses-devel zlib-devel openssl-devel
 
 
 # ## Install silversearcher
@@ -121,6 +120,29 @@ RUN cd /tmp &&\
   ./configure &&\
   make &&\
   make install
+
+
+# ## Install mosh
+#
+# NOTE: We're using an rpm & yum install because the source installation was
+# proving very difficult.
+#
+# In short, protobuf would be installed but mosh's configure could never find protobuf.
+# Very time consuming. The source installation code is below for future work.
+RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm &&\
+  yum install -y mosh
+#RUN cd /tmp &&\
+#  curl -O https://protobuf.googlecode.com/svn/rc/protobuf-2.5.0.tar.gz &&\
+#  tar xvf protobuf-2.5.0.tar.gz
+##  cd protobuf-2.6.0
+##  ./configure &&\
+##  make && make install
+#RUN git clone https://github.com/keithw/mosh /tmp/mosh &&\
+#  cd /tmp/mosh
+##  ./autogen.sh &&\
+##  ./configure &&\
+##  make &&\
+##  make install
 
 
 # ## Install N, and Node
