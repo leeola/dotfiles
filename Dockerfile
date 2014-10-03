@@ -46,8 +46,12 @@ RUN mkdir -p /docker-shared/projects \
 # ## Install simple user dependencies
 #
 # Some user deps that we aren't yet compiling by hand.
+#
+# Notes:
+# `bc` is required by fish to peform math functions.
+# `hostname` is required by powerline (iirc)
 RUN yum install -y\
-  make tar hostname \
+  make tar hostname bc \
   openssl \
   vim \
   git \
@@ -222,7 +226,7 @@ RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle &&\
 ADD fish /root/.dotfiles/fish
 RUN mkdir -p .config/fish &&\
   ln -s ~/.dotfiles/fish/config.fish .config/fish/config.fish &&\
-  ln -s ~/.dotfiles/fish/ascii_greeting .config/fish/ascii_greeting &&\
+  ln -s ~/.dotfiles/fish/greetings .config/fish/greetings &&\
   ln -s ~/.dotfiles/fish/functions .config/fish/functions
 
 # ### git
