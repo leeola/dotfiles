@@ -53,7 +53,8 @@ RUN yum install -y\
   git \
   mercurial \
   curl \
-  ruby rake
+  ruby rake \
+  gcc gcc-c++
 
 
 # ## Install build dependencies
@@ -61,7 +62,7 @@ RUN yum install -y\
 # Ie, dependencies we need for the build, but can remove
 # after it's all done.
 RUN yum install -y \
-  gcc gcc-c++ automake pcre-devel xz-devel ncurses-devel \
+  automake pcre-devel xz-devel ncurses-devel \
   zlib-devel openssl-devel
 
 
@@ -186,7 +187,7 @@ RUN pip install git+git://github.com/Lokaltog/powerline
 # ## Clean up excess build files and deps
 RUN rm -rf /tmp && mkdir /tmp &&\
   yum remove -y \
-    gcc gcc-c++ automake pcre-devel xz-devel ncurses-devel \
+    automake pcre-devel xz-devel ncurses-devel \
     zlib-devel openssl-devel
 
 
