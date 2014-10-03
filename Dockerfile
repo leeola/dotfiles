@@ -246,4 +246,4 @@ RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
 
 
 # ## Run process
-CMD ["/usr/bin/tmux"]
+CMD ["/usr/local/bin/tmux"]
