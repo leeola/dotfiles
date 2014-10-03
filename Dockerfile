@@ -1,6 +1,6 @@
 # DOCKER-VERSION 1.2.0
 #
-# # leeola Development
+# # leeo.la/dotfiles
 #
 # !EXPERIMENTAL!
 #
@@ -8,6 +8,9 @@
 # environment.
 #
 FROM centos
+MAINTAINER Lee Olayvar <leeolayvar@gmail.com>
+
+# ## Set the CWD
 WORKDIR /root
 
 
