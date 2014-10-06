@@ -73,6 +73,38 @@ RUN yum install -y \
   zlib-devel openssl-devel
 
 
+# ## Keychain
+#
+# TODO: REMOVE RPM DEPENDENCY
+RUN rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm &&\
+  yum install -y keychain
+
+
+# ## Install mosh
+#
+# TODO: REMOVE RPM DEPENDENCY
+# NOTE: We're using an rpm & yum install because the source installation
+# was proving very difficult.
+#
+# In short, protobuf would be installed but mosh's configure could never
+# find protobuf. Very time consuming. The source installation code is
+# below for future work.
+RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm &&\
+  yum install -y mosh
+#RUN cd /tmp &&\
+#  curl -O https://protobuf.googlecode.com/svn/rc/protobuf-2.5.0.tar.gz &&\
+#  tar xvf protobuf-2.5.0.tar.gz
+##  cd protobuf-2.6.0
+##  ./configure &&\
+##  make && make install
+#RUN git clone https://github.com/keithw/mosh /tmp/mosh &&\
+#  cd /tmp/mosh
+##  ./autogen.sh &&\
+##  ./configure &&\
+##  make &&\
+##  make install
+
+
 # ## Install silversearcher
 #
 # General purpose
@@ -129,29 +161,6 @@ RUN cd /tmp &&\
   ./configure &&\
   make &&\
   make install
-
-
-# ## Install mosh
-#
-# NOTE: We're using an rpm & yum install because the source installation was
-# proving very difficult.
-#
-# In short, protobuf would be installed but mosh's configure could never find protobuf.
-# Very time consuming. The source installation code is below for future work.
-RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm &&\
-  yum install -y mosh
-#RUN cd /tmp &&\
-#  curl -O https://protobuf.googlecode.com/svn/rc/protobuf-2.5.0.tar.gz &&\
-#  tar xvf protobuf-2.5.0.tar.gz
-##  cd protobuf-2.6.0
-##  ./configure &&\
-##  make && make install
-#RUN git clone https://github.com/keithw/mosh /tmp/mosh &&\
-#  cd /tmp/mosh
-##  ./autogen.sh &&\
-##  ./configure &&\
-##  make &&\
-##  make install
 
 
 # ## Install N, and Node
