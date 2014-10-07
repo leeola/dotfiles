@@ -189,24 +189,24 @@ RUN curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
 
 # ## Install Go Tools
 # (Note, not currently installing Go here, yet)
-RUN git clone https://github.com/pote/gpm.git && cd gpm &&\
+RUN cd /tmp &&\
+  git clone https://github.com/pote/gpm.git && cd gpm &&\
     git checkout v1.2.3 &&\
     ./configure &&\
     make install &&\
-    cd .. && rm -rf gpm &&\
+    cd /tmp &&\
   git clone https://github.com/pote/gvp.git && cd gvp &&\
     git checkout v0.1.0 &&\
     ./configure &&\
     make install &&\
-    cd .. && rm -rf gpm &&\
+    cd /tmp &&\
   git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish &&\
-    cp bin/gvp-fish /usr/local/bin &&\
-    cd .. && rm -rf gvp-fish
+    cp bin/gvp-fish /usr/local/bin
 
 
 # ## Github's Hub
-RUN git clone https://github.com/github/hub.git &&\
-  cd hub &&\
+RUN git clone https://github.com/github/hub.git /tmp/hub &&\
+  cd /tmp/hub &&\
   rake install prefix=/usr/local
 
 
