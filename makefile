@@ -9,6 +9,7 @@ build:
 
 run:
 	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
+		--privileged --volume=/var/lib/docker \
 		--hostname=$(shell hostname) \
 		--publish=3000:3000 \
 		--publish=3003:3003 \
@@ -41,6 +42,7 @@ interact:
 
 interact-noports:
 	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
+		--privileged --volume=/var/lib/docker \
 		--hostname=$(shell hostname) \
 		--rm \
 		docker-dev

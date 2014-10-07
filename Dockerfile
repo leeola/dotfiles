@@ -73,6 +73,16 @@ RUN yum install -y \
   zlib-devel openssl-devel
 
 
+# Install Docker
+#
+# Used to run Docker in Docker.
+ADD ./utils/wrapdocker /usr/local/bin/wrapdocker
+RUN yum install -y libvirt libvirt-client python-virtinst &&\
+  curl -o /usr/local/bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest &&\
+  chmod +x /usr/local/bin/docker &&\
+  chmod +x /usr/local/bin/wrapdocker
+
+
 # ## Keychain
 #
 # TODO: REMOVE RPM DEPENDENCY
@@ -143,13 +153,16 @@ RUN cd /tmp &&\
   cd libevent-2.0.21-stable &&\
   ./configure --prefix=/usr --disable-static &&\
   make install &&\
-  ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5 &&\
   cd .. &&\
   git clone git://git.code.sf.net/p/tmux/tmux-code tmux &&\
   cd tmux &&\
   sh autogen.sh &&\
   ./configure &&\
   make && make install
+# Suddenly this is causing a failure. Not sure why.. but if it's not
+# needed, who cares?
+# POSSIBLY DEPRECATED
+#  ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5 &&\
 
 
 # ## Install Fish
@@ -255,4 +268,5 @@ RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
 
 
 # ## Run process
-CMD ["/usr/local/bin/tmux"]
+#CMD ["/usr/local/bin/tmux"]
+CMD ["wrapdocker"]
