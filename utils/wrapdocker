@@ -95,5 +95,5 @@ else
 	else
 		docker -d &
 	fi
-	exec bash
+	exec "$@"
 fi

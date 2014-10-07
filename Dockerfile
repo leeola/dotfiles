@@ -268,5 +268,4 @@ RUN ln -s ~/.dotfiles/powerline ~/.config/powerline
 
 
 # ## Run process
-#CMD ["/usr/local/bin/tmux"]
-CMD ["wrapdocker"]
+CMD ["/usr/local/bin/wrapdocker", "/usr/local/bin/tmux"]
