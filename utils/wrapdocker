@@ -2,7 +2,7 @@
 
 # First, make sure that cgroups are mounted correctly.
 CGROUP=/sys/fs/cgroup
-: {LOG:=stdio}
+: {DOCKER_LOG:=stdio}
 
 [ -d $CGROUP ] || 
 	mkdir $CGROUP
@@ -83,13 +83,13 @@ popd >/dev/null
 # delete it so that docker can start.
 rm -rf /var/run/docker.pid
 
-# If we were given a PORT environment variable, start as a simple daemon;
-# otherwise, spawn a shell as well
-if [ "$PORT" ]
+# If we were given a DOCKER_PORT environment variable, start as a
+# simple daemon; otherwise, spawn a shell as well
+if [ "$DOCKER_PORT" ]
 then
-	exec docker -d -H 0.0.0.0:$PORT
+	exec docker -d -H 0.0.0.0:$DOCKER_PORT
 else
-	if [ "$LOG" == "file" ]
+	if [ "$DOCKER_LOG" == "file" ]
 	then
 		docker -d &>/var/log/docker.log &
 	else

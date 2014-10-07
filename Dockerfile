@@ -20,6 +20,7 @@ ENV GOPATH /go
 ENV GOBIN /go/bin
 ENV PATH $PATH:$GOBIN
 ENV TERM screen-256color
+ENV DOCKER_LOG file
 
 # ## Set locale
 #
