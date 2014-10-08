@@ -17,3 +17,10 @@
   editor = vim
 [push]
   default = simple
+[color]
+  diff        = true
+  status      = true
+  branch      = true
+  interactive = auto
+  ui          = true
+  pager       = true
