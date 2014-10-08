@@ -7,7 +7,7 @@
 # A humble dockerfile which install and configure my entire development
 # environment.
 #
-FROM centos
+FROM centos:centos7
 MAINTAINER Lee Olayvar <leeolayvar@gmail.com>
 
 # ## Set the CWD
@@ -18,7 +18,7 @@ WORKDIR /root
 ENV HOME /root
 ENV GOPATH /go
 ENV GOBIN /go/bin
-ENV PATH $PATH:$GOBIN
+ENV PATH $PATH:$GOBIN:/usr/local/go/bin
 ENV TERM screen-256color
 ENV DOCKER_LOG file
 
@@ -50,12 +50,10 @@ RUN mkdir -p /docker-shared/projects \
 # ## Install simple user dependencies
 #
 # Some user deps that we aren't yet compiling by hand.
-#
-# Notes:
-# `bc` is required by fish to peform math functions.
-# `hostname` is required by powerline (iirc)
 RUN yum install -y\
-  make tar hostname bc \
+  make tar \
+# required by fish
+  man hostname bc \
   openssl \
   vim \
   git \
@@ -140,8 +138,7 @@ RUN cd /tmp &&\
 RUN cd /tmp &&\
   curl -O https://storage.googleapis.com/golang/go1.3.2.linux-amd64.tar.gz &&\
   tar -xzf go1.3.2.linux-amd64.tar.gz &&\
-  mv go/bin/go    /usr/local/bin/go &&\
-  mv go/bin/gofmt /usr/local/bin/gofmt
+  mv go /usr/local/go
 
 
 # ## Install tmux
