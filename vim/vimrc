@@ -50,6 +50,7 @@ Plugin 'tpope/vim-markdown'
 Plugin 'lchi/vim-toffee'
 Plugin 'fatih/vim-go'
 Plugin 'dag/vim-fish'
+Plugin 'ekalinin/Dockerfile.vim'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
