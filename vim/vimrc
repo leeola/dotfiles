@@ -49,6 +49,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'tpope/vim-markdown'
 Plugin 'lchi/vim-toffee'
 Plugin 'fatih/vim-go'
+Plugin 'dag/vim-fish'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
