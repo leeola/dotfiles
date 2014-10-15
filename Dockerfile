@@ -119,6 +119,7 @@ RUN rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch
 # General purpose
 RUN git clone https://github.com/ggreer/the_silver_searcher /tmp/ag &&\
   cd /tmp/ag &&\
+  git checkout 0.25.0 &&\
   ./build.sh &&\
   make install
 
