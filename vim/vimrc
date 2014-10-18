@@ -122,7 +122,6 @@ set wildmenu
 
 " Vim Searching will search as you type.
 set incsearch
-set ignorecase                      " Ignore case by default
 
 set laststatus=2                    " Show the Airline Line
 
