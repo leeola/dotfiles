@@ -50,6 +50,7 @@ RUN mkdir -p /docker-shared/projects \
 # ## Install simple user dependencies
 #
 # Some user deps that we aren't yet compiling by hand.
+RUN yum update -y && yum clean all
 RUN yum install -y\
   make tar \
 # required by fish
@@ -205,6 +206,7 @@ RUN cd /tmp &&\
 # ## Github's Hub
 RUN git clone https://github.com/github/hub.git /tmp/hub &&\
   cd /tmp/hub &&\
+  git checkout v1.12.2 &&\
   rake install prefix=/usr/local
 
 
