@@ -10,6 +10,7 @@ build:
 run:
 	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
+		--env DOCKER_HOST=$(DOCKER_HOST) \
 		--hostname=$(shell hostname) \
 		--publish=3000:3000 \
 		--publish=3003:3003 \
@@ -30,6 +31,7 @@ start:
 interact:
 	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
+		--env DOCKER_HOST=$(DOCKER_HOST) \
 		--hostname=$(shell hostname) \
 		--publish=3000:3000 \
 		--publish=3003:3003 \
@@ -44,6 +46,7 @@ interact:
 interact-noports:
 	docker run --tty --interactive --volume=/docker-shared:/docker-shared \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
+		--env DOCKER_HOST=$(DOCKER_HOST) \
 		--hostname=$(shell hostname) \
 		--rm \
 		docker-dev

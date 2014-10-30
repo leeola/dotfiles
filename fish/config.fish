@@ -38,7 +38,6 @@ end
 # Change `cd foo` to always check the current dir, and not current *and* home.
 set -Ux CDPATH .
 
-set -x DOCKER_HOST tcp://192.168.59.103:2375
 
 
 #
