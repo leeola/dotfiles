@@ -27,7 +27,7 @@ end
 #
 # Use a switch to figure out which command to call.
 if test (count $argv) -lt 1
-	docker build -t docker-dev .
+	docker build -t leeolayvar/dotfiles .
 else
   switch $argv[1]
     case "help"
@@ -38,7 +38,7 @@ else
       docker run --tty --interactive \
         --volume=/docker-shared:/docker-shared \
         --volume=/var/run/docker.sock:/var/run/docker.sock \
-        --env DOCKER_HOST=$DOCKER_HOST \
+        --env "DOCKER_HOST=$DOCKER_HOST" \
         --hostname=(hostname) \
         --publish=3000:3000 \
         --publish=3003:3003 \
@@ -47,16 +47,16 @@ else
         --publish=8080:8080 \
         --publish=8888:8888 \
         --rm \
-        docker-dev
+        leeolayvar/dotfiles
 
     case "interact-noports"
       docker run --tty --interactive \
         --volume=/docker-shared:/docker-shared \
         --volume=/var/run/docker.sock:/var/run/docker.sock \
-        --env DOCKER_HOST=$DOCKER_HOST \
+        --env "DOCKER_HOST=$DOCKER_HOST" \
         --hostname=(hostname) \
         --rm \
-        docker-dev
+        leeolayvar/dotfiles
 
     case "*"
       fail
