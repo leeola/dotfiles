@@ -156,6 +156,7 @@ RUN mkdir -p /docker-shared/projects \
   && cd .. \
   && git clone git://git.code.sf.net/p/tmux/tmux-code tmux \
   && cd tmux \
+  && git checkout 1.9a \
   && sh autogen.sh \
   && ./configure \
   && make && make install \
