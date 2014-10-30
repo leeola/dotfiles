@@ -1,0 +1,68 @@
+#!/bin/env fish
+#
+# # Build
+#
+# A series of shortcuts for building the docker images and running
+# the containers.
+#
+
+# A fail function, called to bail out of the process with an exit
+# status of 1.
+function fail
+  echo "Error: Unaccepted input. See: ./build help"
+  exit 1
+end
+
+
+
+
+
+
+# ## Build
+function build
+end
+
+
+# ## Top Level Command Parse
+#
+# Use a switch to figure out which command to call.
+if test (count $argv) -lt 1
+	docker build -t docker-dev .
+else
+  switch $argv[1]
+    case "help"
+      echo "No help at the moment"
+      exit 1
+
+    case "interact"
+      docker run --tty --interactive \
+        --volume=/docker-shared:/docker-shared \
+        --volume=/var/run/docker.sock:/var/run/docker.sock \
+        --env DOCKER_HOST=$DOCKER_HOST \
+        --hostname=(hostname) \
+        --publish=3000:3000 \
+        --publish=3003:3003 \
+        --publish=5000:5000 \
+        --publish=8000:8000 \
+        --publish=8080:8080 \
+        --publish=8888:8888 \
+        --rm \
+        docker-dev
+
+    case "interact-noports"
+      docker run --tty --interactive \
+        --volume=/docker-shared:/docker-shared \
+        --volume=/var/run/docker.sock:/var/run/docker.sock \
+        --env DOCKER_HOST=$DOCKER_HOST \
+        --hostname=(hostname) \
+        --rm \
+        docker-dev
+
+    case "*"
+      fail
+  end
+end
+
+
+
+# vim: set filetype=fish:
