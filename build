@@ -34,6 +34,9 @@ else
       echo "No help at the moment"
       exit 1
 
+    case "attach"
+      docker attach dotfiles
+
     case "interact"
       docker run --tty --interactive \
         --volume=/docker-shared:/docker-shared \
@@ -57,6 +60,29 @@ else
         --hostname=(hostname) \
         --rm \
         leeolayvar/dotfiles
+
+    case "link"
+      echo "Linking ./build to /usr/local/bin/dotfiles..."
+      ln -s $PWD/build /usr/local/bin/dotfiles
+
+    case "run"
+      docker run --tty --interactive \
+        --volume=/docker-shared:/docker-shared \
+        --volume=/var/run/docker.sock:/var/run/docker.sock \
+        --env "DOCKER_HOST=$DOCKER_HOST" \
+        --hostname=(hostname) \
+        --publish=3000:3000 \
+        --publish=3003:3003 \
+        --publish=5000:5000 \
+        --publish=8000:8000 \
+        --publish=8080:8080 \
+        --publish=8888:8888 \
+        --detach \
+        --name="dotfiles" \
+        leeolayvar/dotfiles
+
+    case "start"
+      docker start dotfiles
 
     case "*"
       fail
