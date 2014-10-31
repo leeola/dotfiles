@@ -62,8 +62,10 @@ else
         leeolayvar/dotfiles
 
     case "link"
-      echo "Linking ./build to /usr/local/bin/dotfiles..."
-      ln -s $PWD/build /usr/local/bin/dotfiles
+      # Note that this is not smart, and assumes it's being run from ../
+      echo "Removing existing and linking $PWD/dotfiles/dotfiles.fish to /usr/local/bin/dotfiles..."
+      rm -f /usr/local/bin/dotfiles
+      ln -s $PWD/utils/dotfiles.fish /usr/local/bin/dotfiles
 
     case "run"
       docker run --tty --interactive \

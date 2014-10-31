@@ -278,5 +278,8 @@ RUN mkdir -p .config/fish \
   && ln -s ~/.dotfiles/powerline ~/.config/powerline
 
 
+ADD utils/dotfiles.fish /usr/local/bin/dotfiles
+
+
 # ## Run process
 CMD ["/usr/local/bin/tmux"]

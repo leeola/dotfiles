@@ -1,0 +1,12 @@
+#!/usr/bin/env fish
+#
+# # Build
+#
+# A shortcut to `./utils/dotfiles build`
+#
+
+
+./misc/dotfiles build
+
+
+# vim: set filetype=fish:
