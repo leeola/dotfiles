@@ -6,7 +6,7 @@
 #
 
 
-./misc/dotfiles build
+./utils/dotfiles.fish build
 
 
 # vim: set filetype=fish:
