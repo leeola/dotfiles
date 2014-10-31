@@ -9,7 +9,7 @@
 # A fail function, called to bail out of the process with an exit
 # status of 1.
 function fail
-  echo "Error: Unaccepted input. See: ./build help"
+  echo "Error: Unaccepted input. See: dotfiles help"
   exit 1
 end
 
@@ -27,7 +27,7 @@ end
 #
 # Use a switch to figure out which command to call.
 if test (count $argv) -lt 1
-	docker build -t leeolayvar/dotfiles .
+  fail
 else
   switch $argv[1]
     case "help"
@@ -36,6 +36,9 @@ else
 
     case "attach"
       docker attach dotfiles
+
+    case "build"
+      docker build -t leeolayvar/dotfiles .
 
     case "interact"
       docker run --tty --interactive \
