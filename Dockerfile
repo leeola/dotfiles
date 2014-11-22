@@ -195,8 +195,14 @@ RUN mkdir -p /docker-shared/projects \
   && git checkout v1.2.3 \
   && ./configure \
   && make install \
+# ### gpm-all
   && cd /tmp \
+  && git clone https://github.com/pote/gpm-all.git \
+  && cd gpm-all \
+  && ./configure \
+  && make install \
 # ### gvp
+  && cd /tmp \
   && git clone https://github.com/pote/gvp.git && cd gvp \
   && git checkout v0.1.0 \
   && ./configure \
@@ -216,6 +222,11 @@ RUN mkdir -p /docker-shared/projects \
 
 # ## Powerline
   && pip install git+git://github.com/Lokaltog/powerline \
+
+
+# ## AWS CLI
+  && pip install awscli \
+  && ln -s /docker-shared/.aws ~/.aws \
 
 
 # ## Clean up excess build files and deps
