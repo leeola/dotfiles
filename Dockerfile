@@ -62,6 +62,7 @@ RUN mkdir -p /docker-shared/projects \
     gcc gcc-c++ \
 # required by fish
     man hostname bc \
+    zip unzip \
 
 
 # ## Install build dependencies
