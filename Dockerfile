@@ -71,7 +71,8 @@ RUN mkdir -p /docker-shared/projects \
 # after it's all done.
   && yum install -y \
     automake pcre-devel xz-devel ncurses-devel \
-    zlib-devel openssl-devel \
+    zlib-devel openssl-devel autoconf libtool \
+    cmake \
 
 
 # Install Docker
@@ -230,11 +231,18 @@ RUN mkdir -p /docker-shared/projects \
   && ln -s /docker-shared/.aws ~/.aws \
 
 
+# ## NeoVim
+  && git clone https://github.com/neovim/neovim /tmp/neovim \
+  && cd /tmp/neovim \
+  && make install \
+
+
 # ## Clean up excess build files and deps
   && rm -rf /tmp && mkdir /tmp \
   && yum remove -y \
     automake pcre-devel xz-devel ncurses-devel \
-    zlib-devel openssl-devel \
+    zlib-devel openssl-devel autoconf libtool \
+    cmake \
   && yum clean all
 
 
@@ -242,19 +250,38 @@ RUN mkdir -p /docker-shared/projects \
 #
 # We're adding vim here rather than with the other configs due to the
 # plugin installations.
-ADD vim /root/.dotfiles/vim
-RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle \
-  && ln -s ~/.dotfiles/vim/colors .vim/colors \
-  && ln -s ~/.dotfiles/vim/vimrc .vimrc \
-  && ln -s ~/.dotfiles/vim/snippets .vim/snippets \
+#ADD vim /root/.dotfiles/vim
+#RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle \
+#  && ln -s ~/.dotfiles/vim/colors .vim/colors \
+#  && ln -s ~/.dotfiles/vim/vimrc .vimrc \
+#  && ln -s ~/.dotfiles/vim/snippets .vim/snippets \
+#
+#  && git clone https://github.com/altercation/vim-colors-solarized \
+#  && mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors \
+#  && rm -rf vim-colors-solarized \
+#
+#  && git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim \
+#  && echo "Installing Vim Plugins. This will take a couple minutes.." \
+#  && vim +PluginInstall +qall >/dev/null 2>&1
+
+
+# ## Add and Link nvim, Install Plugins
+#
+# We're adding nvim here rather than with the other configs due to the
+# plugin installations.
+ADD nvim /root/.dotfiles/nvim
+RUN mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
+  && ln -s ~/.dotfiles/nvim/colors .nvim/colors \
+  && ln -s ~/.dotfiles/nvim/nvimrc .nvimrc \
+  && ln -s ~/.dotfiles/nvim/snippets .nvim/snippets \
 
   && git clone https://github.com/altercation/vim-colors-solarized \
-  && mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors \
+  && mv vim-colors-solarized/colors/solarized.vim ~/.nvim/colors \
   && rm -rf vim-colors-solarized \
 
-  && git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim \
+  && git clone https://github.com/gmarik/vundle .nvim/bundle/Vundle.vim \
   && echo "Installing Vim Plugins. This will take a couple minutes.." \
-  && vim +PluginInstall +qall >/dev/null 2>&1
+  && nvim +PluginInstall +qall >/dev/null 2>&1
 
 
 # ## Add configs

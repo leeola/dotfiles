@@ -1,0 +1,233 @@
+"
+" # Lee's Vimrc
+"
+" My humble vimrc setup.
+"
+" ## Noteworthy Credits
+"
+" - Doug Black via http://dougblack.io/words/a-good-vimrc.html
+"   Great vimrc writeup.
+"
+
+
+set nocompatible                    " be iMproved
+filetype off                        " required!
+
+"
+" ## Vundle Setup
+"
+
+set rtp+=~/.nvim/bundle/Vundle.vim
+call vundle#begin()
+Bundle 'gmarik/Vundle.vim'
+
+" ### My Bundles
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'guns/xterm-color-table.vim'
+Plugin 'rking/ag.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'Lokaltog/vim-easymotion'
+" Automatic closing tags
+Plugin 'Raimondi/delimitMate'
+" Cool starting screen!
+" Disabled because it's damn annoying at the moment.
+"Bundle 'mhinz/vim-startify'
+" snipMate and it's requirements
+Plugin 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
+Plugin 'tomtom/tlib_vim'              " Dep for snipmate
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+
+" ### Syntax Highlighting Bundles
+Plugin 'scrooloose/syntastic'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'groenewege/vim-less'
+"Removed to try Fatih's vim-go
+"Bundle 'jnwhiteh/vim-golang'
+Plugin 'tpope/vim-markdown'
+Plugin 'lchi/vim-toffee'
+Plugin 'fatih/vim-go'
+Plugin 'dag/vim-fish'
+Plugin 'ekalinin/Dockerfile.vim'
+
+" ### Colorscheme Plugins
+"Bundle 'vim-scripts/ScrollColors'  " Deprecated
+"Bundle 'flazz/vim-colorschemes'    " Deprecated
+" We're installing this plugin manually in Docker, so that
+" the dependency is met right away.
+"Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+filetype plugin indent on           " Vundle Related Magic!
+
+" Powerline setup
+" Disabling powerline
+"set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim
+
+
+"
+" ## Vim Theme Settings
+"
+
+syntax enable
+"set t_Co=256                       " Deprecated Magic
+"set term=screen-256color           " Deprecated Magic
+
+" Because we're using Solarized, i am using iTerm2's Solarized Color palette.
+" If we were not, we want to force 256 color mode for solarized. Currently
+" though, we're ignoring it.
+"let g:solarized_termcolors=256
+
+" Tell Solarized to use the dark themes
+set background=dark
+
+" Set the theme to Solarized
+colorscheme solarized
+
+
+
+"
+" ## Whitespace Matching
+"
+"highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+"
+" ## Highlight Past 80
+" Everything after the 80char limit
+"
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
+
+
+"
+" ## Vim Settings
+"
+set shell=sh                        " Set the default shell to sh, this
+                                    " fixes my bash->fish in Vim.
+
+" Modeline Support
+set modeline
+set modelines=5
+
+" Enables the autocomplete menu when you have some menus up like the `:e foo`
+" menu.
+set wildmenu
+
+" Vim Searching will search as you type.
+set incsearch
+
+set laststatus=2                    " Show the Airline Line
+
+" The following two options enable 'hybrid mode'
+set number                          " Show line numbers
+set relativenumber                  " Show Relative numbers
+
+set ruler                           " Show cursor position
+
+set backupdir-=.                    " Remove current dir from the list
+set backupdir+=.                    " Append it to the list (so it's checked last)
+set backupdir-=~                    " Remove home, if it's in there.. not sure it is?
+set backupdir^=~/.vim/tmp/bkp//     " Prepend the bkp dir. Not sure if // syntax
+                                    " works with backups.
+set backup                          " Turn backup on
+
+set directory=~/.vim/tmp/swp//   	  " Keep swap files in one location.
+set directory+=.                    " Add the current directory as a fallback
+
+set tabstop=2       				        " Global tab width
+set shiftwidth=2			              " Something involving tab width.
+set expandtab				                " Spaces instead of tabs
+
+set backspace=2                     " From Wiki: Make backspace work like most
+                                    " other apps. In practice, it lets me
+                                    " backspace through newlines on osx.
+
+set foldmethod=indent               " Magic
+set foldlevel=20                    " Magic
+set foldlevelstart=20               " Magic
+
+
+"
+" ## Autocmds
+"
+
+augroup markdown
+  autocmd!
+  " Set the auto-wrap at 80 characters for markdown.
+  autocmd BufNewFile,BufRead *.md setlocal textwidth=73
+  " Black magic from
+  " http://vim.wikia.com/wiki/Automatic_formatting_of_paragraphs
+  autocmd BufNewFile,BufRead *.md setlocal fo=aw2tq 
+augroup END
+
+
+"
+" ## Plugin Settings
+"
+
+" ### CtrlP Settings
+let g:ctrlp_user_command = 'ag %s -l --nocolor --skip-vcs-ignores --hidden -g ""'
+let g:ctrlp_extensions = ['line']
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtHistory(-1)': ['<c-up>'],
+  \ 'PrtHistory(1)':  ['<c-down>'],
+  \ 'ToggleType(1)':  ['<c-p>'],
+  \ 'ToggleType(-1)': ['<c-l>'],
+  \ 'PrtCurRight()':  ['<right>']
+  \ }
+
+
+" ### Markdown Plugin
+" Syntax highlighting for given languages
+let g:markdown_fenced_languages = [
+      \ 'coffee', 'css', 'erb=eruby', 'javascript',
+      \ 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'
+      \ ]
+
+" DEPRECATED:
+" These are commented out because i added the Markdown plugin, which should
+" take care of this.
+"autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
+
+
+" ### Startify
+let g:startify_custom_header = 
+      \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+
+
+"
+" ## Maps
+"
+
+
+" ### General Purpose Remaps
+
+" Remap Leader to ,
+let mapleader=","
+
+" Set Ag to ,a
+nnoremap <leader>a :Ag
+
+" Reload Vimrc Config
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+
+" Run last command
+nmap <silent> <leader>1 :!!<CR>
+" Check spelling
+nmap <silent> <leader>s :set spell!<CR>
+" Run Syntastic
+nmap <leader>c :SyntasticCheck<CR>
+
+nnoremap <silent> <leader>p :ClearCtrlPCache<cr>\|:CtrlP<cr>
+
+
+" ### Chrome Specific Remaps
+
