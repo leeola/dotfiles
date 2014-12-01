@@ -58,7 +58,6 @@ RUN mkdir -p /docker-shared/projects \
     git \
     mercurial \
     curl \
-    ruby rake \
     gcc gcc-c++ \
 # required by fish
     man hostname bc \
@@ -213,13 +212,6 @@ RUN mkdir -p /docker-shared/projects \
 # ### gvp-fish
   && git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish \
   && cp bin/gvp-fish /usr/local/bin \
-
-
-# ## Github's Hub
-  && git clone https://github.com/github/hub.git /tmp/hub \
-  && cd /tmp/hub \
-  && git checkout v1.12.2 \
-  && rake install prefix=/usr/local \
 
 
 # ## Powerline

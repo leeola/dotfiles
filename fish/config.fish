@@ -44,7 +44,7 @@ set -Ux CDPATH .
 # ## Aliases
 #
 alias s stash
-alias git hub
+#alias git hub
 
 #
 # ## Alias Functions
