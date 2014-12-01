@@ -285,6 +285,8 @@ RUN mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
 #ADD ssh/config /root/.ssh/config
 # ### fish
 ADD fish /root/.dotfiles/fish
+# ### ag
+ADD ag /root/.dotfiles/ag
 # ### git
 ADD git /root/.dotfiles/git
 # ### tmux
@@ -295,8 +297,11 @@ RUN mkdir -p .config/fish \
   && ln -s ~/.dotfiles/fish/config.fish .config/fish/config.fish \
   && ln -s ~/.dotfiles/fish/greetings .config/fish/greetings \
   && ln -s ~/.dotfiles/fish/functions .config/fish/functions \
+# ### ag
+  && ln -s ~/.dotfiles/ag/agignore ~/.agignore \
 # ### git
   && ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig \
+  && ln -s ~/.dotfiles/git/gitignore_global ~/.gitignore_global \
 # ### tmux
   && ln -s .dotfiles/tmux/tmux.conf .tmux.conf
 
