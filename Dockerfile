@@ -54,7 +54,6 @@ RUN mkdir -p /docker-shared/projects \
   && yum install -y \
     make tar \
     openssl \
-    vim \
     git \
     mercurial \
     curl \
@@ -258,7 +257,8 @@ RUN mkdir -p /docker-shared/projects \
 # We're adding nvim here rather than with the other configs due to the
 # plugin installations.
 ADD nvim /root/.dotfiles/nvim
-RUN mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
+RUN ln -s /usr/local/bin/nvim /usr/local/bin/vim \
+  && mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
   && ln -s ~/.dotfiles/nvim/colors .nvim/colors \
   && ln -s ~/.dotfiles/nvim/nvimrc .nvimrc \
   && ln -s ~/.dotfiles/nvim/snippets .nvim/snippets \
@@ -268,7 +268,7 @@ RUN mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
   && rm -rf vim-colors-solarized \
 
   && git clone https://github.com/gmarik/vundle .nvim/bundle/Vundle.vim \
-  && echo "Installing Vim Plugins. This will take a couple minutes.." \
+  && echo "Installing NeoVim Plugins. This will take a couple minutes.." \
   && nvim +PluginInstall +qall >/dev/null 2>&1
 
 
