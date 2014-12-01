@@ -201,6 +201,10 @@ RUN mkdir -p /docker-shared/projects \
   && cd gpm-all \
   && ./configure \
   && make install \
+# ### gpm-link
+  && git clone https://github.com/elcuervo/gpm-link.git /tmp/gpm-link \
+  && cd /tmp/gpm-link \
+  && make install \
 # ### gvp
   && cd /tmp \
   && git clone https://github.com/pote/gvp.git && cd gvp \
