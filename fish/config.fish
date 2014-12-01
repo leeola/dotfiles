@@ -44,7 +44,9 @@ set -Ux CDPATH .
 # ## Aliases
 #
 alias s stash
-#alias git hub
+# vim is already symlinked to nvim, but by using an alias here,
+# tmux will show nvim as the currently running process.
+alias vim nvim
 
 #
 # ## Alias Functions
