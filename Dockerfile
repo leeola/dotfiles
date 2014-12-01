@@ -214,10 +214,6 @@ RUN mkdir -p /docker-shared/projects \
   && cp bin/gvp-fish /usr/local/bin \
 
 
-# ## Powerline
-  && pip install git+git://github.com/Lokaltog/powerline \
-
-
 # ## AWS CLI
   && pip install awscli \
   && ln -s /docker-shared/.aws ~/.aws \
@@ -293,8 +289,6 @@ ADD fish /root/.dotfiles/fish
 ADD git /root/.dotfiles/git
 # ### tmux
 ADD tmux /root/.dotfiles/tmux
-# ### powerline
-ADD powerline /root/.dotfiles/powerline
 # ## Link configs
 # ### fish
 RUN mkdir -p .config/fish \
@@ -304,9 +298,7 @@ RUN mkdir -p .config/fish \
 # ### git
   && ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig \
 # ### tmux
-  && ln -s .dotfiles/tmux/tmux.conf .tmux.conf \
-# ### powerline
-  && ln -s ~/.dotfiles/powerline ~/.config/powerline
+  && ln -s .dotfiles/tmux/tmux.conf .tmux.conf
 
 
 ADD utils/dotfiles.fish /usr/local/bin/dotfiles

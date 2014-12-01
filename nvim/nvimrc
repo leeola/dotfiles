@@ -62,10 +62,6 @@ Plugin 'ekalinin/Dockerfile.vim'
 call vundle#end()
 filetype plugin indent on           " Vundle Related Magic!
 
-" Powerline setup
-" Disabling powerline
-"set rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim
-
 
 "
 " ## Vim Theme Settings
