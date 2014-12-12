@@ -31,7 +31,28 @@ if test (count $argv) -lt 1
 else
   switch $argv[1]
     case "help"
-      echo "No help at the moment"
+      echo "
+Usage:
+  dotfiles <command>
+
+Commands:
+  attach            # Attach to a currently running container
+  build             # Build the leeolayvar/dotfiles image
+  interact          # Interact with the image
+  interact-noports  # Interact with the image, without port forwarding
+  run               # Run a pre-existing container
+  start             # Start the container from the image
+
+Example, Starting:
+
+  dotfiles start
+  dotfiles attach
+
+Example, Running:
+
+  dotfiles run
+  dotfiles attach
+"
       exit 1
 
     case "attach"
