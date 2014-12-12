@@ -215,6 +215,14 @@ RUN mkdir -p /docker-shared/projects \
 # ### gvp-fish
   && git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish \
   && cp bin/gvp-fish /usr/local/bin \
+# ### goimports
+  && go get github.com/bradfitz/goimports \
+# ### gocode
+  && go get github.com/nsf/gocode \
+# ### godef
+  && go get code.google.com/p/rog-go/exp/cmd/godef \
+# ### go oracle
+  && go get golang.org/x/tools/oracle \
 
 
 # ## AWS CLI

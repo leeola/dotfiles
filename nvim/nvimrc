@@ -198,13 +198,20 @@ let g:markdown_fenced_languages = [
 let g:startify_custom_header = 
       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
+" ### vim-go
+" Enable auto-import on save
+let g:go_fmt_command = "goimports"
+" Disable browser on play
+let g:go_play_open_browser = 0
+
+
 
 "
 " ## Maps
 "
 
 
-" ### General Purpose Remaps
+" ### Leaders
 
 " Remap Leader to ,
 let mapleader=","
@@ -222,8 +229,26 @@ nmap <silent> <leader>s :set spell!<CR>
 " Run Syntastic
 nmap <leader>c :SyntasticCheck<CR>
 
+" Clear Ctrl P Cache
 nnoremap <silent> <leader>p :ClearCtrlPCache<cr>\|:CtrlP<cr>
+
+" #### vim-go
+" Locate the current identifier
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+" Rename the current identifier
+au FileType go nmap <Leader>e <Plug>(go-rename)
+" Info about the current identifier
+au FileType go nmap <Leader>i <Plug>(go-info)
+" Open godoc for current identifier
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+" Check what the current identifier implements
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
 
 
 " ### Chrome Specific Remaps
+" (For in browser use)
 
