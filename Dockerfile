@@ -245,25 +245,6 @@ RUN mkdir -p /docker-shared/projects \
   && yum clean all
 
 
-# ## Add and Link vim, Install Plugins
-#
-# We're adding vim here rather than with the other configs due to the
-# plugin installations.
-#ADD vim /root/.dotfiles/vim
-#RUN mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle \
-#  && ln -s ~/.dotfiles/vim/colors .vim/colors \
-#  && ln -s ~/.dotfiles/vim/vimrc .vimrc \
-#  && ln -s ~/.dotfiles/vim/snippets .vim/snippets \
-#
-#  && git clone https://github.com/altercation/vim-colors-solarized \
-#  && mv vim-colors-solarized/colors/solarized.vim ~/.vim/colors \
-#  && rm -rf vim-colors-solarized \
-#
-#  && git clone https://github.com/gmarik/vundle .vim/bundle/Vundle.vim \
-#  && echo "Installing Vim Plugins. This will take a couple minutes.." \
-#  && vim +PluginInstall +qall >/dev/null 2>&1
-
-
 # ## Add and Link nvim, Install Plugins
 #
 # We're adding nvim here rather than with the other configs due to the
