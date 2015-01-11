@@ -223,6 +223,8 @@ RUN mkdir -p /docker-shared/projects \
   && go get code.google.com/p/rog-go/exp/cmd/godef \
 # ### go oracle
   && go get golang.org/x/tools/oracle \
+# ### gorename
+#  && go get code.google.com/p/go.tools/cmd/gorename \
 
 
 # ## AWS CLI
