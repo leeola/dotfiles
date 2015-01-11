@@ -211,7 +211,12 @@ let g:go_play_open_browser = 0
 "
 
 
-" ### Leaders
+"
+" ## Leaders
+"
+" I (attempt) use leaders to use leaders as a general dumping ground
+" for "things i do too often by hand".
+"
 
 " Remap Leader to ,
 let mapleader=","
@@ -229,10 +234,11 @@ nmap <silent> <leader>s :set spell!<CR>
 " Run Syntastic
 nmap <leader>c :SyntasticCheck<CR>
 
-" Clear Ctrl P Cache
-nnoremap <silent> <leader>p :ClearCtrlPCache<cr>\|:CtrlP<cr>
+" Run ctrlp with leader p, and shift p to clear cache
+nnoremap <silent> <leader>p :CtrlP<cr>
+nnoremap <silent> <leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
-" #### vim-go
+" ### vim-go
 " Locate the current identifier
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
