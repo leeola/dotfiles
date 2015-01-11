@@ -235,7 +235,7 @@ nmap <leader>c :SyntasticCheck<CR>
 nnoremap <silent> <leader>p :CtrlP<cr>
 nnoremap <silent> <leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
-" gwrite git write
+nnoremap <leader>w :write<cr>
 nnoremap <leader>gw :Gwrite<cr>
 
 " ### vim-go
