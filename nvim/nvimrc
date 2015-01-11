@@ -224,9 +224,6 @@ let mapleader=","
 " Set Ag to ,a
 nnoremap <leader>a :Ag
 
-" Reload Vimrc Config
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-
 " Run last command
 nmap <silent> <leader>1 :!!<CR>
 " Check spelling
