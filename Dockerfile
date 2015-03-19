@@ -329,7 +329,8 @@ ADD utils/dotfiles.fish /usr/local/bin/dotfiles
 EXPOSE 22 \
   3000 3003 3030 3033 3333 \
   5000 5005 5050 5055 5555 \
-  8000 8008 8080 8088 8888
+  8000 8008 8080 8088 8888 \
+  60000 60001 60002 60003 60004 60005
 
 # ## Run process
 #CMD ["/usr/local/bin/tmux"]
