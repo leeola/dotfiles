@@ -14,7 +14,11 @@ MAINTAINER Lee Olayvar <leeolayvar@gmail.com>
 WORKDIR /root
 
 
-# ## Configure users
+# ## Configure env vars
+#
+# IMPORTANT: If any env vars are added, they must be added in
+# ./utils/startup.fish as well, so that they are properly exposed to
+# SSH'd users.
 ENV HOME /root
 ENV GOPATH /go
 ENV GOBIN /go/bin
@@ -322,6 +326,7 @@ RUN mkdir -p .config/fish \
   && ln -s .dotfiles/tmux/tmux.conf .tmux.conf
 
 
+ADD utils/startup.sh  /root/.dotfiles/utils/startup.sh
 ADD utils/dotfiles.fish /usr/local/bin/dotfiles
 
 
@@ -334,4 +339,5 @@ EXPOSE 22 \
 
 # ## Run process
 #CMD ["/usr/local/bin/tmux"]
-CMD ["/usr/sbin/sshd", "-D"]
+#CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/root/.dotfiles/utils/startup.sh"]

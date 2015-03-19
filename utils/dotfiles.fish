@@ -15,11 +15,24 @@ end
 
 
 
+# ## getPort
+# Docker prints host:port, and usually we only care about the port.
+# This func simply parses the port.
+function getPort
+  echo "$argv[1]" | awk -F: '{print $2}'
+end
 
 
 
-# ## Build
-function build
+# ## printSshInfo
+function printSshInfo
+  echo "
+SSH  Port:  "(getPort (docker port "$argv[1]" 22))"
+Mosh Ports: "(getPort (docker port "$argv[1]" 60001))", \
+"(getPort (docker port "$argv[1]" 60002))", \
+"(getPort (docker port "$argv[1]" 60003))"
+"
+  return $status
 end
 
 
@@ -36,12 +49,15 @@ Usage:
   dotfiles <command>
 
 Commands:
-  attach            # Attach to a currently running container
-  build             # Build the leeolayvar/dotfiles image
-  interact          # Interact with the image
-  interact-noports  # Interact with the image, without port forwarding
-  run               # Run a pre-existing container
-  start             # Start the container from the image
+  build             # Build the leeola/dotfiles image
+  interact          # Interact with a noports dotfiles container
+  run               # Run a dotfiles container
+  run-noports       # Run a dotfiles container, with dynamic ports
+  rm                # Safely stop and remove the dotfiles container
+  rm-noports        # Safely stop and remove the noports container
+  ssh               # SSH into the local dotfiles container
+  ssh-noports       # SSH into the local noports container
+  info              # Print the ssh/mosh info for the container(s)
 
 Example, Starting:
 
@@ -55,11 +71,26 @@ Example, Running:
 "
       exit 1
 
-    case "attach"
-      docker attach dotfiles
-
     case "build"
-      docker build -t leeolayvar/dotfiles .
+      docker build -t leeola/dotfiles .
+
+    case "info"
+      # Check if the container is running, before echoing
+      docker port dotfiles 22 1>&- 2>&-
+      and echo -n "Dotfiles Info:"
+      and printSshInfo "dotfiles"
+      and set -l dSuccess "true"
+
+      docker port dotfiles-noports 22 1>&- 2>&-
+      and echo "Dotfiles-noports Info:"
+      and printSshInfo "dotfiles-noports"
+      and set -l dnSuccess "true"
+
+      if test -z "$dSuccess$dnSuccess"
+        echo "
+No dotfiles or noports container running.
+"
+      end
 
     case "interact"
       docker run --tty --interactive \
@@ -67,29 +98,9 @@ Example, Running:
         --volume=/var/run/docker.sock:/var/run/docker.sock \
         --env "DOCKER_HOST=$DOCKER_HOST" \
         --hostname=(hostname) \
-        --publish=3000:3000 \
-        --publish=3003:3003 \
-        --publish=5000:5000 \
-        --publish=8000:8000 \
-        --publish=8080:8080 \
-        --publish=8888:8888 \
+        --publish-all \
         --rm \
-        leeolayvar/dotfiles
-
-    case "interact-noports"
-      docker run --tty --interactive \
-        --volume=/docker-shared:/docker-shared \
-        --volume=/var/run/docker.sock:/var/run/docker.sock \
-        --env "DOCKER_HOST=$DOCKER_HOST" \
-        --hostname=(hostname) \
-        --rm \
-        leeolayvar/dotfiles bash
-
-    case "link"
-      # Note that this is not smart, and assumes it's being run from ../
-      echo "Removing existing and linking $PWD/dotfiles/dotfiles.fish to /usr/local/bin/dotfiles..."
-      rm -f /usr/local/bin/dotfiles
-      ln -s $PWD/utils/dotfiles.fish /usr/local/bin/dotfiles
+        leeola/dotfiles bash
 
     case "run"
       docker run \
@@ -99,7 +110,7 @@ Example, Running:
         --hostname=(hostname) \
         --detach \
         --publish-all \
-        --publish=60000-60010:60000-60010/udp \
+        --publish=60000-60005:60000-60005/udp \
         --publish=3000:3000 \
         --publish=3003:3003 \
         --publish=5000:5000 \
@@ -107,9 +118,9 @@ Example, Running:
         --publish=8080:8080 \
         --publish=8888:8888 \
         --name="dotfiles" \
-        leeolayvar/dotfiles
-      and echo "Dotfiles running, you can ssh/mosh into the following port:"
-      and docker port dotfiles-server 22
+        leeola/dotfiles
+      and echo "Dotfiles running"
+      and printSshInfo "dotfiles"
       exit $status
 
     case "run-noports"
@@ -121,15 +132,25 @@ Example, Running:
         --name="dotfiles-server" \
         --detach \
         --publish-all \
-        leeolayvar/dotfiles
-        # Currently disabled, because i'm not yet sure how to
-        # get the container id of the newly made nameless container
-        #and echo "Dotfiles running, you can ssh/mosh into the following port:"
-        #and docker port dotfiles-server 22
+        --name="dotfiles-noports" \
+        leeola/dotfiles
+        and echo "Dotfiles running"
+        and printSshInfo "dotfiles-noports"
       exit $status
 
-    case "start"
-      docker start dotfiles
+    case "rm"
+      docker stop dotfiles
+      and docker rm dotfiles
+      exit $status
+
+    case "rm-noports"
+      docker stop dotfiles-noports
+      and docker rm dotfiles-noports
+      exit $status
+
+    case "ssh"
+      # Forward stderr to supress failures
+      set -l port (docker port dotfiles 22 2>/dev/null)
 
     case "*"
       fail
