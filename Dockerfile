@@ -54,6 +54,7 @@ RUN mkdir -p /docker-shared/projects \
   && yum install -y \
     make tar \
     openssl \
+    openssh-server \
     git \
     mercurial \
     curl \
@@ -244,8 +245,11 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## NeoVim
+# Checking out the commit i've used for ages:
+# 61c98e7e35b18081a8f723406d5ed5f241ddbc96
   && git clone https://github.com/neovim/neovim /tmp/neovim \
   && cd /tmp/neovim \
+  && git checkout 61c98e7e35b18081a8f723406d5ed5f241ddbc96 \
   && make install \
 
 
@@ -276,6 +280,11 @@ RUN ln -s /usr/local/bin/nvim /usr/local/bin/vim \
   && git clone https://github.com/gmarik/vundle .nvim/bundle/Vundle.vim \
   && echo "Installing NeoVim Plugins. This will take a couple minutes.." \
   && nvim +PluginInstall +qall >/dev/null 2>&1
+
+
+# Temporary location
+ADD ssh/sshd_config /etc/ssh/sshd_config
+RUN /usr/bin/ssh-keygen -A
 
 
 # ## Add configs
@@ -315,5 +324,12 @@ RUN mkdir -p .config/fish \
 ADD utils/dotfiles.fish /usr/local/bin/dotfiles
 
 
+# Expose ports that we want to work with
+EXPOSE 22 \
+  3000 3003 3030 3033 3333 \
+  5000 5005 5050 5055 5555 \
+  8000 8008 8080 8088 8888
+
 # ## Run process
-CMD ["/usr/local/bin/tmux"]
+#CMD ["/usr/local/bin/tmux"]
+CMD ["/usr/sbin/sshd", "-D"]

@@ -83,7 +83,7 @@ Example, Running:
         --env "DOCKER_HOST=$DOCKER_HOST" \
         --hostname=(hostname) \
         --rm \
-        leeolayvar/dotfiles
+        leeolayvar/dotfiles bash
 
     case "link"
       # Note that this is not smart, and assumes it's being run from ../
@@ -92,20 +92,41 @@ Example, Running:
       ln -s $PWD/utils/dotfiles.fish /usr/local/bin/dotfiles
 
     case "run"
-      docker run --tty --interactive \
+      docker run \
         --volume=/docker-shared:/docker-shared \
         --volume=/var/run/docker.sock:/var/run/docker.sock \
         --env "DOCKER_HOST=$DOCKER_HOST" \
         --hostname=(hostname) \
+        --detach \
+        --publish-all \
+        --publish=60000-60010:60000-60010/udp \
         --publish=3000:3000 \
         --publish=3003:3003 \
         --publish=5000:5000 \
         --publish=8000:8000 \
         --publish=8080:8080 \
         --publish=8888:8888 \
-        --detach \
         --name="dotfiles" \
         leeolayvar/dotfiles
+      and echo "Dotfiles running, you can ssh/mosh into the following port:"
+      and docker port dotfiles-server 22
+      exit $status
+
+    case "run-noports"
+      docker run \
+        --volume=/docker-shared:/docker-shared \
+        --volume=/var/run/docker.sock:/var/run/docker.sock \
+        --env "DOCKER_HOST=$DOCKER_HOST" \
+        --hostname=(hostname) \
+        --name="dotfiles-server" \
+        --detach \
+        --publish-all \
+        leeolayvar/dotfiles
+        # Currently disabled, because i'm not yet sure how to
+        # get the container id of the newly made nameless container
+        #and echo "Dotfiles running, you can ssh/mosh into the following port:"
+        #and docker port dotfiles-server 22
+      exit $status
 
     case "start"
       docker start dotfiles
