@@ -18,6 +18,7 @@ WORKDIR /root
 ENV HOME /root
 ENV GOPATH /go
 ENV GOBIN /go/bin
+ENV GOROOT /usr/local/go
 ENV PATH $PATH:$GOBIN:/usr/local/go/bin
 ENV TERM screen-256color
 ENV DOCKER_LOG file
@@ -139,8 +140,8 @@ RUN mkdir -p /docker-shared/projects \
 
 # ## Install Golang
  && cd /tmp \
- && curl -O https://storage.googleapis.com/golang/go1.3.2.linux-amd64.tar.gz \
- && tar -xzf go1.3.2.linux-amd64.tar.gz \
+ && curl -O https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz \
+ && tar -xzf go1.4.2.linux-amd64.tar.gz \
  && mv go /usr/local/go \
 
 
