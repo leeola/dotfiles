@@ -109,6 +109,8 @@ autocmd BufWinLeave * call clearmatches()
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
 
+" Enable automatic comment insertion
+set formatoptions+=r
 " Modeline Support
 set modeline
 set modelines=5
@@ -240,6 +242,7 @@ nnoremap <leader>gw :Gwrite<cr>
 
 " ### vim-go
 " Locate the current identifier
+au FileType go nmap <Leader>dd <Plug>(go-def)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
