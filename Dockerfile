@@ -26,6 +26,7 @@ ENV GOROOT /usr/local/go
 ENV PATH $PATH:$GOBIN:/usr/local/go/bin
 ENV TERM screen-256color
 ENV DOCKER_LOG file
+ENV TZ "America/Los_Angeles"
 
 # ## Set locale
 #
