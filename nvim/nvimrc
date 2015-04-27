@@ -236,6 +236,7 @@ nmap <leader>c :SyntasticCheck<CR>
 " run ctrlp with leader p, and shift p to clear cache
 nnoremap <silent> <leader>p :CtrlP<cr>
 nnoremap <silent> <leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
+nnoremap <silent> <leader>b :CtrlPBuffer<cr>
 
 nnoremap <leader>w :write<cr>
 nnoremap <leader>gw :Gwrite<cr>
