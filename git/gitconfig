@@ -3,7 +3,7 @@
   email = leeolayvar@gmail.com
 [alias]
   co = checkout
-  st = status -s
+  st = status --short
   cl = clone
   ci = commit
   co = checkout
