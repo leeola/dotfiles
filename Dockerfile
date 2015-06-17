@@ -192,6 +192,7 @@ RUN mkdir -p /docker-shared/projects \
   && npm install -g \
     gulp \
     coffee-script \
+    webpack \
 
 
 # ## Install Go Tools
