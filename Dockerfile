@@ -195,6 +195,13 @@ RUN mkdir -p /docker-shared/projects \
     webpack \
 
 
+# ## Install FlowType checker
+  && cd /tmp \
+  && curl -LO http://flowtype.org/downloads/flow-linux64-latest.zip \
+  && unzip ./flow-linux64-latest.zip \
+  && mv ./flow/flow /usr/local/bin/flow \
+
+
 # ## Install Go Tools
 # (Note, not currently installing Go here, yet)
 # ### gpm
