@@ -38,6 +38,8 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
 Plugin 'tomtom/tlib_vim'              " Dep for snipmate
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+" Enables auto type checking, etc.
+Plugin 'facebook/vim-flow'
 
 " ### Syntax Highlighting Bundles
 Plugin 'scrooloose/syntastic'
@@ -199,6 +201,10 @@ let g:markdown_fenced_languages = [
 " ### Startify
 let g:startify_custom_header = 
       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
+
+" ### vim-flow
+" Enable the error display window to autoclose, after no errors present.
+let g:flow#autoclose = 1
 
 " ### vim-go
 " Enable auto-import on save
