@@ -86,7 +86,7 @@ RUN mkdir -p /docker-shared/projects \
 # We used to use  docker in docker, but currently that's disabled.
 #ADD ./utils/wrapdocker /usr/local/bin/wrapdocker
   && yum install -y libvirt libvirt-client python-virtinst \
-  && curl -o /usr/local/bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest \
+  && curl -Lo /usr/local/bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest \
   && chmod +x /usr/local/bin/docker \
 
 
