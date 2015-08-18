@@ -161,7 +161,7 @@ RUN mkdir -p /docker-shared/projects \
   && ./configure --prefix=/usr --disable-static \
   && make install \
   && cd .. \
-  && git clone git://git.code.sf.net/p/tmux/tmux-code tmux \
+  && git clone https://github.com/tmux/tmux \
   && cd tmux \
   && git checkout 1.9a \
   && sh autogen.sh \
