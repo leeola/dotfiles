@@ -153,6 +153,8 @@ RUN mkdir -p /docker-shared/projects \
 # ## Install tmux
 #
 # First install libevent, a dep of tmux, then tmux.
+  && echo "===================Installing Tmux=======================" \
+  && echo "Installing libevent.." \
   && cd /tmp \
   && curl -LO https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz \
   && tar -xvf libevent-2.0.21-stable.tar.gz \
@@ -160,6 +162,7 @@ RUN mkdir -p /docker-shared/projects \
   && cd libevent-2.0.21-stable \
   && ./configure --prefix=/usr --disable-static \
   && make install \
+  && echo "Installing tmux.." \
   && cd .. \
   && git clone https://github.com/tmux/tmux \
   && cd tmux \
@@ -174,6 +177,7 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## Install Fish
+  && echo "===================Installing Fish=======================" \
   && cd /tmp \
   && git clone https://github.com/fish-shell/fish-shell \
   && cd fish-shell \
@@ -185,6 +189,7 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## Install N, and Node
+  && echo "===================Installing Node=======================" \
   && curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
     -o /usr/bin/n \
   && chmod +x /usr/bin/n \
@@ -196,6 +201,7 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## Install FlowType checker
+  && echo "===================Installing FlowType=======================" \
   && cd /tmp \
   && curl -LO http://flowtype.org/downloads/flow-linux64-latest.zip \
   && unzip ./flow-linux64-latest.zip \
@@ -205,22 +211,26 @@ RUN mkdir -p /docker-shared/projects \
 # ## Install Go Tools
 # (Note, not currently installing Go here, yet)
 # ### gpm
+  && echo "===================Installing gpm=======================" \
   && cd /tmp \
   && git clone https://github.com/pote/gpm.git && cd gpm \
   && git checkout v1.2.3 \
   && ./configure \
   && make install \
 # ### gpm-all
+  && echo "===================Installing gpm-all=======================" \
   && cd /tmp \
   && git clone https://github.com/pote/gpm-all.git \
   && cd gpm-all \
   && ./configure \
   && make install \
 # ### gpm-link
+  && echo "===================Installing gpm-link=======================" \
   && git clone https://github.com/elcuervo/gpm-link.git /tmp/gpm-link \
   && cd /tmp/gpm-link \
   && make install \
 # ### gvp
+  && echo "===================Installing gvp=======================" \
   && cd /tmp \
   && git clone https://github.com/pote/gvp.git && cd gvp \
   && git checkout v0.1.0 \
@@ -228,21 +238,28 @@ RUN mkdir -p /docker-shared/projects \
   && make install \
   && cd /tmp \
 # ### gvp-fish
+  && echo "===================Installing gvp-fish=======================" \
   && git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish \
   && cp bin/gvp-fish /usr/local/bin \
 # ### goimports
+  && echo "===================Installing goimports=======================" \
   && go get github.com/bradfitz/goimports \
 # ### gocode
+  && echo "===================Installing gocode=======================" \
   && go get github.com/nsf/gocode \
 # ### godef
+  && echo "===================Installing godef=======================" \
   && go get code.google.com/p/rog-go/exp/cmd/godef \
 # ### go oracle
+  && echo "===================Installing go-oracle=======================" \
   && go get golang.org/x/tools/oracle \
 # ### gorename
+#  && echo "===================Installing gorename=======================" \
 #  && go get code.google.com/p/go.tools/cmd/gorename \
 
 
 # ## Libsass Library
+  && echo "===================Installing Libsass=======================" \
   && git clone https://github.com/sass/libsass /tmp/libsass \
   && cd /tmp/libsass \
   && make shared \
@@ -254,6 +271,7 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## AWS CLI
+  && echo "===================Installing Aws Cli=======================" \
   && pip install awscli \
   && ln -s /docker-shared/.aws ~/.aws \
 
@@ -261,6 +279,7 @@ RUN mkdir -p /docker-shared/projects \
 # ## NeoVim
 # Checking out the commit i've used for ages:
 # 61c98e7e35b18081a8f723406d5ed5f241ddbc96
+  && echo "===================Installing Neovim=======================" \
   && git clone https://github.com/neovim/neovim /tmp/neovim \
   && cd /tmp/neovim \
   && git checkout 61c98e7e35b18081a8f723406d5ed5f241ddbc96 \
@@ -268,6 +287,7 @@ RUN mkdir -p /docker-shared/projects \
 
 
 # ## Clean up excess build files and deps
+  && echo "===================Cleaning Up Install=======================" \
   && rm -rf /tmp && mkdir /tmp \
   && yum remove -y \
     automake pcre-devel xz-devel ncurses-devel \
@@ -281,7 +301,8 @@ RUN mkdir -p /docker-shared/projects \
 # We're adding nvim here rather than with the other configs due to the
 # plugin installations.
 ADD nvim /root/.dotfiles/nvim
-RUN ln -s /usr/local/bin/nvim /usr/local/bin/vim \
+RUN echo "===================Configuring Nvim=======================" \
+  && ln -s /usr/local/bin/nvim /usr/local/bin/vim \
   && mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
   && ln -s ~/.dotfiles/nvim/colors .nvim/colors \
   && ln -s ~/.dotfiles/nvim/nvimrc .nvimrc \
