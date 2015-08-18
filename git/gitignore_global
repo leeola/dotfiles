@@ -3,3 +3,4 @@
 *.swo
 .godeps
 node_modules
+.ctrlp
