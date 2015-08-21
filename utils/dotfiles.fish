@@ -132,6 +132,7 @@ No dotfiles or noports container running.
         --publish=8088:8088 \
         --publish=8888:8888 \
         --publish=8443:8443 \
+        --publish=88:88 \
         --name="dotfiles" \
         leeola/dotfiles
       and echo "Dotfiles running"
