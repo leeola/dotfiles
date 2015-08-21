@@ -6,6 +6,10 @@
 # the containers.
 #
 
+if test -z "$TAG"
+  set TAG leeola/dotfiles
+end
+
 # A fail function, called to bail out of the process with an exit
 # status of 1.
 function fail
@@ -72,7 +76,8 @@ Example, Running:
       exit 1
 
     case "build"
-      docker build -t leeola/dotfiles .
+      docker build -t "$TAG" .
+      echo "Built with tag '$TAG'"
 
     case "info"
       # Check if the container is running, before echoing
@@ -100,7 +105,7 @@ No dotfiles or noports container running.
         --hostname=(hostname) \
         --publish-all \
         --rm \
-        leeola/dotfiles bash
+        "$TAG" bash
 
     case "run"
       docker run \
@@ -113,10 +118,20 @@ No dotfiles or noports container running.
         --publish=60000-60005:60000-60005/udp \
         --publish=3000:3000 \
         --publish=3003:3003 \
+        --publish=3030:3030 \
+        --publish=3033:3033 \
+        --publish=3333:3333 \
         --publish=5000:5000 \
+        --publish=5005:5005 \
+        --publish=5050:5050 \
+        --publish=5055:5055 \
+        --publish=5555:5555 \
         --publish=8000:8000 \
+        --publish=8008:8008 \
         --publish=8080:8080 \
+        --publish=8088:8088 \
         --publish=8888:8888 \
+        --publish=8443:4443 \
         --name="dotfiles" \
         leeola/dotfiles
       and echo "Dotfiles running"

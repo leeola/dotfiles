@@ -36,264 +36,30 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 
-# ## Setup the shared folders and links
+# ## Core Installation
 #
-# We're creating the folders with `-p` so that if they don't
-# exist, our link still works.
-#
-# In the future we should probably throw a warning to the user
-# if the docker-shared dir doesn't exist.
-RUN mkdir -p /docker-shared/projects \
-    /docker-shared/.ssh \
-    ~/.config/fish \
-  && ln -s /docker-shared/._/fish/fish_history ~/.config/fish/fish_history \
-  && ln -s /docker-shared/projects ~/projects \
-  && ln -s /docker-shared/.ssh     ~/.ssh \
+# Add the core installation, and run it
+ADD core /root/.dotfiles/core
+RUN   cd /root/.dotfiles/core \
+  &&  bash /root/.dotfiles/core/install/core.sh
+
+## ## Setup the shared folders and links
+##
+## We're creating the folders with `-p` so that if they don't
+## exist, our link still works.
+##
+## In the future we should probably throw a warning to the user
+## if the docker-shared dir doesn't exist.
+#RUN mkdir -p /docker-shared/projects \
+#    /docker-shared/.ssh \
+#    ~/.config/fish \
+#  && ln -s /docker-shared/._/fish/fish_history ~/.config/fish/fish_history \
+#  && ln -s /docker-shared/projects ~/projects \
+#  && ln -s /docker-shared/.ssh     ~/.ssh \
 
 
 
-
-# ## Install simple user dependencies
-#
-# Some user deps that we aren't yet compiling by hand.
-  && yum update -y \
-  && yum install -y \
-    make tar \
-    openssl \
-    openssh-server \
-    git \
-    mercurial \
-    curl \
-    gcc gcc-c++ \
-# required by fish
-    man hostname bc \
-    zip unzip \
-
-
-# ## Install build dependencies
-#
-# Ie, dependencies we need for the build, but can remove
-# after it's all done.
-  && yum install -y \
-    automake pcre-devel xz-devel ncurses-devel \
-    zlib-devel openssl-devel autoconf libtool \
-    cmake \
-
-
-# Install Docker
-#
-# Used to run Docker in Docker.
-# We used to use  docker in docker, but currently that's disabled.
-#ADD ./utils/wrapdocker /usr/local/bin/wrapdocker
-  && yum install -y libvirt libvirt-client python-virtinst \
-  && curl -Lo /usr/local/bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest \
-  && chmod +x /usr/local/bin/docker \
-
-
-# ## Keychain
-#
-# TODO: REMOVE RPM DEPENDENCY
-  && rpm -ivh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm \
-  && yum install -y keychain \
-
-
-# ## Install mosh
-#
-# TODO: REMOVE RPM DEPENDENCY
-# NOTE: We're using an rpm & yum install because the source installation
-# was proving very difficult.
-#
-# In short, protobuf would be installed but mosh's configure could never
-# find protobuf. Very time consuming. The source installation code is
-# below for future work.
-  && rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm \
-  && yum install -y mosh \
-#RUN cd /tmp \
-#  curl -O https://protobuf.googlecode.com/svn/rc/protobuf-2.5.0.tar.gz \
-#  tar xvf protobuf-2.5.0.tar.gz
-##  cd protobuf-2.6.0
-##  ./configure \
-##  make && make install
-#RUN git clone https://github.com/keithw/mosh /tmp/mosh \
-#  cd /tmp/mosh
-##  ./autogen.sh \
-##  ./configure \
-##  make \
-##  make install
-
-
-# ## Install silversearcher
-#
-# General purpose
-  && git clone https://github.com/ggreer/the_silver_searcher /tmp/ag \
-  && cd /tmp/ag \
-  && git checkout 0.20.0 \
-  && ./build.sh \
-  && make install \
-
-
-# ## Install pip
-#
-# Used in: Powerline
-  && cd /tmp \
-  && curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-1.4.2.tar.gz \
-  && tar -xvf setuptools-1.4.2.tar.gz \
-  && cd setuptools-1.4.2 \
-  && python2.7 setup.py install \
-  && curl https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py | python2.7 - \
-
-
-# ## Install Golang
- && cd /tmp \
- && curl -O https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz \
- && tar -xzf go1.4.2.linux-amd64.tar.gz \
- && mv go /usr/local/go \
-
-
-# ## Install tmux
-#
-# First install libevent, a dep of tmux, then tmux.
-  && echo "===================Installing Tmux=======================" \
-  && echo "Installing libevent.." \
-  && cd /tmp \
-  && curl -LO https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz \
-  && tar -xvf libevent-2.0.21-stable.tar.gz \
-  && ls -la \
-  && cd libevent-2.0.21-stable \
-  && ./configure --prefix=/usr --disable-static \
-  && make install \
-  && echo "Installing tmux.." \
-  && cd .. \
-  && git clone https://github.com/tmux/tmux \
-  && cd tmux \
-  && git checkout 1.9a \
-  && sh autogen.sh \
-  && ./configure \
-  && make && make install \
-# Suddenly this is causing a failure. Not sure why.. but if it's not
-# needed, who cares?
-# POSSIBLY DEPRECATED
-#  ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5 \
-
-
-# ## Install Fish
-  && echo "===================Installing Fish=======================" \
-  && cd /tmp \
-  && git clone https://github.com/fish-shell/fish-shell \
-  && cd fish-shell \
-  && git checkout 2.1.1 \
-  && autoconf \
-  && ./configure \
-  && make \
-  && make install \
-
-
-# ## Install N, and Node
-  && echo "===================Installing Node=======================" \
-  && curl https://raw.githubusercontent.com/visionmedia/n/master/bin/n \
-    -o /usr/bin/n \
-  && chmod +x /usr/bin/n \
-  && n stable \
-  && npm install -g \
-    gulp \
-    coffee-script \
-    webpack \
-
-
-# ## Install FlowType checker
-  && echo "===================Installing FlowType=======================" \
-  && cd /tmp \
-  && curl -LO http://flowtype.org/downloads/flow-linux64-latest.zip \
-  && unzip ./flow-linux64-latest.zip \
-  && mv ./flow/flow /usr/local/bin/flow \
-
-
-# ## Install Go Tools
-# (Note, not currently installing Go here, yet)
-# ### gpm
-  && echo "===================Installing gpm=======================" \
-  && cd /tmp \
-  && git clone https://github.com/pote/gpm.git && cd gpm \
-  && git checkout v1.2.3 \
-  && ./configure \
-  && make install \
-# ### gpm-all
-  && echo "===================Installing gpm-all=======================" \
-  && cd /tmp \
-  && git clone https://github.com/pote/gpm-all.git \
-  && cd gpm-all \
-  && ./configure \
-  && make install \
-# ### gpm-link
-  && echo "===================Installing gpm-link=======================" \
-  && git clone https://github.com/elcuervo/gpm-link.git /tmp/gpm-link \
-  && cd /tmp/gpm-link \
-  && make install \
-# ### gvp
-  && echo "===================Installing gvp=======================" \
-  && cd /tmp \
-  && git clone https://github.com/pote/gvp.git && cd gvp \
-  && git checkout v0.1.0 \
-  && ./configure \
-  && make install \
-  && cd /tmp \
-# ### gvp-fish
-  && echo "===================Installing gvp-fish=======================" \
-  && git clone https://github.com/leeolayvar/gvp-fish && cd gvp-fish \
-  && cp bin/gvp-fish /usr/local/bin \
-# ### goimports
-  && echo "===================Installing goimports=======================" \
-  && go get github.com/bradfitz/goimports \
-# ### gocode
-  && echo "===================Installing gocode=======================" \
-  && go get github.com/nsf/gocode \
-# ### godef
-  && echo "===================Installing godef=======================" \
-  && go get code.google.com/p/rog-go/exp/cmd/godef \
-# ### go oracle
-  && echo "===================Installing go-oracle=======================" \
-  && go get golang.org/x/tools/oracle \
-# ### gorename
-#  && echo "===================Installing gorename=======================" \
-#  && go get code.google.com/p/go.tools/cmd/gorename \
-
-
-# ## Libsass Library
-  && echo "===================Installing Libsass=======================" \
-  && git clone https://github.com/sass/libsass /tmp/libsass \
-  && cd /tmp/libsass \
-  && make shared \
-  && make install-shared \
-# On centos, it seems we are missing /usr/local/lib from ldconfig,
-# so add it and run ldconfig to make libsass work.
-  && echo "/usr/local/lib" > /etc/ld.so.conf.d/libsass.conf \
-  && ldconfig \
-
-
-# ## AWS CLI
-  && echo "===================Installing Aws Cli=======================" \
-  && pip install awscli \
-  && ln -s /docker-shared/.aws ~/.aws \
-
-
-# ## NeoVim
-# Checking out the commit i've used for ages:
-# 61c98e7e35b18081a8f723406d5ed5f241ddbc96
-  && echo "===================Installing Neovim=======================" \
-  && git clone https://github.com/neovim/neovim /tmp/neovim \
-  && cd /tmp/neovim \
-  && git checkout 61c98e7e35b18081a8f723406d5ed5f241ddbc96 \
-  && make install \
-
-
-# ## Clean up excess build files and deps
-  && echo "===================Cleaning Up Install=======================" \
-  && rm -rf /tmp && mkdir /tmp \
-  && yum remove -y \
-    automake pcre-devel xz-devel ncurses-devel \
-    zlib-devel openssl-devel autoconf libtool \
-    cmake \
-  && yum clean all
+#ADD . /root/.dotfiles
 
 
 # ## Add and Link nvim, Install Plugins
@@ -365,7 +131,8 @@ EXPOSE 22 \
   3000 3003 3030 3033 3333 \
   5000 5005 5050 5055 5555 \
   8000 8008 8080 8088 8888 \
-  60001 60002 60003
+  60001 60002 60003 \
+  8443
 
 # ## Run process
 #CMD ["/usr/local/bin/tmux"]
