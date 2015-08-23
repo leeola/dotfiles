@@ -5,6 +5,9 @@
 set -e
 echo "[golang-tools.sh] ================== Installing"
 
+# ### godeps
+go get github.com/tools/godep
+
 # ### gpm
 cd /tmp
 git clone https://github.com/pote/gpm.git && cd gpm
