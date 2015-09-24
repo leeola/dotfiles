@@ -21,8 +21,8 @@ set -e
 # ./utils/startup.fish as well, so that they are properly exposed to
 # SSH'd users.
 export HOME=/root
-export GOPATH=/go
-export GOBIN=/go/bin
+export GOPATH=/docker-shared/go
+export GOBIN=/docker-shared/go/bin
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOBIN:/usr/local/go/bin
 export TERM=screen-256color
