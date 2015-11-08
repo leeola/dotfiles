@@ -157,6 +157,11 @@ set foldmethod=indent               " Magic
 set foldlevel=20                    " Magic
 set foldlevelstart=20               " Magic
 
+" Disable the competion preview window. This is mainly
+" apparent with YouCompleteMe, but overall i dislike it. So, i'm disabling
+" it from ever showing up.
+set completeopt-=preview
+
 
 "
 " ## Autocmds
