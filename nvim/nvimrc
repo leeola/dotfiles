@@ -38,6 +38,9 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
 Plugin 'tomtom/tlib_vim'              " Dep for snipmate
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+
+Plugin 'Valloric/YouCompleteMe'
+
 " Enables auto type checking, etc.
 Plugin 'facebook/vim-flow'
 

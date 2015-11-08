@@ -113,20 +113,8 @@ RUN bash /root/.dotfiles/core/install/clean.sh
 # We're adding nvim here rather than with the other configs due to the
 # plugin installations.
 ADD nvim /root/.dotfiles/nvim
-RUN echo "===================Configuring Nvim=======================" \
-  && ln -s /usr/local/bin/nvim /usr/local/bin/vim \
-  && mkdir -p ~/.nvim/tmp/bkp ~/.nvim/tmp/swp ~/.nvim/bundle \
-  && ln -s ~/.dotfiles/nvim/colors .nvim/colors \
-  && ln -s ~/.dotfiles/nvim/nvimrc .nvimrc \
-  && ln -s ~/.dotfiles/nvim/snippets .nvim/snippets \
-
-  && git clone https://github.com/altercation/vim-colors-solarized \
-  && mv vim-colors-solarized/colors/solarized.vim ~/.nvim/colors \
-  && rm -rf vim-colors-solarized \
-
-  && git clone https://github.com/gmarik/vundle .nvim/bundle/Vundle.vim \
-  && echo "Installing NeoVim Plugins. This will take a couple minutes.." \
-  && nvim +PluginInstall +qall >/dev/null 2>&1
+ADD core/configure/nvim.sh /root/.dotfiles/core/configure/nvim.sh
+RUN bash /root/.dotfiles/core/configure/nvim.sh
 
 
 # Temporary location
