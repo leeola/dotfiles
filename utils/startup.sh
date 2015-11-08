@@ -17,6 +17,7 @@ export DOCKER_LOG=$DOCKER_LOG
 export LANG=$LANG
 export LC_ALL=$LC_ALL
 export DOCKER_HOST=$DOCKER_HOST
+export GO15VENDOREXPERIMENT=1
 " >> /etc/profile
 
 # Now run the sshd

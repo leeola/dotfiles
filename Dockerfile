@@ -20,10 +20,11 @@ WORKDIR /root
 # ./utils/startup.fish as well, so that they are properly exposed to
 # SSH'd users.
 ENV HOME /root
-ENV GOPATH /go
-ENV GOBIN /go/bin
+ENV GOPATH /docker-shared/go
+ENV GOBIN /docker-shared/go/bin
 ENV GOROOT /usr/local/go
 ENV PATH $PATH:$GOBIN:/usr/local/go/bin
+ENV GO15VENDOREXPERIMENT 1
 ENV TERM screen-256color
 ENV DOCKER_LOG file
 ENV TZ "America/Los_Angeles"
@@ -36,12 +37,57 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 
-# ## Core Installation
+# ## Installation
 #
-# Add the core installation, and run it
-ADD core /root/.dotfiles/core
-RUN   cd /root/.dotfiles/core \
-  &&  bash /root/.dotfiles/core/install/core.sh
+# Note that by running each step independantly we are not being storage
+# efficient, since each step uses storage and cannot be cleaned after it
+# is run.
+#
+# However, doing it this way is more developer friendly. Each step is
+# cached, meaning modifications don't require previous steps to be run
+# again.
+ADD core/install/dependencies.sh /root/.dotfiles/core/install/dependencies.sh
+RUN bash /root/.dotfiles/core/install/dependencies.sh
+
+ADD core/install/docker.sh /root/.dotfiles/core/install/docker.sh
+RUN bash /root/.dotfiles/core/install/docker.sh
+
+ADD core/install/keychain.sh /root/.dotfiles/core/install/keychain.sh
+RUN bash /root/.dotfiles/core/install/keychain.sh
+
+ADD core/install/mosh.sh /root/.dotfiles/core/install/mosh.sh
+RUN bash /root/.dotfiles/core/install/mosh.sh
+
+ADD core/install/ag.sh /root/.dotfiles/core/install/ag.sh
+RUN bash /root/.dotfiles/core/install/ag.sh
+
+ADD core/install/pip.sh /root/.dotfiles/core/install/pip.sh
+RUN bash /root/.dotfiles/core/install/pip.sh
+
+ADD core/install/tmux.sh /root/.dotfiles/core/install/tmux.sh
+RUN bash /root/.dotfiles/core/install/tmux.sh
+
+ADD core/install/fish.sh /root/.dotfiles/core/install/fish.sh
+RUN bash /root/.dotfiles/core/install/fish.sh
+
+ADD core/install/golang.sh /root/.dotfiles/core/install/golang.sh
+RUN bash /root/.dotfiles/core/install/golang.sh
+
+ADD core/install/golang-tools.sh /root/.dotfiles/core/install/golang-tools.sh
+RUN bash /root/.dotfiles/core/install/golang-tools.sh
+
+ADD core/install/node.sh /root/.dotfiles/core/install/node.sh
+RUN bash /root/.dotfiles/core/install/node.sh
+
+ADD core/install/libsass.sh /root/.dotfiles/core/install/libsass.sh
+RUN bash /root/.dotfiles/core/install/libsass.sh
+
+ADD core/install/nvim.sh /root/.dotfiles/core/install/nvim.sh
+RUN bash /root/.dotfiles/core/install/nvim.sh
+
+ADD core/install/clean.sh /root/.dotfiles/core/install/clean.sh
+RUN bash /root/.dotfiles/core/install/clean.sh
+
 
 ## ## Setup the shared folders and links
 ##

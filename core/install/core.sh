@@ -24,43 +24,14 @@ export HOME=/root
 export GOPATH=/docker-shared/go
 export GOBIN=/docker-shared/go/bin
 export GOROOT=/usr/local/go
+export GO15VENDOREXPERIMENT=1
 export PATH=$PATH:$GOBIN:/usr/local/go/bin
 export TERM=screen-256color
 export TZ="America/Los_Angeles"
 
-
-# ## Install simple user dependencies
-#
-# Some user deps that we aren't yet compiling by hand. Note that we're
-# grouping all yum dependencies here, for easy portability to other OSs.
-#
-# bc/zip/unzip required by fish
-echo "[core.sh] ================== Installing user package dependencies"
-yum update -y
-yum install -y \
-  make tar \
-  openssl \
-  openssh-server \
-  git \
-  mercurial \
-  curl \
-  gcc gcc-c++ \
-  bc zip unzip
-
-
-# ## Install build dependencies
-#
-# Ie, dependencies we need for the build, but can remove
-# after it's all done.
-echo "[core.sh] ================== Installing build package dependencies"
-yum install -y \
-  automake pcre-devel xz-devel ncurses-devel \
-  zlib-devel openssl-devel autoconf libtool \
-  cmake
-
-
 # ## Run core installers
 cd install
+bash dependencies.sh
 bash docker.sh
 bash keychain.sh
 bash mosh.sh
@@ -73,13 +44,4 @@ bash golang-tools.sh
 bash node.sh
 bash libsass.sh
 bash nvim.sh
-
-
-# ## Clean up excess build files and deps
-echo "[core.sh] ================== Cleaningup build dependencies"
-rm -rf /tmp && mkdir /tmp
-yum remove -y \
-    automake pcre-devel xz-devel ncurses-devel \
-    zlib-devel openssl-devel autoconf libtool \
-    cmake
-yum clean all
+bash clean.sh
