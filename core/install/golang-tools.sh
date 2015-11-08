@@ -44,4 +44,7 @@ mv $GOBIN/oracle /usr/local/bin/oracle
 go get golang.org/x/tools/cmd/gorename
 mv $GOBIN/gorename /usr/local/bin/gorename
 
+# ### golint
+go get -u github.com/golang/lint/golint
+mv $GOBIN/golint /usr/local/bin/golint
 
