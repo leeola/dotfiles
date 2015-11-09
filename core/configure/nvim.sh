@@ -21,6 +21,9 @@ ln -s ~/.dotfiles/nvim/colors .nvim/colors
 ln -s ~/.dotfiles/nvim/nvimrc .nvimrc
 ln -s ~/.dotfiles/nvim/snippets .nvim/snippets
 
+# nvim is also using vim bkp dir, so for now make it as well.
+mkdir -p ~/.vim/tmp/bkp ~/.vim/tmp/swp ~/.vim/bundle
+
 
 echo "[configure/nvim.sh] ================== Installing bundles"
 # For some reason i'm installing this manually. Why?
