@@ -108,18 +108,14 @@ RUN bash /root/.dotfiles/core/install/clean.sh
 #ADD . /root/.dotfiles
 
 
-# ## Add and Link nvim, Install Plugins
-#
-# We're adding nvim here rather than with the other configs due to the
-# plugin installations.
-ADD nvim /root/.dotfiles/nvim
-ADD core/configure/nvim.sh /root/.dotfiles/core/configure/nvim.sh
-RUN bash /root/.dotfiles/core/configure/nvim.sh
-
-
 # Temporary location
 ADD ssh/sshd_config /etc/ssh/sshd_config
 RUN /usr/bin/ssh-keygen -A
+
+
+ADD utils/startup.sh      /root/.dotfiles/utils/startup.sh
+ADD utils/link-home.fish /root/.dotfiles/utils/link-home.fish
+ADD utils/dotfiles.fish   /usr/local/bin/dotfiles
 
 
 # ## Add configs
@@ -156,8 +152,14 @@ RUN mkdir -p .config/fish \
   && ln -s .dotfiles/tmux/tmux.conf .tmux.conf
 
 
-ADD utils/startup.sh  /root/.dotfiles/utils/startup.sh
-ADD utils/dotfiles.fish /usr/local/bin/dotfiles
+# ## Add and Link nvim, Install Plugins
+#
+# We're adding nvim here rather than with the other configs due to the
+# plugin installations.
+ADD nvim /root/.dotfiles/nvim
+ADD core/configure/nvim.sh /root/.dotfiles/core/configure/nvim.sh
+RUN bash /root/.dotfiles/core/configure/nvim.sh
+
 
 
 # Expose ports that we want to work with

@@ -2,10 +2,16 @@
 #
 # # Startup
 #
-# A simple script, mainly used to set /etc/profile up with the env
-# variables set in the Dockerfile and variables we pass in via CLI
+# Startup is the actual startup script called by Docker. We should
+# use this to setup our runtime variables and files. As an example,
+# /docker-shared/* should be linked to and ~/*, but this can only be
+# done at runtime. That's where this script comes into play.
 #
 
+# link our docker-shared to our home
+fish /root/.dotfiles/utils/link-home.fish
+
+# Setup the profile to run with our
 echo "
 export HOME=$HOME
 export GOPATH=$GOPATH
