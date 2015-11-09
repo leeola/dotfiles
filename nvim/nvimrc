@@ -271,7 +271,7 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 " Check what the current identifier implements
 au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>l :GoLint<cr>
+au FileType go nnoremap <silent> <leader>l :GoLint<cr>
 
 
 
