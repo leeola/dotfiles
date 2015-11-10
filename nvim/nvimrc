@@ -263,7 +263,7 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 " Rename the current identifier
-au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <Leader>r <Plug>(go-rename)
 " Info about the current identifier
 au FileType go nmap <Leader>q <Plug>(go-info)
 " Open godoc for current identifier
