@@ -265,13 +265,14 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 " Rename the current identifier
 au FileType go nmap <Leader>e <Plug>(go-rename)
 " Info about the current identifier
-au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>q <Plug>(go-info)
 " Open godoc for current identifier
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 " Check what the current identifier implements
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nnoremap <silent> <leader>l :GoLint<cr>
+au FileType go nnoremap <silent> <leader>e :GoImports<cr>
 
 
 
