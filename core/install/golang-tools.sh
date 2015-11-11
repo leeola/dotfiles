@@ -48,3 +48,7 @@ mv $GOBIN/gorename /usr/local/bin/gorename
 go get -u github.com/golang/lint/golint
 mv $GOBIN/golint /usr/local/bin/golint
 
+# ### stringer
+go get golang.org/x/tools/cmd/stringer
+mv $GOBIN/stringer /usr/local/bin/stringer
+
