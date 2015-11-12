@@ -273,6 +273,7 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nnoremap <silent> <leader>l :GoLint<cr>
 au FileType go nnoremap <silent> <leader>e :GoImports<cr>
+au FileType go nnoremap <silent> <leader>; :GoVet<cr>
 
 
 
