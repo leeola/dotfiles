@@ -85,6 +85,9 @@ RUN bash /root/.dotfiles/core/install/libsass.sh
 ADD core/install/nvim.sh /root/.dotfiles/core/install/nvim.sh
 RUN bash /root/.dotfiles/core/install/nvim.sh
 
+ADD core/install/camlistore.sh /root/.dotfiles/core/install/camlistore.sh
+RUN bash /root/.dotfiles/core/install/camlistore.sh
+
 ADD core/install/clean.sh /root/.dotfiles/core/install/clean.sh
 RUN bash /root/.dotfiles/core/install/clean.sh
 
