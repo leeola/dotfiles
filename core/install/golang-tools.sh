@@ -52,3 +52,7 @@ mv $GOBIN/golint /usr/local/bin/golint
 go get golang.org/x/tools/cmd/stringer
 mv $GOBIN/stringer /usr/local/bin/stringer
 
+# ## gopherjs
+go get -u github.com/gopherjs/gopherjs
+mv $GOBIN/gopherjs /usr/local/bin/gopherjs
+
