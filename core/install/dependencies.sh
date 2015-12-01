@@ -23,6 +23,9 @@ yum install -y \
   gcc gcc-c++ \
   bc zip unzip
 
+# Required for apropos, which is needed for fish autocomplete
+yum install -y man
+
 
 # ## Install build dependencies
 #
