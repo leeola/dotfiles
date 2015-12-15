@@ -37,3 +37,5 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 
 
 ## Tmux
+
+`C-a H,J,K,L` - Resize the pane left/down/up/right
