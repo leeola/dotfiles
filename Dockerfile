@@ -159,7 +159,7 @@ ADD core/configure/nvim.sh /root/.dotfiles/core/configure/nvim.sh
 RUN bash /root/.dotfiles/core/configure/nvim.sh
 
 
-ADD utils/link-home.fish /root/.dotfiles/utils/link-home.fish
+ADD utils/link-home.fish  /root/.dotfiles/utils/link-home.fish
 ADD utils/dotfiles.fish   /usr/local/bin/dotfiles
 ADD utils/startup.sh      /root/.dotfiles/utils/startup.sh
 
@@ -173,5 +173,4 @@ EXPOSE 22 \
 
 
 # ## Run process
-#CMD ["/root/.dotfiles/utils/startup.sh"]
-CMD ["sleep", "infinity"]
+CMD ["/root/.dotfiles/utils/startup.sh"]
