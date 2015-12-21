@@ -28,18 +28,6 @@ end
 
 
 
-# ## printSshInfo
-function printSshInfo
-  echo "
-SSH  Port:  "(getPort (docker port "$argv[1]" 22))"
-Mosh Ports: "(getPort (docker port "$argv[1]" 60001))", \
-"(getPort (docker port "$argv[1]" 60002))", \
-"(getPort (docker port "$argv[1]" 60003))"
-"
-  return $status
-end
-
-
 # ## Top Level Command Parse
 #
 # Use a switch to figure out which command to call.
@@ -79,24 +67,6 @@ Example, Running:
       docker build -t "$TAG" .
       echo "Built with tag '$TAG'"
 
-    case "info"
-      # Check if the container is running, before echoing
-      docker port dotfiles 22 1>&- 2>&-
-      and echo -n "Dotfiles Info:"
-      and printSshInfo "dotfiles"
-      and set -l dSuccess "true"
-
-      docker port dotfiles-noports 22 1>&- 2>&-
-      and echo "Dotfiles-noports Info:"
-      and printSshInfo "dotfiles-noports"
-      and set -l dnSuccess "true"
-
-      if test -z "$dSuccess$dnSuccess"
-        echo "
-No dotfiles or noports container running.
-"
-      end
-
     case "interact"
       docker run --tty --interactive \
         --volume=/docker-shared:/docker-shared \
@@ -115,7 +85,6 @@ No dotfiles or noports container running.
         --hostname=(hostname) \
         --detach \
         --publish-all \
-        --publish=60000-60005:60000-60005/udp \
         --publish=3000:3000 \
         --publish=3003:3003 \
         --publish=3030:3030 \
@@ -136,7 +105,6 @@ No dotfiles or noports container running.
         --name="dotfiles" \
         leeola/dotfiles
       and echo "Dotfiles running"
-      and printSshInfo "dotfiles"
       exit $status
 
     case "run-noports"
@@ -149,9 +117,8 @@ No dotfiles or noports container running.
         --detach \
         --publish-all \
         --name="dotfiles-noports" \
-        leeola/dotfiles
+        $TAG
         and echo "Dotfiles running"
-        and printSshInfo "dotfiles-noports"
       exit $status
 
     case "rm"

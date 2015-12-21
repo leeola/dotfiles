@@ -116,11 +116,6 @@ ADD ssh/sshd_config /etc/ssh/sshd_config
 RUN /usr/bin/ssh-keygen -A
 
 
-ADD utils/startup.sh      /root/.dotfiles/utils/startup.sh
-ADD utils/link-home.fish /root/.dotfiles/utils/link-home.fish
-ADD utils/dotfiles.fish   /usr/local/bin/dotfiles
-
-
 # ## Add configs
 # ### ssh
 #
@@ -164,16 +159,19 @@ ADD core/configure/nvim.sh /root/.dotfiles/core/configure/nvim.sh
 RUN bash /root/.dotfiles/core/configure/nvim.sh
 
 
+ADD utils/link-home.fish /root/.dotfiles/utils/link-home.fish
+ADD utils/dotfiles.fish   /usr/local/bin/dotfiles
+ADD utils/startup.sh      /root/.dotfiles/utils/startup.sh
+
 
 # Expose ports that we want to work with
 EXPOSE 22 \
   3000 3003 3030 3033 3333 \
   5000 5005 5050 5055 5555 \
   8000 8008 8080 8088 8888 \
-  60001 60002 60003 \
   88 8443
 
+
 # ## Run process
-#CMD ["/usr/local/bin/tmux"]
-#CMD ["/usr/sbin/sshd", "-D"]
-CMD ["/root/.dotfiles/utils/startup.sh"]
+#CMD ["/root/.dotfiles/utils/startup.sh"]
+CMD ["sleep", "infinity"]

@@ -26,5 +26,4 @@ export DOCKER_HOST=$DOCKER_HOST
 export GO15VENDOREXPERIMENT=1
 " >> /etc/profile
 
-# Now run the sshd
-/usr/sbin/sshd -D
+sleep infinity
