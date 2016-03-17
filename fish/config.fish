@@ -29,11 +29,11 @@ set -Ux PATH ~/.bin ~/.n/bin $PATH
 set -Ux N_PREFIX ~/.n
 
 # Fish Greeting
-function fish_greeting
-  set -l FILES ~/.config/fish/greetings/*
-  set -l n (math 'scale=0;'(random)'%'(count $FILES)'+1')
-  echo -e (cat $FILES[$n])
-end
+#function fish_greeting
+#  set -l FILES ~/.config/fish/greetings/*
+#  set -l n (math 'scale=0;'(random)'%'(count $FILES)'+1')
+#  echo -e (cat $FILES[$n])
+#end
 
 # Change `cd foo` to always check the current dir, and not current *and* home.
 set -Ux CDPATH .
