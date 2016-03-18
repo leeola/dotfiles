@@ -38,4 +38,8 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 
 ## Tmux
 
+`C-a C-a` - Swap windows.
+
+`C-a q <N>` - Show pane numbers, then select a number. Ie, `C-a q 1`
+
 `C-a H,J,K,L` - Resize the pane left/down/up/right
