@@ -21,11 +21,7 @@ function keychain
   source ~/.keychain/$HOSTNAME-fish
 end
 
-# I don't quite understand the scoping rules for -x, -Ux, -gx, etc. I should
-# really read the docs on this one of these days lol. At any rate, i was
-# having some trouble in tmux with my variables being exposed, and -Ux seems
-# to have solved the issue.
-set -Ux PATH ~/.bin ~/.n/bin $PATH
+set -Ux PATH ~/.bin ~/.n/bin ~/.multirust/toolchains/stable/cargo/bin $PATH
 set -Ux N_PREFIX ~/.n
 
 # Fish Greeting
@@ -70,4 +66,7 @@ function docker-rmi-all
   docker rmi (docker images | awk '{print $3}')
 end
 
+set -x PATH $HOME/.cargo/bin /Users/leeolayvar/.nix-profile/bin /Users/leeolayvar/.nix-profile/sbin $PATH
+set -x NIX_PATH nixpkgs=/Users/leeolayvar/.nix-defexpr/channels/nixpkgs
+set -x SSL_CERT_FILE '/Users/leeolayvar/.nix-profile/etc/ssl/certs/ca-bundle.crt'
 
