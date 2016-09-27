@@ -39,8 +39,7 @@ Plug 'honza/vim-snippets'
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-" Enables auto type checking, etc.
-Plug 'facebook/vim-flow'
+Plug 'benekastah/neomake'
 
 " ### Syntax Highlighting Bundles
 Plug 'scrooloose/syntastic'
@@ -54,6 +53,10 @@ Plug 'lchi/vim-toffee'
 Plug 'fatih/vim-go'
 Plug 'dag/vim-fish'
 Plug 'ekalinin/Dockerfile.vim'
+
+" ### Rust specific plugins
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 " ### Colorscheme Plugins
 "Bundle 'vim-scripts/ScrollColors'  " Deprecated
@@ -162,6 +165,9 @@ set foldlevelstart=20               " Magic
 " it from ever showing up.
 set completeopt-=preview
 
+" Disable that stupid mouse crap. Who wants this?
+set mouse=
+
 
 "
 " ## Autocmds
@@ -228,6 +234,19 @@ let g:flow#autoclose = 1
 let g:go_fmt_command = "goimports"
 " Disable browser on play
 let g:go_play_open_browser = 0
+
+" ### vim-rust config
+let g:rustfmt_autosave = 1
+
+" ### vim-racer config
+set hidden
+let g:racer_cmd = "/Users/leeolayvar/.multirust/toolchains/nightly/cargo/bin/racer"
+"let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
+
+" ### neomake
+let g:neomake_echo_current_error=1
+let g:neomake_verbose=0
+autocmd! BufWritePost *.rs NeomakeProject cargo
 
 
 
