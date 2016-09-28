@@ -1,7 +1,8 @@
 
-# leeo.la/dotfiles
+## Deprecated
 
-These are my dotfiles. There are many dotfiles like them, but these are mine.
+This folder of my dotfiles are being deprecated in favor of a simple
+in-home-dir solution. See ../README.md for further details.
 
 ## Big Dragon Warning
 
