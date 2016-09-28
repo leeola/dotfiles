@@ -1,88 +1,80 @@
 "
-" # Lee's Vimrc
-"
-" My humble vimrc setup.
-"
-" ## Noteworthy Credits
-"
-" - Doug Black via http://dougblack.io/words/a-good-vimrc.html
-"   Great vimrc writeup.
+" # leeo.la/dotfiles
 "
 
+" ## Pre-Plugin Setup
+" First we setup some pre-plugin settings
+"
+" TODO(leeola): Write meaningful docstring for each line here.
 let g:python_host_prog = '/usr/bin/python2.7'
-set nocompatible                    " be iMproved
-filetype off                        " required!
+set nocompatible
+filetype off
 
-"
 " ## Plugin Setup
-"
-
+" Next we install our plugins. These are grouped by file type in most cases.
 call plug#begin('~/.vim/plugged')
-
-" ### My Bundles
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'guns/xterm-color-table.vim'
-Plug 'rking/ag.vim'
-Plug 'godlygeek/tabular'
-Plug 'Lokaltog/vim-easymotion'
-" Automatic closing tags
-Plug 'Raimondi/delimitMate'
-" Cool starting screen!
-" Disabled because it's damn annoying at the moment.
-"Bundle 'mhinz/vim-startify'
-" snipMate and it's requirements
-Plug 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
-Plug 'tomtom/tlib_vim'              " Dep for snipmate
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
-
+" ### Always Enabled
+" CtrlP provides a convenient ui for opening files and buffers. A heavily used
+" plugin.
+"
+" host: https://github.com/ctrlpvim/ctrlp.vim
+Plug 'ctrlpvim/ctrlp.vim'
+" An autocompletion plugin that is very fast and language agnostic.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
+"
+" vim-colors-solarized is my vim theme. Though, i'm seeking to change it up
+" and try something different.
+Plug 'altercation/vim-colors-solarized'
+" Asynchronous building actions commonly used for linting and syntax checking
+" for many languages. Quite useful, i even use a custom maker in Rust to
+" handle the new (at this time) error format.
+"
+" host: https://github.com/neomake/neomake
 Plug 'benekastah/neomake'
 
-" ### Syntax Highlighting Bundles
-Plug 'scrooloose/syntastic'
-Plug 'kchmck/vim-coffee-script'
-Plug 'digitaltoad/vim-jade'
-Plug 'groenewege/vim-less'
-"Removed to try Fatih's vim-go
-"Bundle 'jnwhiteh/vim-golang'
-Plug 'tpope/vim-markdown'
-Plug 'lchi/vim-toffee'
-Plug 'fatih/vim-go'
-Plug 'dag/vim-fish'
-Plug 'ekalinin/Dockerfile.vim'
-
-" ### Rust specific plugins
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-
-" ### Colorscheme Plugins
-"Bundle 'vim-scripts/ScrollColors'  " Deprecated
-"Bundle 'flazz/vim-colorschemes'    " Deprecated
-" We're installing this plugin manually in Docker, so that
-" the dependency is met right away.
+" ### Rust Language Only
+" rust.vim is the official Rust language plugin for vim. I use it mainly for
+" syntax highlighting _(i believe it offers syntax highlighting...?)_ and
+" automatic rustfmt calling on file write.
 "
-" EDIT: Currently re-enabling because i'm using mac locally, not docker atm.
-" Not sure how to make this work with both docker and vim.
-Plug 'altercation/vim-colors-solarized'
+" host: https://github.com/rust-lang/rust.vim
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
+
+" ### The Cemetery
+" The following is a series of plugins that have been removed due to
+" inactivity but are quite useful nonetheless. Sometime soon they may be
+" integrated back into the list properly.
+"
+" TODO(leeola): drop the ban hammer.
+"
+" " Automatic alignment of text
+" Plug 'godlygeek/tabular'
+" " Automatic closing tags
+" Plug 'Raimondi/delimitMate'
+" " Cool starting screen!
+" " Bundle 'mhinz/vim-startify'
+" " snipMate and it's requirements
+" Plug 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
+" Plug 'tomtom/tlib_vim'              " Dep for snipmate
+" Plug 'garbas/vim-snipmate'
+" Plug 'honza/vim-snippets'
+" Plug 'fatih/vim-go'
+" Plug 'tpope/vim-markdown'
+" Plug 'dag/vim-fish'
+" Plug 'scrooloose/syntastic'
+" " Don't think i was using Ag at all directly.
+" Plug 'rking/ag.vim'
+" " vim-racer is a plugin which provides syntax checking and ...
+" "
+" " note sure if this provides syntax checking at all. Need to confirm that.
+" " host: https://gitlab.com/racer-rust/vim-racer
+" Plug 'racer-rust/vim-racer', {'for': 'rust'}
 call plug#end()
 
 
-"
 " ## Vim Theme Settings
-"
-
 syntax enable
-"set t_Co=256                       " Deprecated Magic
-"set term=screen-256color           " Deprecated Magic
-
-" Because we're using Solarized, i am using iTerm2's Solarized Color palette.
-" If we were not, we want to force 256 color mode for solarized. Currently
-" though, we're ignoring it.
-"let g:solarized_termcolors=256
 
 " Tell Solarized to use the dark themes
 set background=dark
@@ -103,17 +95,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"
-" ## Highlight Past 80
-" Everything after the 80char limit
-"
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
 
-
-"
 " ## Vim Settings
-"
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
 
@@ -187,13 +170,14 @@ augroup END
 " ## Plugin Settings
 "
 
-" Jump to error after saving
-" Disabled currently. Not sure i want that.
-" let g:syntastic_auto_jump=1
-" Open error list after saving
-let g:syntastic_auto_loc_list=1
-" The line height of the error list
-let g:syntastic_loc_list_height=5
+" TODO(leeola): prune or document
+" " Jump to error after saving
+" " Disabled currently. Not sure i want that.
+" " let g:syntastic_auto_jump=1
+" " Open error list after saving
+" let g:syntastic_auto_loc_list=1
+" " The line height of the error list
+" let g:syntastic_loc_list_height=5
 
 " ### CtrlP Settings
 let g:ctrlp_root_markers = ['.ctrlp', '.git']
@@ -208,45 +192,65 @@ let g:ctrlp_prompt_mappings = {
   \ }
 
 
+" TODO(leeola): prune or document
 " ### Markdown Plugin
 " Syntax highlighting for given languages
-let g:markdown_fenced_languages = [
-      \ 'coffee', 'css', 'erb=eruby', 'javascript',
-      \ 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'
-      \ ]
-
+" let g:markdown_fenced_languages = [
+"       \ 'coffee', 'css', 'erb=eruby', 'javascript',
+"       \ 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'
+"       \ ]
+"
 " DEPRECATED:
 " These are commented out because i added the Markdown plugin, which should
 " take care of this.
 "autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
 
 
+" TODO(leeola): prune or document
 " ### Startify
-let g:startify_custom_header = 
-      \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
-
-" ### vim-flow
-" Enable the error display window to autoclose, after no errors present.
-let g:flow#autoclose = 1
-
-" ### vim-go
-" Enable auto-import on save
-let g:go_fmt_command = "goimports"
-" Disable browser on play
-let g:go_play_open_browser = 0
+" let g:startify_custom_header =
+"       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
 " ### vim-rust config
 let g:rustfmt_autosave = 1
 
 " ### vim-racer config
-set hidden
-let g:racer_cmd = "/Users/leeolayvar/.multirust/toolchains/nightly/cargo/bin/racer"
-"let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
+" set hidden
+" let g:racer_cmd = "/Users/leeolayvar/.multirust/toolchains/nightly/cargo/bin/racer"
+" "let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
 
-" ### neomake
-let g:neomake_echo_current_error=1
-let g:neomake_verbose=0
-autocmd! BufWritePost *.rs NeomakeProject cargo
+" Because i'm using neomake and cargo for my error detection, i don't want
+" rustfmt to tell me if it ran into an error. The UI (provided by rust.vim) is
+" distracting, similar to Syntastic. So i'm ignoring all rustfmt errors.
+"
+" .. for the sake of documentation, i find that window distracting because it
+" pops up in the buffer, and often opening up many times. Meaning that
+" navigating around to fix the problem can open up many of these error
+" windows, quite the PITA.
+let g:rustfmt_fail_silently=1
+" create our actual neomake maker for cargo. Note that neomake ships with a
+" default maker, but it is not using the new error format which resides in
+" nightly.
+"
+" I'm using an explicit 'cargo' exe name incase i want to change the maker
+" name without affecting the binary. `append_file` is used because neomake
+" will automatically append the file path to the end of the full command,
+" which causes cargo to fail. Finally, the errorformat was pulled from
+" a rust.vim PR[1] attempting to fix the problem that causes me to add
+" this whole neomake maker. Thanks to them!!
+"
+" [1]: https://github.com/rust-lang/rust.vim/pull/99#issuecomment-244954595
+let g:neomake_rust_cargo_maker = {
+    \ 'exe': 'cargo',
+    \ 'args': ['build'],
+    \ 'append_file': 0,
+    \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
+  \ }
+" Replace the default makers list with our new maker, ensuring our cargo maker
+" and not the default maker is what is run when we save.
+let g:neomake_rust_enabled_makers = ['cargo']
+" Automatically run this maker when we save .rs files.
+autocmd! BufWritePost *.rs Neomake cargo
 
 
 
