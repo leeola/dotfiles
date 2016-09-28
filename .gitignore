@@ -1,3 +1,1 @@
-node_modules/
-configs/vim/vim-addons/
-configs/vim/bundle/
+.dotfiles
