@@ -1,6 +1,15 @@
-"
 " # leeo.la/dotfiles
 "
+" The following is the config for my main editor, Neovim. It is split up
+" between multiple source files _(init.vim and files within ./ftplugin)_, and
+" written in somewhat-literate programming.
+"
+" For ease of navigation, the following languages have custom settings files:
+"
+" - [Go][./ftplugin/go.vim]
+" - [Markdown][./ftplugin/markdown.vim]
+" - [Python][./ftplugin/python.vim]
+" - [Rust][./ftplugin/rust.vim]
 
 " ## Pre-Plugin Setup
 " First we setup some pre-plugin settings
@@ -27,6 +36,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " vim-colors-solarized is my vim theme. Though, i'm seeking to change it up
 " and try something different.
 Plug 'altercation/vim-colors-solarized'
+
 " Asynchronous building actions commonly used for linting and syntax checking
 " for many languages. Quite useful, i even use a custom maker in Rust to
 " handle the new (at this time) error format.
@@ -75,7 +85,6 @@ Plug 'racer-rust/vim-racer', {'for': 'rust'}
 " Plug 'rking/ag.vim'
 call plug#end()
 
-
 " ## Vim Theme Settings
 syntax enable
 
@@ -86,10 +95,7 @@ set background=dark
 colorscheme solarized
 
 
-
-"
 " ## Whitespace Matching
-"
 "highlight ExtraWhitespace ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -100,6 +106,12 @@ autocmd BufWinLeave * call clearmatches()
 
 
 " ## Vim Settings
+" This lets us split out vimrc *(init.vim for neovim)* into multiple files
+" based on the filetype. This makes it easier to locate the settings you care
+" about. If it's a filetype specific setting, it's in that filetype's config.
+" Otherwise, it's in here.
+filetype plugin on
+
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
 
@@ -164,34 +176,7 @@ set mouse=
 " useful for plugins that go to a method definition in another file.
 set hidden
 
-
-"
-" ## Autocmds
-"
-
-augroup markdown
-  autocmd!
-  " Set the auto-wrap at 80 characters for markdown.
-  autocmd BufNewFile,BufRead *.md setlocal textwidth=73
-  " Black magic from
-  " http://vim.wikia.com/wiki/Automatic_formatting_of_paragraphs
-  autocmd BufNewFile,BufRead *.md setlocal fo=aw2tq
-augroup END
-
-
-"
 " ## Plugin Settings
-"
-
-" TODO(leeola): prune or document
-" " Jump to error after saving
-" " Disabled currently. Not sure i want that.
-" " let g:syntastic_auto_jump=1
-" " Open error list after saving
-" let g:syntastic_auto_loc_list=1
-" " The line height of the error list
-" let g:syntastic_loc_list_height=5
-
 " ### CtrlP Settings
 let g:ctrlp_root_markers = ['.ctrlp', '.git']
 let g:ctrlp_user_command = 'ag %s -l --nocolor --skip-vcs-ignores --hidden -g ""'
@@ -224,85 +209,8 @@ let g:ctrlp_prompt_mappings = {
 " let g:startify_custom_header =
 "       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
-" TODO(leeola): move these rust settings to a rust specific file.
-" ### vim-rust config
-let g:rustfmt_autosave = 1
 
-" This changes the completion popup to show function signatures as well.
-let g:racer_experimental_completer = 1
-
-" ### vim-racer config
-
-" I'm not a fan of the default racer mappings (seen below) so by setting this
-" we can disable them entirely, and define our own.
-"
-" Default bindings can be found at:
-" https://github.com/racer-rust/vim-racer/blob/master/plugin/racer.vim#L302
-let g:racer_no_default_keymappings = 1
-
-augroup filetype_rust
-  " Clear the autocommands in this group, for safe repeated sourcing of this
-  " file
-  autocmd!
-  " In normal mode, map Leader key combinations to vim-racer plugin methods.
-  autocmd FileType rust nmap <Leader>dd <Plug>RacerGoToDefinitionDrect
-  autocmd FileType rust nmap <Leader>ds <Plug>RacerGoToDefinitionSplit
-  autocmd FileType rust nmap <Leader>dv <Plug>RacerGoToDefinitionVSplit
-  autocmd FileType rust nmap <Leader>dk <Plug>RacerShowDocumentation
-augroup END
-
-" this seems a bit crazy, but for some reason system() is returning a newline
-" to the output of the system call. I cannot find any sanity in this.. but it
-" is what it is. To deal with it i'm simply subbing any trailig newlines for
-" nothing, and then appending the libsrc.
-"
-" Note that this requires rustup, and the rust-src component, which can be
-" added with:
-"
-"   rustup component add rust-src
-let $RUST_SRC_PATH=substitute(system('rustc --print sysroot'), '\(.\+\)\n', '\1', '')
-let $RUST_SRC_PATH.='/lib/rustlib/src/rust/src'
-
-" Because i'm using neomake and cargo for my error detection, i don't want
-" rustfmt to tell me if it ran into an error. The UI (provided by rust.vim) is
-" distracting, similar to Syntastic. So i'm ignoring all rustfmt errors.
-"
-" .. for the sake of documentation, i find that window distracting because it
-" pops up in the buffer, and often opening up many times. Meaning that
-" navigating around to fix the problem can open up many of these error
-" windows, quite the PITA.
-let g:rustfmt_fail_silently=1
-
-" create our actual neomake maker for cargo. Note that neomake ships with a
-" default maker, but it is not using the new error format which resides in
-" nightly.
-"
-" I'm using an explicit 'cargo' exe name incase i want to change the maker
-" name without affecting the binary. `append_file` is used because neomake
-" will automatically append the file path to the end of the full command,
-" which causes cargo to fail. Finally, the errorformat was pulled from
-" a rust.vim PR[1] attempting to fix the problem that causes me to add
-" this whole neomake maker. Thanks to them!!
-"
-" [1]: https://github.com/rust-lang/rust.vim/pull/99#issuecomment-244954595
-let g:neomake_rust_cargo_maker = {
-    \ 'exe': 'cargo',
-    \ 'args': ['build'],
-    \ 'append_file': 0,
-    \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
-  \ }
-" Replace the default makers list with our new maker, ensuring our cargo maker
-" and not the default maker is what is run when we save.
-let g:neomake_rust_enabled_makers = ['cargo']
-" Automatically run this maker when we save .rs files.
-autocmd! BufWritePost *.rs Neomake cargo
-
-
-
-"
 " ## Maps
-"
-
 " I'm not a fan of <C-f/b> behavior, where it moves the full screen.
 " I feel like i lose context of where i am. I prefer <C-d> and <C-u>,
 " because it keeps the cursor where it is on screen and moves half
@@ -313,7 +221,6 @@ nmap <C-b> <C-u>
 
 
 " ## Leaders
-
 " Remap Leader to the Space key. This is an important keybind, since
 " Leader is what we hide the vast majority of "custom experience" behind.
 let mapleader=' '
@@ -325,31 +232,3 @@ nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
 nnoremap <silent> <Leader>f :CtrlPLine<cr>
 
 nnoremap <Leader>w :write<cr>
-
-" ### vim-go
-augroup filetype_go
-  autocmd!
-  " Locate the current identifier
-  autocmd FileType go nmap <Leader>dd <Plug>(go-def)
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
-  " Rename the current identifier
-  autocmd FileType go nmap <Leader>r <Plug>(go-rename)
-  " Info about the current identifier
-  autocmd FileType go nmap <Leader>q <Plug>(go-info)
-  " Open godoc for current identifier
-  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-  " Check what the current identifier implements
-  autocmd FileType go nmap <Leader>s <Plug>(go-implements)
-  autocmd FileType go nnoremap <silent> <leader>l :GoLint<cr>
-  autocmd FileType go nnoremap <silent> <leader>e :GoImports<cr>
-  autocmd FileType go nnoremap <silent> <leader>; :GoVet<cr>
-augroup END
-
-
-
-" ### Chrome Specific Remaps
-" (For in browser use)
-
