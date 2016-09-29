@@ -36,9 +36,12 @@ set -Ux CDPATH .
 
 
 
-#
 # ## Aliases
-#
+
+# the great dotfiles command. this uses the bare dotfiles repo with the working
+# directory set to home. Meaning home *is* the repo.
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 alias s stash
 # vim is already symlinked to nvim, but by using an alias here,
 # tmux will show nvim as the currently running process.
@@ -61,12 +64,16 @@ function docker-rmi-untagged
   docker rmi (docker images | grep "^<none>" | awk '{print $3}')
 end
 
-# ### Remove all images
+# ### Remove all docker images
 function docker-rmi-all
   docker rmi (docker images | awk '{print $3}')
 end
 
-set -x PATH $HOME/.cargo/bin /Users/leeolayvar/.nix-profile/bin /Users/leeolayvar/.nix-profile/sbin $PATH
-set -x NIX_PATH nixpkgs=/Users/leeolayvar/.nix-defexpr/channels/nixpkgs
-set -x SSL_CERT_FILE '/Users/leeolayvar/.nix-profile/etc/ssl/certs/ca-bundle.crt'
 
+# TODO(leeola): find a way to generically define this. For the moment i'm not using
+# any nix packages (i believe) so i'm going to disable this, to attempt to
+# keep the fish config generic (to both user and OS).
+#
+# set -x PATH $HOME/.cargo/bin /Users/leeolayvar/.nix-profile/bin /Users/leeolayvar/.nix-profile/sbin $PATH
+# set -x NIX_PATH nixpkgs=/Users/leeolayvar/.nix-defexpr/channels/nixpkgs
+# set -x SSL_CERT_FILE '/Users/leeolayvar/.nix-profile/etc/ssl/certs/ca-bundle.crt'
