@@ -2,6 +2,7 @@
   name = Lee Olayvar
   email = leeolayvar@gmail.com
 [alias]
+  au = add -u
   co = checkout
   st = status --short
   cl = clone
