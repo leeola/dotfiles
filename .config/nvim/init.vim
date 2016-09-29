@@ -12,7 +12,7 @@ filetype off
 
 " ## Plugin Setup
 " Next we install our plugins. These are grouped by file type in most cases.
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " ### Always Enabled
 " CtrlP provides a convenient ui for opening files and buffers. A heavily used
