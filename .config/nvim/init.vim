@@ -13,15 +13,17 @@ filetype off
 " ## Plugin Setup
 " Next we install our plugins. These are grouped by file type in most cases.
 call plug#begin('~/.vim/plugged')
+
 " ### Always Enabled
 " CtrlP provides a convenient ui for opening files and buffers. A heavily used
 " plugin.
 "
 " host: https://github.com/ctrlpvim/ctrlp.vim
 Plug 'ctrlpvim/ctrlp.vim'
+
 " An autocompletion plugin that is very fast and language agnostic.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-"
+
 " vim-colors-solarized is my vim theme. Though, i'm seeking to change it up
 " and try something different.
 Plug 'altercation/vim-colors-solarized'
@@ -39,6 +41,12 @@ Plug 'benekastah/neomake'
 "
 " host: https://github.com/rust-lang/rust.vim
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
+
+" vim-racer is a plugin which provides syntax checking and ...
+"
+" note sure if this provides syntax checking at all. Need to confirm that.
+" host: https://gitlab.com/racer-rust/vim-racer
+Plug 'racer-rust/vim-racer', {'for': 'rust'}
 
 
 " ### The Cemetery
@@ -65,11 +73,6 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 " Plug 'scrooloose/syntastic'
 " " Don't think i was using Ag at all directly.
 " Plug 'rking/ag.vim'
-" " vim-racer is a plugin which provides syntax checking and ...
-" "
-" " note sure if this provides syntax checking at all. Need to confirm that.
-" " host: https://gitlab.com/racer-rust/vim-racer
-" Plug 'racer-rust/vim-racer', {'for': 'rust'}
 call plug#end()
 
 
@@ -148,8 +151,18 @@ set foldlevelstart=20               " Magic
 " it from ever showing up.
 set completeopt-=preview
 
-" Disable that stupid mouse crap. Who wants this?
+" Disable mouse interaction with vim.
+"
+" I find this setting endlessly annoying. I believe this is normally disabled
+" by default in vim, but with neovim it was set as default true.
+"
+" Setting this to mouse= sets the value to empty, since mouse is not a toggle.
+" It takes values like n, v, a, etc.
 set mouse=
+
+" Allow buffers to have unwritten changes when not in focus. This is very
+" useful for plugins that go to a method definition in another file.
+set hidden
 
 
 "
@@ -162,7 +175,7 @@ augroup markdown
   autocmd BufNewFile,BufRead *.md setlocal textwidth=73
   " Black magic from
   " http://vim.wikia.com/wiki/Automatic_formatting_of_paragraphs
-  autocmd BufNewFile,BufRead *.md setlocal fo=aw2tq 
+  autocmd BufNewFile,BufRead *.md setlocal fo=aw2tq
 augroup END
 
 
@@ -211,13 +224,44 @@ let g:ctrlp_prompt_mappings = {
 " let g:startify_custom_header =
 "       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
+" TODO(leeola): move these rust settings to a rust specific file.
 " ### vim-rust config
 let g:rustfmt_autosave = 1
 
+" This changes the completion popup to show function signatures as well.
+let g:racer_experimental_completer = 1
+
 " ### vim-racer config
-" set hidden
-" let g:racer_cmd = "/Users/leeolayvar/.multirust/toolchains/nightly/cargo/bin/racer"
-" "let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
+
+" I'm not a fan of the default racer mappings (seen below) so by setting this
+" we can disable them entirely, and define our own.
+"
+" Default bindings can be found at:
+" https://github.com/racer-rust/vim-racer/blob/master/plugin/racer.vim#L302
+let g:racer_no_default_keymappings = 1
+
+augroup filetype_rust
+  " Clear the autocommands in this group, for safe repeated sourcing of this
+  " file
+  autocmd!
+  " In normal mode, map Leader key combinations to vim-racer plugin methods.
+  autocmd FileType rust nmap <Leader>dd <Plug>RacerGoToDefinitionDrect
+  autocmd FileType rust nmap <Leader>ds <Plug>RacerGoToDefinitionSplit
+  autocmd FileType rust nmap <Leader>dv <Plug>RacerGoToDefinitionVSplit
+  autocmd FileType rust nmap <Leader>dk <Plug>RacerShowDocumentation
+augroup END
+
+" this seems a bit crazy, but for some reason system() is returning a newline
+" to the output of the system call. I cannot find any sanity in this.. but it
+" is what it is. To deal with it i'm simply subbing any trailig newlines for
+" nothing, and then appending the libsrc.
+"
+" Note that this requires rustup, and the rust-src component, which can be
+" added with:
+"
+"   rustup component add rust-src
+let $RUST_SRC_PATH=substitute(system('rustc --print sysroot'), '\(.\+\)\n', '\1', '')
+let $RUST_SRC_PATH.='/lib/rustlib/src/rust/src'
 
 " Because i'm using neomake and cargo for my error detection, i don't want
 " rustfmt to tell me if it ran into an error. The UI (provided by rust.vim) is
@@ -228,6 +272,7 @@ let g:rustfmt_autosave = 1
 " navigating around to fix the problem can open up many of these error
 " windows, quite the PITA.
 let g:rustfmt_fail_silently=1
+
 " create our actual neomake maker for cargo. Note that neomake ships with a
 " default maker, but it is not using the new error format which resides in
 " nightly.
@@ -297,23 +342,26 @@ nnoremap <leader>w :write<cr>
 nnoremap <leader>gw :Gwrite<cr>
 
 " ### vim-go
-" Locate the current identifier
-au FileType go nmap <Leader>dd <Plug>(go-def)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-" Rename the current identifier
-au FileType go nmap <Leader>r <Plug>(go-rename)
-" Info about the current identifier
-au FileType go nmap <Leader>q <Plug>(go-info)
-" Open godoc for current identifier
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-" Check what the current identifier implements
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nnoremap <silent> <leader>l :GoLint<cr>
-au FileType go nnoremap <silent> <leader>e :GoImports<cr>
-au FileType go nnoremap <silent> <leader>; :GoVet<cr>
+augroup filetype_go
+  autocmd!
+  " Locate the current identifier
+  autocmd FileType go nmap <Leader>dd <Plug>(go-def)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
+  " Rename the current identifier
+  autocmd FileType go nmap <Leader>r <Plug>(go-rename)
+  " Info about the current identifier
+  autocmd FileType go nmap <Leader>q <Plug>(go-info)
+  " Open godoc for current identifier
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  " Check what the current identifier implements
+  autocmd FileType go nmap <Leader>s <Plug>(go-implements)
+  autocmd FileType go nnoremap <silent> <leader>l :GoLint<cr>
+  autocmd FileType go nnoremap <silent> <leader>e :GoImports<cr>
+  autocmd FileType go nnoremap <silent> <leader>; :GoVet<cr>
+augroup END
 
 
 
