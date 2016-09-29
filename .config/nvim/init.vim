@@ -312,34 +312,19 @@ nmap <C-f> <C-d>
 nmap <C-b> <C-u>
 
 
-"
 " ## Leaders
-"
-" I (attempt) use leaders to use leaders as a general dumping ground
-" for "things i do too often by hand".
-"
 
-" Remap Leader to ,
-let mapleader=","
-
-" Set Ag to ,a
-nnoremap <leader>a :Ag
-
-" Run last command
-nmap <silent> <leader>1 :!!<CR>
-" Check spelling
-nmap <silent> <leader>s :set spell!<CR>
-" Run Syntastic
-nmap <leader>c :SyntasticCheck<CR>
+" Remap Leader to the Space key. This is an important keybind, since
+" Leader is what we hide the vast majority of "custom experience" behind.
+let mapleader=' '
 
 " run ctrlp with leader p, and shift p to clear cache
-nnoremap <silent> <leader>p :CtrlP<cr>
-nnoremap <silent> <leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
-nnoremap <silent> <leader>b :CtrlPBuffer<cr>
-nnoremap <silent> <leader>f :CtrlPLine<cr>
+nnoremap <silent> <Leader>p :CtrlP<cr>
+nnoremap <silent> <Leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
+nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
+nnoremap <silent> <Leader>f :CtrlPLine<cr>
 
-nnoremap <leader>w :write<cr>
-nnoremap <leader>gw :Gwrite<cr>
+nnoremap <Leader>w :write<cr>
 
 " ### vim-go
 augroup filetype_go
