@@ -21,8 +21,9 @@ function keychain
   source ~/.keychain/$HOSTNAME-fish
 end
 
-set -Ux PATH ~/.bin ~/.n/bin ~/.multirust/toolchains/stable/cargo/bin $PATH
-set -Ux N_PREFIX ~/.n
+
+set -g -x PATH ~/.bin ~/.n/bin ~/.cargo/bin $PATH
+set -g -x N_PREFIX ~/.n
 
 # Fish Greeting
 #function fish_greeting
@@ -40,7 +41,7 @@ set -Ux CDPATH .
 
 # the great dotfiles command. this uses the bare dotfiles repo with the working
 # directory set to home. Meaning home *is* the repo.
-alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot '/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias s stash
 # vim is already symlinked to nvim, but by using an alias here,
@@ -74,6 +75,6 @@ end
 # any nix packages (i believe) so i'm going to disable this, to attempt to
 # keep the fish config generic (to both user and OS).
 #
-# set -x PATH $HOME/.cargo/bin /Users/leeolayvar/.nix-profile/bin /Users/leeolayvar/.nix-profile/sbin $PATH
-# set -x NIX_PATH nixpkgs=/Users/leeolayvar/.nix-defexpr/channels/nixpkgs
-# set -x SSL_CERT_FILE '/Users/leeolayvar/.nix-profile/etc/ssl/certs/ca-bundle.crt'
+# set -x PATH ~/.nix-profile/bin ~/.nix-profile/sbin $PATH
+# set -x NIX_PATH nixpkgs=~/.nix-defexpr/channels/nixpkgs
+# set -x SSL_CERT_FILE ~/.nix-profile/etc/ssl/certs/ca-bundle.crt
