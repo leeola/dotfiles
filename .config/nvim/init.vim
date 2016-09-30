@@ -15,7 +15,6 @@
 " First we setup some pre-plugin settings
 "
 " TODO(leeola): Write meaningful docstring for each line here.
-let g:python_host_prog = '/usr/bin/python2.7'
 set nocompatible
 filetype off
 
@@ -47,6 +46,7 @@ Plug 'benekastah/neomake'
 " File navigation made easy via NerdTree. This plugin
 Plug 'scrooloose/nerdtree'
 
+
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
 " syntax highlighting _(i believe it offers syntax highlighting...?)_ and
@@ -60,6 +60,17 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 " note sure if this provides syntax checking at all. Need to confirm that.
 " host: https://gitlab.com/racer-rust/vim-racer
 Plug 'racer-rust/vim-racer', {'for': 'rust'}
+
+
+" ### Pyhton Language Only
+" jedi-vim provides a lot of ide functionality for python. Including, but not
+" limited to:
+"   - autocomplete
+"   - goto definition
+"   - goto assignment
+"   - pydoc popup
+"   - refactoring
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 
 " ### The Cemetery

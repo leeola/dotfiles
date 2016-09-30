@@ -74,6 +74,7 @@ let g:neomake_rust_cargo_maker = {
     \ 'append_file': 0,
     \ 'errorformat': '%Eerror%m,%Z\ %#-->\ %f:%l:%c',
   \ }
+
 " Replace the default makers list with our new maker, ensuring our cargo maker
 " and not the default maker is what is run when we save.
 let g:neomake_rust_enabled_makers = ['cargo']
