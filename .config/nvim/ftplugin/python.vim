@@ -10,7 +10,7 @@ augroup python_filetype
   " sources don't cause problems.
   autocmd!
   " Automatically run this maker when we save python files.
-  autocmd BufWritePost *.py Neomake python
+  "autocmd BufWritePost *.py Neomake python
 augroup END
 
 " Go to the definition, or the assignment if it's a module, if possible.
@@ -32,3 +32,19 @@ let g:jedi#usages_command = "<Leader>u"
 " ### jedi-vim
 " jedi-vim will pop up a window detailing function arguments.
 let g:jedi#show_call_signatures = 1
+
+" ### Neomake
+let g:neomake_python_yapf_maker = {
+    \ 'args': ['--in-place'],
+  \ }
+
+" Replace the default makers list with our new maker, ensuring our cargo maker
+" and not the default maker is what is run when we save.
+let g:neomake_python_enabled_makers = ['python', 'yapf']
+
+" Call neomake#Make directly instead of the Neomake provided command so we can
+" inject the callback
+augroup python_filetype
+  autocmd!
+  autocmd BufWritePost *.py call neomake#Make(1, [], function('ft#python#neomake_callback_yapf'))
+augroup END
