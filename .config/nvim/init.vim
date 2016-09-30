@@ -46,6 +46,9 @@ Plug 'benekastah/neomake'
 " File navigation made easy via NerdTree. This plugin
 Plug 'scrooloose/nerdtree'
 
+" A nice starting screen for easy opening of recent files, sessions, etc.
+Plug 'mhinz/vim-startify'
+
 
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
@@ -85,18 +88,12 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 " " Automatic closing tags
 " Plug 'Raimondi/delimitMate'
 " " Cool starting screen!
-" " Bundle 'mhinz/vim-startify'
 " " snipMate and it's requirements
 " Plug 'MarcWeber/vim-addon-mw-utils' " Dep for snipmate
 " Plug 'tomtom/tlib_vim'              " Dep for snipmate
 " Plug 'garbas/vim-snipmate'
 " Plug 'honza/vim-snippets'
 " Plug 'fatih/vim-go'
-" Plug 'tpope/vim-markdown'
-" Plug 'dag/vim-fish'
-" Plug 'scrooloose/syntastic'
-" " Don't think i was using Ag at all directly.
-" Plug 'rking/ag.vim'
 call plug#end()
 
 " ## Vim Theme Settings
@@ -227,12 +224,6 @@ let g:ctrlp_prompt_mappings = {
 " These are commented out because i added the Markdown plugin, which should
 " take care of this.
 "autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
-
-
-" TODO(leeola): prune or document
-" ### Startify
-" let g:startify_custom_header =
-"       \ map(split(system('fortune | cowsay'), '\n'), '"   ". v:val') + ['','']
 
 
 " ## Maps
