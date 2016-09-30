@@ -44,6 +44,9 @@ Plug 'altercation/vim-colors-solarized'
 " host: https://github.com/neomake/neomake
 Plug 'benekastah/neomake'
 
+" File navigation made easy via NerdTree. This plugin
+Plug 'scrooloose/nerdtree'
+
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
 " syntax highlighting _(i believe it offers syntax highlighting...?)_ and
@@ -96,13 +99,18 @@ colorscheme solarized
 
 
 " ## Whitespace Matching
+" TODO(leeola): document this and move it within the file to an appropriate
+" location.
 "highlight ExtraWhitespace ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+augroup whitespace_group
+  autocmd!
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+augroup END
 
 
 " ## Vim Settings
@@ -111,6 +119,13 @@ autocmd BufWinLeave * call clearmatches()
 " about. If it's a filetype specific setting, it's in that filetype's config.
 " Otherwise, it's in here.
 filetype plugin on
+
+" Remap Leader to the Space key. This is an important keybind, since
+" Leader is what we hide the vast majority of "custom experience" behind.
+"
+" Note that we're setting this nice and early, because any <Leader> binding
+" before this (ie, nmap <Leader>n) wouldn't work.
+let mapleader=' '
 
 set shell=sh                        " Set the default shell to sh, this
                                     " fixes my bash->fish in Vim.
@@ -189,7 +204,6 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtCurRight()':  ['<right>']
   \ }
 
-
 " TODO(leeola): prune or document
 " ### Markdown Plugin
 " Syntax highlighting for given languages
@@ -219,16 +233,17 @@ let g:ctrlp_prompt_mappings = {
 nmap <C-f> <C-d>
 nmap <C-b> <C-u>
 
-
-" ## Leaders
-" Remap Leader to the Space key. This is an important keybind, since
-" Leader is what we hide the vast majority of "custom experience" behind.
-let mapleader=' '
-
+" ## Plugin Maps
+" ### CtrlP Maps
 " run ctrlp with leader p, and shift p to clear cache
 nnoremap <silent> <Leader>p :CtrlP<cr>
 nnoremap <silent> <Leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
 nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
 nnoremap <silent> <Leader>f :CtrlPLine<cr>
 
-nnoremap <Leader>w :write<cr>
+" ### NERDTree Maps
+" Toggle the NERDTree window.
+nnoremap <Leader>n :NERDTreeToggle<cr>
+" Find the current file within the NERDTree window. It also opens up NERDTree
+" if it is not yet open.
+nnoremap <Leader>N :NERDTreeFind<cr>
