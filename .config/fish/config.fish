@@ -22,7 +22,10 @@ function keychain
 end
 
 
-set -g -x PATH ~/.bin ~/.n/bin ~/.cargo/bin $PATH
+# I'm reordering PATH to put /usr/local/bin before /usr/bin. Otherwise my local
+# python bindings were messed up.
+set -g -x PATH /usr/local/bin /usr/bin /usr/sbin /bin /sbin
+set -g -x PATH ~/.bin ~/.cargo/bin ~/.n/bin /usr/local/go/bin $PATH
 set -g -x N_PREFIX ~/.n
 
 # Fish Greeting
