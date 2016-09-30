@@ -77,5 +77,10 @@ let g:neomake_rust_cargo_maker = {
 " Replace the default makers list with our new maker, ensuring our cargo maker
 " and not the default maker is what is run when we save.
 let g:neomake_rust_enabled_makers = ['cargo']
-" Automatically run this maker when we save .rs files.
-autocmd! BufWritePost *.rs Neomake cargo
+augroup rust_filetype
+  " Clear autocmds for this augroup when sourcing this file, so repeated
+  " sources don't cause problems.
+  autocmd!
+  " Automatically run this maker when we save .rs files.
+  autocmd BufWritePost *.rs Neomake cargo
+augroup END

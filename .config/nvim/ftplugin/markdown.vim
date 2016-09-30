@@ -7,6 +7,8 @@
 " ## Settings
 
 augroup markdown_filetype
+  " Clear autocmds for this augroup when sourcing this file, so repeated
+  " sources don't cause problems.
   autocmd!
   " Set the auto-wrap at 80 characters for markdown.
   autocmd BufNewFile,BufRead *.md setlocal textwidth=73

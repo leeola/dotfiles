@@ -8,6 +8,8 @@
 
 " ### vim-go
 augroup filetype_go
+  " Clear autocmds for this augroup when sourcing this file, so repeated
+  " sources don't cause problems.
   autocmd!
   " Locate the current identifier
   autocmd FileType go nmap <Leader>dd <Plug>(go-def)
