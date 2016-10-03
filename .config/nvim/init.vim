@@ -53,7 +53,6 @@ Plug 'mhinz/vim-startify'
 " host: https://github.com/vim-airline/vim-airline
 Plug 'vim-airline/vim-airline'
 
-
 " Tmuxline is actually a bit strange. This is a vim plugin which configures a
 " running tmux instance, to make it look like airline. Why this is a vim
 " plugin is simply due to the developer deciding to use vimscript.
