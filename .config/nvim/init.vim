@@ -238,6 +238,20 @@ let g:ctrlp_prompt_mappings = {
 " now powerline fonts will work fine.
 let g:airline_powerline_fonts = 1
 
+" ### Startify
+" Modify the list order to show recent files in the current directory first.
+"
+" I'm doing this so that the nearby files are at a lower index and require
+" less keystrokes to open, as these are likely the most desired ones.
+let g:startify_list_order = [
+  \ ['   Recent files in '. getcwd() .':'],
+  \ 'dir',
+  \ ['   Recent files elsewhere:'],
+  \ 'files',
+  \ ['   These are my bookmarks:'],
+  \ 'bookmarks',
+  \ ]
+
 " TODO(leeola): prune or document
 " ### Markdown Plugin
 " Syntax highlighting for given languages
