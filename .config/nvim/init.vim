@@ -49,7 +49,22 @@ Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-startify'
 
 " A nicer looking status bar at the bottom of vim.
+"
+" host: https://github.com/vim-airline/vim-airline
 Plug 'vim-airline/vim-airline'
+
+
+" Tmuxline is actually a bit strange. This is a vim plugin which configures a
+" running tmux instance, to make it look like airline. Why this is a vim
+" plugin is simply due to the developer deciding to use vimscript.
+"
+" Usage is basically running a Tmuxline command *(if needed)*, and
+" snapshotting the current tmux settings onto a file. Then, adding an
+" auto-source to tmux for that file. The commands for this are gone over in
+" the documention [here](https://github.com/edkolev/tmuxline.vim#usage).
+"
+" host: https://github.com/edkolev/tmuxline.vim
+Plug 'edkolev/tmuxline.vim'
 
 
 " ### Rust Language Only
