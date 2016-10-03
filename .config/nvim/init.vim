@@ -92,6 +92,19 @@ Plug 'racer-rust/vim-racer', {'for': 'rust'}
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
 
+" ### Markdown Language Only
+" vim-markdown is a nice plugin with a few surprising features for markdown
+" editing. With that said, i'm not really using much of them atm, it just has
+" good syntax highlighting.
+"
+" If i end up writing a lot, or figure out how to make comments in languages
+" automatically use markdown and features of this plugin, i may expand usage
+" of this.
+"
+" host: https://github.com/gabrielelana/vim-markdown
+Plug 'gabrielelana/vim-markdown'
+
+
 " ### The Cemetery
 " The following is a series of plugins that have been removed due to
 " inactivity but are quite useful nonetheless. Sometime soon they may be
