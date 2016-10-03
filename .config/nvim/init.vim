@@ -32,9 +32,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 " An autocompletion plugin that is very fast and language agnostic.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-" vim-colors-solarized is my vim theme. Though, i'm seeking to change it up
-" and try something different.
-Plug 'altercation/vim-colors-solarized'
+" The color theme i'm using for Vim
+Plug 'morhetz/gruvbox'
 
 " Asynchronous building actions commonly used for linting and syntax checking
 " for many languages. Quite useful, i even use a custom maker in Rust to
@@ -103,7 +102,7 @@ syntax enable
 set background=dark
 
 " Set the theme to Solarized
-colorscheme solarized
+colorscheme gruvbox
 
 
 " ## Whitespace Matching
