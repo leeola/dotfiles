@@ -48,6 +48,9 @@ Plug 'scrooloose/nerdtree'
 " A nice starting screen for easy opening of recent files, sessions, etc.
 Plug 'mhinz/vim-startify'
 
+" A nicer looking status bar at the bottom of vim.
+Plug 'vim-airline/vim-airline'
+
 
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
@@ -210,6 +213,15 @@ let g:ctrlp_prompt_mappings = {
   \ 'ToggleType(-1)': ['<c-l>'],
   \ 'PrtCurRight()':  ['<right>']
   \ }
+
+" ### Vim Airline Settings
+" My current font setup (on my laptop) is using Powerline fonts, so we're
+" enabling those here. This will allow nice looking arrows between the airline
+" sections.
+"
+" I'm not sure if airline has it's own, non-powerline patched fonts, but for
+" now powerline fonts will work fine.
+let g:airline_powerline_fonts = 1
 
 " TODO(leeola): prune or document
 " ### Markdown Plugin
