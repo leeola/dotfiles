@@ -65,6 +65,12 @@ Plug 'vim-airline/vim-airline'
 " host: https://github.com/edkolev/tmuxline.vim
 Plug 'edkolev/tmuxline.vim'
 
+" Tabular is an awesome plugin for aligning text. I don't normally use it, but
+" i added it back _(after removing it)_ purely for the sake of automatically
+" formatting markdown tables, which Tabular does. Without Tabular, it's a real
+" pain to have nice looking formatted tables.
+Plug 'godlygeek/tabular'
+
 
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
