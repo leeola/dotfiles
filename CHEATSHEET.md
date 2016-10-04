@@ -5,41 +5,40 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 
 ## Vim
 
-### Navigation
+### Open Files
 
-`,p` - Opens CtrlP
-`,P` - Clears the CtrlP cache, then opens CtrlP
-`,b` - Opens CtrlP for the Vim Buffer.
+| Command | Name                          | Notes |
+| ------- | ----------------------------- | ----- |
+| SPC p   | Search files                  |       |
+| SPC P   | Clear cache then search files |       |
+| SPC [   | Search buffers                |       |
+| SPC ]   | Search recent files (MRU)     |       |
 
-### Git
+### General Code Language
 
-`,gw` - Synonymous with `git add` on the current file. Also saves.
-
-### Golang Files
-
-`,dd` - Goto the definition of the given identitifer.
-`,ds` - Goto the definition of the given identifier in a horizontally 
-  split window.
-`,dv` - Goto the definition of the given identifier in a vertically split
-  window.
-
-`,r` - Rename the current identifier with GoRename
-
-`,gd` - Goto the Godoc for the given identifier in a horizontally split 
-  window.
-`,gv` - Goto the Godoc for the given identifier in a horizontally split 
-  window.
-
-`,q` - Show Info on the current identifier
-
-`,e` - Run GoImports on the current file.
-`,l` - Run GoLint
+| Command | Name                                 | Notes |
+| ------- | ------------------------------------ | ----- |
+| SPC g d | Goto definition                      |       |
+| SPC g s | Goto definition in horizontal split  |       |
+| SPC g v | Goto definition in vertical split    |       |
+| SPC r   | Rename known instances of identifier |       |
+| SPC k   | Goto documentation for identifier    |       |
 
 
 ## Tmux
 
-`C-a C-a` - Swap windows.
+| Command | Name            | Notes                                          |
+| ------- | --------------- | ---------------------------------------------- |
+| CTRL-a  | The tmux prefix | This precedes **all** documented tmux commands |
+| $       | Rename session  |                                                |
+| ,       | Rename Window   |                                                |
 
-`C-a q <N>` - Show pane numbers, then select a number. Ie, `C-a q 1`
+### Navigation
 
-`C-a H,J,K,L` - Resize the pane left/down/up/right
+| Command | Name                             | Notes                  |
+| ------- | -------------------------------- | ---------------------- |
+| CTRL-a  | Switch to recent window          |                        |
+| q <N>   | Show pane numbers, switch to <N> |                        |
+| H,J,K,L | Resize pane left,down,up,right   |                        |
+| CTRL-s  | Open new horizontal pane         | Mirrors Vim's CTRL-w s |
+| CTRL-v  | Open new vertical pane           | Mirrors Vim's CTRL-w v |
