@@ -28,10 +28,10 @@ augroup filetype_rust
   " file
   autocmd!
   " In normal mode, map Leader key combinations to vim-racer plugin methods.
-  autocmd FileType rust nmap <Leader>dd <Plug>RacerGoToDefinitionDrect
-  autocmd FileType rust nmap <Leader>ds <Plug>RacerGoToDefinitionSplit
-  autocmd FileType rust nmap <Leader>dv <Plug>RacerGoToDefinitionVSplit
-  autocmd FileType rust nmap <Leader>dk <Plug>RacerShowDocumentation
+  autocmd FileType rust nmap <Leader>gd <Plug>RacerGoToDefinitionDrect
+  autocmd FileType rust nmap <Leader>gs <Plug>RacerGoToDefinitionSplit
+  autocmd FileType rust nmap <Leader>gv <Plug>RacerGoToDefinitionVSplit
+  autocmd FileType rust nmap <Leader>k  <Plug>RacerShowDocumentation
 augroup END
 
 " this seems a bit crazy, but for some reason system() is returning a newline
