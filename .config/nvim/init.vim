@@ -71,6 +71,16 @@ Plug 'edkolev/tmuxline.vim'
 " pain to have nice looking formatted tables.
 Plug 'godlygeek/tabular'
 
+" This plugin automatically inserts a closing pair, nothing fancy.
+"
+" Previously i used to use [delimiMate](https://github.com/Raimondi/delimitMate),
+" but every now and then it annoyed me... although i can't remember what it
+" was exactly that bothered me. So, i'm trying out auto-pairs after a quick
+" Google. We'll see how it goes.
+"
+" host: https://github.com/jiangmiao/auto-pairs
+Plug 'jiangmiao/auto-pairs'
+
 
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
