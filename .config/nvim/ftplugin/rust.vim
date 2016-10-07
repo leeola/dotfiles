@@ -5,9 +5,7 @@
 " the main init.vim, with the setting `filetype plugin on`
 
 " ## Plugin Settings
-
 " ### rust-vim
-
 " Enable running rustfmt when the file is saved.
 let g:rustfmt_autosave = 1
 
@@ -23,16 +21,11 @@ let g:racer_experimental_completer = 1
 " https://github.com/racer-rust/vim-racer/blob/master/plugin/racer.vim#L302
 let g:racer_no_default_keymappings = 1
 
-augroup filetype_rust
-  " Clear the autocommands in this group, for safe repeated sourcing of this
-  " file
-  autocmd!
-  " In normal mode, map Leader key combinations to vim-racer plugin methods.
-  autocmd FileType rust nmap <Leader>gd <Plug>RacerGoToDefinitionDrect
-  autocmd FileType rust nmap <Leader>gs <Plug>RacerGoToDefinitionSplit
-  autocmd FileType rust nmap <Leader>gv <Plug>RacerGoToDefinitionVSplit
-  autocmd FileType rust nmap <Leader>k  <Plug>RacerShowDocumentation
-augroup END
+" In normal mode, map Leader key combinations to vim-racer plugin methods.
+nmap <Leader>gd <Plug>RacerGoToDefinitionDrect
+nmap <Leader>gs <Plug>RacerGoToDefinitionSplit
+nmap <Leader>gv <Plug>RacerGoToDefinitionVSplit
+nmap <Leader>k  <Plug>RacerShowDocumentation
 
 " this seems a bit crazy, but for some reason system() is returning a newline
 " to the output of the system call. I cannot find any sanity in this.. but it
@@ -79,7 +72,7 @@ let g:neomake_rust_cargo_maker = {
 " and not the default maker is what is run when we save.
 let g:neomake_rust_enabled_makers = ['cargo']
 
-augroup rust_filetype
+augroup neomake
   " Clear autocmds for this augroup when sourcing this file, so repeated
   " sources don't cause problems.
   autocmd!
