@@ -118,7 +118,7 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 " of this.
 "
 " host: https://github.com/gabrielelana/vim-markdown
-Plug 'gabrielelana/vim-markdown'
+Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 
 " ### The Cemetery
