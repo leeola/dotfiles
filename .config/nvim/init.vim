@@ -263,6 +263,11 @@ let g:startify_list_order = [
   \ 'bookmarks',
   \ ]
 
+" This tells startify to set the working directory to the vcs root when
+" opening a file. Otherwise it sets the working directory to the parent
+" directory of the file you're opening, which is not desired.
+let g:startify_change_to_vcs_root = 1
+
 
 " ## Maps
 " I'm not a fan of <C-f/b> behavior, where it moves the full screen.
