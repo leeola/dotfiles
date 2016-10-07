@@ -22,10 +22,10 @@ let g:racer_experimental_completer = 1
 let g:racer_no_default_keymappings = 1
 
 " In normal mode, map Leader key combinations to vim-racer plugin methods.
-nmap <Leader>gd <Plug>RacerGoToDefinitionDrect
-nmap <Leader>gs <Plug>RacerGoToDefinitionSplit
-nmap <Leader>gv <Plug>RacerGoToDefinitionVSplit
-nmap <Leader>k  <Plug>RacerShowDocumentation
+nmap <buffer> <Leader>gd <Plug>RacerGoToDefinitionDrect
+nmap <buffer> <Leader>gs <Plug>RacerGoToDefinitionSplit
+nmap <buffer> <Leader>gv <Plug>RacerGoToDefinitionVSplit
+nmap <buffer> <Leader>k  <Plug>RacerShowDocumentation
 
 " this seems a bit crazy, but for some reason system() is returning a newline
 " to the output of the system call. I cannot find any sanity in this.. but it
