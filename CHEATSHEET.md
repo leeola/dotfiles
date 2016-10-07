@@ -10,11 +10,10 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 | Command | Name                          | Notes |
 | ------- | ----------------------------- | ----- |
 | SPC p   | Search files                  |       |
-| SPC P   | Clear cache then search files |       |
 | SPC [   | Search buffers                |       |
 | SPC ]   | Search recent files (MRU)     |       |
 
-### General Code Language
+### Code Navigation
 
 | Command | Name                                 | Notes |
 | ------- | ------------------------------------ | ----- |
@@ -23,6 +22,12 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 | SPC g v | Goto definition in vertical split    |       |
 | SPC r   | Rename known instances of identifier |       |
 | SPC k   | Goto documentation for identifier    |       |
+
+### CtrlP Mode
+
+| Command | Name                          | Notes |
+| ------- | ----------------------------- | ----- |
+| CTRL-p  | Clear cache then search files |       |
 
 
 ## Tmux

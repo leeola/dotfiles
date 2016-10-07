@@ -239,13 +239,6 @@ set hidden
 let g:ctrlp_root_markers = ['.ctrlp', '.git']
 let g:ctrlp_user_command = 'ag %s -l --nocolor --skip-vcs-ignores --hidden -g ""'
 let g:ctrlp_extensions = ['line']
-let g:ctrlp_prompt_mappings = {
-  \ 'PrtHistory(-1)': ['<c-up>'],
-  \ 'PrtHistory(1)':  ['<c-down>'],
-  \ 'ToggleType(1)':  ['<c-p>'],
-  \ 'ToggleType(-1)': ['<c-l>'],
-  \ 'PrtCurRight()':  ['<right>']
-  \ }
 
 " ### Vim Airline Settings
 " My current font setup (on my laptop) is using Powerline fonts, so we're
@@ -270,19 +263,6 @@ let g:startify_list_order = [
   \ 'bookmarks',
   \ ]
 
-" TODO(leeola): prune or document
-" ### Markdown Plugin
-" Syntax highlighting for given languages
-" let g:markdown_fenced_languages = [
-"       \ 'coffee', 'css', 'erb=eruby', 'javascript',
-"       \ 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml'
-"       \ ]
-"
-" DEPRECATED:
-" These are commented out because i added the Markdown plugin, which should
-" take care of this.
-"autocmd BufNewFile,BufRead *.md set filetype=markdown " Set md to markdown
-
 
 " ## Maps
 " I'm not a fan of <C-f/b> behavior, where it moves the full screen.
@@ -295,11 +275,32 @@ nmap <C-b> <C-u>
 
 " ## Plugin Maps
 " ### CtrlP Maps
-" run ctrlp with leader p, and shift p to clear cache
-nnoremap <silent> <Leader>p :CtrlP<cr>
-nnoremap <silent> <Leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
-nnoremap <silent> <Leader>b :CtrlPBuffer<cr>
-nnoremap <silent> <Leader>f :CtrlPLine<cr>
+" Bind `SPC p` to the main CtrlP bind. Note that we're using the variable
+" assignment rather than a remap because otherwise CTRL-p *and* SPC p would be
+" mapped to launch CtrlP
+let g:ctrlp_map = '<Leader>p'
+nnoremap <silent> <Leader>[ :CtrlPBuffer<cr>
+
+" Set the max number of most recentnly used files to something low.
+"
+" I don't need hundreds of files because i'm likely not even going to remember
+" needing a specific file from a few hundred files ago. Most of the time my
+" seeking in MRU will be some very recent file. By setting this number low, i
+" should have an easier time finding those recent files.
+"
+" If it's too low, i can always make it bigger again.
+let g:ctrlp_mruf_max = 30
+
+" Search recent used files.
+nnoremap <silent> <Leader>] :CtrlPMRUFiles<cr>
+
+" Search CTags in the current Buffer
+nnoremap <silent> <Leader>\ :CtrlPBufTag<cr>
+
+" Map various functions to bindings.
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtClearCache()':  ['<c-p>'],
+  \ }
 
 " ### NERDTree Maps
 " Toggle the NERDTree window.
