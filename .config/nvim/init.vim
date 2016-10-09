@@ -288,6 +288,15 @@ let g:startify_change_to_vcs_root = 1
 nmap <C-f> <C-d>
 nmap <C-b> <C-u>
 
+" Hide search highlighting until the next search.
+"
+" I was in a habit of clearing my search highlighting by typing `/zz`, which was
+" proving to be quite annoying. Using `Shift /` is defaulted to searching
+" backwards, but i can always use `/pattern` and `N`, to search backwards when
+" desired - which is what i normally use anyway.
+nmap <silent> ? :nohlsearch<cr>
+
+
 " ## Plugin Maps
 " ### CtrlP Maps
 " Bind `SPC p` to the main CtrlP bind. Note that we're using the variable
