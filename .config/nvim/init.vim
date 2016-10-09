@@ -193,7 +193,13 @@ set modelines=5
 " menu.
 set wildmenu
 
-" Vim Searching will search as you type.
+" Show search highlights as you type.
+"
+" This is useful for checking your pattern matches as you type them. It can
+" also be used to check substitute patterns via:
+"
+"     /pattern
+"     :s//replacement
 set incsearch
 
 set laststatus=2                    " Show the Airline Line
