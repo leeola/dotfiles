@@ -5,13 +5,17 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 
 ## Vim
 
-### Open Files
+### File Navigation
 
-| Command | Name                          | Notes |
-| ------- | ----------------------------- | ----- |
-| SPC p   | Search files                  |       |
-| SPC [   | Search buffers                |       |
-| SPC ]   | Search recent files (MRU)     |       |
+| Command      | Name                                 | Notes |
+| ------------ | ------------------------------------ | ----- |
+| SPC p        | Search files                         |       |
+| SPC [        | Search buffers                       |       |
+| SPC ]        | Search recent files (MRU)            |       |
+| SPC p CTRL-p | Clear CtrlP Cache                    |       |
+| SPC n        | Open file tree                       |       |
+| SPC N q      | Close file tree                      |       |
+| SPC N c d q  | Change the CWD to current file's dir |       |
 
 ### Code Navigation
 
@@ -22,12 +26,6 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 | SPC g v | Goto definition in vertical split    |       |
 | SPC r   | Rename known instances of identifier |       |
 | SPC k   | Goto documentation for identifier    |       |
-
-### CtrlP Mode
-
-| Command | Name                          | Notes |
-| ------- | ----------------------------- | ----- |
-| CTRL-p  | Clear cache then search files |       |
 
 
 ## Tmux
