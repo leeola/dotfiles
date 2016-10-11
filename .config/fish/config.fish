@@ -41,11 +41,9 @@ set --export GOBIN $GOPATH/bin
 #   installed by NPM, `go install`, and Cargo are *after* the PATH. This is mainly
 #   to help ensure installing something public doesn't randomly override a likely
 #   more important program.
-# - ~/.bin: General bin.. i believe
 # - ~/.cargo/bin: Rustup and Cargo binaries.
-# - ~/.n/bin: Nodejs N version manager
 # - $GOPATH/bin: Any installed go programs, outside the Go language.
-set --export PATH $GOROOT/bin $PATH ~/.bin ~/.cargo/bin ~/.n/bin $GOPATH/bin
+set --export PATH $GOROOT/bin $PATH ~/.cargo/bin $GOPATH/bin
 
 # Fish Greeting
 #function fish_greeting
