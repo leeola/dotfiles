@@ -24,8 +24,28 @@ end
 
 # I'm reordering PATH to put /usr/local/bin before /usr/bin. Otherwise my local
 # python bindings were messed up.
+#
+# In the future this may become a point of issue. In which case i should simply
+# append $PATH to the below line.
 set -g -x PATH /usr/local/bin /usr/bin /usr/sbin /bin /sbin
-set -g -x PATH ~/.bin ~/.cargo/bin ~/.n/bin /usr/local/go/bin $PATH
+
+# Setup the default Go variables.
+set --export GOROOT /usr/local/go
+set --export GOPATH ~/go
+set --export GOBIN $GOPATH/bin
+
+
+# Set additional paths for (in order):
+# - $GOROOT/bin: Go language binaries
+# - $PATH: Don't override the path, of course. Note that Library binaries, ie ones
+#   installed by NPM, `go install`, and Cargo are *after* the PATH. This is mainly
+#   to help ensure installing something public doesn't randomly override a likely
+#   more important program.
+# - ~/.bin: General bin.. i believe
+# - ~/.cargo/bin: Rustup and Cargo binaries.
+# - ~/.n/bin: Nodejs N version manager
+# - $GOPATH/bin: Any installed go programs, outside the Go language.
+set --export PATH $GOROOT/bin $PATH ~/.bin ~/.cargo/bin ~/.n/bin $GOPATH/bin
 
 # Fish Greeting
 #function fish_greeting
