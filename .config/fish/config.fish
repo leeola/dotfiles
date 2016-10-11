@@ -26,7 +26,6 @@ end
 # python bindings were messed up.
 set -g -x PATH /usr/local/bin /usr/bin /usr/sbin /bin /sbin
 set -g -x PATH ~/.bin ~/.cargo/bin ~/.n/bin /usr/local/go/bin $PATH
-set -g -x N_PREFIX ~/.n
 
 # Fish Greeting
 #function fish_greeting
