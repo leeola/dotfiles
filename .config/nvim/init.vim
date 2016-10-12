@@ -317,6 +317,11 @@ nmap <silent> ? :nohlsearch<cr>
 " assignment rather than a remap because otherwise CTRL-p *and* SPC p would be
 " mapped to launch CtrlP
 let g:ctrlp_map = '<Leader>p'
+
+" Clear cache, and then search recent files.
+nnoremap <silent> <leader>P :ClearCtrlPCache<cr>\|:CtrlP<cr>
+
+" Search the files in buffers (eg, :ls)
 nnoremap <silent> <Leader>[ :CtrlPBuffer<cr>
 
 " Set the max number of most recentnly used files to something low.
@@ -334,11 +339,6 @@ nnoremap <silent> <Leader>] :CtrlPMRUFiles<cr>
 
 " Search CTags in the current Buffer
 nnoremap <silent> <Leader>\ :CtrlPBufTag<cr>
-
-" Map various functions to bindings.
-let g:ctrlp_prompt_mappings = {
-    \ 'PrtClearCache()':  ['<c-p>'],
-  \ }
 
 " ### NERDTree Maps
 " Toggle the NERDTree window.
