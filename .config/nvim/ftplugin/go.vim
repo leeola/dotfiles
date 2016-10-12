@@ -5,31 +5,29 @@
 " the main init.vim, with the setting `filetype plugin on`
 
 " ## Plugin Settings
-
 " ### vim-go
-augroup filetype_go
-  " Clear autocmds for this augroup when sourcing this file, so repeated
-  " sources don't cause problems.
-  autocmd!
-  " Locate the current identifier
-  autocmd FileType go nmap <Leader>dd <Plug>(go-def)
-  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-  autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
+" Automatically import the needed packages.
+let g:go_fmt_command = "goimports"
 
-  " Rename the current identifier
-  autocmd FileType go nmap <Leader>r <Plug>(go-rename)
+" ## Plugin Maps
+" ### vim-go
+" Locate the current identifier
+nmap <Leader>gg <Plug>(go-def)
+nmap <Leader>gs <Plug>(go-def-split)
+nmap <Leader>gv <Plug>(go-def-vertical)
 
-  " Info about the current identifier
-  autocmd FileType go nmap <Leader>q <Plug>(go-info)
+" Rename the current identifier
+nmap <Leader>r <Plug>(go-rename)
 
-  " Open godoc for current identifier
-  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+" Info about the current identifier
+nmap <Leader>i <Plug>(go-info)
 
-  " Check what the current identifier implements
-  autocmd FileType go nmap <Leader>s <Plug>(go-implements)
-  autocmd FileType go nnoremap <silent> <leader>l :GoLint<cr>
-  autocmd FileType go nnoremap <silent> <leader>e :GoImports<cr>
-  autocmd FileType go nnoremap <silent> <leader>; :GoVet<cr>
-augroup END
+" Open godoc for current identifier
+nmap <Leader>k k <Plug>(go-doc)
+nmap <Leader>k v <Plug>(go-doc-vertical)
+
+" Check what the current identifier implements
+nmap <Leader>s <Plug>(go-implements)
+nnoremap <silent> <leader>l :GoLint<cr>
+nnoremap <silent> <leader>e :GoImports<cr>
+nnoremap <silent> <leader>; :GoVet<cr>

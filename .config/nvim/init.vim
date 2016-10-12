@@ -121,6 +121,14 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 
+" ### Go Language Only
+" vim-go is a massive collection of golang tools for things like auto
+" formatting, renaming, and auto imports.
+"
+" host: https://github.com/fatih/vim-go
+Plug 'fatih/vim-go', {'for': 'go'}
+
+
 " ### The Cemetery
 " The following is a series of plugins that have been removed due to
 " inactivity but are quite useful nonetheless. Sometime soon they may be

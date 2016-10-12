@@ -21,11 +21,12 @@ The following represents a cheat sheet for the leeo.la Dotfiles.
 
 | Command | Name                                 | Notes |
 | ------- | ------------------------------------ | ----- |
-| SPC g d | Goto definition                      |       |
-| SPC g s | Goto definition in horizontal split  |       |
-| SPC g v | Goto definition in vertical split    |       |
+| SPC g g | Goto definition                      |       |
+| SPC g s | Open definition in horizontal split  |       |
+| SPC g v | Open definition in vertical split    |       |
 | SPC r   | Rename known instances of identifier |       |
-| SPC k   | Goto documentation for identifier    |       |
+| SPC k k | Goto documentation for identifier    |       |
+| SPC k v | Open documentation for identifier    |       |
 
 
 ## Tmux
