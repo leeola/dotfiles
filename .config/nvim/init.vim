@@ -81,6 +81,14 @@ Plug 'godlygeek/tabular'
 " host: https://github.com/jiangmiao/auto-pairs
 Plug 'jiangmiao/auto-pairs'
 
+" A plugin for choosing windows in a tmux-like manner.
+"
+" It displays a letter in the status bar of each window (or overlayed in it)
+" for you to choose from.
+"
+" host: https://github.com/t9md/vim-choosewin
+Plug 't9md/vim-choosewin'
+
 
 " ### Rust Language Only
 " rust.vim is the official Rust language plugin for vim. I use it mainly for
@@ -346,3 +354,17 @@ nnoremap <Leader>n :NERDTreeToggle<cr>
 " Find the current file within the NERDTree window. It also opens up NERDTree
 " if it is not yet open.
 nnoremap <Leader>N :NERDTreeFind<cr>
+
+" Set the binding to Ctrl-w Ctrl-e for choosing vim windows.
+"
+" This is intended to be a nice common window chooser bind (Ctrl-e), and i
+" plan to do the same with tmux. Eg, `PREFIX Ctrl-e` for tmux.
+nmap <C-w><C-e> <Plug>(choosewin)
+
+" Overlaymode enables a letter (A,B,C,etc) overlay over the vim windows rather
+" than using the status bar. This is convenient, though a bit slow, so i may
+" want to remove it later.
+"
+" My intention is to make the UX of choosing a vim window as similar as i can
+" to Tmux.
+let g:choosewin_overlay_enable = 1
