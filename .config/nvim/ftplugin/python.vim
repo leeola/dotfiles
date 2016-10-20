@@ -15,9 +15,9 @@ augroup END
 
 " Go to the definition, or the assignment if it's a module, if possible.
 " See :help jedi-vim for further details.
-let g:jedi#goto_command = "<Leader>dd"
+let g:jedi#goto_command = "<Leader>gg"
 " Go to the assignment of a variable if possible.
-let g:jedi#goto_assignments_command = "<Leader>da"
+let g:jedi#goto_assignments_command = "<Leader>ga"
 " Because <Leader>dd goes to the definition with additional features, this is
 " disabled. The empty value signifies disabled.
 let g:jedi#goto_definitions_command = ""
