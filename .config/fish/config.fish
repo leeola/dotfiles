@@ -98,3 +98,13 @@ end
 # set -x PATH ~/.nix-profile/bin ~/.nix-profile/sbin $PATH
 # set -x NIX_PATH nixpkgs=~/.nix-defexpr/channels/nixpkgs
 # set -x SSL_CERT_FILE ~/.nix-profile/etc/ssl/certs/ca-bundle.crt
+
+## Setting the openssl dir allows certain things to find openssh.
+#
+# In my case, i needed a dependency of a rust project (rust-openssl) to
+# build but it was failing to locate the include. This solves it.
+#
+# Related thread:
+# https://github.com/sfackler/rust-openssl/issues/255
+set --export OPENSSL_INCLUDE_DIR (brew --prefix openssl)/include
+set --export OPENSSL_LIB_DIR (brew --prefix openssl)/lib
