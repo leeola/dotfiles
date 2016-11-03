@@ -371,11 +371,3 @@ nnoremap <Leader>N :NERDTreeFind<cr>
 " This is intended to be a nice common window chooser bind (Ctrl-e), and i
 " plan to do the same with tmux. Eg, `PREFIX Ctrl-e` for tmux.
 nmap <C-w><C-e> <Plug>(choosewin)
-
-" Overlaymode enables a letter (A,B,C,etc) overlay over the vim windows rather
-" than using the status bar. This is convenient, though a bit slow, so i may
-" want to remove it later.
-"
-" My intention is to make the UX of choosing a vim window as similar as i can
-" to Tmux.
-let g:choosewin_overlay_enable = 1
