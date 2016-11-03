@@ -318,6 +318,17 @@ nmap <C-b> <C-u>
 " desired - which is what i normally use anyway.
 nmap <silent> ? :nohlsearch<cr>
 
+" Search for and navigate to the next occurance of a visually selected block,
+" in visual mode.
+"
+" This is useful for visually selecting a chunk of text, regardless of it is
+" a vim word or not, and search for it. The * key was chosen because in
+" normal mode * searches for the word under the cursor. So now * searches
+" for the selected text in visual mode too. Seems logical.
+" In the future i may want to add # for the reverse of this, just like normal
+" mode.
+vnoremap * y/<C-R>"<CR>
+
 
 " ## Plugin Maps
 " ### CtrlP Maps
