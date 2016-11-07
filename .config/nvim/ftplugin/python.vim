@@ -38,6 +38,20 @@ let g:neomake_python_yapf_maker = {
     \ 'args': ['--in-place'],
   \ }
 
+" Adding this causes neomake to check the 'python' maker below with python3
+" instead of python2.
+"
+" The cause for this was using a specific python3 syntax (`nonlocal foo`) and
+" having the python maker say it was in error.
+"
+" This also has a downside that python2 will now show errors.. but i'm mainly
+" working in python3 these days.
+"
+" Related threads:
+"   https://github.com/neomake/neomake/issues/473
+"   https://github.com/neomake/neomake/issues/449
+let g:neomake_python_python_exe = 'python3'
+
 " Replace the default makers list with our new maker, ensuring our cargo maker
 " and not the default maker is what is run when we save.
 let g:neomake_python_enabled_makers = ['python', 'yapf']
