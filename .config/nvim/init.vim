@@ -137,6 +137,15 @@ Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 Plug 'fatih/vim-go', {'for': 'go'}
 
 
+" ### Toml Language Only
+" A syntax highlighter, nothing fancy.
+" Adding this because i'm using toml for a lot of my configs
+" at home and work.
+"
+" host: https://github.com/cespare/vim-toml
+Plug 'cespare/vim-toml', {'for': 'toml'}
+
+
 " ### The Cemetery
 " The following is a series of plugins that have been removed due to
 " inactivity but are quite useful nonetheless. Sometime soon they may be
