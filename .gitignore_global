@@ -4,3 +4,4 @@
 .godeps
 node_modules
 .ctrlp
+*.gor
