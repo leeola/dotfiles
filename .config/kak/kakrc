@@ -1,12 +1,12 @@
 
 
-# find implements my desire for CtrlP-like
+# find implements my desire for CtrlP-like fuzzy finder in kakoune.
 def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git" } %{ edit %arg{1} }
 
-# 
+# This binding replicates my CtrlP usage for the above command.
 map global user p ":find "
 
-# I'm
+# I'm quite used to using space as a leader from vim, so using it here too.
 map global normal <space> ,
 map global normal , <space>
 
@@ -20,3 +20,7 @@ colorscheme gruvly
 
 # Set the default tab width
 set global tabstop 2
+
+# Highlight trailing whitespace
+hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
+

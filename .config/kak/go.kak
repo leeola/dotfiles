@@ -1,10 +1,10 @@
 # # Local Go Plugin
-# 
+#
 # Override some of the default Go settings.
 #
 
 # The default go highlighting incorrectly highlights interface and struct,
-# so i've moved them to an attributes type. 
+# so i've moved them to an attributes type.
 %sh{
     # Grammar
     attributes="interface|struct"
