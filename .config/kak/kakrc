@@ -26,3 +26,6 @@ hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
 
 # Enable automatic modelines for all files. Eg, to adjust settings per file.
 hook global BufOpenFile .* %{modeline-parse}
+
+# Enable Golang goimports on file save
+hook global BufWritePost .*\.go %{go-format -use-goimports}
