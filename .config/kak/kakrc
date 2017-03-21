@@ -15,7 +15,7 @@ hook global WinCreate .* %{addhl number_lines -hlcursor -separator ' ' -relative
 
 # Set the default colorscheme to my custom gruvbox implementation.
 
-# See .config/kak/colors/gruvly.kak for more details. 
+# See .config/kak/colors/gruvly.kak for more details.
 colorscheme gruvly
 
 # Set the default tab width
@@ -24,3 +24,5 @@ set global tabstop 2
 # Highlight trailing whitespace
 hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
 
+# Enable automatic modelines for all files. Eg, to adjust settings per file.
+hook global BufOpenFile .* %{modeline-parse}
