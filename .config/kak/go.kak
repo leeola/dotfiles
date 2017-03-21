@@ -5,6 +5,11 @@
 
 # The default go highlighting incorrectly highlights interface and struct,
 # so i've moved them to an attributes type.
+#
+# NOTE(leeola): this conflicts with the internal declaration of highlights in
+# /usr/local/share/kak/rc/base/go.kak. So for now, it needs to be disabled.
+# If i can't find a solution soon, i'll likely make an autoload and version
+# control all of the files.
 %sh{
     # Grammar
     attributes="interface|struct"

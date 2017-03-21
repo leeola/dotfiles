@@ -1,5 +1,3 @@
-
-
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
 def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git" } %{ edit %arg{1} }
 
@@ -29,3 +27,6 @@ hook global BufOpenFile .* %{modeline-parse}
 
 # Enable Golang goimports on file save
 hook global BufWritePost .*\.go %{go-format -use-goimports}
+
+# Source my custom language specific configs.
+source ~/.config/kak/go.kak
