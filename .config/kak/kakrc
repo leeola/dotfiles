@@ -28,5 +28,20 @@ hook global BufOpenFile .* %{modeline-parse}
 # Enable Golang goimports on file save
 hook global BufWritePost .*\.go %{go-format -use-goimports}
 
+# NOTE(leeola): The following window hooks seemingly need to be within a
+# WinCreate hook. This may not be correct, or there may be a better way to
+# implement this such as maybe making the window scope a global? Not sure.
+hook global WinCreate .* %{
+    hook window InsertCompletionShow .* %{
+    	map window insert <tab> <c-n>
+    	map window insert <backtab> <c-p>
+    }
+
+    hook window InsertCompletionHide .* %{
+    	unmap window insert <tab> <c-n>
+    	unmap window insert <backtab> <c-p>
+    }
+}
+
 # Source my custom language specific configs.
 source ~/.config/kak/go.kak
