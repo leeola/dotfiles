@@ -2,7 +2,7 @@ def -hidden cuser-mode %{
   info -title "customer user mode" %{
     p: fuzzy find
     b: buffer
-    a: window
+    a: tmux
     ": copy
   }
   #"
@@ -11,8 +11,9 @@ def -hidden cuser-mode %{
 
   on-key %{ %sh{
     case $kak_key in
-      p) echo exec ":find " ;;
+      p) echo exec ":find<space><tab>" ;;
       b) echo cuser-buffer-mode ;;
+      a) echo cuser-tmux-mode ;;
       \") echo cuser-copy-mode ;;
     esac
   }
@@ -25,8 +26,8 @@ def -hidden cuser-buffer-mode %{
   }
   on-key %{ %sh{
     case $kak_key in
-      p) echo exec '!pbpaste<ret>' ;;
-      y) echo exec '<a-|>pbcopy<ret>' ;;
+      p) buffer-previous ;;
+      n) buffer-next ;;
     esac
   }
 }}
@@ -44,10 +45,10 @@ def -hidden cuser-copy-mode %{
   }
 }}
 
-def -hidden cuser-window-mode %{
-  info -title "window mode" %{
-    s: horizontal window
-    v: vertical window
+def -hidden cuser-tmux-mode %{
+  info -title "tmux mode" %{
+    s: horizontal pane
+    v: vertical pane
   }
   on-key %{ %sh{
     case $kak_key in
