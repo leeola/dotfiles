@@ -21,11 +21,13 @@ def -hidden cuser-mode %{
 
 def -hidden cuser-buffer-mode %{
   info -title "buffer mode" %{
+    space: select buffer
     p: previous
     n: next
   }
   on-key %{ %sh{
     case $kak_key in
+      '<space>') echo exec ':buffer<space>' ;;
       p) buffer-previous ;;
       n) buffer-next ;;
     esac
