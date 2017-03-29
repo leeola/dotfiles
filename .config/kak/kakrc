@@ -1,6 +1,9 @@
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
 def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git" } %{ edit %arg{1} }
 
+# This binding replicates my CtrlP usage for the above command.
+map global user p ":find "
+
 # Set relative line numbers whenever a window is opened.
 hook global WinCreate .* %{addhl number_lines -hlcursor -separator ' ' -relative}
 
@@ -44,5 +47,10 @@ source ~/.config/kak/go.kak
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
 map global normal , <space>
-map global normal <space> :cuser-mode<ret>
+map global normal <space> ,
+# Having to disable my custom mode, since there's a bug in Kakoune which prevents
+# interactive prompts.
+#
+# Link: https://github.com/mawww/kakoune/issues/1303
+#map global normal <space> :cuser-mode<ret>
 
