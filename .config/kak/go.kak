@@ -35,3 +35,9 @@
         add-highlighter -group /go/code regex \b(${functions})\b 0:builtin
     "
 }
+
+# Enable autocomplete for go files
+hook global WinSetOption filetype=go %{go-enable-autocomplete}
+
+# Enable Golang goimports on file save
+hook global BufWritePost .*\.go %{go-format -use-goimports}
