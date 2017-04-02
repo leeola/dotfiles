@@ -1,5 +1,5 @@
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
-def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git" } %{ edit %arg{1} }
+def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git/*" } %{ edit %arg{1} }
 
 # This binding replicates my CtrlP usage for the above command.
 map global user p ":find "
