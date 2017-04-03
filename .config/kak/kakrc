@@ -44,10 +44,4 @@ source ~/.config/kak/go.kak
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
 map global normal , <space>
-map global normal <space> ,
-# Having to disable my custom mode, since there's a bug in Kakoune which prevents
-# interactive prompts.
-#
-# Link: https://github.com/mawww/kakoune/issues/1303
-#map global normal <space> :cuser-mode<ret>
-
+map global normal <space> :cuser-mode<ret>
