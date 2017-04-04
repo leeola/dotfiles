@@ -36,8 +36,8 @@ def -hidden cuser-buffer-mode %{
 
 def -hidden cuser-copy-mode %{
   info -title "copy mode" %{
-    p: paste clipboard
-    y: yank clibpard
+    p: paste from clipboard
+    y: yank to clibpard
   }
   on-key %{ %sh{
     case $kak_key in
@@ -55,7 +55,7 @@ def -hidden cuser-tmux-mode %{
   on-key %{ %sh{
     case $kak_key in
       s) echo tmux-new-horizontal ;;
-      v) echo tmux-new-veronical ;;
+      v) echo tmux-new-vertical ;;
     esac
   }
 }}
