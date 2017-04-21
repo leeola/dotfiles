@@ -15,6 +15,25 @@ colorscheme gruvly
 # Set the default tab width
 set global tabstop 2
 
+# Make tab 2 space chars.
+set global indentwidth 2
+
+# Set a padding at the bottom of the window so i can see upcoming lines.
+#
+# Note that columns are also set. 3 lines, 3 columns.
+set global scrolloff 3,3
+
+# Make tab use space characters instead of tab char.
+#
+# Note that this just changes the tab key to indent, not specifically
+# insert two spaces. Unindent is also bound.
+hook global InsertChar \t %{
+  exec -draft -itersel h@
+}
+hook global InsertKey <backspace> %{ try %{
+  exec -draft hGh<a-k>\A\h+\Z<ret>gihyp<lt>
+}}
+
 # Highlight trailing whitespace
 hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
 
