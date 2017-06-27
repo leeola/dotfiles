@@ -108,3 +108,8 @@ end
 # https://github.com/sfackler/rust-openssl/issues/255
 set --export OPENSSL_INCLUDE_DIR (brew --prefix openssl)/include
 set --export OPENSSL_LIB_DIR (brew --prefix openssl)/lib
+
+# Enable android sdk usage
+set --export ANDROID_HOME $HOME/Library/Android/sdk
+set --export PATH $PATH $ANDROID_HOME/tools
+set --export PATH $PATH $ANDROID_HOME/platform-tools
