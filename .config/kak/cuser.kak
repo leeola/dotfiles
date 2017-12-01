@@ -4,6 +4,7 @@ def -hidden cuser-mode %{
     b: buffer
     a: tmux
     ": copy
+    l: language mode
   }
   #"
   # This random quote fixes the bad highlighting caused by the open quote,
@@ -15,6 +16,7 @@ def -hidden cuser-mode %{
       b) echo cuser-buffer-mode ;;
       a) echo cuser-tmux-mode ;;
       \") echo cuser-copy-mode ;;
+      l) echo cuser-lang-mode ;;
     esac
   }
 }}

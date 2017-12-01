@@ -59,6 +59,7 @@ hook global WinCreate .* %{
 source ~/.config/kak/cuser.kak
 # Source my custom language specific configs.
 source ~/.config/kak/go.kak
+source ~/.config/kak/gotools-ext.kak
 
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
