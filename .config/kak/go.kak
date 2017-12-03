@@ -23,18 +23,19 @@
 
     # Add the language's grammar to the static completion list
     printf %s\\n "hook global WinSetOption filetype=go %{
-        set window static_words '${keywords}:${attributes}:${types}:${values}:${functions}'
+        set-option window static_words '${keywords}:${attributes}:${types}:${values}:${functions}'
     }" | sed 's,|,:,g'
 
     # Highlight keywords
     printf %s "
-        add-highlighter -group /go/code regex \b(${keywords})\b 0:keyword
-        add-highlighter -group /go/code regex \b(${attributes})\b 0:attribute
-        add-highlighter -group /go/code regex \b(${types})\b 0:type
-        add-highlighter -group /go/code regex \b(${values})\b 0:value
-        add-highlighter -group /go/code regex \b(${functions})\b 0:builtin
+        add-highlighter shared/go/code regex \b(${keywords})\b 0:keyword
+        add-highlighter shared/go/code regex \b(${attributes})\b 0:attribute
+        add-highlighter shared/go/code regex \b(${types})\b 0:type
+        add-highlighter shared/go/code regex \b(${values})\b 0:value
+        add-highlighter shared/go/code regex \b(${functions})\b 0:builtin
     "
 }
+ 
 
 # Enable autocomplete for go files
 hook global WinSetOption filetype=go %{go-enable-autocomplete}
