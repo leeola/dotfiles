@@ -1,4 +1,7 @@
-def go-ext-jump-def %{
+
+# NOTE(leeola): this has plenty of limitations in implementation,
+# improvements coming in the near future. this is just a hack.
+def -allow-override go-ext-jump-def %{
   %sh{
     guru_output=$(guru definition ${kak_bufname}:#${kak_cursor_byte_offset})
     file=$(echo $guru_output | cut -d ':' -f 1)
@@ -27,4 +30,43 @@ hook global WinSetOption filetype=go %{
       esac
     }}
   }
+}
+
+# TODO(leeola): move these to somewhere .. sane? Not sure where is good.
+# I just know that they error out if called repeatedly, ie on multile
+# calls to go-ext-imports.
+declare-option line-specs code_errors
+set-face CodeErrorFlags default,default
+
+define-command -params ..1 go-ext-imports \
+    -docstring "go-format [-use-goimports]: custom formatter for go files" %{
+    %sh{
+        dir=$(mktemp -d "${TMPDIR:-/tmp}"/kak-go.XXXXXXXX)
+        printf %s\\n "set-option buffer go_format_tmp_dir ${dir}"
+        printf %s\\n "evaluate-commands -no-hooks write ${dir}/buf"
+    }
+    %sh{
+        dir=${kak_opt_go_format_tmp_dir}
+        err_out=$(goimports -srcdir '${kak_buffile}' -e -w ${dir}/buf 2>&1)
+        if [ $? -eq 0 ]; then
+            cp ${dir}/buf "${kak_buffile}"
+
+            printf %s\\n "remove-highlighter window/flag_lines"
+        else
+            err_line=$(echo ${err_out} | cut -d ':' -f 2)
+
+            # get the timestamp for the set-option usage.
+            # No idea why it wants a timestamp.
+            timestamp=$(date +%s)
+
+            printf %s\\n "remove-highlighter window/flag_lines"
+            # this is super hacky and only supports a single line. To be improved later
+            printf %s\\n "set-option global code_errors ${timestamp}:${err_line}|{red,default}x"
+            printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
+
+            printf %s\\n "echo error: ${err_out}"
+        fi
+        rm -r ${dir}
+    }
+    edit!
 }
