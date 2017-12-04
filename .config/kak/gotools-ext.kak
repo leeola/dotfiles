@@ -22,13 +22,26 @@ def -allow-override go-ext-jump-def %{
 hook global WinSetOption filetype=go %{
   def -hidden -allow-override cuser-lang-mode %{
     info -title "go mode" %{
+      e: jump error line
       j: jump definition
     }
     on-key %{ %sh{
       case $kak_key in
         j) echo go-ext-jump-def ;;
+        e) echo go-ext-jump-err-line ;;
       esac
     }}
+  }
+}
+
+def go-ext-jump-err-line %{
+  %sh{
+    if [ ${kak_opt_code_err} == "true" ]; then
+      # TODO(leeola): is there a better way to move the cursor?
+      printf %s\\n "edit ${kak_buffile} ${kak_opt_code_err_line}"
+    else
+      printf %s\\n "echo no current line ${kak_opt_code_err}"
+    fi
   }
 }
 
@@ -36,6 +49,8 @@ hook global WinSetOption filetype=go %{
 # I just know that they error out if called repeatedly, ie on multile
 # calls to go-ext-imports.
 declare-option line-specs code_errors
+declare-option bool code_err
+declare-option int code_err_line
 set-face CodeErrorFlags default,default
 
 define-command -params ..1 go-ext-imports \
@@ -51,17 +66,21 @@ define-command -params ..1 go-ext-imports \
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
+            printf %s\\n "set-option buffer code_err false"
             printf %s\\n "remove-highlighter window/flag_lines"
         else
-            err_line=$(echo ${err_out} | cut -d ':' -f 2)
+            code_err_line=$(echo ${err_out} | cut -d ':' -f 2)
 
             # get the timestamp for the set-option usage.
             # No idea why it wants a timestamp.
             timestamp=$(date +%s)
 
+            printf %s\\n "set-option buffer code_err_line ${code_err_line}"
+            printf %s\\n "set-option buffer code_err true"
+
             printf %s\\n "remove-highlighter window/flag_lines"
             # this is super hacky and only supports a single line. To be improved later
-            printf %s\\n "set-option global code_errors ${timestamp}:${err_line}|{red,default}x"
+            printf %s\\n "set-option global code_errors ${timestamp}:${code_err_line}|{red,default}x"
             printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
 
             printf %s\\n "echo error: ${err_out}"
