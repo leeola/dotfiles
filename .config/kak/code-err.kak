@@ -13,9 +13,6 @@ define-command -params 1 set-code-err-line %{
     if [ ${kak_opt_code_err} == "false" ]; then
       printf %s\\n "add-highlighter window/ flag_lines default code_errors"
       printf %s\\n "set-option buffer code_err true"
-      printf %s\\n "set-option buffer code_err_line ${line}"
-      printf %s\\n "set-option buffer code_err_desc \"${desc}\""
-
       # get the timestamp for the set-option usage.
       # No idea why it wants a timestamp.
       timestamp=$(date +%s)
@@ -28,6 +25,8 @@ define-command -params 1 set-code-err-line %{
     fi
 
     # report the most recent error.
+    printf %s\\n "set-option buffer code_err_line ${line}"
+    printf %s\\n "set-option buffer code_err_desc \"${desc}\""
     printf %s\\n "echo -markup {red,default} ${desc}"
   }
 }
