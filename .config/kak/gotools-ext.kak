@@ -95,7 +95,7 @@ define-command go-ext-imports %{
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
-            printf %s\\n "unset-code-err-line"
+            printf %s\\n "go-ext-check-source"
         else
             printf %s\\n "go-ext-check-source \"${result}\""
         fi
