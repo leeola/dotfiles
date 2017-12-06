@@ -42,15 +42,7 @@ define-command go-ext-rename %{
       result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
       status=$?
       if [ $status -ne 0 ]; then
-        build_result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
-        build_status=$?
-
-        if [ ${build_status} -ne 0 ]; then
-          # quote the err_line to ensure it's only a single argument.
-          printf %s\\n "go-ext-check-source ${build_status} \"${build_result}\""
-        else
-          printf %s\\n "fail unknown error: \"${result}\""
-        fi
+        printf %s\\n 'go-ext-check-source "$result"'
         exit $status
       fi
 
@@ -61,16 +53,10 @@ define-command go-ext-rename %{
   }
 }
 
-define-command -params ..2 go-ext-check-source %{
+define-command -params ..1 go-ext-check-source %{
   %sh{
-    if [ -z ${1} ]; then
-      result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
-      status=$?
-    else
-      # TODO(leeola): ensure both arguments, or none, are provided.
-      result=${2}
-      status=${1}
-    fi
+    result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
+    status=$?
 
     if [ $status -ne 0 ]; then
       firstLine="true"
@@ -84,6 +70,14 @@ define-command -params ..2 go-ext-check-source %{
         printf %s\\n "set-code-err-line \"${err_line}\""
       done
     else
+      # go-ext-check-source allows the caller to check the source
+      # if an error was encountered from things like goimports/gorename/etc.
+      # If no actual syntax error is present though, go-ext-check-source
+      # can print whatever error message those commands received, here.
+      if [ -n "${1}" ]; then
+        printf %s\\n "fail unknown error: \"${result}\""
+      fi
+
       printf %s\\n "unset-code-err-line"
     fi
   }
@@ -103,15 +97,7 @@ define-command go-ext-imports %{
 
             printf %s\\n "unset-code-err-line"
         else
-            build_result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
-            build_status=$?
-
-            if [ ${build_status} -ne 0 ]; then
-              # quote the err_line to ensure it's only a single argument.
-              printf %s\\n "go-ext-check-source ${build_status} \"${build_result}\""
-            else
-              printf %s\\n "fail unknown error: \"${result}\""
-            fi
+            printf %s\\n "go-ext-check-source \"${result}\""
         fi
         rm -r ${dir}
     }
