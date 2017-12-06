@@ -24,17 +24,56 @@ hook global WinSetOption filetype=go %{
     info -title "go mode" %{
       e: jump error line
       j: jump definition
+      r: rename
     }
     on-key %{ %sh{
       case $kak_key in
         j) echo go-ext-jump-def ;;
         e) echo go-ext-jump-err-line ;;
+        r) echo go-ext-rename  ;;
       esac
     }}
   }
 }
 
-def go-ext-jump-err-line %{
+define-command go-ext-rename %{
+  prompt "rename: " %{
+    %sh{
+      result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
+      status=$?
+      if [ $status -ne 0 ]; then
+        prefix=$(echo ${result} | cut -d ':' -f 1)
+        cannotparse=$(echo ${result} | cut -d ':' -f 4)
+
+        # in two scenarios we can parse the output and get
+        # an error location.
+        if [ ${cannotparse} == " cannot parse file" ]; then
+          err_line=$(echo ${result} | cut -d ':' -f 5,6,7)
+        elif [ ${prefix} != "gorename" ]; then
+
+          # only use the first line. This is a bit hacky,
+          # i hate bash.
+          result=$(echo "${result}" | while read line; do echo ${line}; break; done)
+
+          err_line=${result}
+        fi
+
+        if [ -n "${err_line}" ]; then
+          # quote the err_line to ensure it's only a single argument.
+          printf %s\\n "set-code-err-line \"${err_line}\""
+        else
+          printf %s\\n "fail unknown error: ${result}"
+        fi
+        exit $status
+      fi
+
+      printf %s\\n "echo ${result}"
+    }
+    edit!
+  }
+}
+
+define-command go-ext-jump-err-line %{
   %sh{
     if [ ${kak_opt_code_err} == "true" ]; then
       # TODO(leeola): is there a better way to move the cursor?
@@ -53,7 +92,35 @@ declare-option bool code_err
 declare-option int code_err_line
 set-face CodeErrorFlags default,default
 
-define-command -params ..1 go-ext-imports \
+define-command -params 1 set-code-err-line %{
+  %sh{
+    line=$(echo ${1} | cut -d ':' -f 2)
+
+    # get the timestamp for the set-option usage.
+    # No idea why it wants a timestamp.
+    timestamp=$(date +%s)
+
+    if [ ${kak_opt_code_err} == "false" ]; then
+      printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
+      printf %s\\n "set-option buffer code_err true"
+      printf %s\\n "set-option buffer code_err_line ${line}"
+    fi
+
+
+    # set whatever line this error was one.
+    printf %s\\n "set-option global code_errors ${timestamp}:${line}|{red,default}x"
+
+    # report the most recent error.
+    printf %s\\n "fail ${1}"
+  }
+}
+
+define-command unset-code-err-line %{
+  set-option buffer code_err false
+  remove-highlighter window/flag_lines
+}
+
+define-command go-ext-imports \
     -docstring "go-format [-use-goimports]: custom formatter for go files" %{
     %sh{
         dir=$(mktemp -d "${TMPDIR:-/tmp}"/kak-go.XXXXXXXX)
@@ -83,7 +150,7 @@ define-command -params ..1 go-ext-imports \
             printf %s\\n "set-option global code_errors ${timestamp}:${code_err_line}|{red,default}x"
             printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
 
-            printf %s\\n "echo error: ${err_out}"
+            printf %s\\n "fail ${err_out}"
         fi
         rm -r ${dir}
     }
