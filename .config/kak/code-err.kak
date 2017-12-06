@@ -47,7 +47,7 @@ define-command jump-code-err %{
       # report the most recent error.
       printf %s\\n "echo -markup {red,default} ${kak_opt_code_err_desc}"
     else
-      printf %s\\n "echo no current line ${kak_opt_code_err}"
+      printf %s\\n "echo no reported errors"
     fi
   }
 }

@@ -28,8 +28,8 @@ hook global WinSetOption filetype=go %{
     }
     on-key %{ %sh{
       case $kak_key in
-        j) echo jump-code-err ;;
-        e) echo go-ext-jump-err-line ;;
+        e) echo jump-code-err ;;
+        j) echo go-ext-jump-def ;;
         r) echo go-ext-rename  ;;
       esac
     }}
@@ -54,6 +54,7 @@ define-command go-ext-rename %{
         exit $status
       fi
 
+      printf %s\\n "unset-code-err-line"
       printf %s\\n "echo ${result}"
     }
     edit!
@@ -88,8 +89,7 @@ define-command -params ..2 go-ext-check-source %{
   }
 }
 
-define-command go-ext-imports \
-    -docstring "go-format [-use-goimports]: custom formatter for go files" %{
+define-command go-ext-imports %{
     %sh{
         dir=$(mktemp -d "${TMPDIR:-/tmp}"/kak-go.XXXXXXXX)
         printf %s\\n "set-option buffer go_format_tmp_dir ${dir}"
@@ -101,24 +101,17 @@ define-command go-ext-imports \
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
-            printf %s\\n "set-option buffer code_err false"
-            printf %s\\n "remove-highlighter window/flag_lines"
+            printf %s\\n "unset-code-err-line"
         else
-            code_err_line=$(echo ${err_out} | cut -d ':' -f 2)
+            build_result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
+            build_status=$?
 
-            # get the timestamp for the set-option usage.
-            # No idea why it wants a timestamp.
-            timestamp=$(date +%s)
-
-            printf %s\\n "set-option buffer code_err_line ${code_err_line}"
-            printf %s\\n "set-option buffer code_err true"
-
-            printf %s\\n "remove-highlighter window/flag_lines"
-            # this is super hacky and only supports a single line. To be improved later
-            printf %s\\n "set-option global code_errors ${timestamp}:${code_err_line}|{red,default}x"
-            printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
-
-            printf %s\\n "echo -markup {red,default} ${err_out}"
+            if [ ${build_status} -ne 0 ]; then
+              # quote the err_line to ensure it's only a single argument.
+              printf %s\\n "go-ext-check-source ${build_status} \"${build_result}\""
+            else
+              printf %s\\n "fail unknown error: \"${result}\""
+            fi
         fi
         rm -r ${dir}
     }
