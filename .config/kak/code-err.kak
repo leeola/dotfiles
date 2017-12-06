@@ -2,7 +2,6 @@ declare-option line-specs code_errors
 declare-option bool code_err
 declare-option int code_err_line
 declare-option str code_err_desc
-set-face CodeErrorFlags default,default
 
 define-command -params 1 set-code-err-line %{
   %sh{
@@ -11,9 +10,8 @@ define-command -params 1 set-code-err-line %{
     col=$(echo ${1} | cut -d ':' -f 3)
     desc="${file}:${line}:${col}:"$(echo ${1} | cut -d ':' -f 4-)
 
-
     if [ ${kak_opt_code_err} == "false" ]; then
-      printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
+      printf %s\\n "add-highlighter window/ flag_lines default code_errors"
       printf %s\\n "set-option buffer code_err true"
       printf %s\\n "set-option buffer code_err_line ${line}"
       printf %s\\n "set-option buffer code_err_desc \"${desc}\""
@@ -36,7 +34,7 @@ define-command -params 1 set-code-err-line %{
 
 define-command unset-code-err-line %{
   set-option buffer code_err false
-  remove-highlighter window/flag_lines
+  remove-highlighter window/hlflags_code_errors
 }
 
 define-command jump-code-err %{
