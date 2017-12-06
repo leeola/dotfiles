@@ -18,16 +18,16 @@ define-command -params 1 set-code-err-line %{
       timestamp=$(date +%s)
 
       printf %s\\n "set-option global code_errors ${timestamp}:${line}|{red,default}x"
+
+      # report the new error.
+      printf %s\\n "set-option buffer code_err_line ${line}"
+      printf %s\\n "set-option buffer code_err_desc \"${desc}\""
+      printf %s\\n "echo -markup {red,default} ${desc}"
     else
 
       # add this error to previous errors
       printf %s\\n "set-option global code_errors ${kak_opt_code_errors}:${line}|{red,default}x"
     fi
-
-    # report the most recent error.
-    printf %s\\n "set-option buffer code_err_line ${line}"
-    printf %s\\n "set-option buffer code_err_desc \"${desc}\""
-    printf %s\\n "echo -markup {red,default} ${desc}"
   }
 }
 
