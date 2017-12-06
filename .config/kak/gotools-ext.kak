@@ -42,27 +42,14 @@ define-command go-ext-rename %{
       result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
       status=$?
       if [ $status -ne 0 ]; then
-        prefix=$(echo ${result} | cut -d ':' -f 1)
-        cannotparse=$(echo ${result} | cut -d ':' -f 4)
+        build_result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
+        build_status=$?
 
-        # in two scenarios we can parse the output and get
-        # an error location.
-        if [ ${cannotparse} == " cannot parse file" ]; then
-          err_line=$(echo ${result} | cut -d ':' -f 5,6,7,8)
-        elif [ ${prefix} != "gorename" ]; then
-
-          # only use the first line. This is a bit hacky,
-          # i hate bash.
-          result=$(echo "${result}" | while read line; do echo ${line}; break; done)
-
-          err_line=${result}
-        fi
-
-        if [ -n "${err_line}" ]; then
+        if [ ${build_status} -ne 0 ]; then
           # quote the err_line to ensure it's only a single argument.
-          printf %s\\n "set-code-err-line \"${err_line}\""
+          printf %s\\n "go-ext-check-source ${build_status} \"${build_result}\""
         else
-          printf %s\\n "fail unknown error: ${result}"
+          printf %s\\n "fail unknown error: \"${result}\""
         fi
         exit $status
       fi
@@ -73,10 +60,17 @@ define-command go-ext-rename %{
   }
 }
 
-define-command go-ext-check-source %{
+define-command -params ..2 go-ext-check-source %{
   %sh{
-    result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
-    status=$?
+    if [ -z ${1} ]; then
+      result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
+      status=$?
+    else
+      # TODO(leeola): ensure both arguments, or none, are provided.
+      result=${2}
+      status=${1}
+    fi
+
     if [ $status -ne 0 ]; then
       firstLine="true"
       echo "${result}" | while read err_line; do
