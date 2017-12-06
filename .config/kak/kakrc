@@ -57,6 +57,7 @@ hook global WinCreate .* %{
 
 # Source custom additions, like custom user.
 source ~/.config/kak/cuser.kak
+source ~/.config/kak/code-err.kak
 # Source my custom language specific configs.
 source ~/.config/kak/go.kak
 source ~/.config/kak/gotools-ext.kak

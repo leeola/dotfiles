@@ -28,7 +28,7 @@ hook global WinSetOption filetype=go %{
     }
     on-key %{ %sh{
       case $kak_key in
-        j) echo go-ext-jump-def ;;
+        j) echo jump-code-err ;;
         e) echo go-ext-jump-err-line ;;
         r) echo go-ext-rename  ;;
       esac
@@ -73,59 +73,25 @@ define-command go-ext-rename %{
   }
 }
 
-define-command go-ext-jump-err-line %{
+define-command go-ext-check-source %{
   %sh{
-    if [ ${kak_opt_code_err} == "true" ]; then
-      # TODO(leeola): is there a better way to move the cursor?
-      printf %s\\n "edit ${kak_buffile} ${kak_opt_code_err_line}"
-      # report the most recent error.
-      printf %s\\n "echo -markup {red,default} ${kak_opt_code_err_desc}"
+    result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
+    status=$?
+    if [ $status -ne 0 ]; then
+      firstLine="true"
+      echo "${result}" | while read err_line; do
+        if [ ${firstLine} == "true" ]; then
+          firstLine="false"
+          continue
+        fi
+
+        # quote the err_line to ensure it's only a single argument.
+        printf %s\\n "set-code-err-line \"${err_line}\""
+      done
     else
-      printf %s\\n "echo no current line ${kak_opt_code_err}"
+      printf %s\\n "unset-code-err-line"
     fi
   }
-}
-
-# TODO(leeola): move these to somewhere .. sane? Not sure where is good.
-# I just know that they error out if called repeatedly, ie on multile
-# calls to go-ext-imports.
-declare-option line-specs code_errors
-declare-option bool code_err
-declare-option int code_err_line
-declare-option str code_err_desc
-set-face CodeErrorFlags default,default
-
-define-command -params 1 set-code-err-line %{
-  %sh{
-    file=$(basename $(echo ${1} | cut -d ':' -f 1))
-    line=$(echo ${1} | cut -d ':' -f 2)
-    col=$(echo ${1} | cut -d ':' -f 3)
-    desc="${file}:${line}:${col}:"$(echo ${1} | cut -d ':' -f 4-)
-
-
-    # get the timestamp for the set-option usage.
-    # No idea why it wants a timestamp.
-    timestamp=$(date +%s)
-
-    if [ ${kak_opt_code_err} == "false" ]; then
-      printf %s\\n "add-highlighter window/ flag_lines CodeErrorFlags code_errors"
-      printf %s\\n "set-option buffer code_err true"
-      printf %s\\n "set-option buffer code_err_line ${line}"
-      printf %s\\n "set-option buffer code_err_desc \"${desc}\""
-    fi
-
-
-    # set whatever line this error was one.
-    printf %s\\n "set-option global code_errors ${timestamp}:${line}|{red,default}x"
-
-    # report the most recent error.
-    printf %s\\n "echo -markup {red,default} ${desc}"
-  }
-}
-
-define-command unset-code-err-line %{
-  set-option buffer code_err false
-  remove-highlighter window/flag_lines
 }
 
 define-command go-ext-imports \
