@@ -95,10 +95,18 @@ define-command go-ext-imports %{
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
-            printf %s\\n "go-ext-check-source"
-        else
-            printf %s\\n "go-ext-check-source \"${result}\""
+            #printf %s\\n "go-ext-check-source"
+        #else
+            #printf %s\\n "go-ext-check-source \"${result}\""
         fi
+
+        # TODO(leeola): enable error reporting like above.
+        # The new Go method doesn't support error reporting,
+        # though i'll likely rewrite this command to properly
+        # handle this stuff anyway.
+        printf %s\\n "go-kakoune-kak-check-source"
+
+
         rm -r ${dir}
     }
     edit!

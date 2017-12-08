@@ -62,6 +62,9 @@ source ~/.config/kak/code-err.kak
 source ~/.config/kak/go.kak
 source ~/.config/kak/gotools-ext.kak
 
+# my experimental go plugin
+%sh{ kak-go-kakoune-plugins }
+
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
 map global normal , <space>
