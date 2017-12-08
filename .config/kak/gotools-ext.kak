@@ -42,7 +42,7 @@ define-command go-ext-rename %{
       result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
       status=$?
       if [ $status -ne 0 ]; then
-        printf %s\\n 'go-ext-check-source "$result"'
+        printf %s\\n 'go-kakoune-kak-check-source "$result"'
         exit $status
       fi
 
@@ -50,36 +50,6 @@ define-command go-ext-rename %{
       printf %s\\n "echo ${result}"
     }
     edit!
-  }
-}
-
-define-command -params ..1 go-ext-check-source %{
-  %sh{
-    result=$(go build $(dirname ${kak_bufname})/*.go 2>&1)
-    status=$?
-
-    if [ $status -ne 0 ]; then
-      firstLine="true"
-      echo "${result}" | while read err_line; do
-        if [ ${firstLine} == "true" ]; then
-          firstLine="false"
-          continue
-        fi
-
-        # quote the err_line to ensure it's only a single argument.
-        printf %s\\n "set-code-err-line \"${err_line}\""
-      done
-    else
-      # go-ext-check-source allows the caller to check the source
-      # if an error was encountered from things like goimports/gorename/etc.
-      # If no actual syntax error is present though, go-ext-check-source
-      # can print whatever error message those commands received, here.
-      if [ -n "${1}" ]; then
-        printf %s\\n "fail unknown error: \"${result}\""
-      fi
-
-      printf %s\\n "unset-code-err-line"
-    fi
   }
 }
 
@@ -95,9 +65,9 @@ define-command go-ext-imports %{
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
-            #printf %s\\n "go-ext-check-source"
+            #printf %s\\n "go-kakoune-kak-check-source"
         #else
-            #printf %s\\n "go-ext-check-source \"${result}\""
+            #printf %s\\n "go-kakoune-kak-check-source \"${result}\""
         fi
 
         # TODO(leeola): enable error reporting like above.
