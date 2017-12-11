@@ -42,7 +42,7 @@ define-command go-ext-rename %{
       result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
       status=$?
       if [ $status -ne 0 ]; then
-        printf %s\\n 'go-kakoune-kak-check-source "$result"'
+        printf %s\\n 'gokakoune-compile-check "$result"'
         exit $status
       fi
 
@@ -65,16 +65,16 @@ define-command go-ext-imports %{
         if [ $? -eq 0 ]; then
             cp ${dir}/buf "${kak_buffile}"
 
-            #printf %s\\n "go-kakoune-kak-check-source"
+            #printf %s\\n "gokakoune-compile-check"
         #else
-            #printf %s\\n "go-kakoune-kak-check-source \"${result}\""
+            #printf %s\\n "gokakoune-compile-check \"${result}\""
         fi
 
         # TODO(leeola): enable error reporting like above.
         # The new Go method doesn't support error reporting,
         # though i'll likely rewrite this command to properly
         # handle this stuff anyway.
-        printf %s\\n "go-kakoune-kak-check-source"
+        printf %s\\n "gokakoune-compile-check"
 
 
         rm -r ${dir}

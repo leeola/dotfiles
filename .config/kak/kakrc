@@ -63,7 +63,8 @@ source ~/.config/kak/go.kak
 source ~/.config/kak/gotools-ext.kak
 
 # my experimental go plugin
-%sh{ kak-go-kakoune-plugins }
+%sh{ gokakoune-plugins }
+%sh{ gokakoune-examples }
 
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
