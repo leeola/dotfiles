@@ -1,16 +1,3 @@
-
-# NOTE(leeola): this has plenty of limitations in implementation,
-# improvements coming in the near future. this is just a hack.
-def -allow-override go-ext-jump-def %{
-  %sh{
-    guru_output=$(guru definition ${kak_bufname}:#${kak_cursor_byte_offset})
-    file=$(echo $guru_output | cut -d ':' -f 1)
-    line=$(echo $guru_output | cut -d ':' -f 2)
-    column=$(echo $guru_output | cut -d ':' -f 3)
-    printf "edit $file $line $column\n"
-  }
-}
-
 # cuser-lang-mode defined/overridden for  Go language.
 #
 # NOTE(leeola): i've got no idea if this usage will work.
@@ -29,7 +16,7 @@ hook global WinSetOption filetype=go %{
     on-key %{ %sh{
       case $kak_key in
         e) echo jump-code-err ;;
-        j) echo go-ext-jump-def ;;
+        j) echo gokakoune-jump-def ;;
         r) echo go-ext-rename  ;;
       esac
     }}
@@ -42,7 +29,8 @@ define-command go-ext-rename %{
       result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
       status=$?
       if [ $status -ne 0 ]; then
-        printf %s\\n 'gokakoune-compile-check "$result"'
+        #printf %s\\n 'gokakoune-compile-check "$result"'
+        printf %s\\n 'gokakoune-compile-check'
         exit $status
       fi
 
