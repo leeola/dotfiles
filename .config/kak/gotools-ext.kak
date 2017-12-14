@@ -11,12 +11,14 @@ hook global WinSetOption filetype=go %{
     info -title "go mode" %{
       e: jump error line
       j: jump definition
+      i: show documentation
       r: rename
     }
     on-key %{ %sh{
       case $kak_key in
         e) echo jump-code-err ;;
         j) echo gokakoune-jump-def ;;
+        i) echo gokakoune-show-doc ;;
         r) echo go-ext-rename  ;;
       esac
     }}
