@@ -19,27 +19,9 @@ hook global WinSetOption filetype=go %{
         e) echo jump-code-err ;;
         j) echo gokakoune-jump-def ;;
         i) echo gokakoune-show-doc ;;
-        r) echo go-ext-rename  ;;
+        r) echo gokakoune-rename  ;;
       esac
     }}
-  }
-}
-
-define-command go-ext-rename %{
-  prompt "rename: " %{
-    %sh{
-      result=$(gorename -offset "${kak_buffile}:#${kak_cursor_byte_offset}" -to ${kak_text} 2>&1)
-      status=$?
-      if [ $status -ne 0 ]; then
-        #printf %s\\n 'gokakoune-compile-check "$result"'
-        printf %s\\n 'gokakoune-compile-check'
-        exit $status
-      fi
-
-      printf %s\\n "unset-code-err-line"
-      printf %s\\n "echo ${result}"
-    }
-    edit!
   }
 }
 
