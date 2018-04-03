@@ -14,6 +14,7 @@
   dfw = diff --word-diff
   dcw = diff --word-diff --cached
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  lsfp = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --first-parent
 [core]
   editor = kak
 	excludesfile = ~/.gitignore_global
