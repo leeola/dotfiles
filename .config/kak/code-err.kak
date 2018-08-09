@@ -1,5 +1,6 @@
 declare-option line-specs code_errors
 declare-option bool code_err
+declare-option str code_err_file
 declare-option int code_err_line
 declare-option str code_err_desc
 
@@ -40,7 +41,7 @@ define-command jump-code-err %{
   %sh{
     if [ ${kak_opt_code_err} == "true" ]; then
       # TODO(leeola): is there a better way to move the cursor?
-      printf %s\\n "edit ${kak_buffile} ${kak_opt_code_err_line}"
+      printf %s\\n "edit ${kak_opt_code_err_file} ${kak_opt_code_err_line}"
       # report the most recent error.
       printf %s\\n "echo -markup {red,default} ${kak_opt_code_err_desc}"
     else
