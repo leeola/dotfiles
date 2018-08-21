@@ -7,7 +7,7 @@
 # Currently i'm trying to just override it if the hook WinSetOption
 # is called.
 hook global WinSetOption filetype=go %{
-  def -hidden -allow-override cuser-lang-mode %{
+  def -hidden -override cuser-lang-mode %{
     info -title "go mode" %{
       e: jump error line
       j: jump definition
@@ -26,12 +26,12 @@ hook global WinSetOption filetype=go %{
 }
 
 define-command go-ext-imports %{
-    %sh{
+    evaluate-commands %sh{
         dir=$(mktemp -d "${TMPDIR:-/tmp}"/kak-go.XXXXXXXX)
         printf %s\\n "set-option buffer go_format_tmp_dir ${dir}"
         printf %s\\n "evaluate-commands -no-hooks write ${dir}/buf"
     }
-    %sh{
+    evaluate-commands %sh{
         dir=${kak_opt_go_format_tmp_dir}
         err_out=$(goimports -srcdir '${kak_buffile}' -e -w ${dir}/buf 2>&1)
         if [ $? -eq 0 ]; then
