@@ -10,9 +10,9 @@ def -hidden cuser-mode %{
   # This random quote fixes the bad highlighting caused by the open quote,
   # above.
 
-  on-key %{ %sh{
+  on-key %{ evaluate-commands %sh{
     case $kak_key in
-      p) echo exec ":find<space><tab>" ;;
+      p) echo execute-keys ":find<space><tab>" ;;
       b) echo cuser-buffer-mode ;;
       a) echo cuser-tmux-mode ;;
       \") echo cuser-copy-mode ;;
@@ -28,9 +28,9 @@ def -hidden cuser-buffer-mode %{
     n: next
     p: previous
   }
-  on-key %{ %sh{
+  on-key %{ evaluate-commands %sh{
     case $kak_key in
-      b) echo exec ':buffer<space>' ;;
+      b) echo execute-keys ':buffer<space>' ;;
       d) echo delete-buffer ;;
       p) echo buffer-previous ;;
       n) echo buffer-next ;;
@@ -43,10 +43,10 @@ def -hidden cuser-copy-mode %{
     p: paste from clipboard
     y: yank to clibpard
   }
-  on-key %{ %sh{
+  on-key %{ evaluate-commands %sh{
     case $kak_key in
-      p) echo exec '!pbpaste<ret>' ;;
-      y) echo exec '<a-|>pbcopy<ret>' ;;
+      p) echo execute-keys '!pbpaste<ret>' ;;
+      y) echo execute-keys '<a-|>pbcopy<ret>' ;;
     esac
   }
 }}
@@ -56,7 +56,7 @@ def -hidden cuser-tmux-mode %{
     s: horizontal pane
     v: vertical pane
   }
-  on-key %{ %sh{
+  on-key %{ evaluate-commands %sh{
     case $kak_key in
       s) echo tmux-new-horizontal ;;
       v) echo tmux-new-vertical ;;

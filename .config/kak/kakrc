@@ -5,7 +5,7 @@ def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -
 map global user p ":find "
 
 # Set relative line numbers whenever a window is opened.
-hook global KakBegin .* %{addhl global/ number_lines -hlcursor -separator ' ' -relative}
+hook global KakBegin .* %{addhl global/ number-lines -hlcursor -separator ' ' -relative}
 
 # Set the default colorscheme to my custom gruvbox implementation.
 
@@ -35,7 +35,8 @@ hook global InsertKey <backspace> %{ try %{
 }}
 
 # Highlight trailing whitespace
-hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
+#disabled, the highlighter broke in updated version of kak.
+#hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
 
 # Enable automatic modelines for all files. Eg, to adjust settings per file.
 hook global BufOpenFile .* %{modeline-parse}
@@ -63,8 +64,8 @@ source ~/.config/kak/go.kak
 source ~/.config/kak/gotools-ext.kak
 
 # my experimental go plugin
-%sh{ gokakoune-plugins }
-%sh{ gokakoune-examples }
+evaluate-commands %sh{ gokakoune-plugins }
+evaluate-commands %sh{ gokakoune-examples }
 
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
