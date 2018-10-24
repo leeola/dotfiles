@@ -41,20 +41,22 @@ hook global InsertKey <backspace> %{ try %{
 # Enable automatic modelines for all files. Eg, to adjust settings per file.
 hook global BufOpenFile .* %{modeline-parse}
 
+# tab/shift-tab broke with the most recent Kakoune, not sure why.
+# 
 # NOTE(leeola): The following window hooks seemingly need to be within a
 # WinCreate hook. This may not be correct, or there may be a better way to
 # implement this such as maybe making the window scope a global? Not sure.
-hook global WinCreate .* %{
-    hook window InsertCompletionShow .* %{
-    	map window insert <tab> <c-n>
-    	map window insert <backtab> <c-p>
-    }
-
-    hook window InsertCompletionHide .* %{
-    	unmap window insert <tab> <c-n>
-    	unmap window insert <backtab> <c-p>
-    }
-}
+# hook global WinCreate .* %{
+#     hook window InsertCompletionShow .* %{
+#     	map window insert <tab> <c-n>
+#     	map window insert <backtab> <c-p>
+#     }
+# 
+#     hook window InsertCompletionHide .* %{
+#     	unmap window insert <tab> <c-n>
+#     	unmap window insert <backtab> <c-p>
+#     }
+# }
 
 # Source custom additions, like custom user.
 source ~/.config/kak/cuser.kak
