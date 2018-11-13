@@ -67,6 +67,7 @@ source ~/.config/kak/gotools-ext.kak
 # my experimental go plugin
 evaluate-commands %sh{ gokakoune-plugins }
 evaluate-commands %sh{ gokakoune-examples }
+evaluate-commands %sh{ gokakoune-tabnine }
 
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.

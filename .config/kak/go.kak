@@ -38,7 +38,7 @@
 
 
 # Enable autocomplete for go files
-hook global WinSetOption filetype=go %{go-enable-autocomplete}
+# hook global WinSetOption filetype=go %{go-enable-autocomplete}
 
 # Enable Golang goimports on file save
 hook global BufWritePost .*\.go %{go-ext-imports}
