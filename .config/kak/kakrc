@@ -34,9 +34,6 @@ hook global InsertKey <backspace> %{ try %{
   exec -draft hGh<a-k>\A\h+\Z<ret>gihyp<lt>
 }}
 
-# Highlight trailing whitespace
-#disabled, the highlighter broke in updated version of kak.
-#hook global WinCreate .* %{addhl regex '\h+$' 0:default,red}
 
 # Enable automatic modelines for all files. Eg, to adjust settings per file.
 hook global BufOpenFile .* %{modeline-parse}
@@ -46,15 +43,18 @@ hook global BufOpenFile .* %{modeline-parse}
 # WinCreate hook. This may not be correct, or there may be a better way to
 # implement this such as maybe making the window scope a global? Not sure.
 hook global WinCreate .* %{
-    hook window InsertCompletionShow .* %{
-    	map window insert <tab> <c-n>
-    	map window insert <s-tab> <c-p>
-    }
+  # Highlight trailing whitespace
+  addhl window/ regex '\h+$' 0:default,red
 
-    hook window InsertCompletionHide .* %{
-    	unmap window insert <tab> <c-n>
-    	unmap window insert <s-tab> <c-p>
-    }
+  hook window InsertCompletionShow .* %{
+  	map window insert <tab> <c-n>
+  	map window insert <s-tab> <c-p>
+  }
+
+  hook window InsertCompletionHide .* %{
+  	unmap window insert <tab> <c-n>
+  	unmap window insert <s-tab> <c-p>
+  }
 }
 
 # Source custom additions, like custom user.
