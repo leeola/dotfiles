@@ -1,8 +1,16 @@
+# include plugin manager
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+# plugins
+plug "andreyorst/fzf.kak"
+
+set-option global fzf_file_command 'rg'
+
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
-def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git/*" -not -path "./_stores/*" -not -path "./node_modules/*" } %{ edit %arg{1} }
+# def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git/*" -not -path "./_stores/*" -not -path "./node_modules/*" } %{ edit %arg{1} }
 
 # This binding replicates my CtrlP usage for the above command.
-map global user p ":find "
+# map global user p ":find "
 
 # Set relative line numbers whenever a window is opened.
 hook global KakBegin .* %{addhl global/ number-lines -hlcursor -separator ' ' -relative}

@@ -12,7 +12,7 @@ def -hidden cuser-mode %{
 
   on-key %{ evaluate-commands %sh{
     case $kak_key in
-      p) echo execute-keys ":find<space><tab>" ;;
+      p) echo execute-keys ":fzf-mode<ret>f" ;;
       b) echo cuser-buffer-mode ;;
       a) echo cuser-tmux-mode ;;
       \") echo cuser-copy-mode ;;
@@ -23,17 +23,19 @@ def -hidden cuser-mode %{
 
 def -hidden cuser-buffer-mode %{
   info -title "buffer mode" %{
-    b: select buffer
+    b: find buffer
     d: delete buffer
+    s: search buffer
     n: next
     p: previous
   }
   on-key %{ evaluate-commands %sh{
     case $kak_key in
-      b) echo execute-keys ':buffer<space>' ;;
+      b) echo execute-keys ":fzf-mode<ret>b";;
       d) echo delete-buffer ;;
       p) echo buffer-previous ;;
       n) echo buffer-next ;;
+      s) echo execute-keys ":fzf-mode<ret>s";;
     esac
   }
 }}
