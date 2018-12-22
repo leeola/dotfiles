@@ -29,3 +29,5 @@
   pager       = true
 [pager]
   diff = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
