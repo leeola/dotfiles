@@ -1,0 +1,16 @@
+[language.rust]
+filetypes = ["rust"]
+roots = ["Cargo.toml"]
+command = "rls"
+
+[language.typescript]
+filetypes = ["typescript"]
+roots = ["package.json"]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language.typescriptreact]
+filetypes = ["typescriptreact"]
+roots = ["package.json"]
+command = "typescript-language-server"
+args = ["--stdio"]
