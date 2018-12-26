@@ -86,3 +86,8 @@ evaluate-commands %sh{ gokakoune-tabnine }
 # the old space to , which clears selection.
 map global normal , <space>
 map global normal <space> :cuser-mode<ret>
+
+# hack to fix scrolling related to an issue:
+#
+# see: https://github.com/mawww/kakoune/issues/2651
+set global ui_options ncurses_wheel_down_button=64
