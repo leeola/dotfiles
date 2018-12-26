@@ -92,3 +92,9 @@ set global ui_options ncurses_wheel_down_button=64
 # not with plug.kak.
 eval %sh{kak-lsp --kakoune -s $kak_session}
 lsp-enable
+
+set global lsp_tab_size 2
+
+hook global WinSetOption filetype=(rust|typescript|typescriptreact) %{
+  hook window BufWritePre .* lsp-formatting-sync
+}
