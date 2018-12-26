@@ -4,6 +4,11 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 # plugins
 plug "andreyorst/fzf.kak"
 
+# enable kak-lsp. This is installed via brew manually,
+# not with plug.kak.
+eval %sh{kak-lsp --kakoune -s $kak_session}
+lsp-enable
+
 set-option global fzf_file_command 'rg'
 
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
