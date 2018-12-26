@@ -95,6 +95,6 @@ lsp-enable
 
 set global lsp_tab_size 2
 
-hook global WinSetOption filetype=(rust|typescript|typescriptreact) %{
+hook global WinSetOption filetype=(typescript|typescriptreact) %{
   hook window BufWritePre .* lsp-formatting-sync
 }
