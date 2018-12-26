@@ -66,3 +66,23 @@ def -hidden cuser-tmux-mode %{
   }
 }}
 
+def -hidden -override cuser-lang-mode %{
+  info -title "go mode" %{
+    e: jump error line
+    j: jump definition
+    i: show information
+    h: highlight references
+    r: rename
+    `: diagnostics
+  }
+  on-key %{ evaluate-commands %sh{
+    case $kak_key in
+      e) echo lsp-find-error ;;
+      j) echo lsp-definition ;;
+      i) echo lsp-hover ;;
+      h) echo lsp-highlight-references ;;
+      r) echo prompt "rename?" %{ lsp-rename %val{text} }  ;;
+      \`) echo lsp-diagnostics  ;;
+    esac
+  }}
+}

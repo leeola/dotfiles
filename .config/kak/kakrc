@@ -4,11 +4,6 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 # plugins
 plug "andreyorst/fzf.kak"
 
-# enable kak-lsp. This is installed via brew manually,
-# not with plug.kak.
-eval %sh{kak-lsp --kakoune -s $kak_session}
-lsp-enable
-
 set-option global fzf_file_command 'rg'
 
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
@@ -73,6 +68,7 @@ hook global WinCreate .* %{
 # Source custom additions, like custom user.
 source ~/.config/kak/cuser.kak
 source ~/.config/kak/code-err.kak
+source ~/.config/kak/typescriptreact.kak
 # Source my custom language specific configs.
 source ~/.config/kak/go.kak
 source ~/.config/kak/gotools-ext.kak
@@ -91,3 +87,8 @@ map global normal <space> :cuser-mode<ret>
 #
 # see: https://github.com/mawww/kakoune/issues/2651
 set global ui_options ncurses_wheel_down_button=64
+
+# enable kak-lsp. This is installed via brew manually,
+# not with plug.kak.
+eval %sh{kak-lsp --kakoune -s $kak_session}
+lsp-enable
