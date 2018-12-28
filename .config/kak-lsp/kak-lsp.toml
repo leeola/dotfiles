@@ -1,3 +1,9 @@
+[language.go]
+filetypes = ["go"]
+roots = ["go.mod", ".git"]
+command = "bingo"
+args = ["-mode", "stdio", '--logfile', '/tmp/lspserver.log', '--trace', '--pprof', ':6060']
+
 [language.rust]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
