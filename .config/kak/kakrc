@@ -83,11 +83,6 @@ evaluate-commands %sh{ gokakoune-tabnine }
 map global normal , <space>
 map global normal <space> :cuser-mode<ret>
 
-# hack to fix scrolling related to an issue:
-#
-# see: https://github.com/mawww/kakoune/issues/2651
-set global ui_options ncurses_wheel_down_button=64
-
 # enable kak-lsp. This is installed via brew manually,
 # not with plug.kak.
 eval %sh{kak-lsp --kakoune -s $kak_session}
