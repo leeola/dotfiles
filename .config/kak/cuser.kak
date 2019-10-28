@@ -10,16 +10,19 @@ def -hidden cuser-mode %{
   # This random quote fixes the bad highlighting caused by the open quote,
   # above.
 
-  on-key %{ evaluate-commands %sh{
-    case $kak_key in
-      p) echo execute-keys ":fzf-mode<ret>f" ;;
-      b) echo cuser-buffer-mode ;;
-      a) echo cuser-tmux-mode ;;
-      \") echo cuser-copy-mode ;;
-      l) echo cuser-lang-mode ;;
-    esac
+  on-key %{
+    require-module fzf
+    evaluate-commands %sh{
+      case $kak_key in
+        p) echo execute-keys ":fzf-mode<ret>f" ;;
+        b) echo cuser-buffer-mode ;;
+        a) echo cuser-tmux-mode ;;
+        \") echo cuser-copy-mode ;;
+        l) echo cuser-lang-mode ;;
+      esac
+    }
   }
-}}
+}
 
 def -hidden cuser-buffer-mode %{
   info -title "buffer mode" %{
@@ -60,8 +63,8 @@ def -hidden cuser-tmux-mode %{
   }
   on-key %{ evaluate-commands %sh{
     case $kak_key in
-      s) echo tmux-new-horizontal ;;
-      v) echo tmux-new-vertical ;;
+      s) echo tmux-terminal-horizontal kak -c $kak_session ;;
+      v) echo tmux-terminal-vertical kak -c $kak_session ;;
     esac
   }
 }}

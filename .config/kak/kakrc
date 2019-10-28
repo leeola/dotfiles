@@ -1,10 +1,53 @@
+# Kakoune config for: Kakoune v2019.07.01
+
 # include plugin manager
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-# plugins
-plug "andreyorst/fzf.kak"
+#
+# ## plugins
+#
 
-set-option global fzf_file_command 'rg'
+# commit from 10/28, no compat reason.
+plug "andreyorst/fzf.kak" commit "c6e894a" defer "fzf" %{
+  set-option global fzf_file_command 'rg'
+}
+
+# commit from 10/28, no compat reason.
+plug "ul/kak-lsp" commit "82ead01" do %{
+  cargo build --release --locked
+  cargo install --force --path . # `--path .' is needed by recent versions of cargo
+} config %{
+  set-option global lsp_diagnostic_line_error_sign '║'
+  set-option global lsp_diagnostic_line_warning_sign '┊'
+
+  define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
+  define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
+  define-command ee -docstring 'go to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
+
+  define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+
+  hook global WinSetOption filetype=(c|cpp|rust) %{
+    set-option window lsp_auto_highlight_references true
+    set-option window lsp_hover_anchor false
+    lsp-auto-hover-enable
+    lsp-enable-window
+  }
+
+  hook global WinSetOption filetype=(rust) %{
+    set-option window lsp_server_configuration rust.clippy_preference="on"
+  }
+
+  hook global WinSetOption filetype=rust %{
+    hook window BufWritePre .* %{
+      evaluate-commands %sh{
+        test -f rustfmt.toml && printf lsp-formatting-sync
+      }
+    }
+  }
+
+  hook global KakEnd .* lsp-exit
+}
+
 
 # find implements my desire for CtrlP-like fuzzy finder in kakoune.
 # def find -params 1 -shell-candidates %{ find . -type f -not -path "./vendor/*" -not -path "./.git/*" -not -path "./_stores/*" -not -path "./node_modules/*" } %{ edit %arg{1} }
@@ -14,11 +57,6 @@ set-option global fzf_file_command 'rg'
 
 # Set relative line numbers whenever a window is opened.
 hook global KakBegin .* %{addhl global/ number-lines -hlcursor -separator ' ' -relative}
-
-# Set the default colorscheme to my custom gruvbox implementation.
-
-# See .config/kak/colors/gruvly.kak for more details.
-colorscheme gruvly
 
 # Set the default tab width
 set global tabstop 2
@@ -67,16 +105,16 @@ hook global WinCreate .* %{
 
 # Source custom additions, like custom user.
 source ~/.config/kak/cuser.kak
-source ~/.config/kak/code-err.kak
-source ~/.config/kak/typescriptreact.kak
+# source ~/.config/kak/code-err.kak
+# source ~/.config/kak/typescriptreact.kak
 # Source my custom language specific configs.
-source ~/.config/kak/go.kak
-source ~/.config/kak/gotools-ext.kak
+# source ~/.config/kak/go.kak
+# source ~/.config/kak/gotools-ext.kak
 
 # my experimental go plugin
-evaluate-commands %sh{ gokakoune-plugins }
-evaluate-commands %sh{ gokakoune-examples }
-evaluate-commands %sh{ gokakoune-tabnine }
+#evaluate-commands %sh{ gokakoune-plugins }
+#evaluate-commands %sh{ gokakoune-examples }
+#evaluate-commands %sh{ gokakoune-tabnine }
 
 # Bind the custom user mode entry point to space,  my normal leader
 # the old space to , which clears selection.
@@ -86,15 +124,15 @@ map global normal <space> :cuser-mode<ret>
 # hack to fix scrolling related to an issue:
 #
 # see: https://github.com/mawww/kakoune/issues/2651
-set global ui_options ncurses_wheel_down_button=64
+#set global ui_options ncurses_wheel_down_button=64
 
 # enable kak-lsp. This is installed via brew manually,
 # not with plug.kak.
-eval %sh{kak-lsp --kakoune -s $kak_session}
-lsp-enable
+#eval %sh{kak-lsp --kakoune -s $kak_session}
+#lsp-enable
 
-set global lsp_tab_size 2
+#set global lsp_tab_size 2
 
-hook global WinSetOption filetype=(typescript|typescriptreact) %{
-  hook window BufWritePre .* lsp-formatting-sync
-}
+# hook global WinSetOption filetype=(typescript|typescriptreact) %{
+#   hook window BufWritePre .* lsp-formatting-sync
+# }
