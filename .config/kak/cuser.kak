@@ -86,7 +86,7 @@ def -hidden -override cuser-lang-mode %{
       e) echo lsp-find-error ;;
       j) echo lsp-definition ;;
       i) echo lsp-hover ;;
-      f) echo lsp-formatting-sync ;;
+      f) echo lsp-formatting ;;
       h) echo lsp-highlight-references ;;
       r) echo prompt "rename?" %{ lsp-rename %val{text} }  ;;
       \`) echo lsp-diagnostics  ;;
