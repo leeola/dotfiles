@@ -70,9 +70,10 @@ def -hidden cuser-tmux-mode %{
 }}
 
 def -hidden -override cuser-lang-mode %{
-  info -title "go mode" %{
+  info -title "lang mode" %{
     c: show lsp capabilities
     e: jump error line
+    w: jump warning line
     j: jump definition
     i: show information
     f: format
@@ -84,6 +85,7 @@ def -hidden -override cuser-lang-mode %{
     case $kak_key in
       c) echo lsp-capabilities ;;
       e) echo lsp-find-error ;;
+      w) echo lsp-find-error --include-warnings ;;
       j) echo lsp-definition ;;
       i) echo lsp-hover ;;
       f) echo lsp-formatting ;;

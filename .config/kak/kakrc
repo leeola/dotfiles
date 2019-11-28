@@ -7,6 +7,11 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 # ## plugins
 #
 
+# basic theme
+plug "andreyorst/base16-gruvbox.kak" theme config %{
+  colorscheme base16-gruvbox-dark-medium
+}
+
 # commit from 10/28, no compat reason.
 plug "andreyorst/fzf.kak" commit "c6e894a" defer "fzf" %{
   set-option global fzf_file_command 'rg'
@@ -41,6 +46,8 @@ plug "ul/kak-lsp" commit "82ead01" do %{
     hook window BufWritePre .* %{
       lsp-formatting-sync
     }
+
+    set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
   }
 
   hook global KakEnd .* lsp-exit
