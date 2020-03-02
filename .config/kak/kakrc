@@ -65,7 +65,6 @@ hook global KakBegin .* %{addhl global/ number-lines -hlcursor -separator ' ' -r
 
 # Set the default tab width
 set global tabstop 2
-
 # Make tab 2 space chars.
 set global indentwidth 2
 
@@ -141,3 +140,11 @@ map global normal <space> :cuser-mode<ret>
 # hook global WinSetOption filetype=(typescript|typescriptreact) %{
 #   hook window BufWritePre .* lsp-formatting-sync
 # }
+
+# Rust specific config.
+hook global WinSetOption filetype=(rust) %{
+    # Set the default tab width
+    set buffer tabstop 4
+    # Make tab 4 space chars.
+    set buffer indentwidth 4
+}
