@@ -59,11 +59,8 @@
   environment.systemPackages = with pkgs; [
     fish
     kakoune
-    git
     firefox
-    _1password
-    slack
-    spotify
+    git
   ];
 
   nixpkgs.config.allowUnfree = true;
