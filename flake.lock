@@ -36,10 +36,27 @@
         "type": "github"
       }
     },
+    "plug_kak": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599166630,
+        "narHash": "sha256-N5pWSwwlk5po8cK5j7aelKwNt6SCLDmreeC/46BVyVw=",
+        "owner": "robertmeta",
+        "repo": "plug.kak",
+        "rev": "cf02b00f3764cbd03ce9ab6eec2f4eed035c0737",
+        "type": "github"
+      },
+      "original": {
+        "owner": "robertmeta",
+        "repo": "plug.kak",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plug_kak": "plug_kak"
       }
     }
   },

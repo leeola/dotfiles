@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ plug_kak }: { pkgs, ... }:
 {
     home.packages = [
       pkgs.htop
@@ -9,12 +9,10 @@
       pkgs.blender
     ];
 
-    # programs.git = {
-    #     enable = true;
-    #     includes = [ { path = ./.gitconfig; } ];
-    # };
-
     home.file = {
         ".gitconfig".source = ./.gitconfig;
+        ".config/kak/kakrc".source = ./.config/kak/kakrc;
+        ".config/kak/cuser.kak".source = ./.config/kak/cuser.kak;
+        ".config/kak/plugins/plug.kak".source = plug_kak;
     };
 }
