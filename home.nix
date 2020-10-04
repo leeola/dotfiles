@@ -25,5 +25,6 @@
         # An after-file hook to run `kak -e plug-install` could.. in theory..
         # mutate what it wants. Though the output wouldn't be deterministic.. hmm
         # ".config/kak/plugins/plug.kak".source = plug_kak;
+        ".tmux.conf".source = ./.tmux.conf;
     };
 }
