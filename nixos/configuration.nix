@@ -121,6 +121,7 @@
   users.users.lee = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
   };
 
   # This value determines the NixOS release from which the default
