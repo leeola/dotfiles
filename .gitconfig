@@ -29,8 +29,10 @@
   pager       = true
 [pager]
   diff = false
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+# Disabled while i setup Nix. I didn't have a key on this machine
+# and it was causing git clones to fail.
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
