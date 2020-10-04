@@ -9,6 +9,7 @@
       pkgs.blender
       pkgs.fzf
       pkgs.ripgrep
+      pkgs.rustup
     ];
 
     home.file = {
