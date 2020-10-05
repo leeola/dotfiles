@@ -11,6 +11,9 @@
       pkgs.fzf
       pkgs.ripgrep
       pkgs.rustup
+      # gcc + binutils for buildessential-like behavior
+      pkgs.gcc
+      pkgs.binutils
     ];
 
     home.file = {
