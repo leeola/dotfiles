@@ -61,6 +61,14 @@
     kakoune
     firefox
     git
+    # Using this to swap between Bluetooth A2DP and HFP/HSP modes,
+    # allowing AirPods Pro and JayBirds3 to be used with a mic.
+    #
+    # NOTE: At the time of writing, AirPods Pro didn't work with mic,
+    # as it said HFP/HSP was "unavailable" in the dropdown. I'm hoping it's
+    # due to an older bluetooth dongle, so i'm ordering a newer one. Fingers
+    # crossed.
+    pavucontrol
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -93,17 +101,18 @@
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
-    # extraModules = [ pkgs.pulseaudio-modules-bt ];
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };
 
   # Bluetooth
   hardware.bluetooth.enable = true;
-  # hardware.bluetooth.config.General = {
+  hardware.bluetooth.config.General = {
     # ControllerMode = "dual";
     # ControllerMode = "bredr";
-    # Enable = "Source,Sink,Media,Socket";
-  # };
+    Enable = "Source,Sink,Media,Socket";
+  };
+  # services.blueman.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
