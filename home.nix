@@ -30,5 +30,6 @@
         ".config/fish/config.fish".source = ./fish/config.fish;
         ".config/fish/functions/dot.fish".source = ./fish/functions/dot.fish;
         ".tmux.conf".source = ./.tmux.conf;
+        ".config/alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
     };
 }
