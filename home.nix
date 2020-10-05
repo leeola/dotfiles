@@ -4,16 +4,24 @@
       pkgs.htop
       pkgs.alacritty
       pkgs.tmux
+      pkgs.blender
       pkgs.spotify
       pkgs._1password
-      pkgs.slack
-      pkgs.blender
       pkgs.fzf
       pkgs.ripgrep
       pkgs.rustup
       # gcc + binutils for buildessential-like behavior
       pkgs.gcc
       pkgs.binutils
+      pkgs.alsaLib
+
+      # productivity / work software
+      pkgs.kontact
+      pkgs.slack
+      pkgs.zoom-us
+
+      # dev software
+      pkgs.insomnia
     ];
 
     home.file = {
