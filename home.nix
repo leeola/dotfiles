@@ -2,6 +2,7 @@
 {
     home.packages = [
       pkgs.htop
+      pkgs.alacritty
       pkgs.tmux
       pkgs.spotify
       pkgs._1password
