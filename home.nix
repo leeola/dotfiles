@@ -1,6 +1,12 @@
 { plug_kak }: { pkgs, ... }:
 {
+    # lorri works alongside direnv to avoid needing to constantly use nix-shell.
+    services.lorri.enable = true;
+
     home.packages = [
+      # Enable environments per directory. A companion to lorri,
+      # enabled below.
+      pkgs.direnv
       pkgs.htop
       pkgs.alacritty
       pkgs.tmux
@@ -10,10 +16,6 @@
       pkgs.fzf
       pkgs.ripgrep
       pkgs.rustup
-      # gcc + binutils for buildessential-like behavior
-      pkgs.gcc
-      pkgs.binutils
-      pkgs.alsaLib
 
       # productivity / work software
       pkgs.kontact
