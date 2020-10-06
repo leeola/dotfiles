@@ -3,27 +3,27 @@
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
 
-    home.packages = [
+    home.packages = with pkgs; [
       # Enable environments per directory. A companion to lorri,
       # enabled below.
-      pkgs.direnv
-      pkgs.htop
-      pkgs.alacritty
-      pkgs.tmux
-      pkgs.blender
-      pkgs.spotify
-      pkgs._1password
-      pkgs.fzf
-      pkgs.ripgrep
-      pkgs.rustup
+      direnv
+      htop
+      alacritty
+      tmux
+      blender
+      spotify
+      _1password
+      fzf
+      ripgrep
+      rustup
 
       # productivity / work software
-      pkgs.kontact
-      pkgs.slack
-      pkgs.zoom-us
+      kontact
+      slack
+      zoom-us
 
       # dev software
-      pkgs.insomnia
+      insomnia
     ];
 
     home.file = {
