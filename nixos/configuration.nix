@@ -30,6 +30,8 @@
   #  }
   #'';
 
+  # Required to make bluetooth HSP/HFP mode work for my older PC.
+  hardware.enableAllFirmware = true;
 
   networking.hostName = "spew"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -103,6 +105,18 @@
     enable = true;
     extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
+    # extraConfig = "
+    #   load-module module-switch-on-connect
+    # ";
+    # configFile = pkgs.writeText "default.pa" ''
+    #   load-module module-bluetooth-policy
+    #   load-module module-bluetooth-discover
+    #   # module fails to load with
+    #   ##   module-bluez5-device.c: Failed to get device path from module arguments
+    #   ##   module.c: Failed to load module "module-bluez5-device" (argument: ""): initialization failed.
+    #   # load-module module-bluez5-device
+    #   # load-module module-bluez5-discover
+    # '';
   };
 
   # Bluetooth
