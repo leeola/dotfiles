@@ -17,6 +17,7 @@
       fzf
       ripgrep
       rustup
+      discord
 
       # productivity / work software
       kontact
