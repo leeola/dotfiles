@@ -29,6 +29,7 @@
     ];
 
     home.file = {
+      ".config/nixpkgs/config.nix".source = ./nixpkgs/config.nix;
         ".gitconfig".source = ./.gitconfig;
         ".config/kak/kakrc".source = ./.config/kak/kakrc;
         ".config/kak/cuser.kak".source = ./.config/kak/cuser.kak;
