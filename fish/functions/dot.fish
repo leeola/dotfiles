@@ -5,6 +5,9 @@ function dot
   end
 
   switch $argv[1]
+  case ""
+    # open a subshell at the dotfiles dir for ease
+    env -C $DOTFILES $SHELL
   case git kak
     # plain git and kak functionality
     env -C $DOTFILES $argv
