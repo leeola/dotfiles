@@ -48,7 +48,7 @@ plug "ul/kak-lsp" commit "82ead01" do %{
       lsp-formatting-sync
     }
 
-    set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+    set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /home/lee/kak-lsp.log"
   }
 
   hook global KakEnd .* lsp-exit
