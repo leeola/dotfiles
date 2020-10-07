@@ -75,6 +75,9 @@
 
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  # Including opengl as part of my attempt to get Vulkan working,
+  # no idea if this is needed... :sus:
+  hardware.opengl.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
