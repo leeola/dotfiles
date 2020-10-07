@@ -13,6 +13,7 @@
       blender
       spotify
       _1password
+      kak-lsp
       fzf
       ripgrep
       rustup
