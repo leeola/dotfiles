@@ -4,6 +4,9 @@
     services.lorri.enable = true;
 
     home.packages = with pkgs; [
+      #
+      # # utilities
+      unzip
       # Enable environments per directory. A companion to lorri,
       # enabled below.
       direnv
@@ -19,12 +22,14 @@
       rustup
       discord
 
-      # productivity / work software
+      #
+      # # productivity / work software
       kontact
       slack
       zoom-us
 
-      # dev software
+      #
+      # # dev software
       insomnia
     ];
 
