@@ -21,6 +21,7 @@
       ripgrep
       rustup
       discord
+      signal-desktop
 
       #
       # # productivity / work software
