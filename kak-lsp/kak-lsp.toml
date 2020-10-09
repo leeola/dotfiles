@@ -7,6 +7,8 @@ args = ["-mode", "stdio", '--logfile', '/tmp/lspserver.log', '--trace', '--pprof
 [language.rust]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
+# Experimenting with RA, but so far it's not great..
+# command = "rust-analyzer"
 command = "rls"
 
 [language.typescript]
