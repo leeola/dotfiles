@@ -55,6 +55,8 @@
         # ".config/kak/plugins/plug.kak".source = plug_kak;
         ".config/fish/config.fish".source = ./fish/config.fish;
         ".config/fish/functions/dot.fish".source = ./fish/functions/dot.fish;
+        ".config/fish/functions/pbp.fish".source = ./fish/functions/pbp.fish;
+        ".config/fish/functions/pbc.fish".source = ./fish/functions/pbc.fish;
         ".tmux.conf".source = ./.tmux.conf;
         ".config/alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
     };
