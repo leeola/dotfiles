@@ -45,13 +45,16 @@ def -hidden cuser-buffer-mode %{
 
 def -hidden cuser-copy-mode %{
   info -title "copy mode" %{
-    p: paste from clipboard
     y: yank to clibpard
+    p: paste from clipboard
   }
   on-key %{ evaluate-commands %sh{
+    # TODO: make this work with Linux and Mac
     case $kak_key in
-      p) echo execute-keys '!pbpaste<ret>' ;;
-      y) echo execute-keys '<a-|>pbcopy<ret>' ;;
+      # p) echo execute-keys '!pbpaste<ret>' ;;
+      # y) echo execute-keys '<a-|>pbcopy<ret>' ;;
+      y) echo execute-keys '<a-|>xclip<space>-i<space>-selection<space>c<ret>' ;;
+      p) echo execute-keys '!xclip<space>-o<space>-selection<space>c<ret>' ;;
     esac
   }
 }}

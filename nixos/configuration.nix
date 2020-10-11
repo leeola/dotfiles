@@ -63,6 +63,7 @@
     kakoune
     firefox
     git
+    xclip
     # Using this to swap between Bluetooth A2DP and HFP/HSP modes,
     # allowing AirPods Pro and JayBirds3 to be used with a mic.
     #
