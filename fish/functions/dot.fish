@@ -11,7 +11,7 @@ function dot
   case git kak
     # plain git and kak functionality
     env -C $DOTFILES $argv
-  case st ci ls au df dc co
+  case st ci ls au df dc co push
     # git shortcuts
     env -C $DOTFILES git $argv
   case home
