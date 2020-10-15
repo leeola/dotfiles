@@ -7,6 +7,9 @@
       #
       # # utilities
       unzip
+      etcher      # iso burner
+      screenfetch # bizarrely named system info fetching
+
       # Enable environments per directory. A companion to lorri,
       # enabled below.
       direnv
