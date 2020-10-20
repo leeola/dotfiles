@@ -147,9 +147,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lee = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.fish;
   };
+
+  # Enable Docker.
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
