@@ -28,6 +28,8 @@
       rustup
       discord
       signal-desktop
+      # Not available in my lock i think. I need to commit some changes before i screw with the lock.
+      # bottom # A CLI system monitor
 
       #
       # # productivity / work software
@@ -62,5 +64,6 @@
         ".config/fish/functions/pbc.fish".source = ./fish/functions/pbc.fish;
         ".tmux.conf".source = ./.tmux.conf;
         ".config/alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
+        ".config/bottom/bottom.toml".source = ./bottom/bottom.toml;
     };
 }
