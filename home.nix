@@ -33,7 +33,7 @@
 
       #
       # # productivity / work software
-      kontact
+      albert
       slack
       zoom-us
 
