@@ -4,6 +4,7 @@
 { config, lib, pkgs, ... }:
 
 {
+  # !??!?!?!?!?!?!?! What is this
   # imports =
   #   [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
   #   ];

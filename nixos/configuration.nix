@@ -162,5 +162,40 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
 
+
+  #
+  # # Setup OpenVPN
+  #
+  # ## Usage
+  #
+  # Start the vpn:
+  # ```
+  # sudo systemctl start openvpn-officeVPN.service
+  # ```
+  #
+  # Tools to debug:
+  # ```
+  # systemctl status openvpn-officeVPN.service
+  # journalctl -xe
+  #
+  # ```
+  #
+  # ## Notes
+  #
+  # There's something exported config.. so i was getitng a failure indicating that
+  # /etc/openvpn/update-resolv-conf didn't exist. I'm guessing it's because the config
+  # inhibits Nix's ability to configure the proper resolve location?
+  #
+  # Regardless, the below environment.etc modification got it working. Which
+  # seems to softlink the proper resolve location into the default path.
+  services.openvpn.servers = {
+    officeVPN  = {
+      config = '' config /home/lee/work/client.ovpn '';
+      autoStart = false;
+      updateResolvConf = true;
+    };
+  };
+  environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
+
 }
 
