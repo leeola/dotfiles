@@ -61,7 +61,7 @@
   environment.systemPackages = with pkgs; [
     fish
     kakoune
-    firefox
+    firefox-bin
     git
     xclip
     # Using this to swap between Bluetooth A2DP and HFP/HSP modes,
