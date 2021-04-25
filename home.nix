@@ -17,7 +17,6 @@
       etcher      # iso burner
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.
-      gnuplot # a plotter, used by some benching tools.
       notify-desktop
 
       # Enable environments per directory. A companion to lorri,
@@ -53,6 +52,7 @@
       # # dev software
       insomnia
       jetbrains.datagrip
+      gnuplot # a plotter, used by some benching tools.
 
       # Disabled because i'm not using a cam atm.
       # #
