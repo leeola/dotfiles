@@ -3,12 +3,22 @@
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
 
+    # Toying with overlaps, i have no idea how to make this work... :sus:
+    # import nixpkgs.overlays = [
+    #   (self: super: {
+    #     blender = super.blender.override { version = "2.91.0"; };
+    #   })
+    # ];
+
     home.packages = with pkgs; [
       #
       # # utilities
       unzip
       etcher      # iso burner
       screenfetch # bizarrely named system info fetching
+      bc # Unix math command, useful for Kakoune.
+      gnuplot # a plotter, used by some benching tools.
+      notify-desktop
 
       # Enable environments per directory. A companion to lorri,
       # enabled below.
@@ -36,10 +46,20 @@
       albert
       slack
       zoom-us
+      google-chrome # web dev, ugh
+      brave # debating switching to it?
 
       #
       # # dev software
       insomnia
+      jetbrains.datagrip
+
+      # Disabled because i'm not using a cam atm.
+      # #
+      # # # web cam focused packages
+      # # obs-v4l2sink
+      # # obs-studio
+      # # linuxPackages.v4l2loopback
     ];
 
     home.file = {
