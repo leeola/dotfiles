@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs-kak, ... }:
 
 {
   nix = {
@@ -60,7 +60,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     fish
-    kakoune
+    nixpkgs-kak.legacyPackages.x86_64-linux.kakoune
     firefox-bin
     git
     xclip

@@ -3,6 +3,7 @@
 
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager = {
           url = "github:nix-community/home-manager";
           inputs.nixpkgs.follows = "/nixpkgs";
@@ -13,7 +14,7 @@
       };
   };
 
-  outputs = { home-manager, nixpkgs, plug_kak, ... }: {
+  outputs = { home-manager, nixpkgs, plug_kak, nixpkgs-kak, ... }: {
 
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -23,17 +24,22 @@
 	# system = "x86_64-linux";
 	# modules = [ ./nixos/configuration.nix ];
     # };
+    #kak = nixpkgs-kak.packages.x86_64.kakoune;
+    #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
     nixosConfigurations = {
       pc = nixpkgs.lib.nixosSystem {
-        # inherit  gii
 	system = "x86_64-linux";
+	specialArgs = { inherit nixpkgs-kak; };
 	modules = [
     	  ./nixos/configuration.nix
     	  home-manager.nixosModules.home-manager
     	  {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.lee = import ./home.nix { plug_kak = plug_kak; };
+            home-manager.users.lee = import ./home.nix {
+              plug_kak = plug_kak;
+              nixpkgs-kak = nixpkgs-kak;
+            };
             # home-manager.users.lee = import ./home.nix;
     	  }
 	];

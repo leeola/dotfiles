@@ -1,4 +1,4 @@
-{ plug_kak }: { pkgs, ... }:
+{ plug_kak, nixpkgs-kak }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -29,7 +29,7 @@
       spotify
       _1password
       git-lfs
-      kak-lsp
+      nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
       rust-analyzer
       cargo-edit
       fzf

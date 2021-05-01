@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kak": {
+      "locked": {
+        "lastModified": 1619232882,
+        "narHash": "sha256-QS5CWxDYobx5cH3dm61k8jwgJlc4TCAo+o/9GwAc51M=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "93de027ee045d0c1fbf13418fb86d86e6309b962",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "plug_kak": {
       "flake": false,
       "locked": {
@@ -56,6 +72,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-kak": "nixpkgs-kak",
         "plug_kak": "plug_kak"
       }
     }
