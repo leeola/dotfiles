@@ -72,6 +72,7 @@
     # due to an older bluetooth dongle, so i'm ordering a newer one. Fingers
     # crossed.
     pavucontrol
+    killall
   ];
 
   nixpkgs.config.allowUnfree = true;
