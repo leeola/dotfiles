@@ -29,8 +29,8 @@
       spotify
       _1password
       git-lfs
-      nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
-      rust-analyzer
+      # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
+      nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
       cargo-edit
       fzf
       ripgrep
