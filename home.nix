@@ -1,4 +1,4 @@
-{ plug_kak, nixpkgs-kak }: { pkgs, ... }:
+{ plug_kak, nixpkgs-kak, obsidian }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -18,16 +18,18 @@
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.
       notify-desktop
-
+      # note taker
+      obsidian.obsidian
       # Enable environments per directory. A companion to lorri,
       # enabled below.
       direnv
       htop
       alacritty
+      obsidian.wezterm
       tmux
-      blender
+      obsidian.blender
       spotify
-      _1password
+      obsidian._1password-gui
       git-lfs
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
       nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
@@ -35,15 +37,19 @@
       fzf
       ripgrep
       rustup
-      discord
-      signal-desktop
+      obsidian.discord
+      obsidian.signal-desktop
       # Not available in my lock i think. I need to commit some changes before i screw with the lock.
       # bottom # A CLI system monitor
+      obsidian.fira-code
+      obsidian.fontconfig
+
+      obsidian.squashfsTools
 
       #
       # # productivity / work software
-      albert
-      slack
+      obsidian.albert
+      obsidian.slack
       zoom-us
       google-chrome # web dev, ugh
       brave # debating switching to it?
@@ -51,7 +57,7 @@
       #
       # # dev software
       insomnia
-      jetbrains.datagrip
+      obsidian.jetbrains.datagrip
       gnuplot # a plotter, used by some benching tools.
 
       # Disabled because i'm not using a cam atm.
