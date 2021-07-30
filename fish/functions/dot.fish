@@ -18,7 +18,9 @@ function dot
     # a shortcut to edit the home config
     env -C $DOTFILES kak home.nix
   case switch
-    env -C $DOTFILES sudo nixos-rebuild switch --flake .#pc
+    env -C $DOTFILES sudo nixos-rebuild switch --flake .#
+  case test
+    env -C $DOTFILES sudo nixos-rebuild test --flake .#
   case "*"
     echo "unknown dot command: "$argv[1]
     return 1
