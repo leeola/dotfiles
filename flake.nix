@@ -2,11 +2,11 @@
   description = "A very basic flake";
 
   inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
       nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       obsidian.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager = {
-          url = "github:nix-community/home-manager";
+          url = "github:nix-community/home-manager/release-21.05";
           inputs.nixpkgs.follows = "/nixpkgs";
       };
       plug_kak = {
@@ -38,11 +38,11 @@
     #kak = nixpkgs-kak.packages.x86_64.kakoune;
     #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
     nixosConfigurations = {
-      pc = nixpkgs.lib.nixosSystem {
+      desk = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
 	specialArgs = { inherit nixpkgs-kak; inherit obsidian; };
 	modules = [
-    	  ./nixos/configuration.nix
+    	  ./system/desk/configuration.nix
     	  home-manager.nixosModules.home-manager
     	  {
             home-manager.useGlobalPkgs = true;

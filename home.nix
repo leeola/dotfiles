@@ -10,11 +10,12 @@
     #   })
     # ];
 
+    imports = [ ./dconf.nix ];
+
     home.packages = with pkgs; [
       #
       # # utilities
       unzip
-      etcher      # iso burner
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.
       notify-desktop
