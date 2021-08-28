@@ -13,12 +13,11 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 #   colorscheme base16-gruvbox-dark-medium
 # }
 
-# commit from 10/28, no compat reason.
-plug "andreyorst/fzf.kak" commit "c6e894a" defer "fzf" %{
+# commit from 2021/08/02, no compat reason.
+plug "andreyorst/fzf.kak" commit "124c3a2" demand "fzf-file" %{
   set-option global fzf_file_command 'rg'
 }
 
-# commit from 10/28, no compat reason.
 plug "ul/kak-lsp" do %{
   cargo build --release --locked
   cargo install --force --path . # `--path .' is needed by recent versions of cargo

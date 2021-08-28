@@ -10,7 +10,7 @@
           inputs.nixpkgs.follows = "/nixpkgs";
       };
       plug_kak = {
-          url = "github:robertmeta/plug.kak";
+          url = "github:andreyorst/plug.kak";
           flake = false;
       };
   };

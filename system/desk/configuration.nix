@@ -81,9 +81,12 @@
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ];
     shell = pkgs.fish;
   };
+
+  # Enable Docker.
+  virtualisation.docker.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
@@ -93,6 +96,8 @@
     kakoune
     firefox-wayland
     git
+
+    wl-clipboard
 
     # desktop look & feel
     gnome3.gnome-tweak-tool
@@ -104,8 +109,13 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.vitals
     gnomeExtensions.sound-output-device-chooser
+    gnomeExtensions.fullscreen-notifications
     # BUG: screenshot tool fails on use. Need to figure out why.
     # gnomeExtensions.screenshot-tool
+    gnomeExtensions.emoji-selector
+
+    # xdg-desktop-portal
+    # xdg-desktop-portal-wlr
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -135,5 +145,38 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
 
+  #
+  # # Setup OpenVPN
+  #
+  # ## Usage
+  #
+  # Start the vpn:
+  # ```
+  # sudo systemctl start openvpn-officeVPN.service
+  # ```
+  #
+  # Tools to debug:
+  # ```
+  # systemctl status openvpn-officeVPN.service
+  # journalctl -xe
+  #
+  # ```
+  #
+  # ## Notes
+  #
+  # There's something exported config.. so i was getitng a failure indicating that
+  # /etc/openvpn/update-resolv-conf didn't exist. I'm guessing it's because the config
+  # inhibits Nix's ability to configure the proper resolve location?
+  #
+  # Regardless, the below environment.etc modification got it working. Which
+  # seems to softlink the proper resolve location into the default path.
+  services.openvpn.servers = {
+    officeVPN  = {
+      config = '' config /home/lee/work/client.ovpn '';
+      autoStart = false;
+      updateResolvConf = true;
+    };
+  };
+  environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
 }
 
