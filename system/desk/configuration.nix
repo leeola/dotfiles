@@ -47,9 +47,11 @@
   services.xserver.enable = true;
   services.xserver.xkbOptions = "caps:swapescape";
 
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = false;
   services.xserver.desktopManager.gnome.enable = true;
   # services.xserver.displayManager.lightdm.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
@@ -61,7 +63,6 @@
    #services.xserver.displayManager.gdm.nvidiaWayland = true;
   services.dbus.packages = [ pkgs.gnome3.dconf ];
   services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
-  
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -94,10 +95,8 @@
   environment.systemPackages = with pkgs; [
     fish
     kakoune
-    firefox-wayland
+    firefox
     git
-
-    wl-clipboard
 
     # desktop look & feel
     gnome3.gnome-tweak-tool
