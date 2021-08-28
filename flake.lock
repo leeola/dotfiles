@@ -72,15 +72,15 @@
     "plug_kak": {
       "flake": false,
       "locked": {
-        "lastModified": 1599166630,
-        "narHash": "sha256-N5pWSwwlk5po8cK5j7aelKwNt6SCLDmreeC/46BVyVw=",
-        "owner": "robertmeta",
+        "lastModified": 1624709158,
+        "narHash": "sha256-TObcciNUNj0ztM8UyTKfeLU0TNwUE5h+hVJRNQbPhx0=",
+        "owner": "andreyorst",
         "repo": "plug.kak",
-        "rev": "cf02b00f3764cbd03ce9ab6eec2f4eed035c0737",
+        "rev": "b70f4767c12ac47ff326717a84ef9cf942baa1b4",
         "type": "github"
       },
       "original": {
-        "owner": "robertmeta",
+        "owner": "andreyorst",
         "repo": "plug.kak",
         "type": "github"
       }

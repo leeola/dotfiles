@@ -32,8 +32,9 @@
       spotify
       obsidian._1password-gui
       git-lfs
+      obsidian.kak-lsp
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
-      nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
+      # nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
       cargo-edit
       fzf
       ripgrep
@@ -52,8 +53,9 @@
       obsidian.albert
       obsidian.slack
       zoom-us
-      google-chrome # web dev, ugh
+      obsidian.google-chrome # web dev, ugh
       brave # debating switching to it?
+      obsidian.chromium # testing wayland compat
 
       #
       # # dev software

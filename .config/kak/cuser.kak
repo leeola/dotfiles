@@ -49,12 +49,12 @@ def -hidden cuser-copy-mode %{
     p: paste from clipboard
   }
   on-key %{ evaluate-commands %sh{
-    # TODO: make this work with Linux and Mac
+    # TODO: make this work with Linux (wayland and x..) and Mac
     case $kak_key in
       # p) echo execute-keys '!pbpaste<ret>' ;;
       # y) echo execute-keys '<a-|>pbcopy<ret>' ;;
-      y) echo execute-keys '<a-|>xclip<space>-i<space>-selection<space>c<ret>' ;;
-      p) echo execute-keys '!xclip<space>-o<space>-selection<space>c<ret>' ;;
+      y) echo execute-keys '<a-|>wl-copy<ret>' ;;
+      p) echo execute-keys '!wl-paste<ret>' ;;
     esac
   }
 }}
