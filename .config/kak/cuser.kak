@@ -53,8 +53,10 @@ def -hidden cuser-copy-mode %{
     case $kak_key in
       # p) echo execute-keys '!pbpaste<ret>' ;;
       # y) echo execute-keys '<a-|>pbcopy<ret>' ;;
-      y) echo execute-keys '<a-|>wl-copy<ret>' ;;
-      p) echo execute-keys '!wl-paste<ret>' ;;
+      #y) echo execute-keys '<a-|>wl-copy<ret>' ;;
+      #p) echo execute-keys '!wl-paste<ret>' ;;
+      y) echo execute-keys '<a-|>xclip<space>-i<space>-selection<space>c<ret>' ;;
+      p) echo execute-keys '!xclip<space>-o<space>-selection<space>c<ret>' ;;
     esac
   }
 }}

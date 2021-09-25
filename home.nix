@@ -15,6 +15,7 @@
     home.packages = with pkgs; [
       #
       # # utilities
+      xclip
       unzip
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.

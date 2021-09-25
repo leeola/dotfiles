@@ -95,7 +95,7 @@
   environment.systemPackages = with pkgs; [
     fish
     kakoune
-    firefox
+    firefox-bin
     git
 
     # desktop look & feel
@@ -109,9 +109,8 @@
     gnomeExtensions.vitals
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.fullscreen-notifications
-    # BUG: screenshot tool fails on use. Need to figure out why.
-    # gnomeExtensions.screenshot-tool
-    gnomeExtensions.emoji-selector
+    gnomeExtensions.screenshot-tool
+    gjs # NOTE: seems to be a dependency of the prev Screenshot tool
 
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
