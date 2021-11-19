@@ -34,6 +34,7 @@
       obsidian._1password-gui
       git-lfs
       obsidian.kak-lsp
+      obsidian.kakoune
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
       # nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
       cargo-edit
@@ -63,6 +64,13 @@
       insomnia
       obsidian.jetbrains.datagrip
       gnuplot # a plotter, used by some benching tools.
+      obsidian.hurl # Curl based test format
+
+      # Music tooling
+      obsidian.musescore
+      obsidian.bitwig-studio
+      #obsidian.pianoteq-standard-trial
+      #pianoteq-stage-trial
 
       # Disabled because i'm not using a cam atm.
       # #
