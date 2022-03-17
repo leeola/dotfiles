@@ -13,15 +13,37 @@
           url = "github:andreyorst/plug.kak";
           flake = false;
       };
+
+      nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+      darwin.url = "github:lnl7/nix-darwin/master";
+      darwin.inputs.nixpkgs.follows = "nixpkgs";
+      home-manager-darwin.url = "github:nix-community/home-manager";
   };
 
-  outputs = { home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, ... }:
+  outputs = {
+      home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian,
+      nixpkgs-darwin, darwin, home-manager-darwin,
+      ... }:
   let
     obsidian-pkgs = import obsidian {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
   in {
+    darwinConfigurations."mbp2017" = darwin.lib.darwinSystem {
+      system = "x86_64-darwin";
+      modules = [
+          ./system/mbp2017/darwin-configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.lee = import ./home/mbp2017.nix;
+          }
+      ];
+      inputs = { inherit nixpkgs-darwin darwin home-manager-darwin; };
+    };
+
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
     #defaultPackage.x86_64-linux = self.packages.x86_64-linux.hello;
