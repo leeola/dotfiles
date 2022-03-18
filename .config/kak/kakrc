@@ -1,10 +1,14 @@
 # Kakoune config for: Kakoune v2019.07.01
 
 # include plugin manager
-# source "%val{config}/plugins/plug.kak/rc/plug.kak"
+# source "%val{config}/nix_plugins/plug.kak/rc/plug.kak"
+# plug "andreyorst/plug.kak" noload config %{
+#     set-option global plug_install_dir %sh{ echo $HOME/.config/kak/nix_plugins }
+# }
 
 #
-# ## plugins
+# plugins
+# -------
 #
 
 # Disabled while i setup Nix
@@ -13,8 +17,11 @@
 #   colorscheme base16-gruvbox-dark-medium
 # }
 
-# # commit from 2021/08/02, no compat reason.
-# plug "andreyorst/fzf.kak" commit "124c3a2" demand "fzf-file" %{
+# commit from 2021/08/02, no compat reason.
+source "%val{config}/nix_plugins/fzf.kak/rc/fzf.kak"
+source "%val{config}/nix_plugins/fzf.kak/rc/modules/fzf-file.kak"
+source "%val{config}/nix_plugins/fzf.kak/rc/modules/fzf-buffer.kak"
+# plug "andreyorst/fzf.kak" noload demand "fzf-file" %{
 #   set-option global fzf_file_command 'rg'
 # }
 

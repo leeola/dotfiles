@@ -21,6 +21,54 @@
         "type": "github"
       }
     },
+    "dev": {
+      "locked": {
+        "lastModified": 1647297614,
+        "narHash": "sha256-ulGq3W5XsrBMU/u5k9d4oPy65pQTkunR4HKKtTq0RwY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "73ad5f9e147c0d2a2061f1d4bd91e05078dc0b58",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "dev_kak_fzf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1643112466,
+        "narHash": "sha256-hIfq/Hf3ltufyon8VYyyCcpJ8Z2bY7XaTMsIUvuWfXo=",
+        "owner": "andreyorst",
+        "repo": "fzf.kak",
+        "rev": "010e3950419717ec9b79263674f514f1c06adb59",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andreyorst",
+        "repo": "fzf.kak",
+        "type": "github"
+      }
+    },
+    "dev_kak_plug": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644854271,
+        "narHash": "sha256-WK96PRnofyBnS6PH4xeJSNJdVdcApGZ//4GPBKvYATg=",
+        "owner": "andreyorst",
+        "repo": "plug.kak",
+        "rev": "d2bde869b077988e1c1e6f05ab94a485366516f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andreyorst",
+        "repo": "plug.kak",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -157,6 +205,9 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "dev": "dev",
+        "dev_kak_fzf": "dev_kak_fzf",
+        "dev_kak_plug": "dev_kak_plug",
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
         "nixpkgs": "nixpkgs_2",

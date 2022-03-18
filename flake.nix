@@ -14,6 +14,20 @@
           flake = false;
       };
 
+      # Dev oriented pinning/inputs
+      # ###########################
+      dev.url = "github:NixOS/nixpkgs/nixos-unstable";
+      # Kakoune plugin manager. Not really useful with Nix, but
+      # currently handles the integration of plugins in kak config too
+      dev_kak_plug = {
+          url = "github:andreyorst/plug.kak";
+          flake = false;
+      };
+      dev_kak_fzf = {
+          url = "github:andreyorst/fzf.kak";
+          flake = false;
+      };
+
       nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
       darwin.url = "github:lnl7/nix-darwin/master";
       darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,8 +35,9 @@
   };
 
   outputs = {
-      home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian,
+      home-manager, nixpkgs, nixpkgs-kak, obsidian, plug_kak,
       nixpkgs-darwin, darwin, home-manager-darwin,
+      dev, dev_kak_plug, dev_kak_fzf,
       ... }:
   let
     obsidian-pkgs = import obsidian {
@@ -38,7 +53,11 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.lee = import ./home/mbp2017.nix;
+            # NIT: Not sure if this is the ideal way to pass in the inputs to HomeManager,
+            # need to research this.
+            home-manager.users.lee = import ./home/mbp2017.nix {
+              inherit dev dev_kak_plug dev_kak_fzf;
+            };
           }
       ];
       inputs = { inherit nixpkgs-darwin darwin home-manager-darwin; };
