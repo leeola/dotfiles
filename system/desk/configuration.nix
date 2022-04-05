@@ -114,8 +114,6 @@
 
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
-
-    pianoteq-stage-trial
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

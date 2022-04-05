@@ -1,4 +1,4 @@
-{ plug_kak, nixpkgs-kak, obsidian }: { pkgs, ... }:
+{ helix, plug_kak, nixpkgs-kak, obsidian }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -47,8 +47,12 @@
       # bottom # A CLI system monitor
       obsidian.fira-code
       obsidian.fontconfig
+      obsidian.docker-compose
 
       obsidian.squashfsTools
+      helix
+      vim
+      #obsidian.helix
 
       #
       # # productivity / work software
@@ -78,6 +82,9 @@
       # # obs-v4l2sink
       # # obs-studio
       # # linuxPackages.v4l2loopback
+
+      # Misc
+      obsidian.sweethome3d.application
     ];
 
     home.file = {
