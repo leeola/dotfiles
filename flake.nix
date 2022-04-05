@@ -2,24 +2,53 @@
   description = "A very basic flake";
 
   inputs = {
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
       nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       obsidian.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager = {
-          url = "github:nix-community/home-manager/release-21.05";
+          url = "github:nix-community/home-manager/release-21.11";
           inputs.nixpkgs.follows = "/nixpkgs";
       };
       plug_kak = {
           url = "github:andreyorst/plug.kak";
           flake = false;
       };
+      # Helix editor
+      helix.url = "github:leeola/helix/22.03-diag-next-err";
+      helix.inputs.nixpkgs.follows = "obsidian";
   };
 
-  outputs = { home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, ... }:
+  outputs = { helix, home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, ... }:
   let
     obsidian-pkgs = import obsidian {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
+      overlays = [
+        (final: prev: {
+          # rustPlatform.buildRustPackage rec {
+          # helix = prev.helix.override prev.rustPlatform.buildRustPackage rec {
+          # helixWtf = prev.helix.override import helix_flake {};
+          # helixWtf = final.helix.overrideAttrs (oldAttrs: rec {
+          #   pname = "helixWtf";
+          #   version = "22.03";
+          #   src = prev.fetchFromGitHub {
+          #     owner = "helix-editor";
+          #     repo = oldAttrs.pname;
+          #     rev = "22.03";
+          #     fetchSubmodules = true;
+          #     sha256 = "sha256-anUYKgr61QQmdraSYpvFY/2sG5hkN3a2MwplNZMEyfI=";
+          #   };
+          #   #cargoSha256 = "sha256-/1qQF2/ylTtj6Z91XP+kIIkty65vJQ7Phcc9LZV3VoQ=";
+          #   #cargoSha256 = prev.lib.fakeSha256;
+          #   # cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+          #   # cargoSha256 = prev.lib.fakeSha256;
+          #   # orig:
+          #   #  cargoSha256 = "0000000000000000000000000000000000000000000000000000";
+          #   #  cargoSha256 = "sha256-/EATU7HsGNB35YOBp8sofbPd1nl4d3Ggj1ay3QuHkCI=";
+          #   # cargoDepsName = "helix-22.03";
+          # });
+        })
+      ];
     };
   in {
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
@@ -51,6 +80,8 @@
               plug_kak = plug_kak;
               nixpkgs-kak = nixpkgs-kak;
               obsidian = obsidian-pkgs;
+              helix = helix.packages.x86_64-linux.helix;
+              # helix = helix;
             };
             # home-manager.users.lee = import ./home.nix;
     	  }
