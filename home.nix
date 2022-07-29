@@ -29,7 +29,8 @@
       alacritty
       obsidian.wezterm
       tmux
-      obsidian.blender
+      obsidian.blender_latest
+      obsidian.krita
       spotify
       obsidian._1password-gui
       git-lfs

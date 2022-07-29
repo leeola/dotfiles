@@ -46,6 +46,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.xkbOptions = "caps:swapescape";
+  services.xserver.wacom.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
