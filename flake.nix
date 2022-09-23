@@ -48,14 +48,15 @@
           #   # cargoDepsName = "helix-22.03";
           # });
 
-          blender_latest = prev.blender.overrideAttrs (old: rec {
-            pname = "blender";
-            version = "3.2.0";
-            src = prev.fetchurl {
-              url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-              sha256 = "sha256-k78LL1urcQWxnF1lSoSi3CH3Ylhzo2Bk2Yvq5zbTYEo=";
-            };               
-          });
+          # # Don't need to override blender at the moment.
+          # blender_latest = prev.blender.overrideAttrs (old: rec {
+          #   pname = "blender";
+          #   version = "3.2.0";
+          #   src = prev.fetchurl {
+          #     url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
+          #     sha256 = "sha256-k78LL1urcQWxnF1lSoSi3CH3Ylhzo2Bk2Yvq5zbTYEo=";
+          #   };               
+          # });
         })
       ];
     };
