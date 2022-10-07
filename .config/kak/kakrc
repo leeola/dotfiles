@@ -8,7 +8,7 @@
 
 #
 # plugins
-# -------
+# =======
 #
 
 # Disabled while i setup Nix
@@ -17,13 +17,19 @@
 #   colorscheme base16-gruvbox-dark-medium
 # }
 
-# commit from 2021/08/02, no compat reason.
+
+# Fuzzy Finder
+# ------------
 source "%val{config}/nix_plugins/fzf.kak/rc/fzf.kak"
 source "%val{config}/nix_plugins/fzf.kak/rc/modules/fzf-file.kak"
 source "%val{config}/nix_plugins/fzf.kak/rc/modules/fzf-buffer.kak"
-# plug "andreyorst/fzf.kak" noload demand "fzf-file" %{
-#   set-option global fzf_file_command 'rg'
-# }
+hook global ModuleLoaded fzf %{
+    set-option global fzf_file_command 'rg'
+}
+
+# Language Server
+# ---------------
+
 
 # plug "ul/kak-lsp" do %{
 #   cargo build --release --locked
