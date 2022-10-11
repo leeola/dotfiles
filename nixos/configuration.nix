@@ -73,6 +73,8 @@
     # crossed.
     pavucontrol
     killall
+    # provides utilities for webcam. Notably v4l2-ctl
+    v4l-utils
   ];
 
   nixpkgs.config.allowUnfree = true;
