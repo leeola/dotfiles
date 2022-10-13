@@ -57,6 +57,15 @@
           #     sha256 = "sha256-k78LL1urcQWxnF1lSoSi3CH3Ylhzo2Bk2Yvq5zbTYEo=";
           #   };               
           # });
+
+          obsidian_latest = prev.obsidian.overrideAttrs (old: rec {
+            version = "1.0.0";
+            filename = if prev.stdenv.isDarwin then "Obsidian-${version}-universal.dmg" else "obsidian-${version}.tar.gz";
+            src = prev.fetchurl {
+              url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/${filename}";
+              sha256 = if prev.stdenv.isDarwin then "1q9almr8k1i2wzksd09libgnvypj5k9j15y6cxg4rgnw32fa152n" else "sha256-H1Cl9SBz/mwN8gezFkcV4KxI7+xVjQV2AtyLKyjVpI8=";
+            };
+          });
         })
       ];
     };
