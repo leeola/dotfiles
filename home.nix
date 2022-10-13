@@ -21,7 +21,7 @@
       bc # Unix math command, useful for Kakoune.
       notify-desktop
       # note taker
-      obsidian.obsidian
+      obsidian.obsidian_latest
       # Enable environments per directory. A companion to lorri,
       # enabled below.
       direnv
