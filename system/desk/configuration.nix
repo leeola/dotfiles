@@ -42,6 +42,9 @@
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   # };
+  
+  # moonlander keyboard support.
+  hardware.keyboard.zsa.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -83,7 +86,7 @@
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "plugdev" ];
     shell = pkgs.fish;
   };
 
@@ -115,6 +118,8 @@
 
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
+    
+    wally-cli
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
