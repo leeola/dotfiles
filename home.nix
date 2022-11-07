@@ -1,4 +1,4 @@
-{ helix, plug_kak, nixpkgs-kak, obsidian }: { pkgs, ... }:
+{ helix, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -53,7 +53,7 @@
       obsidian.squashfsTools
       helix
       vim
-      #obsidian.helix
+      nix_lsp_nil
 
       #
       # # productivity / work software

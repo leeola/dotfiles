@@ -16,9 +16,14 @@
       # Helix editor
       helix.url = "github:leeola/helix/22.03-diag-next-err";
       helix.inputs.nixpkgs.follows = "obsidian";
+      # Nix language LSP
+      nix_lsp_nil = {
+        url = "github:oxalica/nil";
+        inputs.nixpkgs.follows = "obsidian";
+      };
   };
 
-  outputs = { helix, home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, ... }:
+  outputs = { helix, home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, ... }:
   let
     obsidian-pkgs = import obsidian {
       system = "x86_64-linux";
@@ -101,6 +106,7 @@
               obsidian = obsidian-pkgs;
               helix = helix.packages.x86_64-linux.helix;
               # helix = helix;
+              nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
             };
             # home-manager.users.lee = import ./home.nix;
     	  }
