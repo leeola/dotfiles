@@ -59,7 +59,7 @@
       # # productivity / work software
       obsidian.albert
       obsidian.slack
-      zoom-us
+      obsidian.zoom-us
       obsidian.google-chrome # web dev, ugh
       brave # debating switching to it?
       obsidian.chromium # testing wayland compat
