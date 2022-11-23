@@ -48,7 +48,11 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.xkbOptions = "caps:swapescape";
+  # Disabled, because now i flash my keyboards via QMK, so no need for
+  # software swap. Fancy.
+  #
+  # services.xserver.xkbOptions = "caps:swapescape";
+  services.xserver.xkbOptions = "";
   services.xserver.wacom.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -119,7 +123,12 @@
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
     
+    # moonlander keyboard flashing tool
     wally-cli
+    # qmk udev configuration necessary to flash qmk keyboards.
+    qmk-udev-rules
+    # qmk_cli tool
+    qmk
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
