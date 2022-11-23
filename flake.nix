@@ -53,15 +53,16 @@
           #   # cargoDepsName = "helix-22.03";
           # });
 
-          # # Don't need to override blender at the moment.
-          # blender_latest = prev.blender.overrideAttrs (old: rec {
-          #   pname = "blender";
-          #   version = "3.2.0";
-          #   src = prev.fetchurl {
-          #     url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-          #     sha256 = "sha256-k78LL1urcQWxnF1lSoSi3CH3Ylhzo2Bk2Yvq5zbTYEo=";
-          #   };               
-          # });
+          blender_latest = (prev.blender.overrideAttrs (old: rec {
+            pname = "blender";
+            version = "3.3.0";
+            src = prev.fetchurl {
+              url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
+              sha256 = "sha256-IsUaTmY4XLFIGKpNdtz3+m1uEDr7DTaRbhLqFZiNIfA=";
+            };               
+          })).override {
+            cudaSupport = true;
+          };
 
           obsidian_latest = prev.obsidian.overrideAttrs (old: rec {
             version = "1.0.0";
