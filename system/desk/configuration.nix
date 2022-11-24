@@ -51,8 +51,7 @@
   # Disabled, because now i flash my keyboards via QMK, so no need for
   # software swap. Fancy.
   #
-  # services.xserver.xkbOptions = "caps:swapescape";
-  services.xserver.xkbOptions = "";
+  # services.xserver.xkbOptions = "caps:caps";
   services.xserver.wacom.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
