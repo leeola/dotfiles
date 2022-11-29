@@ -87,6 +87,7 @@
       # Misc
       obsidian.sweethome3d.application
       obsidian.mpv
+      obsidian.vlc
     ];
 
     home.file = {
