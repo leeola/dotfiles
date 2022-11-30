@@ -49,6 +49,7 @@
       obsidian.fira-code
       obsidian.fontconfig
       obsidian.docker-compose
+      mosh
 
       obsidian.squashfsTools
       helix
