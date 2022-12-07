@@ -19,6 +19,7 @@
       unzip
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.
+      obsidian._1password-gui
       notify-desktop
       # note taker
       obsidian.obsidian_latest
