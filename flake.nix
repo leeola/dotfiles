@@ -29,7 +29,7 @@
       system = "x86_64-linux";
       config = { allowUnfree = true; };
       overlays = [
-        (final: prev: {
+        (final: prev: rec {
           # rustPlatform.buildRustPackage rec {
           # helix = prev.helix.override prev.rustPlatform.buildRustPackage rec {
           # helixWtf = prev.helix.override import helix_flake {};
@@ -52,14 +52,19 @@
           #   #  cargoSha256 = "sha256-/EATU7HsGNB35YOBp8sofbPd1nl4d3Ggj1ay3QuHkCI=";
           #   # cargoDepsName = "helix-22.03";
           # });
-
+            
+          freetype_brotli = prev.freetype.overrideAttrs (old: rec {
+            nativeBuildInputs = old.nativeBuildInputs ++ [ prev.brotli ];
+          });
+          
           blender_latest = (prev.blender.overrideAttrs (old: rec {
             pname = "blender";
-            version = "3.3.0";
+            version = "3.4.0";
             src = prev.fetchurl {
               url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-              sha256 = "sha256-IsUaTmY4XLFIGKpNdtz3+m1uEDr7DTaRbhLqFZiNIfA=";
+              sha256 = "sha256-KdBpOcUQ43NHEboW8nqtzMbtVRzhRq6eN6zUosohNJo=";
             };               
+            nativeBuildInputs = old.nativeBuildInputs ++ [ prev.libepoxy freetype_brotli ];
           })).override {
             cudaSupport = true;
           };
