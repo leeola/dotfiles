@@ -116,4 +116,6 @@
         ".config/alacritty/alacritty.yml".source = ./alacritty/alacritty.yml;
         ".config/bottom/bottom.toml".source = ./bottom/bottom.toml;
     };
+
+    home.stateVersion = "21.11";
 }

@@ -68,7 +68,9 @@
 
    #hardware.nvidia.modesetting.enable = true;
    #services.xserver.displayManager.gdm.nvidiaWayland = true;
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
+
+  # Not available in 22.11 it seems
+  # services.dbus.packages = [ pkgs.gnome3.dconf ];
   services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 
   # Configure keymap in X11
@@ -106,7 +108,6 @@
     git
 
     # desktop look & feel
-    gnome3.gnome-tweak-tool
     gnome.gnome-shell-extensions
     matcha-gtk-theme
 
