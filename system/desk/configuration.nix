@@ -107,6 +107,8 @@
     kakoune
     firefox-bin
     git
+    # Get back my damn full screen terminal. Wtf Gnome Console?
+    gnome.gnome-terminal
 
     # desktop look & feel
     gnome.gnome-shell-extensions
