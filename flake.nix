@@ -14,7 +14,8 @@
           flake = false;
       };
       # Helix editor
-      helix.url = "github:leeola/helix/22.03-diag-next-err";
+      # helix.url = "github:leeola/helix/22.03-diag-next-err";
+      helix.url = "github:helix-editor/helix/22.12";
       helix.inputs.nixpkgs.follows = "obsidian";
       # Nix language LSP
       nix_lsp_nil = {
