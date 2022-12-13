@@ -112,13 +112,13 @@
     gnome.gnome-terminal
 
     # desktop look & feel
-    # gnome.gnome-shell-extensions
-    # matcha-gtk-theme
+    gnome.gnome-shell-extensions
+    matcha-gtk-theme
 
     # extensions
     # gnomeExtensions.appindicator
-    # gnomeExtensions.dash-to-panel
-    # gnomeExtensions.vitals
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.vitals
     # gnomeExtensions.sound-output-device-chooser
     # gnomeExtensions.fullscreen-notifications
     # gnomeExtensions.screenshot-tool
