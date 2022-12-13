@@ -111,17 +111,17 @@
     gnome.gnome-terminal
 
     # desktop look & feel
-    gnome.gnome-shell-extensions
-    matcha-gtk-theme
+    # gnome.gnome-shell-extensions
+    # matcha-gtk-theme
 
     # extensions
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.vitals
-    gnomeExtensions.sound-output-device-chooser
-    gnomeExtensions.fullscreen-notifications
-    gnomeExtensions.screenshot-tool
-    gjs # NOTE: seems to be a dependency of the prev Screenshot tool
+    # gnomeExtensions.appindicator
+    # gnomeExtensions.dash-to-panel
+    # gnomeExtensions.vitals
+    # gnomeExtensions.sound-output-device-chooser
+    # gnomeExtensions.fullscreen-notifications
+    # gnomeExtensions.screenshot-tool
+    # gjs # NOTE: seems to be a dependency of the prev Screenshot tool
 
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
