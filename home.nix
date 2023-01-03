@@ -90,6 +90,7 @@
       obsidian.sweethome3d.application
       obsidian.mpv
       obsidian.vlc
+      v4l-utils
     ];
 
     home.file = {
