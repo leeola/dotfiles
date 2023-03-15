@@ -15,11 +15,30 @@
     experimental-features = nix-command flakes
   '';
 
+  boot.loader.timeout = 25;
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
-  boot.loader.timeout = 15;
+  # boot.loader.grub.configurationLimit = 20;
+  # boot.loader.grub.extraEntries = ''
+  #   menuentry "Windows 10 1 1" {
+  #     insmod part_msdos
+  #     insmod chain
+  #     set root='(hd1,gpt1)'
+  #     chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+  #   }
+  #   menuentry "Windows 10 0 1" {
+  #     insmod part_msdos
+  #     insmod chain
+  #     set root='(hd0,gpt1)'
+  #     chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+  #   }
+  # '';
 
   networking.hostName = "desk"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -108,6 +127,12 @@
     kakoune
     firefox-bin
     git
+
+    # Some utils that were handy to manually get multi-OS jiggery done.
+    parted
+    os-prober
+    woeusb-ng
+
     # Get back my damn full screen terminal. Wtf Gnome Console?
     gnome.gnome-terminal
 
