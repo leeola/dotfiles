@@ -51,6 +51,7 @@
       obsidian.fontconfig
       obsidian.docker-compose
       mosh
+      flameshot # screenshot utility
 
       obsidian.squashfsTools
       helix
