@@ -71,6 +71,7 @@
       # # dev software
       insomnia
       obsidian.jetbrains.datagrip
+      obsidian.jetbrains.clion
       gnuplot # a plotter, used by some benching tools.
       obsidian.hurl # Curl based test format
 
