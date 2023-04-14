@@ -61,10 +61,10 @@
           
           blender_latest = (prev.blender.overrideAttrs (old: rec {
             pname = "blender";
-            version = "3.4.1";
+            version = "3.5.0";
             src = prev.fetchurl {
               url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-              sha256 = "sha256-JHxMEignDJAQ9HIcmFy1tiirUKvPnyZ4Ywc3FC7rkcM=";
+              sha256 = "sha256-QoYuhtnPaQSZHwqMvmLIAlBb6SV7Gc8EPsCI3M7nFOM=";
             };               
             nativeBuildInputs = old.nativeBuildInputs ++ [ prev.libepoxy freetype_brotli ];
           })).override {
