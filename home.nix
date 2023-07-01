@@ -1,4 +1,4 @@
-{ helix, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil }: { pkgs, ... }:
+{ plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -19,7 +19,6 @@
       unzip
       screenfetch # bizarrely named system info fetching
       bc # Unix math command, useful for Kakoune.
-      obsidian._1password-gui
       notify-desktop
       # note taker
       obsidian.obsidian_latest
@@ -33,16 +32,12 @@
       obsidian.blender_latest
       obsidian.krita
       spotify
-      obsidian._1password-gui
       git-lfs
       obsidian.kak-lsp
       obsidian.kakoune
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
-      # nixpkgs-kak.legacyPackages.x86_64-linux.rust-analyzer
-      cargo-edit
       fzf
       ripgrep
-      rustup
       obsidian.discord
       obsidian.signal-desktop
       # Not available in my lock i think. I need to commit some changes before i screw with the lock.
@@ -54,7 +49,8 @@
       flameshot # screenshot utility
 
       obsidian.squashfsTools
-      helix
+      # helix
+      obsidian.helix
       vim
       nix_lsp_nil
 
