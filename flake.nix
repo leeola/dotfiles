@@ -23,9 +23,13 @@
         url = "github:oxalica/nil";
         inputs.nixpkgs.follows = "obsidian";
       };
+      nix_lsp_nixd = {
+        url = "github:nix-community/nixd";
+        inputs.nixpkgs.follows = "obsidian";
+      };
   };
 
-  outputs = { home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, ... }:
+  outputs = { home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd, ... }:
   let
     obsidian-pkgs = import obsidian {
       system = "x86_64-linux";
@@ -113,6 +117,7 @@
               nixpkgs-kak = nixpkgs-kak;
               obsidian = obsidian-pkgs;
               nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
+              nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
             };
             # home-manager.users.lee = import ./home.nix;
     	  }
