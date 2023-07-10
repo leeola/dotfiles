@@ -1,4 +1,4 @@
-{ plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil }: { pkgs, ... }:
+{ plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd }: { pkgs, ... }:
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -53,6 +53,7 @@
       obsidian.helix
       vim
       nix_lsp_nil
+      nix_lsp_nixd
 
       #
       # # productivity / work software
@@ -62,6 +63,7 @@
       obsidian.google-chrome # web dev, ugh
       brave # debating switching to it?
       obsidian.chromium # testing wayland compat
+      pritunl-client
 
       #
       # # dev software
