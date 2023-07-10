@@ -116,6 +116,15 @@
     shell = pkgs.fish;
   };
 
+  # Adding this due to the message:
+  #   Failed assertions:
+  #   - users.users.lee.shell is set to fish, but
+  #   programs.fish.enable is not true. This will cause the fish
+  #   shell to lack the basic nix directories in its PATH and might make
+  #   logging in as that user impossible. You can fix it with:
+  #   programs.fish.enable = true;
+  programs.fish.enable = true;
+
   # Enable Docker.
   virtualisation.docker.enable = true;
 
