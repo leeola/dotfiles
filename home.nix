@@ -63,7 +63,7 @@
       obsidian.google-chrome # web dev, ugh
       brave # debating switching to it?
       obsidian.chromium # testing wayland compat
-      pritunl-client
+      obsidian.pritunl-client
 
       #
       # # dev software
