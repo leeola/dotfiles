@@ -104,28 +104,31 @@
     #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
     nixosConfigurations = {
       desk = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
-	specialArgs = { inherit nixpkgs-kak; inherit obsidian; };
-	modules = [
-    	  ./system/desk/configuration.nix
-    	  home-manager.nixosModules.home-manager
-    	  {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.lee = import ./home.nix {
-              plug_kak = plug_kak;
-              nixpkgs-kak = nixpkgs-kak;
-              obsidian = obsidian-pkgs;
-              nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
-              nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
-            };
-            # home-manager.users.lee = import ./home.nix;
-    	  }
-	];
+        system = "x86_64-linux";
+        specialArgs = { inherit nixpkgs-kak; inherit obsidian; };
+        modules = [
+          	  ./system/desk/configuration.nix
+          	  home-manager.nixosModules.home-manager
+          	  {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users.lee = import ./home.nix {
+                    plug_kak = plug_kak;
+                    nixpkgs-kak = nixpkgs-kak;
+                    obsidian = obsidian-pkgs;
+                    nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
+                    nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
+                  };
+                  # home-manager.users.lee = import ./home.nix;
+          	  }
+        ];
+      };
+      closet = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+      	  ./system/closet/configuration.nix
+        ];
       };
     };
-
   };
-
-
 }

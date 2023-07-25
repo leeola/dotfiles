@@ -9,6 +9,11 @@
       ./hardware-configuration.nix
     ];
 
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -64,10 +69,11 @@
     #  thunderbird
     #];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keyFiles = [
-      /etc/nixos/ssh/authorized_keys  
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJc8zqhshx+cSdrJqffeCKRGwbCI66rdxnpvK6wT1KqPuHaWQxL1nmiNk9n5ilP3sylGVZNCPYjerNLnF9cSnIJ8SpEb2MYRvdopBcjULw39b2msJG7SeRJPhy/htwGPEBPvNzGh5J1kgrSrdNoCZ/h83MvEAOdiEXULfgTm/1USD5fH9syEYbpiqNVESlLL5hGkQo8HvctgKW63UIwh33MOVCt/n5FTX0MAqBoHlKX7HIfZ/ySZ+WZTFzsYWq5JHKFdYuHZAvPXmBmNH54Qsto9CNHWi8vgIVcv8evZQtxO/jX4/hFDc+pg1HGjQtBIzNt/bav0WN/jnxmP7NoVrd lee@home"
     ];
   };
+  programs.fish.enable = true;
   programs.mosh.enable = true;
   virtualisation.docker.enable = true;
 
@@ -75,6 +81,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     fish
+    git
     tmux
     helix
     kakoune
