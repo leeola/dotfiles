@@ -148,6 +148,15 @@
     };
   };
 
+  services.plex = {
+    enable = true;
+    openFirewall = true;
+    dataDir = "/mnt/gen01/appstate/plex";
+  };
+  # For:
+  # - Plex
+  nixpkgs.config.allowUnfree = true;
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
