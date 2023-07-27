@@ -105,11 +105,19 @@
   services.openssh.enable = true;
   services.openssh.passwordAuthentication = false;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [
+    # NFSv4
+    2049
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+
+  services.nfs.server.enable = true;
+  services.nfs.server.exports = ''
+    /export       192.168.1.48(rw,fsid=0,no_subtree_check)          192.168.1.57(rw,fsid=0,no_subtree_check)          192.168.1.218(rw,fsid=0,no_subtree_check)
+    /export/gen01 192.168.1.48(rw,nohide,insecure,no_subtree_check) 192.168.1.57(rw,nohide,insecure,no_subtree_check) 192.168.1.218(rw,nohide,insecure,no_subtree_check)
+    /export/gen02 192.168.1.48(rw,nohide,insecure,no_subtree_check) 192.168.1.57(rw,nohide,insecure,no_subtree_check) 192.168.1.218(rw,nohide,insecure,no_subtree_check)
+  '';
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
