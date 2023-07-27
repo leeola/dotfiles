@@ -23,6 +23,16 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/gen01" = {
+    device = "/dev/disk/by-label/GEN01";
+    fsType = "ext4";
+  };
+
+  fileSystems."/mnt/gen02" = {
+    device = "/dev/disk/by-label/GEN02";
+    fsType = "ext4";
+  };
+
   swapDevices = [{
     device = "/.swapfile";
   }];
