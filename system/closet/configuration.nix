@@ -60,19 +60,19 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-    # packages = with pkgs; [
-    #  firefox
-    #  thunderbird
-    #];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJc8zqhshx+cSdrJqffeCKRGwbCI66rdxnpvK6wT1KqPuHaWQxL1nmiNk9n5ilP3sylGVZNCPYjerNLnF9cSnIJ8SpEb2MYRvdopBcjULw39b2msJG7SeRJPhy/htwGPEBPvNzGh5J1kgrSrdNoCZ/h83MvEAOdiEXULfgTm/1USD5fH9syEYbpiqNVESlLL5hGkQo8HvctgKW63UIwh33MOVCt/n5FTX0MAqBoHlKX7HIfZ/ySZ+WZTFzsYWq5JHKFdYuHZAvPXmBmNH54Qsto9CNHWi8vgIVcv8evZQtxO/jX4/hFDc+pg1HGjQtBIzNt/bav0WN/jnxmP7NoVrd lee@home"
     ];
+  };
+  users.users.veronica = {
+    isNormalUser = true;
+    extraGroups = [];
+    shell = pkgs.fish;
   };
   programs.fish.enable = true;
   programs.mosh.enable = true;
@@ -107,10 +107,15 @@
 
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [
-    # NFSv4
-    2049
+    2049 # NFSv4
+    5357 # samba-wsdd
   ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedUDPPorts = [
+    3702 # samba-wsdd
+  ];
+  # Allowping and openFirewall seem to be required for Samba.. :sus:
+  networking.firewall.allowPing = true;
+  services.samba.openFirewall = true;
 
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
@@ -118,6 +123,30 @@
     /export/gen01 192.168.1.48(rw,nohide,insecure,no_subtree_check) 192.168.1.57(rw,nohide,insecure,no_subtree_check) 192.168.1.218(rw,nohide,insecure,no_subtree_check)
     /export/gen02 192.168.1.48(rw,nohide,insecure,no_subtree_check) 192.168.1.57(rw,nohide,insecure,no_subtree_check) 192.168.1.218(rw,nohide,insecure,no_subtree_check)
   '';
+
+  services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    extraConfig = ''
+      workgroup = WORKGROUP
+      server string = smbnix
+      netbios name = smbnix
+      security = user
+      # note: localhost is the ipv6 localhost ::1
+      hosts allow = 192.168.1. 127.0.0.1 localhost
+      hosts deny = 0.0.0.0/0
+    '';
+    shares = {
+      closet_general = {
+        path = "/export";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "valid users" = "lee veronica";
+      };
+    };
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

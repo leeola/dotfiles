@@ -17,7 +17,6 @@
     { device = "/dev/disk/by-label/NIXROOT";
       fsType = "ext4";
     };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
@@ -28,9 +27,9 @@
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/gen02" = {
-    device = "/dev/disk/by-label/GEN02";
-    fsType = "ext4";
+  fileSystems."/export/gen01" = {
+    device = "/mnt/gen01";
+    options = [ "bind" ];
   };
 
   swapDevices = [{
