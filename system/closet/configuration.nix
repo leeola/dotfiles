@@ -89,6 +89,7 @@
     vim
     htop
     parted
+    snapraid
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

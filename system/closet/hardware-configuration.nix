@@ -22,6 +22,10 @@
       fsType = "vfat";
     };
 
+  fileSystems."/mnt/parity01" = {
+    device = "/dev/disk/by-label/PARITY01";
+    fsType = "ext4";
+  };
   fileSystems."/mnt/gen01" = {
     device = "/dev/disk/by-label/GEN01";
     fsType = "ext4";
