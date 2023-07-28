@@ -152,7 +152,9 @@
   services.plex = {
     enable = true;
     openFirewall = true;
-    dataDir = "/mnt/gen01/appstate/plex";
+    # TODO: Move appstate to a mut-friendly drive.
+    # dataDir = "/mnt/gen01/appstate/plex";
+    dataDir = "/var/lib/plex";
   };
   # For:
   # - Plex
