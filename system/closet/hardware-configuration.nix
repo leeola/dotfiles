@@ -26,13 +26,13 @@
     device = "/dev/disk/by-label/PARITY01";
     fsType = "ext4";
   };
-  fileSystems."/mnt/gen01" = {
-    device = "/dev/disk/by-label/GEN01";
+  fileSystems."/mnt/archive01" = {
+    device = "/dev/disk/by-label/ARCHIVE01";
     fsType = "ext4";
   };
 
-  fileSystems."/export/gen01" = {
-    device = "/mnt/gen01";
+  fileSystems."/export/archive01" = {
+    device = "/mnt/archive01";
     options = [ "bind" ];
   };
 
