@@ -110,9 +110,11 @@
   networking.firewall.allowedTCPPorts = [
     2049 # NFSv4
     5357 # samba-wsdd
+    7001 22000 # syncthing
   ];
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
+    22000 21027 # syncthing
   ];
   # Allowping and openFirewall seem to be required for Samba.. :sus:
   networking.firewall.allowPing = true;
@@ -159,6 +161,15 @@
   # For:
   # - Plex
   nixpkgs.config.allowUnfree = true;
+
+  services.syncthing = {
+    enable = true;
+    dataDir = "/mnt/archive01/lee/sync";
+    openDefaultPorts = true;
+    configDir = "/home/lee/.config/syncthing";
+    user = "lee";
+    group = "users";
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

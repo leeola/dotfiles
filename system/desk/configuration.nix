@@ -196,6 +196,29 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.05"; # Did you read the comment?
 
+  # TODO: Probably move to home configuration? /shrug
+  services.syncthing = {
+    enable = true;
+    dataDir = "/home/lee/sync";
+    openDefaultPorts = true;
+    configDir = "/home/lee/.config/syncthing";
+    user = "lee";
+    group = "users";
+    devices = {
+      "closet" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
+    };
+    folders = {
+      "blender" = {
+        path = "/home/lee/blender";
+        devices = [ "closet" ];
+      };
+      "krita" = {
+        path = "/home/lee/krita";
+        devices = [ "closet" ];
+      };
+    };
+  };
+
   #
   # # Setup OpenVPN
   #
