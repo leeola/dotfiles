@@ -110,7 +110,7 @@
   networking.firewall.allowedTCPPorts = [
     2049 # NFSv4
     5357 # samba-wsdd
-    7001 22000 # syncthing
+    22000 # syncthing
   ];
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
@@ -165,10 +165,53 @@
   services.syncthing = {
     enable = true;
     dataDir = "/mnt/archive01/lee/sync";
-    openDefaultPorts = true;
     configDir = "/home/lee/.config/syncthing";
+    overrideDevices = true;
+    overrideFolders = true;
+    openDefaultPorts = true;
     user = "lee";
     group = "users";
+    devices = {
+      "desk" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
+    };
+    extraOptions = {
+      options.globalAnnounceEnabled = false;
+      options.relaysEnabled = false;
+    };
+    folders = {
+      "blender" = {
+        path = "/mnt/archive01/lee/blender";
+        devices = [ "desk" ];
+        versioning = {
+          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+          type = "staggered";
+          params = {
+            cleanInterval = "3600"; # 1 hour in seconds
+            maxAge = "30758400"; # 356 days in seconds
+          };
+        };
+      };
+      "krita" = {
+        path = "/mnt/archive01/lee/krita";
+        devices = [ "desk" ];
+        versioning = {
+          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+          type = "staggered";
+          params = {
+            cleanInterval = "3600"; # 1 hour in seconds
+            maxAge = "30758400"; # 356 days in seconds
+          };
+        };
+      };
+      "projects" = {
+        path = "/mnt/archive01/lee/projects";
+        devices = [ "desk" ];
+      };
+      "work" = {
+        path = "/mnt/archive01/lee/work";
+        devices = [ "desk" ];
+      };
+    };
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

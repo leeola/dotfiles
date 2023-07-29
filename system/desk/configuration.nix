@@ -200,12 +200,14 @@
   services.syncthing = {
     enable = true;
     dataDir = "/home/lee/sync";
-    openDefaultPorts = true;
     configDir = "/home/lee/.config/syncthing";
+    overrideDevices = true;
+    overrideFolders = true;
+    openDefaultPorts = true;
     user = "lee";
     group = "users";
     devices = {
-      "closet" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
+      "closet" = { id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH"; };
     };
     folders = {
       "blender" = {
@@ -214,6 +216,14 @@
       };
       "krita" = {
         path = "/home/lee/krita";
+        devices = [ "closet" ];
+      };
+      "projects" = {
+        path = "/home/lee/projects";
+        devices = [ "closet" ];
+      };
+      "work" = {
+        path = "/home/lee/work";
         devices = [ "closet" ];
       };
     };
