@@ -20,6 +20,12 @@
 
   networking.hostName = "closet";
 
+  services.adguardhome = {
+    enable = true;
+    openFirewall = true;
+    settings.bind_port = 7000;
+  };
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -115,6 +121,7 @@
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
     22000 21027 # syncthing
+    53 # ? adguard?
   ];
   # Allowping and openFirewall seem to be required for Samba.. :sus:
   networking.firewall.allowPing = true;

@@ -41,7 +41,9 @@
   # '';
 
   networking.hostName = "desk"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.nameservers = [
+    "192.168.1.169"
+  ];
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
