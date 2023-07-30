@@ -41,9 +41,6 @@
   # '';
 
   networking.hostName = "desk"; # Define your hostname.
-  networking.nameservers = [
-    "192.168.1.169"
-  ];
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
@@ -52,8 +49,24 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.networkmanager.enable = true;
+  # NOTE: Not really sure the right combination of networkmanager nameserver settings to use.
+  # I had to fight nameserver to update, so it was difficult to say what is needed or correct.
+  # Ie repeatedly i could make a change here, such as disabling all of these, and nixos-switch
+  # and then no change would be reflected on the resolv.conf.
+  # Though, perhaps it actually is working and looking at resolv.conf is unrelated? :shrug.
+  # Seems to be resolv.conf based on testing, though.
+  # IMPORTANT: The only way i could get these things to show changes on resolv.conf was to toggle
+  # .dns between `default` and `none`. Based on a small sample size of testing, that worked.
+  networking.networkmanager.insertNameservers = [
+    "192.168.1.169"
+  ];
+  networking.nameservers = [
+    # Not sure why this is required, but if i leave this blank then `insertNameservers` also doesn't work,
+    # and that one is the more important for ordering. See above `IMPORTANT:` on applying.
+    "192.168.1.1"
+  ];
+  networking.networkmanager.dns = "default";
   networking.useDHCP = false;
-  # networking.interfaces.enp4s0.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
