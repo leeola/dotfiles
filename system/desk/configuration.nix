@@ -224,7 +224,15 @@
     devices = {
       "closet" = { id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH"; };
     };
+    extraOptions = {
+      options.globalAnnounceEnabled = false;
+      options.relaysEnabled = false;
+    };
     folders = {
+      "blender_config" = {
+        path = "/home/lee/.config/blender";
+        devices = [ "closet" ];
+      };
       "blender" = {
         path = "/home/lee/blender";
         devices = [ "closet" ];

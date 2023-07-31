@@ -186,6 +186,10 @@
       options.relaysEnabled = false;
     };
     folders = {
+      "blender_config" = {
+        path = "/mnt/archive01/lee/blender_config";
+        devices = [ "desk" ];
+      };
       "blender" = {
         path = "/mnt/archive01/lee/blender";
         devices = [ "desk" ];
