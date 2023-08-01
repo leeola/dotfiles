@@ -189,6 +189,14 @@
       "blender_config" = {
         path = "/mnt/archive01/lee/blender_config";
         devices = [ "desk" ];
+        versioning = {
+          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+          type = "staggered";
+          params = {
+            cleanInterval = "3600"; # 1 hour in seconds
+            maxAge = "30758400"; # 356 days in seconds
+          };
+        };
       };
       "blender" = {
         path = "/mnt/archive01/lee/blender";
