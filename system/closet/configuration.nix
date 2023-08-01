@@ -232,6 +232,19 @@
       };
     };
   };
+  systemd.timers.snapraid_sync= {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "hourly";
+    };
+  };
+  systemd.services.snapraid_sync = {
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      ExecStart = "${pkgs.snapraid}/bin/snapraid sync";
+    };
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -245,6 +258,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }
 
