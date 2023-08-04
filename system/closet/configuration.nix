@@ -60,7 +60,7 @@
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "plex" ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJc8zqhshx+cSdrJqffeCKRGwbCI66rdxnpvK6wT1KqPuHaWQxL1nmiNk9n5ilP3sylGVZNCPYjerNLnF9cSnIJ8SpEb2MYRvdopBcjULw39b2msJG7SeRJPhy/htwGPEBPvNzGh5J1kgrSrdNoCZ/h83MvEAOdiEXULfgTm/1USD5fH9syEYbpiqNVESlLL5hGkQo8HvctgKW63UIwh33MOVCt/n5FTX0MAqBoHlKX7HIfZ/ySZ+WZTFzsYWq5JHKFdYuHZAvPXmBmNH54Qsto9CNHWi8vgIVcv8evZQtxO/jX4/hFDc+pg1HGjQtBIzNt/bav0WN/jnxmP7NoVrd lee@home"
@@ -68,7 +68,7 @@
   };
   users.users.veronica = {
     isNormalUser = true;
-    extraGroups = [];
+    extraGroups = [ "plex" ];
     shell = pkgs.fish;
   };
   programs.fish.enable = true;
