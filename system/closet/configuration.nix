@@ -71,12 +71,6 @@
     extraGroups = [ "plex" ];
     shell = pkgs.fish;
   };
-  users.users.conduit = {
-    isSystemUser = true;
-    group = "conduit";
-  };
-  users.groups.conduit = {};
-
   programs.fish.enable = true;
   programs.mosh.enable = true;
   virtualisation.docker.enable = true;
@@ -88,11 +82,11 @@
     git
     tmux
     helix
+    kakoune
     vim
     htop
     parted
     snapraid
-    matrix-conduit
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -240,17 +234,6 @@
       Type = "oneshot";
       User = "root";
       ExecStart = "${pkgs.snapraid}/bin/snapraid sync";
-    };
-  };
-  systemd.services.conduit = {
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.matrix-conduit}/bin/conduit";
-      Environment = "CONDUIT_CONFIG=/etc/conduit/conduit.toml";
-      User = "conduit";
-      Group = "conduit";
-      Restart = "always";
     };
   };
 
