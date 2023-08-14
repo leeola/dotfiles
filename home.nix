@@ -38,8 +38,6 @@
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
       fzf
       ripgrep
-      obsidian.discord
-      obsidian.signal-desktop
       # Not available in my lock i think. I need to commit some changes before i screw with the lock.
       # bottom # A CLI system monitor
       obsidian.fira-code
@@ -47,6 +45,12 @@
       obsidian.docker-compose
       mosh
       flameshot # screenshot utility
+
+      #
+      # # Chat
+      obsidian.discord
+      obsidian.signal-desktop
+      obsidian.element-desktop
 
       obsidian.squashfsTools
       # helix
