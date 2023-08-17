@@ -221,6 +221,14 @@
         path = "/mnt/archive01/lee/work";
         devices = [ "desk" ];
       };
+      "courses" = {
+        path = "/mnt/archive01/lee/courses";
+        devices = [ "desk" ];
+      };
+      "references" = {
+        path = "/mnt/archive01/lee/references";
+        devices = [ "desk" ];
+      };
     };
   };
   systemd.timers.snapraid_sync= {

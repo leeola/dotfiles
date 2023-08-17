@@ -233,6 +233,14 @@
         path = "/home/lee/work";
         devices = [ "closet" ];
       };
+      "courses" = {
+        path = "/home/lee/courses";
+        devices = [ "closet" ];
+      };
+      "references" = {
+        path = "/home/lee/references";
+        devices = [ "closet" ];
+      };
     };
   };
 
