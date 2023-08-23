@@ -76,15 +76,17 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = false;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.wayland = false;
+  # services.xserver.desktopManager.gnome.enable = true;
+
   # services.xserver.displayManager.lightdm.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
 
    #hardware.nvidia.modesetting.enable = true;
    #services.xserver.displayManager.gdm.nvidiaWayland = true;
