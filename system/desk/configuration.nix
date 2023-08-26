@@ -178,6 +178,10 @@
   #   enableSSHSupport = true;
   # };
 
+  environment.sessionVariables = {
+    SSH_ASKPASS_REQUIRE="prefer";
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
