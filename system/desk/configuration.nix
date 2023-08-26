@@ -143,31 +143,15 @@
     os-prober
     woeusb-ng
 
-    # Get back my damn full screen terminal. Wtf Gnome Console?
-    gnome.gnome-terminal
-
-    # desktop look & feel
-    gnome.gnome-shell-extensions
-    matcha-gtk-theme
-
-    # extensions
-    # gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.vitals
-    # gnomeExtensions.sound-output-device-chooser
-    # gnomeExtensions.fullscreen-notifications
-    # gnomeExtensions.screenshot-tool
-    # gjs # NOTE: seems to be a dependency of the prev Screenshot tool
-
-    # xdg-desktop-portal
-    # xdg-desktop-portal-wlr
-    
     # moonlander keyboard flashing tool
     wally-cli
     # qmk udev configuration necessary to flash qmk keyboards.
     qmk-udev-rules
     # qmk_cli tool
     qmk
+
+    # KWallet<->SSH integration. Used by `programs.ssh.askPassword`
+    ksshaskpass
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -178,6 +162,8 @@
   #   enableSSHSupport = true;
   # };
 
+  programs.ssh.startAgent = true;
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
   environment.sessionVariables = {
     SSH_ASKPASS_REQUIRE="prefer";
   };
