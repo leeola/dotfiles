@@ -10,7 +10,7 @@
     #   })
     # ];
 
-    imports = [ ./dconf.nix ];
+    imports = [ ];
 
     home.packages = with pkgs; [
       #

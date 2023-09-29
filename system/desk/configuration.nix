@@ -93,7 +93,7 @@
 
   # Not available in 22.11 it seems
   # services.dbus.packages = [ pkgs.gnome3.dconf ];
-  services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+  # services.udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
