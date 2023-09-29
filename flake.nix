@@ -5,6 +5,9 @@
       system.url = "github:NixOS/nixpkgs/nixos-23.05";
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow.url = "github:NixOS/nixpkgs/nixos-23.05";
+      work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
+      # Hopefully temporary pin because it broke when i updated obsidian -_-
+      pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
 
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
       nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -38,6 +41,8 @@
   };
 
   outputs = {
+    work-input, pin-vpn-input,
+
     home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd,
     
     darwin, darwin-nixpkgs,
@@ -100,6 +105,14 @@
         })
       ];
     };
+    work = import work-input {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
+    pin-vpn = import pin-vpn-input {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
   in {
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -129,6 +142,8 @@
                   plug_kak = plug_kak;
                   nixpkgs-kak = nixpkgs-kak;
                   obsidian = obsidian-pkgs;
+                  work = work;
+                  pin-vpn = pin-vpn;
                   nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
                   nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
                 };
