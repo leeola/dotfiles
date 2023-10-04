@@ -2,9 +2,9 @@
   description = "A very basic flake";
 
   inputs = {
-      system.url = "github:NixOS/nixpkgs/nixos-23.05";
+      system-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
-      slow.url = "github:NixOS/nixpkgs/nixos-23.05";
+      slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
       # Hopefully temporary pin because it broke when i updated obsidian -_-
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
@@ -41,6 +41,8 @@
   };
 
   outputs = {
+    system-input,
+    slow-input,
     work-input, pin-vpn-input,
 
     home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd,
@@ -109,6 +111,10 @@
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
+    system = import system-input {
+      system = "x86_64-linux";
+      config = { allowUnfree = true; };
+    };
     pin-vpn = import pin-vpn-input {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
@@ -131,7 +137,12 @@
     #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
     nixosConfigurations.desk = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit nixpkgs-kak; inherit obsidian; };
+      specialArgs = {
+        # NIT: I think i can remove these..?
+        inherit nixpkgs-kak; inherit obsidian;
+
+        system = system;
+      };
       modules = [
         	  ./system/desk/configuration.nix
         	  home-manager.nixosModules.home-manager
