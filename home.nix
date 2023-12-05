@@ -40,6 +40,7 @@
       ripgrep
       obsidian.discord
       obsidian.signal-desktop
+      obsidian.beeper
       # Not available in my lock i think. I need to commit some changes before i screw with the lock.
       # bottom # A CLI system monitor
       obsidian.fira-code
