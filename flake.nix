@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-      system-input.url = "github:NixOS/nixpkgs/nixos-23.05";
+      system-input.url = "github:NixOS/nixpkgs/nixos-23.11";
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -162,7 +162,7 @@
         	  }
       ];
     };
-    nixosConfigurations.closet = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.closet = system-input.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
     	  ./system/closet/configuration.nix
