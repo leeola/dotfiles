@@ -9,11 +9,11 @@
       # Hopefully temporary pin because it broke when i updated obsidian -_-
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
 
-      nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+      nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
       nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       obsidian.url = "github:NixOS/nixpkgs/nixos-unstable";
       home-manager = {
-          url = "github:nix-community/home-manager/release-23.05";
+          url = "github:nix-community/home-manager/release-23.11";
           inputs.nixpkgs.follows = "/nixpkgs";
       };
       plug_kak = {
@@ -35,7 +35,7 @@
         inputs.nixpkgs.follows = "obsidian";
       };
 
-      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-21.11-darwin";
+      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
       darwin.url = "github:lnl7/nix-darwin/master";
       darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
   };
@@ -195,5 +195,32 @@
     #       }
     #   ];
     # };
+    darwinConfigurations."mbp2023" = darwin.lib.darwinSystem {
+      # system = "aarch64-darwin";
+      # inputs = { inherit nixpkgs-darwin darwin home-manager-darwin; };
+      modules = [
+        ./system/mbp2023/darwin-configuration.nix
+        home-manager.darwinModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.lee = import ./system/mbp2023/home.nix {
+            # inherit dev_kak_plug dev_kak_fzf dev_kak_lsp;
+            #home-manager.extraSpecialArgs = { inherit dev; };
+            pkgs = import darwin-nixpkgs {
+              system = "aarch64-darwin";
+              config = { allowUnfree = true; };
+            };
+            # apps = import apps {
+            #   system = "aarch64-darwin";
+            #   config = { allowUnfree = true; };
+            # };
+            # dev = import dev {
+            #   system = "aarch64-darwin";
+            # };
+            # helix = helix;
+            };
+          }
+      ];
+    };
   };
 }
