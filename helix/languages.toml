@@ -1,0 +1,28 @@
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+cargo.allFeatures = true
+
+# [[language]]
+# name = "nix"
+# scope = "source.nix"
+# injection-regex = "nix"
+# file-types = ["nix"]
+# language-server = { command = "nixd" }
+
+# # A fake Tanc language, to dev tanc with.
+# [[language]]
+# name = "tanc-nix"
+# # tf is this?
+# scope = "source.tanc"
+# injection-regex = "tanc"
+# file-types = ["tanc"]
+# roots = []
+# language-server = { command = "tanc", args = ["--log-file", "tanc.log", "-vvv"] }
+
+# [[language]]
+# name = "sailfish template"
+# scope = "source.stpl"
+# injection-regex = "stpl"
+# file-types = ["stpl"]
+# indent = { tab-width = 2, unit = "  " } 
+# roots = []
