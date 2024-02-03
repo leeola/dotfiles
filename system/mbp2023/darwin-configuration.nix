@@ -10,6 +10,14 @@
 
   users.users.lee = {
     home = "/Users/lee";
+    # Seems this doesn't work for nix-darwin.
+    # Ref:
+    # - https://github.com/LnL7/nix-darwin/issues/779
+    # - https://github.com/LnL7/nix-darwin/issues/361
+    # - https://github.com/LnL7/nix-darwin/issues/328
+    #
+    # My solution then is to set it manually in OSX -_-
+    shell = pkgs.fish;
   };
 
   # Auto upgrade nix package and the daemon service.
@@ -19,9 +27,11 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
-  # Create /etc/zshrc that loads the nix-darwin environment.
+  # Default shell, my primary shell.
+  programs.fish.enable = true;
+  # OSX Default shell! Important incase the mac gets reverted back to zsh and
+  # i lose Nix and have to repair. Which is more annoying than it should be.
   programs.zsh.enable = true;  # default shell on catalina
-  # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;

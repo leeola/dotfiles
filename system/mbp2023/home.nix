@@ -20,6 +20,8 @@
 
     home.file = {
         ".gitconfig".source = ../../.gitconfig;
+        ".config/helix/config.toml".source = ../../helix/config.toml;
+        ".config/helix/languages.toml".source = ../../helix/languages.toml;
         # ".config/kak/kakrc".source = ../../.config/kak/kakrc;
         # ".config/kak/cuser.kak".source = ../../.config/kak/cuser.kak;
         # ".config/fish/config.fish".source = ../../fish/config.fish;
