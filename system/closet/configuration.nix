@@ -87,6 +87,7 @@
     htop
     parted
     snapraid
+    file
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -108,12 +109,18 @@
     2049 # NFSv4
     5357 # samba-wsdd
     22000 # syncthing
+    5222 6666 27015 27016 8766 # satis, maybe pal? 
+    8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
   ];
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
     22000 21027 # syncthing
     53 # ? adguard?
+    5222 6666 15777 15000 27015 27016 8766 # satis, maybe pal?
+    8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
   ];
+  networking.firewall.allowedTCPPortRanges = [ { from=7777; to=7827; } ];
+  networking.firewall.allowedUDPPortRanges = [ { from=7777; to=7827; } ];
   # Allowping and openFirewall seem to be required for Samba.. :sus:
   networking.firewall.allowPing = true;
   services.samba.openFirewall = true;
@@ -242,6 +249,88 @@
       Type = "oneshot";
       User = "root";
       ExecStart = "${pkgs.snapraid}/bin/snapraid sync";
+    };
+  };
+
+  # # systemd.services."container@paloci".serviceConfig = {
+  # #     User = "paloci";
+  # #     Group = "paloci";
+  # #     WorkingDirectory = "/var/lib/paloci";
+  # # };
+  # virtualisation.oci-containers.containers.paloci = {
+  #   # user = "paloci:paloci";
+  #   # workdir = "/var/lib/paloci";
+  #   image = "docker://thijsvanloef/palworld-server-docker:latest";
+  #   autoStart = true;
+  #   extraOptions = [
+  #     "--cpus=12"
+  #     "--memory=20G"
+  #     "--stop-timeout=30"
+  #     "--env-file=/home/lee/paloci.env"
+  #   ];
+  #   ports = [
+  #     "8211:8211/udp"
+  #     "27015:27015/udp"
+  #   ];
+  #   volumes = [
+  #     "./palworld:/palworld/"
+  #   ];
+  # };
+  # # systemd.services."container@paloci".serviceConfig = {
+  # #     User = "paloci";
+  # #     Group = "paloci";
+  # #     WorkingDirectory = "/var/lib/paloci";
+  # # };
+  # systemd.services."podman-paloci".serviceConfig.wantedBy = [ "multi-user.target" ];
+  # # systemd.services."podman-paloci".serviceConfig.DynamicUser = true;
+  # systemd.services."podman-paloci".serviceConfig.User = "paloci";
+  # systemd.services."podman-paloci".serviceConfig.Group = "paloci";
+  # systemd.services."podman-paloci".serviceConfig.Restart = lib.mkForce "no";
+  # # systemd.services."podman-paloci".serviceConfig.StateDirectory = "paloci";
+  # # systemd.services."podman-paloci".serviceConfig.WorkingDirectory = "/var/lib/paloci";
+  # users.users.paloci = {
+  #   home = "/var/lib/paloci";
+  #   createHome = true;
+  #   isSystemUser = true;
+  #   group = "paloci";
+  # };
+  # users.groups.paloci = {};
+
+  users.users.paldocker = {
+    home = "/var/lib/paldocker";
+    createHome = true;
+    isSystemUser = true;
+    extraGroups = [ "docker" ];
+    group = "paldocker";
+  };
+  users.groups.paldocker = {};
+  systemd.services.paldocker = 
+    let
+      dockercli = "${pkgs.docker}/bin/docker";
+      podname = "paldocker";
+    in
+  {
+    wantedBy = [ "multi-user.target" ];
+    script = ''
+      # ${dockercli} run \
+      #   --name ${podname} \
+      #   --env-file ./pal.env \
+      #   -p '8211:8211/udp' \
+      #   -p '27015:27015/udp' \
+      #   -v ./state:/palworld \ 
+      #   --env-file ./pal.env \
+      #   --restart unless-stopped \
+      #   --stop-timeout 30 \
+      #   thijsvanloef/palworld-server-docker:latest
+      # docker run --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
+      ${dockercli} run --name ${podname} --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
+    '';
+    serviceConfig = {
+      # Temporarily adding restart to no, to while i debug.
+      Restart = "no";
+      # Restart = "always";
+      User = podname;
+      WorkingDirectory = "/var/lib/${podname}";
     };
   };
 
