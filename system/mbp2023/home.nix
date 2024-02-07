@@ -1,7 +1,11 @@
+{ pkgs }: { ... }:
+let
+    term = import ../../home/term.nix { inherit pkgs; };
+in
 {
-  pkgs,
-}: { ... }: {
-    home.packages = [
+    home.packages =
+        term.packages ++
+    [
         # pkgs.ripgrep
         # pkgs.fzf
         # pkgs.direnv
@@ -18,17 +22,15 @@
         # pkgs.slack
     ];
 
-    home.file = {
-        ".gitconfig".source = ../../.gitconfig;
-        ".config/helix/config.toml".source = ../../helix/config.toml;
-        ".config/helix/languages.toml".source = ../../helix/languages.toml;
+    home.file =
+        term.file //
+    {
         # ".config/kak/kakrc".source = ../../.config/kak/kakrc;
         # ".config/kak/cuser.kak".source = ../../.config/kak/cuser.kak;
         # ".config/fish/config.fish".source = ../../fish/config.fish;
         # ".config/fish/functions/dot.fish".source = ../../fish/functions/dot.fish;
         # ".config/fish/functions/pbp.fish".source = ../../fish/functions/pbp.fish;
         # ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
-        ".tmux.conf".source = ../../.tmux.conf;
     };
     # home.file = {
     #   ".config/nixpkgs/config.nix".source = ./nixpkgs/config.nix;
