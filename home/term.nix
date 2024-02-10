@@ -13,5 +13,6 @@
     ".config/helix/languages.toml".source = ../helix/languages.toml;
     ".config/fish/config.fish".source = ../fish/config.fish;
     ".tmux.conf".source = ../.tmux.conf;
+    ".wezterm.lua".source = ../wezterm.lua;
   };
 }
