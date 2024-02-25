@@ -118,6 +118,7 @@
     53 # ? adguard?
     5222 6666 15777 15000 27015 27016 8766 # satis, maybe pal?
     8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
+    8766 9700 # sonstf, including 27016 but satisf has that.
   ];
   networking.firewall.allowedTCPPortRanges = [ { from=7777; to=7827; } ];
   networking.firewall.allowedUDPPortRanges = [ { from=7777; to=7827; } ];
