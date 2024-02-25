@@ -297,43 +297,43 @@
   # };
   # users.groups.paloci = {};
 
-  users.users.paldocker = {
-    home = "/var/lib/paldocker";
-    createHome = true;
-    isSystemUser = true;
-    extraGroups = [ "docker" ];
-    group = "paldocker";
-  };
-  users.groups.paldocker = {};
-  systemd.services.paldocker = 
-    let
-      dockercli = "${pkgs.docker}/bin/docker";
-      podname = "paldocker";
-    in
-  {
-    wantedBy = [ "multi-user.target" ];
-    script = ''
-      # ${dockercli} run \
-      #   --name ${podname} \
-      #   --env-file ./pal.env \
-      #   -p '8211:8211/udp' \
-      #   -p '27015:27015/udp' \
-      #   -v ./state:/palworld \ 
-      #   --env-file ./pal.env \
-      #   --restart unless-stopped \
-      #   --stop-timeout 30 \
-      #   thijsvanloef/palworld-server-docker:latest
-      # docker run --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
-      ${dockercli} run --name ${podname} --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
-    '';
-    serviceConfig = {
-      # Temporarily adding restart to no, to while i debug.
-      Restart = "no";
-      # Restart = "always";
-      User = podname;
-      WorkingDirectory = "/var/lib/${podname}";
-    };
-  };
+  # users.users.paldocker = {
+  #   home = "/var/lib/paldocker";
+  #   createHome = true;
+  #   isSystemUser = true;
+  #   extraGroups = [ "docker" ];
+  #   group = "paldocker";
+  # };
+  # users.groups.paldocker = {};
+  # systemd.services.paldocker = 
+  #   let
+  #     dockercli = "${pkgs.docker}/bin/docker";
+  #     podname = "paldocker";
+  #   in
+  # {
+  #   wantedBy = [ "multi-user.target" ];
+  #   script = ''
+  #     # ${dockercli} run \
+  #     #   --name ${podname} \
+  #     #   --env-file ./pal.env \
+  #     #   -p '8211:8211/udp' \
+  #     #   -p '27015:27015/udp' \
+  #     #   -v ./state:/palworld \ 
+  #     #   --env-file ./pal.env \
+  #     #   --restart unless-stopped \
+  #     #   --stop-timeout 30 \
+  #     #   thijsvanloef/palworld-server-docker:latest
+  #     # docker run --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
+  #     ${dockercli} run --name ${podname} --env-file ./pal.env -p '8211:8211/udp' -p '27015:27015/udp' -v ./state:/palworld --env-file ./pal.env --restart unless-stopped --stop-timeout 30 thijsvanloef/palworld-server-docker:latest
+  #   '';
+  #   serviceConfig = {
+  #     # Temporarily adding restart to no, to while i debug.
+  #     Restart = "no";
+  #     # Restart = "always";
+  #     User = podname;
+  #     WorkingDirectory = "/var/lib/${podname}";
+  #   };
+  # };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
