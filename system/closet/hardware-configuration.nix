@@ -30,9 +30,17 @@
     device = "/dev/disk/by-label/ARCHIVE01";
     fsType = "ext4";
   };
+  fileSystems."/mnt/archive02" = {
+    device = "/dev/disk/by-label/ARCHIVE02";
+    fsType = "ext4";
+  };
 
   fileSystems."/export/archive01" = {
     device = "/mnt/archive01";
+    options = [ "bind" ];
+  };
+  fileSystems."/export/archive02" = {
+    device = "/mnt/archive02";
     options = [ "bind" ];
   };
 
