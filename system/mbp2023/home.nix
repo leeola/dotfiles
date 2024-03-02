@@ -1,6 +1,6 @@
-{ pkgs, term-pkgs }: { ... }:
+{ pkgs, unstable-pkgs }: { ... }:
 let
-    term = import ../../home/term.nix { inherit pkgs term-pkgs; };
+    term = import ../../home/term.nix { pkgs = unstable-pkgs; };
 in
 {
     home.packages =

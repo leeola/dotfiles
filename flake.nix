@@ -6,7 +6,7 @@
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
-      term-pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      unstable-pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
       # Hopefully temporary pin because it broke when i updated obsidian -_-
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
 
@@ -46,7 +46,7 @@
     slow-input,
     work-input,
     pin-vpn-input,
-    term-pkgs,
+    unstable-pkgs,
 
     home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd,
     
@@ -213,7 +213,7 @@
               system = "aarch64-darwin";
               config = { allowUnfree = true; };
             };
-            term-pkgs = import term-pkgs {
+            unstable-pkgs = import unstable-pkgs {
               system = "aarch64-darwin";
             };
             # apps = import apps {

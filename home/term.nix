@@ -1,10 +1,10 @@
-{ pkgs, term-pkgs }: {
+{ pkgs }: {
   packages = with pkgs; [
     helix
     mosh
     direnv
     ripgrep
-    term-pkgs.tmux
+    tmux
   ];
 
   file = {
