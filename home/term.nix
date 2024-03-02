@@ -5,6 +5,7 @@
     direnv
     ripgrep
     tmux
+    git-lfs
   ];
 
   file = {
