@@ -80,6 +80,7 @@
   environment.systemPackages = with pkgs; [
     fish
     git
+    git-lfs
     tmux
     helix
     kakoune
