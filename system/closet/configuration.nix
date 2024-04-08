@@ -114,6 +114,7 @@
     22000 # syncthing
     5222 6666 27015 27016 8766 # satis, maybe pal? 
     8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
+    5678 # rudolfs
   ];
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
