@@ -5,6 +5,7 @@
     direnv
     ripgrep
     tmux
+    zellij
     git-lfs
   ];
 
