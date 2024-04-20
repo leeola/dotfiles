@@ -153,7 +153,7 @@
         	  {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.lee = import ./home.nix {
+                home-manager.users.lee = import ./system/desk/home.nix {
                   plug_kak = plug_kak;
                   nixpkgs-kak = nixpkgs-kak;
                   obsidian = obsidian-pkgs;
