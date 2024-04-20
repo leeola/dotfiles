@@ -2,21 +2,28 @@
   description = "A very basic flake";
 
   inputs = {
+      # System level inputs.
       system-input.url = "github:NixOS/nixpkgs/nixos-23.11";
+      home-manager = {
+          url = "github:nix-community/home-manager/release-23.11";
+          inputs.nixpkgs.follows = "/nixpkgs";
+      };
+      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
+      darwin.url = "github:lnl7/nix-darwin/master";
+      darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
+
+      # Pseudo release channels.
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
       unstable-pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
       # Hopefully temporary pin because it broke when i updated obsidian -_-
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
 
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
       nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       obsidian.url = "github:NixOS/nixpkgs/nixos-unstable";
-      home-manager = {
-          url = "github:nix-community/home-manager/release-23.11";
-          inputs.nixpkgs.follows = "/nixpkgs";
-      };
       plug_kak = {
           url = "github:andreyorst/plug.kak";
           flake = false;
@@ -35,10 +42,6 @@
         url = "github:nix-community/nixd";
         inputs.nixpkgs.follows = "obsidian";
       };
-
-      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
-      darwin.url = "github:lnl7/nix-darwin/master";
-      darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
   };
 
   outputs = {
