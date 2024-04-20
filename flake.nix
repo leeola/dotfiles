@@ -143,7 +143,7 @@
     # };
     #kak = nixpkgs-kak.packages.x86_64.kakoune;
     #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
-    nixosConfigurations.desk = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.desk = system-input.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
         # NIT: I think i can remove these..?
