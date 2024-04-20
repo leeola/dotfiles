@@ -1,11 +1,32 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+//
+// NIT: Does clear-defaults in the root do anything? Apparently it's still used in the .. submodules or w/e.
 keybinds clear-defaults=true {
-    normal {
+    locked {
+        bind "Ctrl a" { SwitchToMode "Normal"; }
+    }
+    normal clear-defaults=true {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
-    }
-    locked {
-        bind "Ctrl l" { SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Locked"; }
+        bind "Ctrl a" { ToggleTab; SwitchToMode "Locked"; }
+        bind "Ctrl v" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "Ctrl s" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "Ctrl w" { SwitchFocus; SwitchToMode "Locked"; }
+        bind "Ctrl r" { ToggleFloatingPanes; SwitchToMode "Locked"; }
+        bind "Ctrl q" { TogglePaneEmbedOrFloating; SwitchToMode "Locked"; }
+
+        bind "e" { SwitchToMode "Pane"; }
+        bind "t" { SwitchToMode "Tab"; }
+        bind "m" { SwitchToMode "Move"; }
+        bind "o" { SwitchToMode "Session"; }
+
+        bind "Left" { MoveFocus "Left"; }
+        bind "Right" { MoveFocus "Right"; }
+        bind "Down" { MoveFocus "Down"; }
+        bind "Up" { MoveFocus "Up"; }
+
+        bind "Ctrl l" { Quit; }
     }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
@@ -21,24 +42,24 @@ keybinds clear-defaults=true {
         bind "-" { Resize "Decrease"; }
     }
     pane {
-        bind "Ctrl a" { SwitchToMode "Normal"; }
+        bind "Ctrl a" "Esc" { SwitchToMode "Locked"; }
         bind "h" "Left" { MoveFocus "Left"; }
         bind "l" "Right" { MoveFocus "Right"; }
         bind "j" "Down" { MoveFocus "Down"; }
         bind "k" "Up" { MoveFocus "Up"; }
-        bind "p" { SwitchFocus; }
-        bind "n" { NewPane; SwitchToMode "Normal"; }
-        bind "d" { NewPane "Down"; SwitchToMode "Normal"; }
-        bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
-        bind "x" { CloseFocus; SwitchToMode "Normal"; }
-        bind "f" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
-        bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
-        bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
-        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+        bind "Tab" { SwitchFocus; }
+        bind "n" { NewPane; SwitchToMode "Locked"; }
+        bind "d" { NewPane "Down"; SwitchToMode "Locked"; }
+        bind "r" { NewPane "Right"; SwitchToMode "Locked"; }
+        bind "x" { CloseFocus; SwitchToMode "Locked"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "Locked"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "Locked"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "Locked"; }
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Locked"; }
         bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
     move {
-        bind "Ctrl h" { SwitchToMode "Normal"; }
+        bind "Ctrl a" "Esc" { SwitchToMode "Locked"; }
         bind "n" "Tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "h" "Left" { MovePane "Left"; }
@@ -47,7 +68,10 @@ keybinds clear-defaults=true {
         bind "l" "Right" { MovePane "Right"; }
     }
     tab {
-        bind "Ctrl t" { SwitchToMode "Normal"; }
+        bind "Ctrl t" { ToggleTab; }
+        bind "Tab" { ToggleTab; }
+        bind "Esc" { SwitchToMode "Locked"; }
+
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "Left" "Up" "k" { GoToPreviousTab; }
         bind "l" "Right" "Down" "j" { GoToNextTab; }
@@ -66,7 +90,6 @@ keybinds clear-defaults=true {
         bind "7" { GoToTab 7; SwitchToMode "Normal"; }
         bind "8" { GoToTab 8; SwitchToMode "Normal"; }
         bind "9" { GoToTab 9; SwitchToMode "Normal"; }
-        bind "Tab" { ToggleTab; }
     }
     scroll {
         bind "Ctrl s" { SwitchToMode "Normal"; }
@@ -110,6 +133,7 @@ keybinds clear-defaults=true {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
     }
     session {
+        bind "Ctrl a" "Esc" { SwitchToMode "Locked"; }
         bind "Ctrl o" { SwitchToMode "Normal"; }
         bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
@@ -145,8 +169,8 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        bind "Ctrl l" { SwitchToMode "Locked"; }
-        // bind "Ctrl q" { Quit; }
+        bind "Ctrl a" { SwitchToMode "Locked"; }
+        bind "Ctrl l" { Quit; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
@@ -157,11 +181,8 @@ keybinds clear-defaults=true {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
     }
-    shared_except "normal" "locked" {
-        bind "Enter" "Esc" { SwitchToMode "Normal"; }
-    }
     shared_except "pane" "locked" {
-        bind "Ctrl a" { SwitchToMode "Pane"; }
+        bind "Ctrl e" { SwitchToMode "Pane"; }
     }
     shared_except "resize" "locked" {
         bind "Ctrl n" { SwitchToMode "Resize"; }
@@ -280,8 +301,7 @@ plugins {
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
-//
-// default_mode "locked"
+default_mode "locked"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
