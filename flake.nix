@@ -6,17 +6,18 @@
       system-input.url = "github:NixOS/nixpkgs/nixos-23.11";
       home-manager = {
           url = "github:nix-community/home-manager/release-23.11";
-          inputs.nixpkgs.follows = "/nixpkgs";
+          inputs.nixpkgs.follows = "system-input";
       };
-      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
       darwin.url = "github:lnl7/nix-darwin/master";
-      darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
+      darwin.inputs.nixpkgs.follows = "system-input";
 
       # Pseudo release channels.
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
       unstable-pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      # Special darwin input. Not sure if it's needed, but might be handy?
+      darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
 
       # Hopefully temporary pin because it broke when i updated obsidian -_-
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
