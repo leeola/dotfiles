@@ -91,6 +91,7 @@
     file
     zip
     unzip
+    podman-tui
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -338,6 +339,22 @@
   #     WorkingDirectory = "/var/lib/${podname}";
   #   };
   # };
+
+  virtualisation.oci-containers.containers."rudolfs" = {
+    # grabbing master atm to use pre-release, with optional --key support. 
+    image = "jasonwhite0/rudolfs:master";
+    autoStart = true;
+    cmd = [
+      "--port" "8080"
+      "local"
+      "--path" "/data/data"
+    ];
+    ports = [ "5678:8080" ];
+    volumes = [ "/mnt/archive01/rudolfs:/data" ];
+    environment = {
+      RUDOLFS_CONFIG = "/data/config.toml";
+    };
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
