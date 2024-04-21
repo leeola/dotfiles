@@ -11,7 +11,7 @@
   ];
 
   file = {
-    ".gitconfig".source = ../.gitconfig;
+    ".gitconfig".source = ../git/gitconfig;
     ".config/helix/config.toml".source = ../helix/config.toml;
     ".config/helix/languages.toml".source = ../helix/languages.toml;
     ".config/fish/config.fish".source = ../fish/config.fish;
