@@ -35,7 +35,7 @@ in
       bc # Unix math command, useful for Kakoune.
       notify-desktop
       # note taker
-      obsidian.obsidian_latest
+      obsidian.obsidian
       htop
       alacritty
       obsidian.wezterm
