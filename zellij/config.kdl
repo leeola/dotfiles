@@ -8,6 +8,8 @@ keybinds clear-defaults=true {
     normal clear-defaults=true {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
+
+        // Primarily my old tmux binds.
         bind "Esc" { SwitchToMode "Locked"; }
         bind "Ctrl a" { ToggleTab; SwitchToMode "Locked"; }
         bind "Ctrl v" { NewPane "Down"; SwitchToMode "Locked"; }
@@ -15,7 +17,10 @@ keybinds clear-defaults=true {
         bind "Ctrl w" { SwitchFocus; SwitchToMode "Locked"; }
         bind "Ctrl r" { ToggleFloatingPanes; SwitchToMode "Locked"; }
         bind "Ctrl q" { TogglePaneEmbedOrFloating; SwitchToMode "Locked"; }
+        bind "c" { NewTab; SwitchToMode "Locked"; }
+        bind "$" { SwitchToMode "RenameTab"; TabNameInput 0; }
 
+        // Primarily Zellij oriented binds.
         bind "e" { SwitchToMode "Pane"; }
         bind "t" { SwitchToMode "Tab"; }
         bind "m" { SwitchToMode "Move"; }
@@ -125,8 +130,8 @@ keybinds clear-defaults=true {
         bind "Enter" { SwitchToMode "Search"; }
     }
     renametab {
-        bind "Ctrl c" { SwitchToMode "Normal"; }
-        bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Enter" { SwitchToMode "Locked"; }
+        bind "Esc" { UndoRenameTab; SwitchToMode "Locked"; }
     }
     renamepane {
         bind "Ctrl c" { SwitchToMode "Normal"; }
