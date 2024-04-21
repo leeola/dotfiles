@@ -11,6 +11,7 @@ in
     home.file =
         term.file //
     {
+        ".wezterm.lua".source = ../../wezterm/wezterm.lua;
     };
 
     home.stateVersion = "23.11";

@@ -121,6 +121,7 @@ in
         ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
         ".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
         ".config/bottom/bottom.toml".source = ../../bottom/bottom.toml;
+        ".wezterm.lua".source = ../../wezterm/wezterm_desk.lua;
     };
 
     home.stateVersion = "21.11";
