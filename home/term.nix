@@ -7,6 +7,7 @@
     tmux
     zellij
     git-lfs
+    starship
   ];
 
   file = {
@@ -17,5 +18,6 @@
     ".tmux.conf".source = ../tmux/tmux.conf;
     ".wezterm.lua".source = ../wezterm/wezterm.lua;
     ".config/zellij/config.kdl".source = ../zellij/config.kdl;
+    ".config/starship.toml".source = ../starship/starship.toml;
   };
 }
