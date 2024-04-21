@@ -1,4 +1,16 @@
-{ plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd, work, pin-vpn }: { pkgs, ... }:
+{
+  unstable-pkgs,
+  plug_kak,
+  nixpkgs-kak,
+  obsidian,
+  nix_lsp_nil,
+  nix_lsp_nixd,
+  work,
+  pin-vpn,
+}: { pkgs, ... }:
+let
+    term = import ../../home/term.nix { pkgs = unstable-pkgs; };
+in
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
     services.lorri.enable = true;
@@ -12,7 +24,9 @@
 
     imports = [ ];
 
-    home.packages = with pkgs; [
+    home.packages =
+        term.packages ++
+    (with pkgs; [
       #
       # # utilities
       xclip
@@ -22,22 +36,16 @@
       notify-desktop
       # note taker
       obsidian.obsidian_latest
-      # Enable environments per directory. A companion to lorri,
-      # enabled below.
-      direnv
       htop
       alacritty
       obsidian.wezterm
-      tmux
       obsidian.blender_latest
       obsidian.krita
       spotify
-      git-lfs
       obsidian.kak-lsp
       obsidian.kakoune
       # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
       fzf
-      ripgrep
       obsidian.discord
       obsidian.signal-desktop
       obsidian.beeper
@@ -46,12 +54,9 @@
       obsidian.fira-code
       obsidian.fontconfig
       obsidian.docker-compose
-      mosh
       flameshot # screenshot utility
 
       obsidian.squashfsTools
-      # helix
-      obsidian.helix
       vim
       nix_lsp_nil
       nix_lsp_nixd
@@ -92,11 +97,12 @@
       obsidian.mpv
       obsidian.vlc
       v4l-utils
-    ];
+    ]);
 
-    home.file = {
+    home.file =
+        term.file //
+    {
       ".config/nixpkgs/config.nix".source = ../../nixpkgs/config.nix;
-        ".gitconfig".source = ../../.gitconfig;
         ".config/kak/kakrc".source = ../../.config/kak/kakrc;
         ".config/kak/cuser.kak".source = ../../.config/kak/cuser.kak;
         ".config/kak-lsp/kak-lsp.toml".source = ../../kak-lsp/kak-lsp.toml;
@@ -110,11 +116,9 @@
         # An after-file hook to run `kak -e plug-install` could.. in theory..
         # mutate what it wants. Though the output wouldn't be deterministic.. hmm
         # ".config/kak/plugins/plug.kak".source = ../.plug_kak;
-        ".config/fish/config.fish".source = ../../fish/config.fish;
         ".config/fish/functions/dot.fish".source = ../../fish/functions/dot.fish;
         ".config/fish/functions/pbp.fish".source = ../../fish/functions/pbp.fish;
         ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
-        ".tmux.conf".source = ../../.tmux.conf;
         ".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
         ".config/bottom/bottom.toml".source = ../../bottom/bottom.toml;
     };
