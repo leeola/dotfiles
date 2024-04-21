@@ -176,6 +176,19 @@
       system = "x86_64-linux";
       modules = [
     	  ./system/closet/configuration.nix
+    	  home-manager.nixosModules.home-manager
+    	  {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.lee = import ./system/closet/home.nix {
+              pkgs = import system-input {
+                system = "x86_64-linux";
+              };
+              unstable-pkgs = import unstable-pkgs {
+                system = "x86_64-linux";
+              };
+            };
+    	  }
       ];
     };
     # darwinConfigurations."mbp2017" = darwin.lib.darwinSystem {
