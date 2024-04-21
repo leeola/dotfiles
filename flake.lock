@@ -114,7 +114,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "obsidian"
+          "unstable-pkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -136,7 +136,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
-          "obsidian"
+          "unstable-pkgs"
         ]
       },
       "locked": {

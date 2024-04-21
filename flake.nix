@@ -37,11 +37,11 @@
       # Nix language LSP
       nix_lsp_nil = {
         url = "github:oxalica/nil";
-        inputs.nixpkgs.follows = "obsidian";
+        inputs.nixpkgs.follows = "unstable-pkgs";
       };
       nix_lsp_nixd = {
         url = "github:nix-community/nixd";
-        inputs.nixpkgs.follows = "obsidian";
+        inputs.nixpkgs.follows = "unstable-pkgs";
       };
   };
 
