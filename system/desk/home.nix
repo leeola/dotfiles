@@ -58,7 +58,7 @@
 
       #
       # # productivity / work software
-      obsidian.albert
+      albert
       obsidian.slack
       obsidian.zoom-us
       obsidian.google-chrome # web dev, ugh
