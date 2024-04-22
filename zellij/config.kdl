@@ -19,6 +19,13 @@ keybinds clear-defaults=true {
         bind "Ctrl q" { TogglePaneEmbedOrFloating; SwitchToMode "Locked"; }
         bind "c" { NewTab; SwitchToMode "Locked"; }
         bind "$" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        bind "Ctrl f" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Locked"
+        }
 
         bind "1" { GoToTab 1; SwitchToMode "Locked"; }
         bind "2" { GoToTab 2; SwitchToMode "Locked"; }
