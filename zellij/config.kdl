@@ -147,17 +147,15 @@ keybinds clear-defaults=true {
         bind "Ctrl c" { SwitchToMode "Normal"; }
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
     }
-    session {
+    session clear-defaults=true {
         bind "Ctrl a" "Esc" { SwitchToMode "Locked"; }
-        bind "Ctrl o" { SwitchToMode "Normal"; }
-        bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
-        bind "w" {
+        bind "o" {
             LaunchOrFocusPlugin "zellij:session-manager" {
                 floating true
                 move_to_focused_tab true
             };
-            SwitchToMode "Normal"
+            SwitchToMode "Locked"
         }
     }
     tmux {
