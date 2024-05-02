@@ -15,8 +15,12 @@
   dcw = diff --word-diff --cached
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --graph
   lsfp = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --first-parent
+  lsdc = dc --name-only
+  lsdf = df --name-only
   r = rebase
   ri = rebase -i
+  rc = rebase --continue
+  ra = rebase --abort
 [core]
   editor = hx
   excludesfile = ~/.gitignore_global
