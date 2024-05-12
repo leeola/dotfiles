@@ -92,12 +92,14 @@
           });
           
           blender_latest = (prev.blender.overrideAttrs (old: rec {
-            pname = "blender";
-            version = "4.0.1";
-            src = prev.fetchurl {
-              url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-              sha256 = "sha256-/jLU0noX5RxhQ+26G16nGFylm65Lzfm9s11oCWCC43Q=";
-            };               
+            # Disabled pin. Probably a better way to write this?
+            # pname = "blender";
+            # version = "4.1.0";
+            # src = prev.fetchurl {
+            #   url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
+            #   sha256 = "sha256-/jLU0noX5RxhQ+26G16nGFylm65Lzfm9s11oCWCC43Q=";
+            # };               
+
             # Disabling these, as they broke when i updated updated my lockfile.
             # nativeBuildInputs = old.nativeBuildInputs ++ [ prev.libepoxy freetype_brotli ];
           })).override {
