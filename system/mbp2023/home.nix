@@ -6,7 +6,8 @@ in
     home.packages =
         term.packages ++
     [
-        unstable-pkgs.zed-editor
+        # Disabling, seems it's broke in master. It's flagged as broken.
+        # unstable-pkgs.zed-editor
     ];
 
     home.file =
