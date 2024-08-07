@@ -60,6 +60,7 @@ in
       vim
       nix_lsp_nil
       nix_lsp_nixd
+      obsidian.zed-editor
 
       #
       # # productivity / work software

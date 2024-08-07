@@ -6,6 +6,7 @@ in
     home.packages =
         term.packages ++
     [
+        unstable-pkgs.zed-editor
     ];
 
     home.file =
