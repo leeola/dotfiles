@@ -38,7 +38,7 @@ in
       obsidian.obsidian
       htop
       alacritty
-      obsidian.wezterm
+      wezterm
       obsidian.blender_latest
       obsidian.krita
       spotify
