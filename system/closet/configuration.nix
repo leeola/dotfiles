@@ -22,7 +22,8 @@
   time.timeZone = "America/Los_Angeles";
 
   services.adguardhome = {
-    enable = true;
+    # Disabled because it broke for some reason... :eyetwitch:
+    enable = false;
     openFirewall = true;
     settings.bind_port = 7000;
   };
