@@ -8,6 +8,7 @@
     zellij
     git-lfs
     starship
+    jujutsu
   ];
 
   file = {
