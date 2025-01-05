@@ -75,7 +75,9 @@
   services.xserver.wacom.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
+  # Looks like this is required now to enable closed source driver:
+  #     https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/hardware/video/nvidia.nix#L261-L269
+  hardware.nvidia.open = false;
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
@@ -101,10 +103,6 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

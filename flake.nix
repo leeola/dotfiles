@@ -3,9 +3,9 @@
 
   inputs = {
       # System level inputs.
-      system-input.url = "github:NixOS/nixpkgs/nixos-24.05";
+      system-input.url = "github:NixOS/nixpkgs/nixos-24.11";
       home-manager = {
-          url = "github:nix-community/home-manager/release-24.05";
+          url = "github:nix-community/home-manager/release-24.11";
           inputs.nixpkgs.follows = "system-input";
       };
       darwin.url = "github:lnl7/nix-darwin/master";

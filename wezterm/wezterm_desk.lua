@@ -22,4 +22,9 @@ return {
   line_height = 1.0;
   default_prog = {"fish"},
   enable_tab_bar = false,
+
+  -- Fixes the insane broken front rendering.
+  -- https://github.com/wez/wezterm/issues/5990
+  -- https://github.com/wez/wezterm/issues/6005
+  front_end = "WebGpu"
 };

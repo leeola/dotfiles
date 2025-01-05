@@ -11,5 +11,7 @@ config.color_scheme = 'AdventureTime'
 
 config.enable_tab_bar = false
 
+config.front_end = "WebGpu"
+
 -- and finally, return the configuration to wezterm
 return config
