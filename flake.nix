@@ -15,7 +15,7 @@
       adev.url = "github:NixOS/nixpkgs/nixos-23.05";
       slow-input.url = "github:NixOS/nixpkgs/nixos-23.05";
       work-input.url = "github:NixOS/nixpkgs/nixos-unstable";
-      unstable-pkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+      unstable-pkgs.url = "github:NixOS/nixpkgs/master";
       # Special darwin input. Not sure if it's needed, but might be handy?
       darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-23.11-darwin";
 
