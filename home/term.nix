@@ -9,6 +9,7 @@
     git-lfs
     starship
     jujutsu
+    node2nix
   ];
 
   file = {
