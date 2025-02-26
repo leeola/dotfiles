@@ -229,6 +229,7 @@
             };
             unstable-pkgs = import unstable-pkgs {
               system = "aarch64-darwin";
+              config = { allowUnfree = true; };
             };
             # apps = import apps {
             #   system = "aarch64-darwin";
