@@ -9,7 +9,7 @@
     git-lfs
     starship
     jujutsu
-    node2nix
+    claude-code
   ];
 
   file = {

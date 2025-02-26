@@ -153,6 +153,7 @@
                 home-manager.users.lee = import ./system/desk/home.nix {
                   unstable-pkgs = import unstable-pkgs {
                     system = "x86_64-linux";
+                    config = { allowUnfree = true; };
                   };
                   plug_kak = plug_kak;
                   nixpkgs-kak = nixpkgs-kak;
