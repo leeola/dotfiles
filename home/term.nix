@@ -9,7 +9,9 @@
     git-lfs
     starship
     jujutsu
+
     claude-code
+    aider-chat
   ];
 
   file = {
