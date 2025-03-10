@@ -18,7 +18,7 @@ return {
   font = wezterm.font("Fira Code", {weight="Medium"});
   -- font = wezterm.font("monospace");
   -- font = wezterm.font("JetBrains Mono");
-  font_size = 9.0;
+  font_size = 8.0;
   line_height = 1.0;
   default_prog = {"fish"},
   enable_tab_bar = false,
