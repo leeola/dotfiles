@@ -43,6 +43,8 @@
         url = "github:nix-community/nixd";
         inputs.nixpkgs.follows = "unstable-pkgs";
       };
+
+      flake-utils.url  = "github:numtide/flake-utils";
   };
 
   outputs = {
@@ -56,11 +58,11 @@
     
     darwin, darwin-nixpkgs,
 
-     ...
-  }:
+    flake-utils,
+  }: flake-utils.lib.eachDefaultSystem (system:
   let
     obsidian-pkgs = import obsidian {
-      system = "x86_64-linux";
+      inherit system;
       config = { allowUnfree = true; };
       overlays = [
         (final: prev: rec {
@@ -109,17 +111,26 @@
       ];
     };
     work = import work-input {
-      system = "x86_64-linux";
+      inherit system;
       config = { allowUnfree = true; };
     };
     system = import system-input {
-      system = "x86_64-linux";
+      inherit system;
       config = { allowUnfree = true; };
     };
     pin-vpn = import pin-vpn-input {
-      system = "x86_64-linux";
+      inherit system;
       config = { allowUnfree = true; };
     };
+
+    # unstable-pkgs = import unstable-pkgs {
+    #   config = { allowUnfree = true; };
+    #   overlays = [
+    #     (final: prev: rec {
+    #     })
+    #   ];
+    # };
+
   in {
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -243,5 +254,6 @@
           }
       ];
     };
-  };
+  }
+  );
 }
