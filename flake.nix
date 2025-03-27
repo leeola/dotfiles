@@ -112,7 +112,7 @@
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
-    system = import system-input {
+    mkSystemPkgs = system: import system-input {
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
@@ -141,33 +141,35 @@
     # };
     #kak = nixpkgs-kak.packages.x86_64.kakoune;
     #ruby-1-2-3 = nixpkgs-kak.legacyPackages.x86_64.ruby;
-    nixosConfigurations.desk = system-input.lib.nixosSystem {
+    nixosConfigurations.desk = let
       system = "x86_64-linux";
-      specialArgs = {
-        # NIT: I think i can remove these..?
-        inherit nixpkgs-kak; inherit obsidian;
-
-        system = system;
+    in
+      system-input.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          # NIT: I think i can remove these..?
+          inherit nixpkgs-kak; inherit obsidian;
+          system = mkSystemPkgs system;
+        };
+        modules = [
+          	  ./system/desk/configuration.nix
+          	  home-manager.nixosModules.home-manager
+          	  {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users.lee = import ./system/desk/home.nix {
+                    unstable-pkgs = mkUnstablePkgs system;
+                    plug_kak = plug_kak;
+                    nixpkgs-kak = nixpkgs-kak;
+                    obsidian = obsidian-pkgs;
+                    work = work;
+                    pin-vpn = pin-vpn;
+                    nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
+                    nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
+                  };
+          	  }
+        ];
       };
-      modules = [
-        	  ./system/desk/configuration.nix
-        	  home-manager.nixosModules.home-manager
-        	  {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.lee = import ./system/desk/home.nix {
-                  unstable-pkgs = mkUnstablePkgs "x86_64-linux";
-                  plug_kak = plug_kak;
-                  nixpkgs-kak = nixpkgs-kak;
-                  obsidian = obsidian-pkgs;
-                  work = work;
-                  pin-vpn = pin-vpn;
-                  nix_lsp_nil = nix_lsp_nil.packages.x86_64-linux.nil;
-                  nix_lsp_nixd = nix_lsp_nixd.packages.x86_64-linux.nixd;
-                };
-        	  }
-      ];
-    };
     nixosConfigurations.closet = system-input.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
