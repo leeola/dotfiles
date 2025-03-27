@@ -120,6 +120,11 @@
       system = "x86_64-linux";
       config = { allowUnfree = true; };
     };
+
+    mkUnstablePkgs = system: import unstable-pkgs {
+      inherit system;
+      config = { allowUnfree = true; };
+    };
   in {
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
@@ -151,10 +156,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.users.lee = import ./system/desk/home.nix {
-                  unstable-pkgs = import unstable-pkgs {
-                    system = "x86_64-linux";
-                    config = { allowUnfree = true; };
-                  };
+                  unstable-pkgs = mkUnstablePkgs "x86_64-linux";
                   plug_kak = plug_kak;
                   nixpkgs-kak = nixpkgs-kak;
                   obsidian = obsidian-pkgs;
@@ -178,9 +180,7 @@
               pkgs = import system-input {
                 system = "x86_64-linux";
               };
-              unstable-pkgs = import unstable-pkgs {
-                system = "x86_64-linux";
-              };
+              unstable-pkgs = mkUnstablePkgs "x86_64-linux";
             };
     	  }
       ];
@@ -227,10 +227,7 @@
               system = "aarch64-darwin";
               config = { allowUnfree = true; };
             };
-            unstable-pkgs = import unstable-pkgs {
-              system = "aarch64-darwin";
-              config = { allowUnfree = true; };
-            };
+            unstable-pkgs = unstable-pkgs "aarch64-darwin";
             # apps = import apps {
             #   system = "aarch64-darwin";
             #   config = { allowUnfree = true; };
