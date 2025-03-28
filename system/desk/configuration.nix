@@ -21,7 +21,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
   # boot.loader.grub.configurationLimit = 20;
@@ -79,7 +78,7 @@
   #     https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/hardware/video/nvidia.nix#L261-L269
   hardware.nvidia.open = false;
 
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Enable the GNOME Desktop Environment.
@@ -192,46 +191,48 @@
     enable = true;
     dataDir = "/home/lee/sync";
     configDir = "/home/lee/.config/syncthing";
-    overrideDevices = true;
-    overrideFolders = true;
     openDefaultPorts = true;
     user = "lee";
     group = "users";
-    devices = {
-      "closet" = { id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH"; };
-    };
-    extraOptions = {
-      options.globalAnnounceEnabled = false;
-      options.relaysEnabled = false;
-    };
-    folders = {
-      "blender_config" = {
-        path = "/home/lee/.config/blender";
-        devices = [ "closet" ];
+    settings = {
+      overrideDevices = true;
+      overrideFolders = true;
+      extraOptions = {
+        options.globalAnnounceEnabled = false;
+        options.relaysEnabled = false;
       };
-      "blender" = {
-        path = "/home/lee/blender";
-        devices = [ "closet" ];
+      devices = {
+        "closet" = { id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH"; };
       };
-      "krita" = {
-        path = "/home/lee/krita";
-        devices = [ "closet" ];
-      };
-      "projects" = {
-        path = "/home/lee/projects";
-        devices = [ "closet" ];
-      };
-      "work" = {
-        path = "/home/lee/work";
-        devices = [ "closet" ];
-      };
-      "courses" = {
-        path = "/home/lee/courses";
-        devices = [ "closet" ];
-      };
-      "references" = {
-        path = "/home/lee/references";
-        devices = [ "closet" ];
+      folders = {
+        "blender_config" = {
+          path = "/home/lee/.config/blender";
+          devices = [ "closet" ];
+        };
+        "blender" = {
+          path = "/home/lee/blender";
+          devices = [ "closet" ];
+        };
+        "krita" = {
+          path = "/home/lee/krita";
+          devices = [ "closet" ];
+        };
+        "projects" = {
+          path = "/home/lee/projects";
+          devices = [ "closet" ];
+        };
+        "work" = {
+          path = "/home/lee/work";
+          devices = [ "closet" ];
+        };
+        "courses" = {
+          path = "/home/lee/courses";
+          devices = [ "closet" ];
+        };
+        "references" = {
+          path = "/home/lee/references";
+          devices = [ "closet" ];
+        };
       };
     };
   };
