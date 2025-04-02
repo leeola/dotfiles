@@ -105,8 +105,10 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.passwordAuthentication = false;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+  };
 
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [
@@ -141,17 +143,17 @@
   services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
   services.samba = {
     enable = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server string = smbnix
-      netbios name = smbnix
-      security = user
-      # note: localhost is the ipv6 localhost ::1
-      hosts allow = 192.168.1. 127.0.0.1 localhost
-      hosts deny = 0.0.0.0/0
-    '';
-    shares = {
+    settings = {
+      global = {
+        workgroup = "WORKGROUP";
+        "server string" = "smbnix";
+        "netbios name" = "smbnix";
+        security = "user";
+        # note: localhost is the ipv6 localhost ::1
+        "hosts allow" = "192.168.1. 127.0.0.1 localhost";
+        "hosts deny" = "0.0.0.0/0";
+      };
+
       closet_general = {
         path = "/export";
         browseable = "yes";
@@ -182,68 +184,71 @@
     openDefaultPorts = true;
     user = "lee";
     group = "users";
-    devices = {
-      "desk" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
-    };
-    extraOptions = {
-      options.globalAnnounceEnabled = false;
-      options.relaysEnabled = false;
-    };
-    folders = {
-      "blender_config" = {
-        path = "/mnt/archive01/lee/blender_config";
-        devices = [ "desk" ];
-        versioning = {
-          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
-          type = "staggered";
-          params = {
-            cleanInterval = "3600"; # 1 hour in seconds
-            maxAge = "30758400"; # 356 days in seconds
+    settings = {
+      options = {
+        globalAnnounceEnabled = false;
+        relaysEnabled = false;
+      };
+      devices = {
+        "desk" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
+      };
+      folders = {
+        "blender_config" = {
+          path = "/mnt/archive01/lee/blender_config";
+          devices = [ "desk" ];
+          versioning = {
+            # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+            type = "staggered";
+            params = {
+              cleanInterval = "3600"; # 1 hour in seconds
+              maxAge = "30758400"; # 356 days in seconds
+            };
           };
         };
-      };
-      "blender" = {
-        path = "/mnt/archive01/lee/blender";
-        devices = [ "desk" ];
-        versioning = {
-          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
-          type = "staggered";
-          params = {
-            cleanInterval = "3600"; # 1 hour in seconds
-            maxAge = "30758400"; # 356 days in seconds
+        "blender" = {
+          path = "/mnt/archive01/lee/blender";
+          devices = [ "desk" ];
+          versioning = {
+            # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+            type = "staggered";
+            params = {
+              cleanInterval = "3600"; # 1 hour in seconds
+              maxAge = "30758400"; # 356 days in seconds
+            };
           };
         };
-      };
-      "krita" = {
-        path = "/mnt/archive01/lee/krita";
-        devices = [ "desk" ];
-        versioning = {
-          # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
-          type = "staggered";
-          params = {
-            cleanInterval = "3600"; # 1 hour in seconds
-            maxAge = "30758400"; # 356 days in seconds
+        "krita" = {
+          path = "/mnt/archive01/lee/krita";
+          devices = [ "desk" ];
+          versioning = {
+            # docs: https://docs.syncthing.net/users/versioning.html#staggered-file-versioning
+            type = "staggered";
+            params = {
+              cleanInterval = "3600"; # 1 hour in seconds
+              maxAge = "30758400"; # 356 days in seconds
+            };
           };
         };
-      };
-      "projects" = {
-        path = "/mnt/archive01/lee/projects";
-        devices = [ "desk" ];
-      };
-      "work" = {
-        path = "/mnt/archive01/lee/work";
-        devices = [ "desk" ];
-      };
-      "courses" = {
-        path = "/mnt/archive01/lee/courses";
-        devices = [ "desk" ];
-      };
-      "references" = {
-        path = "/mnt/archive01/lee/references";
-        devices = [ "desk" ];
+        "projects" = {
+          path = "/mnt/archive01/lee/projects";
+          devices = [ "desk" ];
+        };
+        "work" = {
+          path = "/mnt/archive01/lee/work";
+          devices = [ "desk" ];
+        };
+        "courses" = {
+          path = "/mnt/archive01/lee/courses";
+          devices = [ "desk" ];
+        };
+        "references" = {
+          path = "/mnt/archive01/lee/references";
+          devices = [ "desk" ];
+        };
       };
     };
   };
+
   systemd.timers.snapraid_sync= {
     wantedBy = [ "timers.target" ];
     timerConfig = {
