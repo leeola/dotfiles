@@ -229,7 +229,7 @@
               system = "aarch64-darwin";
               config = { allowUnfree = true; };
             };
-            unstable-pkgs = unstable-pkgs "aarch64-darwin";
+            unstable-pkgs = mkUnstablePkgs "aarch64-darwin";
             # apps = import apps {
             #   system = "aarch64-darwin";
             #   config = { allowUnfree = true; };
