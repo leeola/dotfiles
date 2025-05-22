@@ -129,7 +129,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "unstable-pkgs"
+          "system-input"
         ],
         "rust-overlay": "rust-overlay"
       },
@@ -152,7 +152,7 @@
         "flake-parts": "flake-parts",
         "flake-root": "flake-root",
         "nixpkgs": [
-          "unstable-pkgs"
+          "system-input"
         ],
         "treefmt-nix": "treefmt-nix"
       },
