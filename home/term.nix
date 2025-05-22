@@ -12,6 +12,9 @@
 
     claude-code
     aider-chat
+
+    # A disk space usage helper
+    du-dust
   ];
 
   file = {
