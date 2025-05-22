@@ -13,8 +13,9 @@
     claude-code
     aider-chat
 
-    # A disk space usage helper
+    # Disk space analyzers.
     du-dust
+    dua
   ];
 
   file = {
