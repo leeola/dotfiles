@@ -151,7 +151,7 @@
     qmk
 
     # KWallet<->SSH integration. Used by `programs.ssh.askPassword`
-    ksshaskpass
+    kdePackages.ksshaskpass
 
     system.lutris
   ];
@@ -165,7 +165,7 @@
   # };
 
   programs.ssh.startAgent = true;
-  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.ksshaskpass.out}/bin/ksshaskpass";
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
   environment.sessionVariables = {
     SSH_ASKPASS_REQUIRE="prefer";
   };
