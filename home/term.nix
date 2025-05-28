@@ -16,6 +16,9 @@
     # Disk space analyzers.
     du-dust
     dua
+
+    # CSV Data toolkit
+    xan
   ];
 
   file = {
