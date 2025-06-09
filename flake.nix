@@ -8,7 +8,7 @@
           url = "github:nix-community/home-manager/release-25.05";
           inputs.nixpkgs.follows = "system-input";
       };
-      darwin.url = "github:lnl7/nix-darwin/master";
+      darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       darwin.inputs.nixpkgs.follows = "system-input";
 
       # Pseudo release channels.
