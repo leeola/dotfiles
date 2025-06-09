@@ -1,6 +1,0 @@
-*.swp
-*.swo
-.git
-.godeps
-node_modules
-.ctrlp
