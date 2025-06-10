@@ -23,6 +23,7 @@
 
   file = {
     ".gitconfig".source = ../git/gitconfig;
+    ".gitignore_global".source = ../git/gitignore_global;
     ".config/helix/config.toml".source = ../helix/config.toml;
     ".config/helix/languages.toml".source = ../helix/languages.toml;
     ".config/fish/config.fish".source = ../fish/config.fish;
