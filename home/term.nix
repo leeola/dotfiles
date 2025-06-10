@@ -30,5 +30,6 @@
     ".tmux.conf".source = ../tmux/tmux.conf;
     ".config/zellij/config.kdl".source = ../zellij/config.kdl;
     ".config/starship.toml".source = ../starship/starship.toml;
+    ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
   };
 }

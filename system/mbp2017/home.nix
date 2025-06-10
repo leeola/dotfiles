@@ -27,5 +27,6 @@
         # ".config/fish/functions/pbp.fish".source = ../../fish/functions/pbp.fish;
         # ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
         # ".tmux.conf".source = ../../.tmux.conf;
+        ".claude/CLAUDE.md".source = ../../claude/CLAUDE.md;
     };
 }
