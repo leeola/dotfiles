@@ -1,0 +1,3 @@
+- Avoid deeply nested if statements. Prefer happy path is the main path, early exits for unhappy paths when logical.
+- Format, lint and test code before considering it done.
+- Be concise with documentation.
