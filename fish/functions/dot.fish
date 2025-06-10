@@ -17,7 +17,9 @@ function dot
             # Platform-specific build command
             if test (uname) = Darwin
                 echo "Building Darwin configuration..."
-                nix run nix-darwin -- build --flake .
+                # Using hardcoded hostname 'mbp2023' due to known issue where
+                # hostname isn't being properly set from nix on macOS - to fix in future
+                nix run nix-darwin -- build --flake .#mbp2023
             else
                 echo "Building NixOS configuration..."
                 nixos-rebuild build --flake .
@@ -26,7 +28,9 @@ function dot
             # Platform-specific switch command
             if test (uname) = Darwin
                 echo "Switching Darwin configuration..."
-                nix run nix-darwin -- switch --flake .
+                # Using hardcoded hostname 'mbp2023' due to known issue where
+                # hostname isn't being properly set from nix on macOS - to fix in future
+                nix run nix-darwin -- switch --flake .#mbp2023
             else
                 echo "Switching NixOS configuration..."
                 nixos-rebuild switch --flake .
