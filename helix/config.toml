@@ -23,7 +23,7 @@ j = "goto_last_line"
 k = "goto_file_start"
  
 [keys.normal.space]
-p = "file_picker" 
+p = "file_picker_in_current_directory"
 P = "no_op"
 y = "no_op"
 Y = "no_op"
