@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable-pkgs, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -167,6 +167,7 @@
   services.plex = {
     enable = true;
     openFirewall = true;
+    package = unstable-pkgs.plex;
     # TODO: Move appstate to a mut-friendly drive.
     # dataDir = "/mnt/gen01/appstate/plex";
     dataDir = "/var/lib/plex";

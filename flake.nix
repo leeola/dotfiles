@@ -172,6 +172,9 @@
       };
     nixosConfigurations.closet = system-input.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {
+        unstable-pkgs = mkUnstablePkgs "x86_64-linux";
+      };
       modules = [
     	  ./system/closet/configuration.nix
     	  home-manager.nixosModules.home-manager
