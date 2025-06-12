@@ -1,7 +1,5 @@
 {
   unstable-pkgs,
-  plug_kak,
-  nixpkgs-kak,
   obsidian,
   nix_lsp_nil,
   nix_lsp_nixd,
@@ -42,9 +40,7 @@ in
       obsidian.blender_latest
       obsidian.krita
       spotify
-      obsidian.kak-lsp
-      obsidian.kakoune
-      # nixpkgs-kak.legacyPackages.x86_64-linux.kak-lsp
+      # Removed kakoune and kak-lsp packages
       fzf
       obsidian.discord
       obsidian.signal-desktop
@@ -103,9 +99,7 @@ in
         term.file //
     {
       ".config/nixpkgs/config.nix".source = ../../nixpkgs/config.nix;
-        ".config/kak/kakrc".source = ../../kak/kakrc;
-        ".config/kak/cuser.kak".source = ../../kak/cuser.kak;
-        ".config/kak-lsp/kak-lsp.toml".source = ../../kak-lsp/kak-lsp.toml;
+        # Removed kakoune config file links
         # So far i can't get Plug to behave well with Nix.
         # The directory (plugins) isn't immutable, so in theory it should happily
         # clone into it - but i'm guessing Plug needs to mutate the /plug.kak directory

@@ -84,7 +84,6 @@
     git-lfs
     tmux
     helix
-    kakoune
     vim
     htop
     parted

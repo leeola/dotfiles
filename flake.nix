@@ -23,12 +23,7 @@
       pin-vpn-input.url = "github:NixOS/nixpkgs/fb942492b7accdee4e6d17f5447091c65897dde4";
 
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-      nixpkgs-kak.url = "github:NixOS/nixpkgs/nixos-unstable";
       obsidian.url = "github:NixOS/nixpkgs/nixos-unstable";
-      plug_kak = {
-          url = "github:andreyorst/plug.kak";
-          flake = false;
-      };
       # Helix editor
       # # helix.url = "github:leeola/helix/22.03-diag-next-err";
       # helix.url = "github:leeola/helix/22.12-ctrlj-master";
@@ -52,7 +47,7 @@
     pin-vpn-input,
     unstable-pkgs,
 
-    home-manager, nixpkgs, plug_kak, nixpkgs-kak, obsidian, nix_lsp_nil, nix_lsp_nixd,
+    home-manager, nixpkgs, obsidian, nix_lsp_nil, nix_lsp_nixd,
     
     darwin, darwin-nixpkgs,
 
@@ -159,7 +154,7 @@
         inherit system;
         specialArgs = {
           # NIT: I think i can remove these..?
-          inherit nixpkgs-kak; inherit obsidian;
+          inherit obsidian;
           system = mkSystemPkgs system;
         };
         modules = [
@@ -170,8 +165,6 @@
                   home-manager.useUserPackages = true;
                   home-manager.users.lee = import ./system/desk/home.nix {
                     unstable-pkgs = mkUnstablePkgs system;
-                    plug_kak = plug_kak;
-                    nixpkgs-kak = nixpkgs-kak;
                     obsidian = obsidian-pkgs;
                     work = work;
                     pin-vpn = pin-vpn;

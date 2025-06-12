@@ -186,22 +186,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-kak": {
-      "locked": {
-        "lastModified": 1678654296,
-        "narHash": "sha256-aVfw3ThpY7vkUeF1rFy10NAkpKDS2imj3IakrzT0Occ=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5a1dc8acd977ff3dccd1328b7c4a6995429a656b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1733096140,
@@ -246,22 +230,6 @@
         "type": "github"
       }
     },
-    "plug_kak": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1662661260,
-        "narHash": "sha256-8fanVaP6g7bW1Fu4JVF49YQmeqaHsq4r+DgS9r7HKgc=",
-        "owner": "andreyorst",
-        "repo": "plug.kak",
-        "rev": "f28b3fb88fbc77d69b1027780cb9a16b0bd7fc76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "andreyorst",
-        "repo": "plug.kak",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "adev": "adev",
@@ -271,10 +239,8 @@
         "nix_lsp_nil": "nix_lsp_nil",
         "nix_lsp_nixd": "nix_lsp_nixd",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-kak": "nixpkgs-kak",
         "obsidian": "obsidian",
         "pin-vpn-input": "pin-vpn-input",
-        "plug_kak": "plug_kak",
         "slow-input": "slow-input",
         "system-input": "system-input",
         "unstable-pkgs": "unstable-pkgs",
