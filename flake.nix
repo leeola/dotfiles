@@ -124,6 +124,17 @@
     mkUnstablePkgs = system: import unstable-pkgs {
       inherit system;
       config = { allowUnfree = true; };
+      overlays = [
+        (final: prev: {
+          claude-code = prev.claude-code.overrideAttrs (old: rec {
+            version = "1.0.21";
+            src = prev.fetchzip {
+              url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
+              hash = "sha256-CtNY7CduAg/QWs58jFnJ/3CMRpRKrJzD49Gqw7kSsao=";
+            };
+          });
+        })
+      ];
     };
   in {
     #packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
