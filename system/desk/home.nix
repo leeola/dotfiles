@@ -103,8 +103,8 @@ in
         term.file //
     {
       ".config/nixpkgs/config.nix".source = ../../nixpkgs/config.nix;
-        ".config/kak/kakrc".source = ../../.config/kak/kakrc;
-        ".config/kak/cuser.kak".source = ../../.config/kak/cuser.kak;
+        ".config/kak/kakrc".source = ../../kak/kakrc;
+        ".config/kak/cuser.kak".source = ../../kak/cuser.kak;
         ".config/kak-lsp/kak-lsp.toml".source = ../../kak-lsp/kak-lsp.toml;
         # So far i can't get Plug to behave well with Nix.
         # The directory (plugins) isn't immutable, so in theory it should happily
