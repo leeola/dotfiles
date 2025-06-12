@@ -24,15 +24,17 @@ k = "goto_file_start"
  
 [keys.normal.space]
 p = "file_picker_in_current_directory"
-P = "no_op"
+P = "file_picker"
+f = "no_op"
+F = "no_op"
 y = "no_op"
 Y = "no_op"
-r = "no_op"
 S = "no_op"
 # jumplist save
 s = "save_selection"
 j = "jump_backward"
 k = "jump_forward"
+r = ":reload-all"
 
 
 [keys.normal.space.l]
