@@ -32,3 +32,4 @@ Configuration files in `home/<name>.nix.file` are symlinked to their expected lo
 - Use `nix build .#` to build the default system configuration
 - Use `nix build .#<system_name>` to build a specific system configuration
 - Always use build commands to test configurations before considering them done
+- Build nix on mac with `nix run nix-darwin -- build --flake .#mbp2023`
