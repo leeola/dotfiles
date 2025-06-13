@@ -2,6 +2,7 @@
 - Be concise with documentation. Prefer documenting methods, struct fields, modules.
 - Avoid obvious documentation. Little expressions of code that are self explanatory don't need documentation. Focus on only documenting complex or ambiguous code. 
 - Avoid deeply nested if statements. Prefer happy path is the main path, early exits for unhappy paths when logical.
+- Never include emojis into source code.
 
 ## Language specific behaviors
 
