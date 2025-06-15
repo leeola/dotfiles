@@ -29,6 +29,7 @@ Configuration files in `home/<name>.nix.file` are symlinked to their expected lo
 
 ## Build Commands
 
+- Always use nixfmt before considering a nix change done.
 - Use `nix build .#` to build the default system configuration
 - Use `nix build .#<system_name>` to build a specific system configuration
 - Always use build commands to test configurations before considering them done

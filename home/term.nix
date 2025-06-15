@@ -20,6 +20,9 @@
 
     # CSV Data toolkit
     xan
+
+    # Nix
+    nixfmt-rfc-style
   ];
 
   file = {
