@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, nixpkgs-kak, ... }:
+{
+  config,
+  pkgs,
+  nixpkgs-kak,
+  ...
+}:
 
 {
   nix = {
@@ -12,10 +17,10 @@
     '';
   };
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
@@ -149,11 +154,13 @@
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.lee = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
     shell = pkgs.fish;
   };
 
@@ -167,7 +174,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.03"; # Did you read the comment?
-
 
   #
   # # Setup OpenVPN
@@ -195,8 +201,8 @@
   # Regardless, the below environment.etc modification got it working. Which
   # seems to softlink the proper resolve location into the default path.
   services.openvpn.servers = {
-    officeVPN  = {
-      config = '' config /home/lee/work/client.ovpn '';
+    officeVPN = {
+      config = ''config /home/lee/work/client.ovpn '';
       autoStart = false;
       updateResolvConf = true;
     };
@@ -204,4 +210,3 @@
   environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
 
 }
-

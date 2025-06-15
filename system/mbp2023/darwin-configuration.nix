@@ -2,11 +2,11 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-    [ pkgs.vim
+  environment.systemPackages = [
+    pkgs.vim
     pkgs.tmux
     pkgs.helix
-    ];
+  ];
 
   users.users.lee = {
     home = "/Users/lee";
@@ -30,7 +30,7 @@
   programs.fish.enable = true;
   # OSX Default shell! Important incase the mac gets reverted back to zsh and
   # i lose Nix and have to repair. Which is more annoying than it should be.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -77,4 +77,3 @@
   # # $ darwin-rebuild changelog
   # system.stateVersion = 4;
 }
-

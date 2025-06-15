@@ -5,29 +5,30 @@
   nix_lsp_nixd,
   work,
   pin-vpn,
-}: { pkgs, lib, ... }:
+}:
+{ pkgs, lib, ... }:
 let
-    term = import ../../home/term.nix { 
-      inherit lib;
-      pkgs = unstable-pkgs; 
-    };
+  term = import ../../home/term.nix {
+    inherit lib;
+    pkgs = unstable-pkgs;
+  };
 in
 {
-    # lorri works alongside direnv to avoid needing to constantly use nix-shell.
-    services.lorri.enable = true;
+  # lorri works alongside direnv to avoid needing to constantly use nix-shell.
+  services.lorri.enable = true;
 
-    # Toying with overlaps, i have no idea how to make this work... :sus:
-    # import nixpkgs.overlays = [
-    #   (self: super: {
-    #     blender = super.blender.override { version = "2.91.0"; };
-    #   })
-    # ];
+  # Toying with overlaps, i have no idea how to make this work... :sus:
+  # import nixpkgs.overlays = [
+  #   (self: super: {
+  #     blender = super.blender.override { version = "2.91.0"; };
+  #   })
+  # ];
 
-    imports = [ ];
+  imports = [ ];
 
-    home.packages =
-        term.packages ++
-    (with pkgs; [
+  home.packages =
+    term.packages
+    ++ (with pkgs; [
       #
       # # utilities
       xclip
@@ -98,29 +99,27 @@ in
       v4l-utils
     ]);
 
-    home.file =
-        term.file //
-    {
-      ".config/nixpkgs/config.nix".source = ../../nixpkgs/config.nix;
-        # Removed kakoune config file links
-        # So far i can't get Plug to behave well with Nix.
-        # The directory (plugins) isn't immutable, so in theory it should happily
-        # clone into it - but i'm guessing Plug needs to mutate the /plug.kak directory
-        # for some bookkeeping.
-        #
-        # For now i'll do it manually, but i'm guessing i can manage to let plug.kak
-        # manage the entire /plugins directory as part of the file installation.
-        # An after-file hook to run `kak -e plug-install` could.. in theory..
-        # mutate what it wants. Though the output wouldn't be deterministic.. hmm
-        # ".config/kak/plugins/plug.kak".source = ../.plug_kak;
-        ".config/fish/functions/pbp.fish".source = ../../fish/functions/pbp.fish;
-        ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
-        ".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
-        ".config/bottom/bottom.toml".source = ../../bottom/bottom.toml;
-        ".wezterm.lua".source = ../../wezterm/wezterm_desk.lua;
-    };
+  home.file = term.file // {
+    ".config/nixpkgs/config.nix".source = ../../nixpkgs/config.nix;
+    # Removed kakoune config file links
+    # So far i can't get Plug to behave well with Nix.
+    # The directory (plugins) isn't immutable, so in theory it should happily
+    # clone into it - but i'm guessing Plug needs to mutate the /plug.kak directory
+    # for some bookkeeping.
+    #
+    # For now i'll do it manually, but i'm guessing i can manage to let plug.kak
+    # manage the entire /plugins directory as part of the file installation.
+    # An after-file hook to run `kak -e plug-install` could.. in theory..
+    # mutate what it wants. Though the output wouldn't be deterministic.. hmm
+    # ".config/kak/plugins/plug.kak".source = ../.plug_kak;
+    ".config/fish/functions/pbp.fish".source = ../../fish/functions/pbp.fish;
+    ".config/fish/functions/pbc.fish".source = ../../fish/functions/pbc.fish;
+    ".config/alacritty/alacritty.yml".source = ../../alacritty/alacritty.yml;
+    ".config/bottom/bottom.toml".source = ../../bottom/bottom.toml;
+    ".wezterm.lua".source = ../../wezterm/wezterm_desk.lua;
+  };
 
-    home.activation = term.activation;
+  home.activation = term.activation;
 
-    home.stateVersion = "21.11";
+  home.stateVersion = "21.11";
 }

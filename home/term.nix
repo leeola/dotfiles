@@ -1,4 +1,5 @@
-{ pkgs, lib }: {
+{ pkgs, lib }:
+{
   packages = with pkgs; [
     helix
     mosh
@@ -44,11 +45,11 @@
   # lib.hm.dag provides a directed acyclic graph (DAG) for ordering activation steps
   # "writeBoundary" is a special marker that separates file writing from other activation tasks
   # Scripts run after writeBoundary ensure all home.file entries have been created first
-  # 
+  #
   # To view activation logs:
   # - `journalctl --user -u home-manager-activation.service`
   # - Or run activation manually to see output: `/nix/store/*-home-manager-generation/activate`
-  activation.claudeMcpSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  activation.claudeMcpSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     # Ensure rust-lsp MCP server is configured for Claude
     # This runs on every system switch but only adds the server if missing
     if ! ${pkgs.claude-code}/bin/claude mcp list 2>/dev/null | grep -q "rust-lsp"; then

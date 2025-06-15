@@ -2,13 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, system, ... }:
+{
+  config,
+  pkgs,
+  system,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix.package = pkgs.nixVersions.latest;
   nix.extraOptions = ''
@@ -61,7 +66,7 @@
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   # };
-  
+
   # moonlander keyboard support.
   hardware.keyboard.zsa.enable = true;
 
@@ -89,8 +94,8 @@
   # services.xserver.displayManager.lightdm.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
 
-   #hardware.nvidia.modesetting.enable = true;
-   #services.xserver.displayManager.gdm.nvidiaWayland = true;
+  #hardware.nvidia.modesetting.enable = true;
+  #services.xserver.displayManager.gdm.nvidiaWayland = true;
 
   # Not available in 22.11 it seems
   # services.dbus.packages = [ pkgs.gnome3.dconf ];
@@ -110,7 +115,11 @@
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
-    extraGroups = [ "wheel" "docker" "plugdev" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "plugdev"
+    ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJc8zqhshx+cSdrJqffeCKRGwbCI66rdxnpvK6wT1KqPuHaWQxL1nmiNk9n5ilP3sylGVZNCPYjerNLnF9cSnIJ8SpEb2MYRvdopBcjULw39b2msJG7SeRJPhy/htwGPEBPvNzGh5J1kgrSrdNoCZ/h83MvEAOdiEXULfgTm/1USD5fH9syEYbpiqNVESlLL5hGkQo8HvctgKW63UIwh33MOVCt/n5FTX0MAqBoHlKX7HIfZ/ySZ+WZTFzsYWq5JHKFdYuHZAvPXmBmNH54Qsto9CNHWi8vgIVcv8evZQtxO/jX4/hFDc+pg1HGjQtBIzNt/bav0WN/jnxmP7NoVrd lee@home"
@@ -166,7 +175,7 @@
   programs.ssh.startAgent = true;
   programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.kdePackages.ksshaskpass.out}/bin/ksshaskpass";
   environment.sessionVariables = {
-    SSH_ASKPASS_REQUIRE="prefer";
+    SSH_ASKPASS_REQUIRE = "prefer";
   };
 
   # List services that you want to enable:
@@ -207,7 +216,9 @@
         options.relaysEnabled = false;
       };
       devices = {
-        "closet" = { id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH"; };
+        "closet" = {
+          id = "C7H5SPI-OBTQKPO-W6JNSVV-JXPIKDS-A5M5ELB-LFQBPRX-K4YP32I-DIZMVQH";
+        };
       };
       folders = {
         "blender_config" = {
@@ -268,12 +279,11 @@
   # Regardless, the below environment.etc modification got it working. Which
   # seems to softlink the proper resolve location into the default path.
   services.openvpn.servers = {
-    officeVPN  = {
-      config = '' config /home/lee/work/client.ovpn '';
+    officeVPN = {
+      config = ''config /home/lee/work/client.ovpn '';
       autoStart = false;
       updateResolvConf = true;
     };
   };
   environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
 }
-

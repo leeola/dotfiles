@@ -1,4 +1,5 @@
-{ prev, pkgs }: {
+{ prev, pkgs }:
+{
   inherit prev;
   home.packages = with pkgs; [
     mosh

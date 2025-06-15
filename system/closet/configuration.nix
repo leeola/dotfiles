@@ -2,12 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, unstable-pkgs, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  lib,
+  unstable-pkgs,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nix.package = pkgs.nixVersions.latest;
   nix.extraOptions = ''
@@ -61,7 +67,11 @@
   users.users.lee = {
     isNormalUser = true;
     initialPassword = "eel";
-    extraGroups = [ "wheel" "docker" "plex" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "plex"
+    ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJc8zqhshx+cSdrJqffeCKRGwbCI66rdxnpvK6wT1KqPuHaWQxL1nmiNk9n5ilP3sylGVZNCPYjerNLnF9cSnIJ8SpEb2MYRvdopBcjULw39b2msJG7SeRJPhy/htwGPEBPvNzGh5J1kgrSrdNoCZ/h83MvEAOdiEXULfgTm/1USD5fH9syEYbpiqNVESlLL5hGkQo8HvctgKW63UIwh33MOVCt/n5FTX0MAqBoHlKX7HIfZ/ySZ+WZTFzsYWq5JHKFdYuHZAvPXmBmNH54Qsto9CNHWi8vgIVcv8evZQtxO/jX4/hFDc+pg1HGjQtBIzNt/bav0WN/jnxmP7NoVrd lee@home"
@@ -114,20 +124,58 @@
     2049 # NFSv4
     5357 # samba-wsdd
     22000 # syncthing
-    5222 6666 27015 27016 8766 # satis, maybe pal? 
-    8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
+    5222
+    6666
+    27015
+    27016
+    8766 # satis, maybe pal?
+    8211
+    25575
+    27015
+    27031
+    27032
+    27033
+    27034
+    27035
+    27036 # paldocker
     5678 # rudolfs
   ];
   networking.firewall.allowedUDPPorts = [
     3702 # samba-wsdd
-    22000 21027 # syncthing
+    22000
+    21027 # syncthing
     53 # ? adguard?
-    5222 6666 15777 15000 27015 27016 8766 # satis, maybe pal?
-    8211 25575 27015 27031 27032 27033 27034 27035 27036 # paldocker
-    8766 9700 # sonstf, including 27016 but satisf has that.
+    5222
+    6666
+    15777
+    15000
+    27015
+    27016
+    8766 # satis, maybe pal?
+    8211
+    25575
+    27015
+    27031
+    27032
+    27033
+    27034
+    27035
+    27036 # paldocker
+    8766
+    9700 # sonstf, including 27016 but satisf has that.
   ];
-  networking.firewall.allowedTCPPortRanges = [ { from=7777; to=7827; } ];
-  networking.firewall.allowedUDPPortRanges = [ { from=7777; to=7827; } ];
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 7777;
+      to = 7827;
+    }
+  ];
+  networking.firewall.allowedUDPPortRanges = [
+    {
+      from = 7777;
+      to = 7827;
+    }
+  ];
   # Allowping and openFirewall seem to be required for Samba.. :sus:
   networking.firewall.allowPing = true;
   services.samba.openFirewall = true;
@@ -190,7 +238,9 @@
         relaysEnabled = false;
       };
       devices = {
-        "desk" = { id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6"; };
+        "desk" = {
+          id = "RBZADNL-JLTLMTS-W6G5Z62-EZ3T4JP-N6SNIWM-6ZPJRRY-NIPRNIQ-ZZ2Y6Q6";
+        };
       };
       folders = {
         "blender_config" = {
@@ -249,7 +299,7 @@
     };
   };
 
-  systemd.timers.snapraid_sync= {
+  systemd.timers.snapraid_sync = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "hourly";
@@ -315,7 +365,7 @@
   #   group = "paldocker";
   # };
   # users.groups.paldocker = {};
-  # systemd.services.paldocker = 
+  # systemd.services.paldocker =
   #   let
   #     dockercli = "${pkgs.docker}/bin/docker";
   #     podname = "paldocker";
@@ -328,7 +378,7 @@
   #     #   --env-file ./pal.env \
   #     #   -p '8211:8211/udp' \
   #     #   -p '27015:27015/udp' \
-  #     #   -v ./state:/palworld \ 
+  #     #   -v ./state:/palworld \
   #     #   --env-file ./pal.env \
   #     #   --restart unless-stopped \
   #     #   --stop-timeout 30 \
@@ -346,13 +396,15 @@
   # };
 
   virtualisation.oci-containers.containers."rudolfs" = {
-    # grabbing master atm to use pre-release, with optional --key support. 
+    # grabbing master atm to use pre-release, with optional --key support.
     image = "jasonwhite0/rudolfs:master";
     autoStart = true;
     cmd = [
-      "--port" "8080"
+      "--port"
+      "8080"
       "local"
-      "--path" "/data/data"
+      "--path"
+      "/data/data"
     ];
     ports = [ "5678:8080" ];
     volumes = [ "/mnt/archive01/rudolfs:/data" ];
@@ -374,4 +426,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-

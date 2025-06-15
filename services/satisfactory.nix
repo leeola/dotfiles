@@ -1,18 +1,43 @@
 # Placeholder, to be enabled next time i care.
-{}: {
+{ }:
+{
   users.users.satisfactory = {
     home = "/var/lib/satisfactory";
     createHome = true;
     isSystemUser = true;
     group = "satisfactory";
   };
-  users.groups.satisfactory = {};
+  users.groups.satisfactory = { };
   networking = {
     firewall = {
-      allowedTCPPortRanges = [ { from=7777; to=7827; } ];
-      allowedTCPPorts = [ 5222 6666 27015 27016 8766 ];
-      allowedUDPPorts = [ 5222 6666 15777 15000 27015 27016 8766 ];
-      allowedUDPPortRanges = [ { from=7777; to=7827; } ];
+      allowedTCPPortRanges = [
+        {
+          from = 7777;
+          to = 7827;
+        }
+      ];
+      allowedTCPPorts = [
+        5222
+        6666
+        27015
+        27016
+        8766
+      ];
+      allowedUDPPorts = [
+        5222
+        6666
+        15777
+        15000
+        27015
+        27016
+        8766
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 7777;
+          to = 7827;
+        }
+      ];
     };
   };
   systemd.services.satisfactory = {
@@ -35,7 +60,7 @@
       WorkingDirectory = "/var/lib/satisfactory";
     };
     environment = {
-      LD_LIBRARY_PATH="SatisfactoryDedicatedServer/linux64:SatisfactoryDedicatedServer/Engine/Binaries/Linux:SatisfactoryDedicatedServer/Engine/Binaries/ThirdParty/PhysX3/Linux/x86_64-unknown-linux-gnu/";
+      LD_LIBRARY_PATH = "SatisfactoryDedicatedServer/linux64:SatisfactoryDedicatedServer/Engine/Binaries/Linux:SatisfactoryDedicatedServer/Engine/Binaries/ThirdParty/PhysX3/Linux/x86_64-unknown-linux-gnu/";
     };
   };
 }
