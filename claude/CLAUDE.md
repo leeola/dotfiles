@@ -8,6 +8,7 @@
 
 ### Rust
 
+- For parents of submodules use `foo.rs` not `foo/mod.rs`. `mod.rs` should never be used.
 - Prefer implementations and algorithms that do not allocate.
 - Avoid repetitive test code, prefer DRY principles to achieve the same result. Closures and functions are your friend.
 - Don't prefix test funcs with `test_` in their names.
