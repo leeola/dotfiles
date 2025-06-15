@@ -5,9 +5,12 @@
   nix_lsp_nixd,
   work,
   pin-vpn,
-}: { pkgs, ... }:
+}: { pkgs, lib, ... }:
 let
-    term = import ../../home/term.nix { pkgs = unstable-pkgs; };
+    term = import ../../home/term.nix { 
+      inherit lib;
+      pkgs = unstable-pkgs; 
+    };
 in
 {
     # lorri works alongside direnv to avoid needing to constantly use nix-shell.
@@ -116,6 +119,8 @@ in
         ".config/bottom/bottom.toml".source = ../../bottom/bottom.toml;
         ".wezterm.lua".source = ../../wezterm/wezterm_desk.lua;
     };
+
+    home.activation = term.activation;
 
     home.stateVersion = "21.11";
 }

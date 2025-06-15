@@ -1,6 +1,9 @@
-{ pkgs, unstable-pkgs }: { ... }:
+{ pkgs, unstable-pkgs }: { lib, ... }:
 let
-    term = import ../../home/term.nix { pkgs = unstable-pkgs; };
+    term = import ../../home/term.nix { 
+      inherit lib;
+      pkgs = unstable-pkgs; 
+    };
 in
 {
     home.packages =
@@ -12,6 +15,8 @@ in
         term.file //
     {
     };
+
+    home.activation = term.activation;
 
     home.stateVersion = "23.11";
 }

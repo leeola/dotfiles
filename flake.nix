@@ -128,6 +128,31 @@
               hash = "sha256-Gn+AzZysuYsZDMzcXlzDMWSWeJS3L7itvlGJq4kYha0=";
             };
           });
+          
+          mcp-language-server = prev.buildGoModule rec {
+            pname = "mcp-language-server";
+            version = "0.1.1";
+            
+            src = prev.fetchFromGitHub {
+              owner = "isaacphi";
+              repo = "mcp-language-server";
+              rev = "v${version}";
+              hash = "sha256-T0wuPSShJqVW+CcQHQuZnh3JOwqUxAKv1OCHwZMr7KM=";
+            };
+            
+            vendorHash = "sha256-3NEG9o5AF2ZEFWkA9Gub8vn6DNptN6DwVcn/oR8ujW0=";
+            
+            excludedPackages = [ "integrationtests" ];
+            
+            doCheck = false;
+            
+            meta = with prev.lib; {
+              description = "Language server that runs and exposes a language server to LLMs";
+              homepage = "https://github.com/isaacphi/mcp-language-server";
+              license = licenses.mit;
+              platforms = platforms.unix;
+            };
+          };
         })
       ];
     };

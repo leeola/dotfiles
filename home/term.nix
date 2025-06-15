@@ -1,4 +1,4 @@
-{ pkgs }: {
+{ pkgs, lib }: {
   packages = with pkgs; [
     helix
     mosh
@@ -12,6 +12,7 @@
 
     claude-code
     aider-chat
+    mcp-language-server
 
     # Disk space analyzers.
     du-dust
@@ -35,4 +36,27 @@
     ".config/starship.toml".source = ../starship/starship.toml;
     ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
   };
+
+  # Home-manager activation scripts run during system switch
+  # lib.hm.dag provides a directed acyclic graph (DAG) for ordering activation steps
+  # "writeBoundary" is a special marker that separates file writing from other activation tasks
+  # Scripts run after writeBoundary ensure all home.file entries have been created first
+  # 
+  # To view activation logs:
+  # - `journalctl --user -u home-manager-activation.service`
+  # - Or run activation manually to see output: `/nix/store/*-home-manager-generation/activate`
+  activation.claudeMcpSetup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Ensure rust-lsp MCP server is configured for Claude
+    # This runs on every system switch but only adds the server if missing
+    if ! ${pkgs.claude-code}/bin/claude mcp list 2>/dev/null | grep -q "rust-lsp"; then
+      echo "Adding rust-lsp MCP server..."
+      ${pkgs.claude-code}/bin/claude mcp add \
+        -s user \
+        rust-lsp \
+        "/etc/profiles/per-user/lee/bin/mcp-language-server" \
+        -- \
+        --workspace . \
+        --lsp rust-analyzer
+    fi
+  '';
 }
