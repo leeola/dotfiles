@@ -1,0 +1,13 @@
+{
+  "rust-analyzer": {
+    "check": {
+      "command": "clippy"
+    },
+    "cargo": {
+      "allFeatures": true
+    },
+    "checkOnSave": {
+      "extraArgs": ["--profile", "rust-analyzer"]
+    }
+  }
+}

@@ -156,10 +156,14 @@
                 version = "0.1.1";
 
                 src = prev.fetchFromGitHub {
-                  owner = "isaacphi";
+                  # Temporarily testing my own build for --config option
+                  owner = "leeola";
+                  # owner = "isaacphi";
                   repo = "mcp-language-server";
-                  rev = "v${version}";
-                  hash = "sha256-T0wuPSShJqVW+CcQHQuZnh3JOwqUxAKv1OCHwZMr7KM=";
+                  # rev = "v${version}";
+                  # The commit of --config, ontop of 0.1.1
+                  rev = "ae7608c";
+                  hash = "sha256-gw/VdbBHD2iRDR/BpL+xeic6iSeKVPE5IJKhJp900fU=";
                 };
 
                 vendorHash = "sha256-3NEG9o5AF2ZEFWkA9Gub8vn6DNptN6DwVcn/oR8ujW0=";

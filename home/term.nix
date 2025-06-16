@@ -42,6 +42,8 @@ in
     ".config/zellij/config.kdl".source = ../zellij/config.kdl;
     ".config/starship.toml".source = ../starship/starship.toml;
     ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
+    ".cargo/config.toml".source = ../cargo/config.toml;
+    ".config/mcp-language-server/config.json".source = ../mcp-language-server/config.json;
   } // devEnvs.files;
 
   # Home-manager activation scripts run during system switch
@@ -63,7 +65,8 @@ in
         "/etc/profiles/per-user/lee/bin/mcp-language-server" \
         -- \
         --workspace . \
-        --lsp rust-analyzer
+        --lsp rust-analyzer \
+        --config ~/.config/mcp-language-server/config.json
     fi
   '';
 }
