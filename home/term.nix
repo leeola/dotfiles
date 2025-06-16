@@ -1,4 +1,7 @@
 { pkgs, lib }:
+let
+  devEnvs = import ./dev-envs.nix { inherit pkgs lib; };
+in
 {
   packages = with pkgs; [
     helix
@@ -39,7 +42,7 @@
     ".config/zellij/config.kdl".source = ../zellij/config.kdl;
     ".config/starship.toml".source = ../starship/starship.toml;
     ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
-  };
+  } // devEnvs.files;
 
   # Home-manager activation scripts run during system switch
   # lib.hm.dag provides a directed acyclic graph (DAG) for ordering activation steps
