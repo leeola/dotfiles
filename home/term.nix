@@ -39,6 +39,7 @@
     ".config/zellij/config.kdl".source = ../zellij/config.kdl;
     ".config/starship.toml".source = ../starship/starship.toml;
     ".claude/CLAUDE.md".source = ../claude/CLAUDE.md;
+    ".cargo/config.toml".source = ../cargo/config.toml;
   };
 
   # Home-manager activation scripts run during system switch
