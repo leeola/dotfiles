@@ -57,7 +57,12 @@ in
   activation.claudeMcpSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     # Ensure rust-lsp MCP server is configured for Claude
     # This runs on every system switch but only adds the server if missing
-    if ! ${pkgs.claude-code}/bin/claude mcp list 2>/dev/null | grep -q "rust-lsp"; then
+
+    # Get current MCP list and normalize whitespace for robust comparison
+    current_mcp_list=$(${pkgs.claude-code}/bin/claude mcp list 2>/dev/null | tr -s ' \t\n' ' ' | tr -d '\r')
+    expected_config="rust-lsp /etc/profiles/per-user/lee/bin/mcp-language-server"
+
+    if ! echo "$current_mcp_list" | grep -Fq "$expected_config"; then
       echo "Adding rust-lsp MCP server..."
       ${pkgs.claude-code}/bin/claude mcp add \
         -s user \
