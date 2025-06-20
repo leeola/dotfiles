@@ -1,6 +1,6 @@
 [user]
   name = Lee Olayvar
-	email = leegit@fastmail.com
+  email = leegit@fastmail.com
 [alias]
   au = add -u
   co = checkout
@@ -42,7 +42,32 @@
 #[url "git@github.com:"]
 #	insteadOf = https://github.com/
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[rerere]
+  enabled = true
+  autoUpdate = true
+
+[diff]
+  algorithm = histogram
+  renames = true
+  indentHeuristic = true
+  colorMoved = default 
+
+[merge]
+  conflictStyle = diff3
+  renames = true
+  log = true
+  summary = true
+
+[pull]
+  twohead = ort
+
+[core]
+  whitespace = trailing-space,space-before-tab,tab-in-indent
+
+[apply]
+  whitespace = fix
