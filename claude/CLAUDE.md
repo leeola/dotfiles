@@ -21,5 +21,5 @@ Always:
 - Avoid repetitive test code, prefer DRY principles to achieve the same result. Closures and functions are your friend.
 - Don't prefix test funcs with `test_` in their names.
 - Favor concise assert messages over comments around test assets.
-- Prefer doctest docs over comments.
 - Include ``See also: [`Foo`]`` in docs for related types, methods, modules, etc.
+- When building docs, don't use `--open`. That opens the browser and you're not using the browser.
