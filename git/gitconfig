@@ -64,7 +64,7 @@
   summary = true
 
 [pull]
-  twohead = ort
+  # twohead = ort # Requires Git 2.33+
 
 [core]
   whitespace = trailing-space,space-before-tab,tab-in-indent
